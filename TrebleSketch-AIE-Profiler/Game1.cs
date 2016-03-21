@@ -1,11 +1,32 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Design;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Storage;
 
 namespace TrebleSketch_AIE_Profiler
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// Name: Adelaide Space Adventures
+    /// Genre: 2D Profiler
+    /// Description: You must play as Adelaide as she must handle the everyday stress of being the head of a national space agency.
+    /// Version: 0.0.01 (Developmental Stages)
+    /// Developer: Titus Huang (Treble Sketch/ILM126)
+    /// Game Engine: MonoGame
+    /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE), hope to massively
+    /// improve on this game and also to improve on my programming skills for future industry uses.
+    /// </summary>
+
+    /// <summary>
+    /// BUGS:
+    /// - Incomplete Game
     /// </summary>
     public class Game1 : Game
     {

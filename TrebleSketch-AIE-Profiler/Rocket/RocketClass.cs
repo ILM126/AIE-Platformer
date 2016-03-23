@@ -15,10 +15,14 @@ namespace TrebleSketch_AIE_Profiler
 {
     class RocketClass
     {
-        public Texture2D engineTitus;
+        public EngineClass Engine;
+        public FuelTankClass FuelTank;
 
-        public Texture2D fuelTanksMedium;
-
+        public RocketClass()
+        {
+            Engine = new EngineClass();
+            FuelTank = new FuelTankClass();
+        }
         
     }
 }

@@ -17,7 +17,7 @@ namespace TrebleSketch_AIE_Profiler
     /// Name: Adelaide Space Adventures
     /// Genre: 2D Profiler
     /// Description: You must play as Adelaide as she must handle the everyday stress of being the head of a national space agency.
-    /// Version: 0.0.01 (Developmental Stages)
+    /// Version: 0.1.12 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE), hope to massively
@@ -35,6 +35,8 @@ namespace TrebleSketch_AIE_Profiler
 
         RocketClass Rocket;
         WorldClass World;
+        SurfaceClass Surface;
+        AudioClass Audio;
 
         public Game1()
         {
@@ -50,7 +52,11 @@ namespace TrebleSketch_AIE_Profiler
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Rocket = new RocketClass();
+            World = new WorldClass();
+            Surface = new SurfaceClass();
+            Audio = new AudioClass();
+
 
             base.Initialize();
         }
@@ -66,12 +72,31 @@ namespace TrebleSketch_AIE_Profiler
 
             // RocketClass - Anything to do with a Rocket goes here
                 // Engines
-                //Rocket.engineTitus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
+                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
 
                 // Fuel Tanks
-                //Rocket.fuelTanksMedium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+                Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
+            
+            // WorldClass - Loads the planets and moons
+                // Planets
+
+                // Moons
+
+            // SurfaceClass - Loads the Space Centre
+                // Stage 01
+
+                // Stage 02
+
+                // Stage 03
+
+            // AudioClass - Loads the Sounds and Sound Effects
+                // Rocket
+
+                // People
+
+                // Music
 
 
             // TODO: use this.Content to load your game content here
@@ -107,23 +132,15 @@ namespace TrebleSketch_AIE_Profiler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.SkyBlue);
 
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(Rocket.engineTitus
-                , new Vector2(0, 0)
-                , null
-                , Color.White
-                , 0
-                , new Vector2(Rocket.engineTitus.Width / 2
-                    , Rocket.engineTitus.Height / 2)
-                , new Vector2( / Rocket.engineTitus.Width
-                    , 50 / Rocket.engineTitus.Height)
-                , SpriteEffects.None
-                , 0);
+            Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
+
+            Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
 
             spriteBatch.End();
 

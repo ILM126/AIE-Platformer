@@ -13,7 +13,12 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace TrebleSketch_AIE_Profiler
 {
-    class World
+    class RocketClass
     {
+        public Texture2D engineTitus;
+
+        public Texture2D fuelTanksMedium;
+
+        
     }
 }

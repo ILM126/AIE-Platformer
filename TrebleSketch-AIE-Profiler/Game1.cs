@@ -33,6 +33,9 @@ namespace TrebleSketch_AIE_Profiler
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        RocketClass Rocket;
+        WorldClass World;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -60,6 +63,16 @@ namespace TrebleSketch_AIE_Profiler
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // RocketClass - Anything to do with a Rocket goes here
+                // Engines
+                //Rocket.engineTitus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
+
+                // Fuel Tanks
+                //Rocket.fuelTanksMedium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+
+                // Capsules
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -97,6 +110,22 @@ namespace TrebleSketch_AIE_Profiler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(Rocket.engineTitus
+                , new Vector2(0, 0)
+                , null
+                , Color.White
+                , 0
+                , new Vector2(Rocket.engineTitus.Width / 2
+                    , Rocket.engineTitus.Height / 2)
+                , new Vector2( / Rocket.engineTitus.Width
+                    , 50 / Rocket.engineTitus.Height)
+                , SpriteEffects.None
+                , 0);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

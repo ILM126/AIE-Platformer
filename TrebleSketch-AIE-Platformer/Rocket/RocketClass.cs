@@ -11,10 +11,20 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 
-namespace TrebleSketch_AIE_Profiler
+namespace TrebleSketch_AIE_Platformer
 {
     class RocketClass
     {
+        public float Speed;
+        public float Acceleration;
+
+        public Vector2 Position;
+
+        public float Height;
+        public float Width;
+
+        public bool Spawned;
+
         public EngineClass Engine;
         public FuelTankClass FuelTank;
 

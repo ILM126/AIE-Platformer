@@ -11,13 +11,13 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 
-namespace TrebleSketch_AIE_Profiler
+namespace TrebleSketch_AIE_Platformer
 {
     /// <summary>
     /// Name: Adelaide Space Adventures
     /// Genre: 2D Profiler
     /// Description: You must play as Adelaide as she must handle the everyday stress of being the head of a national space agency.
-    /// Version: 0.1.12 (Developmental Stages)
+    /// Version: 0.1.15 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE), hope to massively

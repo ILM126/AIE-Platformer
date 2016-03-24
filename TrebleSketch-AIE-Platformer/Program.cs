@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrebleSketch_AIE_Profiler
+namespace TrebleSketch_AIE_Platformer
 {
 #if WINDOWS || LINUX
     /// <summary>

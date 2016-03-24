@@ -11,20 +11,13 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 
-namespace TrebleSketch_AIE_Profiler
+namespace TrebleSketch_AIE_Platformer
 {
     class FuelTankClass
     {
-        EngineClass Engine;
 
         /// <summary>
-        /// Engine: "Titus"
-        /// Version: 1
-        /// Thrust (ASL):
-        /// Thrust (Vaccum):
-        /// TWR:
-        /// Weight:
-        /// Fuel: 
+        /// 
         /// </summary>
 
         public Texture2D Medium;

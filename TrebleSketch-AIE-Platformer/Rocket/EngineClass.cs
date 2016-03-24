@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 
-namespace TrebleSketch_AIE_Profiler
+namespace TrebleSketch_AIE_Platformer
 {
     class EngineClass
     {

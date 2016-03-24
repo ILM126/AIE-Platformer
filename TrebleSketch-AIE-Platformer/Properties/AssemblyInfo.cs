@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TrebleSketch-AIE-Profiler")]
-[assembly: AssemblyProduct("TrebleSketch-AIE-Profiler")]
+[assembly: AssemblyTitle("Adelaide Space Program")]
+[assembly: AssemblyProduct("Adelaide Space Program")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("Manage your own space program and survive in the everyday life as the head of a space program")]
+[assembly: AssemblyCompany("Treble Sketch Games")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

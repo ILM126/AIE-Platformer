@@ -8,8 +8,8 @@
     <ProjectGuid>{176B19F0-FC91-482B-A04E-0C2B31547A71}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrebleSketch_AIE_Profiler</RootNamespace>
-    <AssemblyName>TrebleSketch-AIE-Profiler</AssemblyName>
+    <RootNamespace>TrebleSketch_AIE_Platformer</RootNamespace>
+    <AssemblyName>TrebleSketch-AIE-Platformer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <MonoGameContentBuilderExe>
@@ -42,15 +42,16 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AudioClass.cs" />
+    <Compile Include="Audio\AudioClass.cs" />
+    <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Rocket\EngineClass.cs" />
     <Compile Include="Rocket\FuelTankClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rocket\RocketClass.cs" />
-    <Compile Include="SurfaceClass.cs" />
-    <Compile Include="WorldClass.cs" />
+    <Compile Include="Surface\SurfaceClass.cs" />
+    <Compile Include="World\WorldClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

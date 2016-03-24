@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrebleSketch-AIE-Profiler", "TrebleSketch-AIE-Profiler\TrebleSketch-AIE-Profiler.csproj", "{176B19F0-FC91-482B-A04E-0C2B31547A71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrebleSketch-AIE-Platformer", "TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer.csproj", "{176B19F0-FC91-482B-A04E-0C2B31547A71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

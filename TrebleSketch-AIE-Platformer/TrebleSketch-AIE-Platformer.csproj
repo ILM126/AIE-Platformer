@@ -72,6 +72,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Surface\" />
     <Folder Include="Content\World\" />
   </ItemGroup>
   <ItemGroup>

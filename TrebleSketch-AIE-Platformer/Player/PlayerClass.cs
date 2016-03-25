@@ -15,6 +15,12 @@ namespace TrebleSketch_AIE_Platformer
 {
     class PlayerClass
     {
-        public Vector2 Position;
+        // public Vector2 Position;
+        public PlayerTrebleSketch TrebleSketch;
+
+        public PlayerClass()
+        {
+            TrebleSketch = new PlayerTrebleSketch();
+        }
     }
 }

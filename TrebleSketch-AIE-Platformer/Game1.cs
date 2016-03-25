@@ -14,16 +14,23 @@ using Microsoft.Xna.Framework.Storage;
 namespace TrebleSketch_AIE_Platformer
 {
     /// <summary>
-    /// Name: Adelaide Space Adventures
-    /// Genre: 2D Profiler
-    /// Description: You must play as Adelaide as she must handle the everyday stress of being the head of a national space agency.
-    /// Version: 0.1.15 (Developmental Stages)
+    /// Name: Pony Space Simulator
+    /// Genre: 2D Platformer
+    /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
+    /// a starting national space agency.
+    /// Version: 0.1.22 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
-    /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE), hope to massively
-    /// improve on this game and also to improve on my programming skills for future industry uses.
+    /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
+    /// improve on my game design/programming skills. Yes, this game does contain ponies. As suggested in the title.
     /// </summary>
 
+    /// <summary>
+    /// TO DO:
+    /// - Make Game "First Playable" by 30th of March, 2016.
+    /// - Follow Rainlender's Schedule
+    /// </summary>
+    
     /// <summary>
     /// BUGS:
     /// - Incomplete Game
@@ -33,6 +40,7 @@ namespace TrebleSketch_AIE_Platformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        PlayerClass Player;
         RocketClass Rocket;
         WorldClass World;
         SurfaceClass Surface;
@@ -52,6 +60,7 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void Initialize()
         {
+            Player = new PlayerClass();
             Rocket = new RocketClass();
             World = new WorldClass();
             Surface = new SurfaceClass();
@@ -70,12 +79,19 @@ namespace TrebleSketch_AIE_Platformer
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // RocketClass - Anything to do with a Rocket goes here
+            // PlayerClass - Loads Treble Sketch and Adelaide Player Sprites
+                // Treble Sketch
+                Player.TrebleSketch.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left");
+                Player.TrebleSketch.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right");
+
+                // Adelaide
+
+            // RocketClass - Loads all rocket components
                 // Engines
-                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
+                // Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
 
                 // Fuel Tanks
-                Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+                // Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
             
@@ -138,9 +154,28 @@ namespace TrebleSketch_AIE_Platformer
 
             spriteBatch.Begin();
 
-            Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
+            // Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
 
-            Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
+            // Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                Player.TrebleSketch.PlayerFacingRight = false;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                Player.TrebleSketch.PlayerFacingRight = true;
+            }
+            else if (Player.TrebleSketch.PlayerFacingRight == false)
+            {
+                Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+            }
+            else if (Player.TrebleSketch.PlayerFacingRight == true)
+            {
+                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
+            }
 
             spriteBatch.End();
 

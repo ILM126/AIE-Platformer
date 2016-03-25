@@ -14,11 +14,11 @@ using Microsoft.Xna.Framework.Storage;
 namespace TrebleSketch_AIE_Platformer
 {
     /// <summary>
-    /// Name: Pony Space Simulator
+    /// Name: Space Program Simulator 2016
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.1.22 (Developmental Stages)
+    /// Version: 0.1.23 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
@@ -27,6 +27,12 @@ namespace TrebleSketch_AIE_Platformer
 
     /// <summary>
     /// TO DO:
+    /// - Player Movement
+    /// - Fonts
+    /// - Player-to-Surface Collisions
+    /// - Scene Movements
+    /// - Scene Transitions
+    /// - Speech System
     /// - Make Game "First Playable" by 30th of March, 2016.
     /// - Follow Rainlender's Schedule
     /// </summary>
@@ -40,11 +46,15 @@ namespace TrebleSketch_AIE_Platformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // "Start" the Classes
         PlayerClass Player;
         RocketClass Rocket;
         WorldClass World;
         SurfaceClass Surface;
         AudioClass Audio;
+
+        // "Start" the fonts
+        // SpriteFont InformationFont;
 
         public Game1()
         {
@@ -114,6 +124,9 @@ namespace TrebleSketch_AIE_Platformer
 
                 // Music
 
+            // Extra Assets - Loads the extra fonts and what no
+                // Fonts
+                // InformationFont = Content.Load<SpriteFont>("");
 
             // TODO: use this.Content to load your game content here
         }
@@ -140,6 +153,11 @@ namespace TrebleSketch_AIE_Platformer
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        private void GameBuild() // Displays the Game Build Number on the lower right hand side
+        {
+            // spriteBatch.DrawString(InformationFont, "SCORE : " + Ship.Score.ToString(), new Vector2(10, 10), Color.White);
         }
 
         /// <summary>
@@ -176,6 +194,8 @@ namespace TrebleSketch_AIE_Platformer
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
             }
+
+
 
             spriteBatch.End();
 

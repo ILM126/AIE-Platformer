@@ -18,7 +18,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.1.23 (Developmental Stages)
+    /// Version: 0.2.30 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
@@ -27,7 +27,6 @@ namespace TrebleSketch_AIE_Platformer
 
     /// <summary>
     /// TO DO:
-    /// - Player Movement
     /// - Fonts
     /// - Player-to-Surface Collisions
     /// - Scene Movements
@@ -71,11 +70,12 @@ namespace TrebleSketch_AIE_Platformer
         protected override void Initialize()
         {
             Player = new PlayerClass();
+            Player.TrebleSketch.InitializeTrebleSketch(graphics);
+
             Rocket = new RocketClass();
             World = new WorldClass();
             Surface = new SurfaceClass();
             Audio = new AudioClass();
-
 
             base.Initialize();
         }
@@ -150,7 +150,7 @@ namespace TrebleSketch_AIE_Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            Player.PlayerMovement(gameTime);
 
             base.Update(gameTime);
         }
@@ -168,8 +168,6 @@ namespace TrebleSketch_AIE_Platformer
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
-            // TODO: Add your drawing code here
-
             spriteBatch.Begin();
 
             // Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
@@ -179,23 +177,21 @@ namespace TrebleSketch_AIE_Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-                Player.TrebleSketch.PlayerFacingRight = false;
+                Player.PlayerFacingRight = false;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                Player.TrebleSketch.PlayerFacingRight = true;
+                Player.PlayerFacingRight = true;
             }
-            else if (Player.TrebleSketch.PlayerFacingRight == false)
+            else if (Player.PlayerFacingRight == false)
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
-            else if (Player.TrebleSketch.PlayerFacingRight == true)
+            else if (Player.PlayerFacingRight == true)
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
             }
-
-
 
             spriteBatch.End();
 

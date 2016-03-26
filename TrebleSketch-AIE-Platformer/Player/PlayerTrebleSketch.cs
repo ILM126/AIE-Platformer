@@ -15,15 +15,38 @@ namespace TrebleSketch_AIE_Platformer
 {
     class PlayerTrebleSketch
     {
-        public bool PlayerFacingRight;
+        PlayerClass Player;
+
+        // Player Values
+        //public Vector2 SpawnPosition;
+        public Vector2 Position;
+        public Vector2 Velocity;
+        public float Acceleration;
+        //public Vector2 Size;
+        public float Rotation;
+        public float RotationDelta;
+
         public Texture2D FaceRight;
         public Texture2D FaceLeft;
+
+        public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
+        {
+            Player = new PlayerClass();
+
+            // Player.SpawnPosition = Player.Position;
+            Position = new Vector2(graphics.PreferredBackBufferWidth / 2
+                    , graphics.PreferredBackBufferHeight / 2);
+            Velocity = new Vector2(0, 0);
+            Acceleration = 0;
+            // Player.Size = new Vector2(85.0f, 85.0f);
+        }
+
+        // Loads Player Texture 
 
         public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             spriteBatch.Draw(FaceRight
-                , new Vector2(graphics.PreferredBackBufferWidth / 2
-                    , graphics.PreferredBackBufferHeight / 2)
+                , Position
                 , null
                 , Color.White
                 , 0
@@ -37,8 +60,7 @@ namespace TrebleSketch_AIE_Platformer
         public void loadPlayerTrebleSketchLeft(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             spriteBatch.Draw(FaceLeft
-                , new Vector2(graphics.PreferredBackBufferWidth / 2
-                    , graphics.PreferredBackBufferHeight / 2)
+                , Position
                 , null
                 , Color.White
                 , 0

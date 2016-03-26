@@ -15,8 +15,33 @@ namespace TrebleSketch_AIE_Platformer
 {
     class PlayerClass
     {
-        // public Vector2 Position;
+        public bool PlayerFacingRight;
+
         public PlayerTrebleSketch TrebleSketch;
+
+        public void PlayerMovement(GameTime gameTime)
+        {
+            //    if (Keyboard.GetState().IsKeyDown(Keys.S))
+            //    {
+            //        TrebleSketch.Acceleration = 0.05f;
+            //    }
+            //if (Keyboard.GetState().IsKeyDown(Keys.W))
+            //{
+            //    TrebleSketch.Velocity += new Vector2(0, -2f);
+            //}
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && PlayerFacingRight == false)
+            {
+                TrebleSketch.Velocity = new Vector2(-2.5f, 0);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D) && PlayerFacingRight == true)
+            {
+                TrebleSketch.Velocity = new Vector2(2.5f, 0);
+            } else {
+                TrebleSketch.Velocity = new Vector2(0, 0);
+            }
+
+            TrebleSketch.Position += TrebleSketch.Velocity;
+        }
 
         public PlayerClass()
         {

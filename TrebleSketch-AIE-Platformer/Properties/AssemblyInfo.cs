@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Adelaide Space Program")]
-[assembly: AssemblyProduct("Adelaide Space Program")]
+[assembly: AssemblyTitle("Space Program Simulator 2016")]
+[assembly: AssemblyProduct("Space Program Simulator 2016")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyDescription("Manage your own space program and survive in the everyday life as the head of a space program")]
+[assembly: AssemblyDescription("You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of a starting national space agency.")]
 [assembly: AssemblyCompany("Treble Sketch Games")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]

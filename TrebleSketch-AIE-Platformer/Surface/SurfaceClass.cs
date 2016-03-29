@@ -15,6 +15,22 @@ namespace TrebleSketch_AIE_Platformer
 {
     class SurfaceClass
     {
+        PlayerClass Player;
+
+        public Vector2 Gravity;
+
+        // Scene Stats
+        public float SceneSize;
+        public float SceneHeight;
+        public int PlayerInScene;
+
+        public void ConfirmPlayerInScene()
+        {
+            if (Player.InScene == PlayerInScene)
+            {
+                
+            }
+        }
 
     }
 }

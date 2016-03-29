@@ -33,11 +33,14 @@ namespace TrebleSketch_AIE_Platformer
         {
             Player = new PlayerClass();
 
+            Player.PlayerFacingRight = true;
+            Player.PlayerFacingRight = false;
+
             // Player.SpawnPosition = Player.Position;
             Position = new Vector2(graphics.PreferredBackBufferWidth / 2
                     , graphics.PreferredBackBufferHeight / 2);
             Velocity = new Vector2(0, 0);
-            Acceleration = 0;
+            Acceleration = Velocity.X;
             // Player.Size = new Vector2(85.0f, 85.0f);
         }
 

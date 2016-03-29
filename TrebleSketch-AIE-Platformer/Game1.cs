@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using MonoGame.Extended.BitmapFonts;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -51,6 +52,7 @@ namespace TrebleSketch_AIE_Platformer
         WorldClass World;
         SurfaceClass Surface;
         AudioClass Audio;
+        DevLogging Debug;
 
         // "Start" the fonts
         // SpriteFont InformationFont;
@@ -71,11 +73,14 @@ namespace TrebleSketch_AIE_Platformer
         {
             Player = new PlayerClass();
             Player.TrebleSketch.InitializeTrebleSketch(graphics);
+            Player.PlayerFacingRight = true;
 
             Rocket = new RocketClass();
             World = new WorldClass();
             Surface = new SurfaceClass();
             Audio = new AudioClass();
+
+            Debug = new DevLogging();
 
             base.Initialize();
         }
@@ -98,10 +103,10 @@ namespace TrebleSketch_AIE_Platformer
 
             // RocketClass - Loads all rocket components
                 // Engines
-                // Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
+                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
 
                 // Fuel Tanks
-                // Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+                Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
             
@@ -127,6 +132,7 @@ namespace TrebleSketch_AIE_Platformer
             // Extra Assets - Loads the extra fonts and what no
                 // Fonts
                 // InformationFont = Content.Load<SpriteFont>("");
+                Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
 
             // TODO: use this.Content to load your game content here
         }
@@ -150,7 +156,7 @@ namespace TrebleSketch_AIE_Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            Player.PlayerMovement(gameTime);
+            Player.PlayerMovement();
 
             base.Update(gameTime);
         }
@@ -170,27 +176,29 @@ namespace TrebleSketch_AIE_Platformer
 
             spriteBatch.Begin();
 
-            // Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
+            Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
 
-            // Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
+            Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && Player.BothSidesPressed == false)
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
                 Player.PlayerFacingRight = false;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Player.BothSidesPressed == false)
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
                 Player.PlayerFacingRight = true;
             }
+
+            if (Player.PlayerFacingRight)
+            {
+                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
+            }
             else if (Player.PlayerFacingRight == false)
             {
                 Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
-            else if (Player.PlayerFacingRight == true)
-            {
-                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
             }
 
             spriteBatch.End();

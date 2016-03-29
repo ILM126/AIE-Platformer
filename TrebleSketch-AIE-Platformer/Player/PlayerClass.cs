@@ -15,29 +15,35 @@ namespace TrebleSketch_AIE_Platformer
 {
     class PlayerClass
     {
+        DevLogging Debug;
+
+        // Player Scene Controls
+        public int InScene;
         public bool PlayerFacingRight;
+        public bool BothSidesPressed;
+        public bool IsJumping;
 
         public PlayerTrebleSketch TrebleSketch;
 
-        public void PlayerMovement(GameTime gameTime)
+        public void PlayerMovement()
         {
-            //    if (Keyboard.GetState().IsKeyDown(Keys.S))
-            //    {
-            //        TrebleSketch.Acceleration = 0.05f;
-            //    }
-            //if (Keyboard.GetState().IsKeyDown(Keys.W))
-            //{
-            //    TrebleSketch.Velocity += new Vector2(0, -2f);
-            //}
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && PlayerFacingRight == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.A)) // Press A
             {
                 TrebleSketch.Velocity = new Vector2(-2.5f, 0);
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D) && PlayerFacingRight == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.D)) // Press D
             {
                 TrebleSketch.Velocity = new Vector2(2.5f, 0);
-            } else {
+            }
+
+            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
+            {
                 TrebleSketch.Velocity = new Vector2(0, 0);
+                BothSidesPressed = false;
+            } else if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                TrebleSketch.Velocity = new Vector2(0, 0);
+                BothSidesPressed = true;
             }
 
             TrebleSketch.Position += TrebleSketch.Velocity;

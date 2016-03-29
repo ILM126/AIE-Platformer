@@ -24,7 +24,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void loadFuelTankMedium(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            spriteBatch.Draw(Medium
+                spriteBatch.Draw(Medium
                 , new Vector2(graphics.PreferredBackBufferWidth / 2
                     , graphics.PreferredBackBufferHeight / 2 - 62.5f)
                 , null

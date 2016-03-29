@@ -28,6 +28,12 @@ namespace TrebleSketch_AIE_Platformer
         public EngineClass Engine;
         public FuelTankClass FuelTank;
 
+        public void RocketSpawnPosition(GraphicsDeviceManager graphics)
+        {
+            Position = new Vector2(graphics.PreferredBackBufferWidth / 2,
+                graphics.PreferredBackBufferHeight / 2);
+        }
+
         public RocketClass()
         {
             Engine = new EngineClass();

@@ -15,7 +15,6 @@ namespace TrebleSketch_AIE_Platformer
 {
     class EngineClass
     {
-        
 
         /// <summary>
         /// Engine: "Titus"

@@ -19,6 +19,16 @@ namespace TrebleSketch_AIE_Platformer
 
         public Vector2 Gravity;
 
+        // Scene Textures
+        public Texture2D OutsideGrass;
+
+        // public Texture2D BuildingOutsideWalls;
+        // public Texture2D BuildingInsideWalls;
+
+        // public Texture2D InsideTiledFloor;
+        // public Texture2D InsideMetalFloor;
+        // public Texture2D InsideConcreteFloor;
+
         // Scene Stats
         public float SceneSize;
         public float SceneHeight;

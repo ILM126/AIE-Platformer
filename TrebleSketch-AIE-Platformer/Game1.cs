@@ -50,7 +50,7 @@ namespace TrebleSketch_AIE_Platformer
         PlayerClass Player;
         RocketClass Rocket;
         WorldClass World;
-        SurfaceClass Surface;
+        SceneClass Scene;
         AudioClass Audio;
         DevLogging Debug;
 
@@ -77,7 +77,7 @@ namespace TrebleSketch_AIE_Platformer
 
             Rocket = new RocketClass();
             World = new WorldClass();
-            Surface = new SurfaceClass();
+            Scene = new SceneClass();
             Audio = new AudioClass();
 
             Debug = new DevLogging();

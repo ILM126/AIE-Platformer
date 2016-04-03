@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace TrebleSketch_AIE_Platformer
 {
-    class SurfaceClass
+    class SceneClass
     {
         PlayerClass Player;
 

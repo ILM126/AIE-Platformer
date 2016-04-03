@@ -52,7 +52,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rocket\RocketClass.cs" />
-    <Compile Include="Surface\SurfaceClass.cs" />
+    <Compile Include="Saves\SaveModule.cs" />
+    <Compile Include="Scene\SceneClass.cs" />
     <Compile Include="World\WorldClass.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace TrebleSketch_AIE_Platformer
     {
         PlayerClass Player;
 
-        public Vector2 Gravity;
+        public float Gravity;
 
         // Scene Textures
         public Texture2D OutsideGrass;
@@ -34,13 +34,28 @@ namespace TrebleSketch_AIE_Platformer
         public float SceneHeight;
         public int PlayerInScene;
 
-        public void ConfirmPlayerInScene()
+        public void InitiateSurface()
+        {
+            Gravity = 15.936375f;
+        }
+
+        public void HandleGravity()
+        {
+
+        }
+
+        public void ConfirmPlayerGrounded()
+        {
+
+        }
+
+        /* public void ConfirmPlayerInScene()
         {
             if (Player.InScene == PlayerInScene)
             {
                 
             }
-        }
+        }*/
 
     }
 }

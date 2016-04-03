@@ -19,7 +19,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.2.30 (Developmental Stages)
+    /// Version: 0.0.2.75 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
@@ -28,7 +28,6 @@ namespace TrebleSketch_AIE_Platformer
 
     /// <summary>
     /// TO DO:
-    /// - Fonts
     /// - Player-to-Surface Collisions
     /// - Scene Movements
     /// - Scene Transitions
@@ -36,10 +35,11 @@ namespace TrebleSketch_AIE_Platformer
     /// - Make Game "First Playable" by 30th of March, 2016.
     /// - Follow Rainlender's Schedule
     /// </summary>
-    
+
     /// <summary>
     /// BUGS:
     /// - Incomplete Game
+    /// - When you press D/A and then
     /// </summary>
     public class Game1 : Game
     {
@@ -72,12 +72,14 @@ namespace TrebleSketch_AIE_Platformer
         protected override void Initialize()
         {
             Player = new PlayerClass();
-            Player.TrebleSketch.InitializeTrebleSketch(graphics);
+            Player.InitializeTrebleSketch(graphics);
             Player.PlayerFacingRight = true;
 
             Rocket = new RocketClass();
             World = new WorldClass();
+
             Scene = new SceneClass();
+
             Audio = new AudioClass();
 
             Debug = new DevLogging();
@@ -96,8 +98,8 @@ namespace TrebleSketch_AIE_Platformer
 
             // PlayerClass - Loads Treble Sketch and Adelaide Player Sprites
                 // Treble Sketch
-                Player.TrebleSketch.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left");
-                Player.TrebleSketch.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right");
+                Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left");
+                Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right");
 
                 // Adelaide
 
@@ -182,23 +184,23 @@ namespace TrebleSketch_AIE_Platformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.A) && Player.BothSidesPressed == false)
             {
-                Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                Player.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
                 Player.PlayerFacingRight = false;
             }
-            
+
             if (Keyboard.GetState().IsKeyDown(Keys.D) && Player.BothSidesPressed == false)
             {
-                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                Player.loadPlayerTrebleSketchRight(spriteBatch, graphics);
                 Player.PlayerFacingRight = true;
             }
 
             if (Player.PlayerFacingRight)
             {
-                Player.TrebleSketch.loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                Player.loadPlayerTrebleSketchRight(spriteBatch, graphics);
             }
             else if (Player.PlayerFacingRight == false)
             {
-                Player.TrebleSketch.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                Player.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
 
             spriteBatch.End();

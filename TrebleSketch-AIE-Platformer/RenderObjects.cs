@@ -15,7 +15,8 @@ namespace TrebleSketch_AIE_Platformer
 {
     class RenderObjects
     {
-        public SquareCollision m_SquareCollision;
+        // public SquareCollision m_SquareCollision;
+
 
     }
 }

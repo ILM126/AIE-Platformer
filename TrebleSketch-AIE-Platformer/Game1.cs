@@ -83,6 +83,7 @@ namespace TrebleSketch_AIE_Platformer
             Audio = new AudioClass();
 
             Debug = new DevLogging();
+            Debug.ShowDebug();
 
             base.Initialize();
         }

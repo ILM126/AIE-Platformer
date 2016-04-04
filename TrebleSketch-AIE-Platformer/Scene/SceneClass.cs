@@ -15,6 +15,16 @@ namespace TrebleSketch_AIE_Platformer
 {
     class SceneClass
     {
+        protected enum SceneID
+        {
+            Menu_StartMenu,
+            SpaceCenter_Reception,
+            SpaceCenter_CEOOffice,
+            SoaceCenter_PressConferenceRoom,
+            Outside_FrontLawns,
+            Outside_ParkingLot
+        }
+
         PlayerClass Player;
 
         public float Gravity;
@@ -60,6 +70,11 @@ namespace TrebleSketch_AIE_Platformer
                 
             }
         }*/
+
+        public void SpawnScene()
+        {
+
+        }
 
     }
 }

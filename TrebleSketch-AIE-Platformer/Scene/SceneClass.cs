@@ -29,6 +29,9 @@ namespace TrebleSketch_AIE_Platformer
         // public Texture2D InsideMetalFloor;
         // public Texture2D InsideConcreteFloor;
 
+        // List of Tiles rendered :3
+        protected List<RenderObjects> renderedTiles;
+
         // Scene Stats
         public float SceneSize;
         public float SceneHeight;
@@ -36,7 +39,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public void InitiateSurface()
         {
-            Gravity = 15.936375f;
+            Gravity = 15.936375f; // Approximately 9.708m/s^2, Earth's Gravity
+            renderedTiles = new List<RenderObjects>();
         }
 
         public void HandleGravity()

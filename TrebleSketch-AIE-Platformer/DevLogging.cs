@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -20,6 +21,11 @@ namespace TrebleSketch_AIE_Platformer
         public BitmapFont DebugFont;
 
         public void ShowDebug()
+        {
+            Debug.WriteLine("LOL WAT MATE!");
+        }
+
+        public void InGameDebug()
         {
 
         }

@@ -32,7 +32,7 @@ namespace TrebleSketch_AIE_Platformer
     /// - Scene Movements
     /// - Scene Transitions
     /// - Speech System
-    /// - Make Game "First Playable" by 30th of March, 2016.
+    /// - Make Game "First Playable" by 6th of April, 2016.
     /// - Follow Rainlender's Schedule
     /// </summary>
 

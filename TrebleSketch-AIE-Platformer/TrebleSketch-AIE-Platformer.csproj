@@ -46,6 +46,7 @@
     <Compile Include="DevLogging.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\PlayerTrebleSketch.cs" />
+    <Compile Include="RenderObjects.cs" />
     <Compile Include="Rocket\EngineClass.cs" />
     <Compile Include="Rocket\FuelTankClass.cs" />
     <Compile Include="Game1.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Rocket\RocketClass.cs" />
     <Compile Include="Saves\SaveModule.cs" />
     <Compile Include="Scene\SceneClass.cs" />
+    <Compile Include="SquareCollision.cs" />
     <Compile Include="World\WorldClass.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,15 +15,17 @@ namespace TrebleSketch_AIE_Platformer
 {
     class SceneClass
     {
-        protected enum SceneID
+        protected enum UIMode
         {
-            Menu_StartMenu,
-            SpaceCenter_Reception,
-            SpaceCenter_CEOOffice,
-            SoaceCenter_PressConferenceRoom,
-            Outside_FrontLawns,
-            Outside_ParkingLot
+            MainMenu,
+            SettingsMenu,
+            LoadMenu,
+            StoryStage,
+            BattleStage,
+            InGameUIGone
         }
+
+        protected int SceneID;
 
         PlayerClass Player;
 

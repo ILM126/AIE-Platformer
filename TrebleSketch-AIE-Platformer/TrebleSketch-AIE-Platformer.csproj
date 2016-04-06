@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rocket\RocketClass.cs" />
     <Compile Include="Saves\SaveModule.cs" />
+    <Compile Include="Scene\LoadScene.cs" />
     <Compile Include="Scene\SceneClass.cs" />
     <Compile Include="SquareCollision.cs" />
     <Compile Include="World\WorldClass.cs" />

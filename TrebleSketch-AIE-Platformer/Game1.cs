@@ -19,7 +19,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.2.79 (Developmental Stages)
+    /// Version: 0.0.2.80 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
@@ -180,29 +180,9 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.Begin();
 
             Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
-
             Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && Player.BothSidesPressed == false)
-            {
-                Player.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-                Player.PlayerFacingRight = false;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Player.BothSidesPressed == false)
-            {
-                Player.loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                Player.PlayerFacingRight = true;
-            }
-
-            if (Player.PlayerFacingRight)
-            {
-                Player.loadPlayerTrebleSketchRight(spriteBatch, graphics);
-            }
-            else if (Player.PlayerFacingRight == false)
-            {
-                Player.loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
+            Player.RenderPlayer(spriteBatch, graphics);
 
             spriteBatch.End();
 

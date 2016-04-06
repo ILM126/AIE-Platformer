@@ -104,5 +104,27 @@ namespace TrebleSketch_AIE_Platformer
                 , SpriteEffects.None
                 , 0);
         }
+
+        public void RenderPlayer(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && BothSidesPressed == false)
+            {
+                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                PlayerFacingRight = false;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && BothSidesPressed == false)
+            {
+                loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                PlayerFacingRight = true;
+            }
+            if (PlayerFacingRight)
+            {
+                loadPlayerTrebleSketchRight(spriteBatch, graphics);
+            }
+            else if (PlayerFacingRight == false)
+            {
+                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+            }
+        }
     }
 }

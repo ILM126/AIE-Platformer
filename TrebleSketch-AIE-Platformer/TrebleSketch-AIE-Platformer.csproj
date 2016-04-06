@@ -75,13 +75,15 @@
     <Content Include="Content\Player\treble-sketch_stand_right.png" />
     <Content Include="Content\Rocket\engine-Titus-v1.png" />
     <Content Include="Content\Rocket\fuelTank-Medium-v1.png" />
+    <Content Include="Content\Surface\surface-dirt1-v1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Surface\" />
     <Folder Include="Content\World\" />
   </ItemGroup>
   <ItemGroup>

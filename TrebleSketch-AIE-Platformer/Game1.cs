@@ -125,18 +125,19 @@ namespace TrebleSketch_AIE_Platformer
                 Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
-            
+
             // WorldClass - Loads the planets and moons
                 // Planets
 
                 // Moons
 
             // SurfaceClass - Loads the Space Centre
-                // Stage 01
+                // 01 - Reception
+                Scene.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");
 
-                // Stage 02
+                // 02 - Front Lawns
 
-                // Stage 03
+                // 03 - Conference Room
 
             // AudioClass - Loads the Sounds and Sound Effects
                 // Rocket

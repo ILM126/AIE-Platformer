@@ -30,15 +30,6 @@ namespace TrebleSketch_AIE_Platformer
             map_texture = texture;
             map_position = position;
             map_size = size;
-            switch (Player.ToScene)
-            {
-                case 1:
-
-                break;
-                default:
-                    Debug.WriteLine("What, lol. No Scenes!", "GameObjects: ");
-                break;
-            }
             map_origin = new Vector2(
                 (int)map_size.X / 2,
                 (int)map_size.Y / 2);

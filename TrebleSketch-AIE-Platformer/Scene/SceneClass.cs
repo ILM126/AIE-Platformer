@@ -28,8 +28,9 @@ namespace TrebleSketch_AIE_Platformer
         protected int SceneID;
 
         PlayerClass Player;
+        SceneClass Scene;
 
-        public float Gravity;
+        // public float Gravity;
 
         // Scene Textures
         public Texture2D OutsideGrass;
@@ -51,13 +52,13 @@ namespace TrebleSketch_AIE_Platformer
 
         public void InitiateSurface()
         {
-            Gravity = 15.936375f; // Approximately 9.708m/s^2, Earth's Gravity
+            
             renderedTiles = new List<RenderObjects>();
         }
 
         public void HandleGravity()
         {
-
+            // Gravity = 15.936375f; // This is Earth's Gravity in this in real time m/2^s | That is, if Treble is about 1.2m tall
         }
 
         public void ConfirmPlayerGrounded()
@@ -76,6 +77,7 @@ namespace TrebleSketch_AIE_Platformer
         public void SpawnScene()
         {
 
+            // if ()
         }
 
     }

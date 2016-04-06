@@ -37,13 +37,12 @@ namespace TrebleSketch_AIE_Platformer
         // Player Movement
         public bool PlayerFacingRight;
         public bool BothSidesPressed;
-        // public bool IsJumping;
-        // public bool IsGrounded;
+        public bool IsJumping;
+        public bool IsGrounded;
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
         {
             PlayerFacingRight = true;
-            PlayerFacingRight = false;
             BothSidesPressed = false;
 
             // Player.SpawnPosition = Player.Position;
@@ -74,6 +73,19 @@ namespace TrebleSketch_AIE_Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 BothSidesPressed = true;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsJumping == false)
+            {
+                //lol titus is a massive poop amirite
+                Position.Y -= 50f;
+                Velocity.Y -= 2f;
+                IsJumping = true;
+            }
+            if (IsJumping)
+            {
+                float i = 1;
+                Velocity.Y += 0.15f * 1;
             }
 
             Position += Velocity;
@@ -128,5 +140,20 @@ namespace TrebleSketch_AIE_Platformer
                 loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
         }
+
+        public PlayerClass(Texture2D drawTexture, Vector2 drawPosition) // https://www.youtube.com/watch?v=ZLxIShw-7ac
+        {
+            if (PlayerFacingRight)
+            {
+                FaceRight = drawTexture;
+            } else if (!PlayerFacingRight)
+            {
+                FaceLeft = drawTexture;
+            }
+            Position = drawPosition;
+            IsJumping = false;
+        }
+
+
     }
 }

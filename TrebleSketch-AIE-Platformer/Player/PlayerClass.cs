@@ -31,6 +31,8 @@ namespace TrebleSketch_AIE_Platformer
 
         // Player Scene Stuff
         public int InScene;
+        public int FromScene;
+        public int ToScene;
 
         // Player Movement
         public bool PlayerFacingRight;
@@ -107,12 +109,12 @@ namespace TrebleSketch_AIE_Platformer
 
         public void RenderPlayer(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && BothSidesPressed == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
             {
                 loadPlayerTrebleSketchLeft(spriteBatch, graphics);
                 PlayerFacingRight = false;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && BothSidesPressed == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
             {
                 loadPlayerTrebleSketchRight(spriteBatch, graphics);
                 PlayerFacingRight = true;

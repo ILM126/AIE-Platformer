@@ -30,8 +30,7 @@ namespace TrebleSketch_AIE_Platformer
         public Texture2D FaceLeft;
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
-        {
-            Player = new PlayerClass();
+        { 
 
             Player.PlayerFacingRight = true;
             Player.PlayerFacingRight = false;

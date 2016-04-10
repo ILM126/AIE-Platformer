@@ -22,7 +22,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void ShowDebug()
         {
-            Debug.WriteLine("LOL WAT MATE!");
+            Debug.WriteLine("[INFO] LOL WAT MATE!");
         }
 
         public void InGameDebug()

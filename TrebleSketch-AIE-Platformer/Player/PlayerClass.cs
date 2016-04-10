@@ -56,30 +56,42 @@ namespace TrebleSketch_AIE_Platformer
             // Player.Size = new Vector2(85.0f, 85.0f);
         }
 
-        public void PlayerMovement(GameTime gameTime)
+        void PlayerMovement(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Velocity = new Vector2(0, 0);
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && PlayerFacingRight == false) // Press A
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
             {
-                Velocity = new Vector2(-2.5f, 0);
+                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                PlayerFacingRight = false;
+                Velocity.X = -4.8f;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D) && PlayerFacingRight) // Press D
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
             {
-                Velocity = new Vector2(2.5f, 0);
+                loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                PlayerFacingRight = true;
+                Velocity.X = 4.8f;
             }
 
             if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
             {
                 BothSidesPressed = false;
+
+                if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 BothSidesPressed = true;
+
+                if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsJumping == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !IsJumping)
             {
                 Jump();
             }
@@ -130,26 +142,9 @@ namespace TrebleSketch_AIE_Platformer
                 , 0);
         }
 
-        public void RenderPlayer(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
-            {
-                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-                PlayerFacingRight = false;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
-            {
-                loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                PlayerFacingRight = true;
-            }
-            if (PlayerFacingRight)
-            {
-                loadPlayerTrebleSketchRight(spriteBatch, graphics);
-            }
-            else if (PlayerFacingRight == false)
-            {
-                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
+            PlayerMovement(gameTime, spriteBatch, graphics);
         }
 
         public PlayerClass(Texture2D drawTexture, Vector2 drawPosition) // https://www.youtube.com/watch?v=ZLxIShw-7ac

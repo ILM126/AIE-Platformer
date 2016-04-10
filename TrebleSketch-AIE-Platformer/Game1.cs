@@ -174,8 +174,6 @@ namespace TrebleSketch_AIE_Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            Player.PlayerMovement(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -197,7 +195,7 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
             Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
 
-            Player.RenderPlayer(spriteBatch, graphics);
+            Player.Draw(gameTime, spriteBatch, graphics);
 
             spriteBatch.End();
 

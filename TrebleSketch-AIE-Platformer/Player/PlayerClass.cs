@@ -146,20 +146,5 @@ namespace TrebleSketch_AIE_Platformer
         {
             PlayerMovement(gameTime, spriteBatch, graphics);
         }
-
-        public PlayerClass(Texture2D drawTexture, Vector2 drawPosition) // https://www.youtube.com/watch?v=ZLxIShw-7ac
-        {
-            if (PlayerFacingRight)
-            {
-                FaceRight = drawTexture;
-            } else if (!PlayerFacingRight)
-            {
-                FaceLeft = drawTexture;
-            }
-            Position = drawPosition;
-            IsJumping = false;
-        }
-
-
     }
 }

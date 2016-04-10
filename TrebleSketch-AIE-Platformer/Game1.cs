@@ -144,6 +144,7 @@ namespace TrebleSketch_AIE_Platformer
                 // People
 
                 // Music
+                Audio.Bright_DJStartchAttack = Content.Load<Song>("Audio/Bright by DJStratchAttack");
 
             // Extra Assets - Loads the extra fonts and what no
                 // Fonts
@@ -171,6 +172,8 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            Audio.ToggleMusic(gameTime);
 
             base.Update(gameTime);
         }

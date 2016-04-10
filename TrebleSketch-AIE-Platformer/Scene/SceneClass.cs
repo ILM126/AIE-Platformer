@@ -26,6 +26,7 @@ namespace TrebleSketch_AIE_Platformer
         }
 
         protected int SceneID;
+        public string SceneName;
 
         PlayerClass Player;
         SceneClass Scene;
@@ -43,42 +44,25 @@ namespace TrebleSketch_AIE_Platformer
         // public Texture2D InsideConcreteFloor;
 
         // List of Tiles rendered :3
-        protected List<RenderObjects> renderedTiles;
+        protected List<SceneObjects> sceneTiles;
+        protected Vector2 Tile_Size;
 
         // Scene Stats
-        public float SceneSize;
-        public float SceneHeight;
+        float Scene_Width;
+        float Scene_Height;
+        float Scene_Size;
+
+        // Player Scene Stats
         public int PlayerInScene;
 
         public void InitiateSurface()
         {
-            
-            renderedTiles = new List<RenderObjects>();
-        }
-
-        public void HandleGravity()
-        {
-            // Gravity = 15.936375f; // This is Earth's Gravity in this in real time m/2^s | That is, if Treble is about 1.2m tall
+            sceneTiles = new List<SceneObjects>();
         }
 
         public void ConfirmPlayerGrounded()
         {
 
         }
-
-        /* public void ConfirmPlayerInScene()
-        {
-            if (Player.InScene == PlayerInScene)
-            {
-                
-            }
-        }*/
-
-        public void SpawnScene()
-        {
-
-            // if ()
-        }
-
     }
 }

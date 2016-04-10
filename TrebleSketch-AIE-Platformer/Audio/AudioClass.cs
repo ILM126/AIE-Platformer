@@ -17,6 +17,7 @@ namespace TrebleSketch_AIE_Platformer
     {
         public Song Bright_DJStartchAttack;
         TimeSpan lastChange;
+        bool playedOnce;
 
         public void ToggleMusic(GameTime gameTime)
         {
@@ -25,7 +26,7 @@ namespace TrebleSketch_AIE_Platformer
                 if (MediaPlayer.State != MediaState.Playing)
                 {
                     MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
-                    MediaPlayer.Volume -= 0.75f;
+                    if (!playedOnce) MediaPlayer.Volume -= 0.75f; playedOnce = true;
                 }
             }
             TimeSpan last = gameTime.TotalGameTime - lastChange;

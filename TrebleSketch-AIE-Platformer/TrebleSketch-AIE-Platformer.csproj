@@ -47,7 +47,7 @@
     <Compile Include="GameObjects.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\PlayerTrebleSketch.cs" />
-    <Compile Include="RenderObjects.cs" />
+    <Compile Include="SceneObjects.cs" />
     <Compile Include="Rocket\EngineClass.cs" />
     <Compile Include="Rocket\FuelTankClass.cs" />
     <Compile Include="Game1.cs" />
@@ -72,6 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\Bright by DJStratchAttack.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Player\treble-sketch_stand_left.png" />
     <Content Include="Content\Player\treble-sketch_stand_right.png" />
     <Content Include="Content\Rocket\engine-Titus-v1.png" />

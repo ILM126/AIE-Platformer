@@ -13,9 +13,18 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace TrebleSketch_AIE_Platformer
 {
-    class RenderObjects
+    class SceneObjects
     {
-        // public SquareCollision m_SquareCollision;
+        public Texture2D scene_Texture;
+        public Vector2 scene_Position;
+        public Vector2 scene_Size;
+
+        public SceneObjects(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2())
+        {
+            scene_Texture = texture;
+            scene_Position = position;
+            scene_Size = size;
+        }
 
 
     }

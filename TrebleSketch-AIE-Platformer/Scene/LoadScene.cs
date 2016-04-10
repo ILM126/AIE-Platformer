@@ -16,9 +16,29 @@ namespace TrebleSketch_AIE_Platformer
 {
     class LoadScene : SceneClass
     {
-        public void Scene01()
+        public void SceneLoader()
         {
-            
+            SceneID = 0;
+            switch(SceneID)
+            {
+                case 0:
+                    SceneName = "Test Map";
+                    break;
+                case 1:
+                    SceneName = "Main Menu";
+                    break;
+                case 2:
+                    SceneName = "Settings Menu";
+                    break;
+                case 3:
+                    SceneName = "Front Lawns";
+                    break;
+                default:
+                    SceneName = "Test Map";
+                    break;
+            }
+
+            Console.WriteLine("[INFO] Loaded " + SceneName + ".");
         }
     }
 }

@@ -174,7 +174,7 @@ namespace TrebleSketch_AIE_Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            Player.PlayerMovement();
+            Player.PlayerMovement(gameTime);
 
             base.Update(gameTime);
         }

@@ -30,6 +30,7 @@ namespace TrebleSketch_AIE_Platformer
         //public Vector2 Size;
 
         // Player Scene Stuff
+        float Gravity;
         public int InScene;
         public int FromScene;
         public int ToScene;
@@ -37,8 +38,9 @@ namespace TrebleSketch_AIE_Platformer
         // Player Movement
         public bool PlayerFacingRight;
         public bool BothSidesPressed;
-        public bool IsJumping;
-        public bool IsGrounded;
+        bool IsJumping;
+        bool IsGrounded;
+        bool isGrounded;
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
         {
@@ -50,11 +52,13 @@ namespace TrebleSketch_AIE_Platformer
                     , graphics.PreferredBackBufferHeight / 2);
             Velocity = new Vector2(0, 0);
             Acceleration = Velocity.X;
+            Gravity = 50f;
             // Player.Size = new Vector2(85.0f, 85.0f);
         }
 
-        public void PlayerMovement()
+        public void PlayerMovement(GameTime gameTime)
         {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Velocity = new Vector2(0, 0);
             if (Keyboard.GetState().IsKeyDown(Keys.A) && PlayerFacingRight == false) // Press A
             {
@@ -77,18 +81,25 @@ namespace TrebleSketch_AIE_Platformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsJumping == false)
             {
-                //lol titus is a massive poop amirite
-                Position.Y -= 50f;
-                Velocity.Y -= 2f;
-                IsJumping = true;
-            }
-            if (IsJumping)
-            {
-                float i = 1;
-                Velocity.Y += 0.15f * 1;
+                Jump();
             }
 
+            if (!isGrounded) Velocity.Y += Gravity * time;
+            else Velocity.Y = 0;
+
+            Position.Y += Velocity.Y * time;
+            // isGrounded = false;
+
             Position += Velocity;
+        }
+
+        public void Jump()
+        {
+            if (isGrounded)
+            {
+                IsJumping = true;
+                Velocity.Y = -100f;
+            }
         }
 
         public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)

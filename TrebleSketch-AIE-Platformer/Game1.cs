@@ -81,6 +81,10 @@ namespace TrebleSketch_AIE_Platformer
         {
             Console.WriteLine("[INFO] Started Initializing Game");
 
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.ApplyChanges();
+
             Debug = new DevLogging();
             Debug.ShowDebug();
 

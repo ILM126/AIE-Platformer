@@ -47,7 +47,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     SceneObjects GroundTile = new SceneObjects(
                         OutsideGrass
-                        , new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 + 50)
+                        , new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 + 40)
                         , new Vector2(Tile_Size, Tile_Size)
                         , Scale);
                     GroundTiles.Add(GroundTile);

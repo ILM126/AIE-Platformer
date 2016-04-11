@@ -10,11 +10,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using MonoGame.Extended.BitmapFonts;
 
 namespace TrebleSketch_AIE_Platformer
 {
     class AudioClass
     {
+        public DevLogging Debug;
+
         public Song Bright_DJStartchAttack;
         TimeSpan lastChange;
         bool playedOnce;
@@ -38,6 +41,17 @@ namespace TrebleSketch_AIE_Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.K))
             {
                 MediaPlayer.Stop();
+            }
+        }
+
+        public void CurrentSong(SpriteBatch spriteBatch)
+        {
+            if (MediaPlayer.State == MediaState.Playing)
+            {
+                spriteBatch.DrawString(Debug.InformationFont, "Current Song: " + Bright_DJStartchAttack.Name.ToString(), new Vector2(10, 10), Color.Black);
+            } else
+            {
+                spriteBatch.DrawString(Debug.InformationFont, "Current Song: ", new Vector2(10, 10), Color.Black);
             }
         }
     }

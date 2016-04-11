@@ -48,10 +48,18 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (MediaPlayer.State == MediaState.Playing)
             {
-                spriteBatch.DrawString(Debug.InformationFont, "Current Song: " + Bright_DJStartchAttack.Name.ToString(), new Vector2(10, 10), Color.Black);
+                spriteBatch.DrawString(Debug.InformationFont, "Current Song: " + Bright_DJStartchAttack.Name.ToString(), new Vector2(10, 5), Color.Black);
             } else
             {
-                spriteBatch.DrawString(Debug.InformationFont, "Current Song: ", new Vector2(10, 10), Color.Black);
+                spriteBatch.DrawString(Debug.InformationFont, "Current Song: ", new Vector2(10, 5), Color.Black);
+            }
+
+            if (MediaPlayer.IsRepeating)
+            {
+                spriteBatch.DrawString(Debug.InformationFont, "Repeating: True", new Vector2(10, 70), Color.Black);
+            } else if (!MediaPlayer.IsRepeating)
+            {
+                spriteBatch.DrawString(Debug.InformationFont, "Repeating: False", new Vector2(10, 70), Color.Black);
             }
         }
     }

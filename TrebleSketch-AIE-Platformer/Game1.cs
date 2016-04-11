@@ -65,9 +65,6 @@ namespace TrebleSketch_AIE_Platformer
         AudioClass Audio;
         DevLogging Debug;
 
-        // "Start" the fonts
-        // SpriteFont InformationFont;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -84,6 +81,9 @@ namespace TrebleSketch_AIE_Platformer
         {
             Console.WriteLine("[INFO] Started Initializing Game");
 
+            Debug = new DevLogging();
+            Debug.ShowDebug();
+
             Player = new PlayerClass();
             Player.InitializeTrebleSketch(graphics);
 
@@ -98,9 +98,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.InitialiseScene(graphics);
 
             Audio = new AudioClass();
-
-            Debug = new DevLogging();
-            Debug.ShowDebug();
+            Audio.Debug = Debug;
 
             Console.WriteLine("[INFO] Finished Initializing Game");
 
@@ -159,7 +157,7 @@ namespace TrebleSketch_AIE_Platformer
 
             // Extra Assets - Loads the extra fonts and what no
                 // Fonts
-                // InformationFont = Content.Load<SpriteFont>("");
+                Debug.InformationFont = Content.Load<BitmapFont>("informationfont");
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
 
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
@@ -217,6 +215,11 @@ namespace TrebleSketch_AIE_Platformer
 
             // Console.WriteLine("[INFO] Drawing Scene Textures");
             SceneLoad.Draw(gameTime, spriteBatch);
+
+            // Console.WriteLine("[INFO] Drawing Audio Name");
+            Audio.CurrentSong(spriteBatch);
+
+            // Debug.InGameDebug(spriteBatch);
 
             spriteBatch.End();
 

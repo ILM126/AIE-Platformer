@@ -19,6 +19,7 @@ namespace TrebleSketch_AIE_Platformer
     class DevLogging
     {
         public BitmapFont DebugFont;
+        public BitmapFont InformationFont;
 
         public void ShowDebug()
         {

@@ -21,6 +21,7 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 scene_Size;
         public Vector2 scene_Origin;
         public float scene_Scale;
+        public SquareCollision BoxCollision;
 
         public SceneObjects(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
         {
@@ -56,6 +57,16 @@ namespace TrebleSketch_AIE_Platformer
                 0,
                 0);
         }
-
+        
+        protected virtual void UpdateBounds()
+        {
+            /// Note: this should be called whenever the object position,
+            /// size, or scale are changed
+            BoxCollision = new SquareCollision(scene_Position, scene_Size * scene_Scale);
+        }
+        protected bool SquareCollisionCheck(SceneObjects pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
     }
 }

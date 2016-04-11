@@ -16,13 +16,41 @@ namespace TrebleSketch_AIE_Platformer
 {
     class LoadScene : SceneClass
     {
-        public void SceneLoader()
+        public List<SceneObjects> GroundTiles;
+        float Scale;
+        float Tile_Size;
+
+        // Scene Textures
+        public Texture2D OutsideGrass;
+
+        // public Texture2D BuildingOutsideWalls;
+        // public Texture2D BuildingInsideWalls;
+
+        // public Texture2D InsideTiledFloor;
+        // public Texture2D InsideMetalFloor;
+        // public Texture2D InsideConcreteFloor;
+
+        public void InitialiseScene(GraphicsDeviceManager graphics)
         {
+            GroundTiles = new List<SceneObjects>();
+            Scale = 0.5f;
+            Tile_Size = 50f;
             SceneID = 0;
+            SceneLoader(graphics);
+        }
+
+        public void SceneLoader(GraphicsDeviceManager graphics)
+        {
             switch(SceneID)
             {
                 case 0:
                     SceneName = "Test Map";
+                    SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 + 50)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale);
+                    GroundTiles.Add(GroundTile);
                     break;
                 case 1:
                     SceneName = "Main Menu";
@@ -35,10 +63,19 @@ namespace TrebleSketch_AIE_Platformer
                     break;
                 default:
                     SceneName = "Test Map";
+                    // Scene00_TestMap();
                     break;
             }
 
             Console.WriteLine("[INFO] Loaded " + SceneName + ".");
+        }
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (SceneObjects groundTile in GroundTiles)
+            {
+                groundTile.Draw(gameTime, spriteBatch, OutsideGrass);
+            }
         }
     }
 }

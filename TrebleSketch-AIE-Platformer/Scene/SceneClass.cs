@@ -30,22 +30,10 @@ namespace TrebleSketch_AIE_Platformer
 
         PlayerClass Player;
         SceneClass Scene;
-
-        // public float Gravity;
-
-        // Scene Textures
-        public Texture2D OutsideGrass;
-
-        // public Texture2D BuildingOutsideWalls;
-        // public Texture2D BuildingInsideWalls;
-
-        // public Texture2D InsideTiledFloor;
-        // public Texture2D InsideMetalFloor;
-        // public Texture2D InsideConcreteFloor;
+        LoadScene SceneLoad;
 
         // List of Tiles rendered :3
         protected List<SceneObjects> sceneTiles;
-        protected Vector2 Tile_Size;
 
         // Scene Stats
         float Scene_Width;
@@ -57,7 +45,11 @@ namespace TrebleSketch_AIE_Platformer
 
         public void InitiateSurface()
         {
-            sceneTiles = new List<SceneObjects>();
+        }
+
+        public void Draw()
+        {
+
         }
 
         public void ConfirmPlayerGrounded()

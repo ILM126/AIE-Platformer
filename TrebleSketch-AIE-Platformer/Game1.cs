@@ -32,7 +32,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.3.69 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.4.71 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
@@ -62,6 +62,8 @@ namespace TrebleSketch_AIE_Platformer
         RocketClass Rocket;
         WorldClass World;
         SceneClass Scene;
+        LoadScene SceneLoad;
+        SceneObjects SceneObject;
         AudioClass Audio;
         DevLogging Debug;
 
@@ -82,6 +84,8 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void Initialize()
         {
+            Console.WriteLine("[INFO] Started Initializing Game");
+
             Player = new PlayerClass();
             Player.InitializeTrebleSketch(graphics);
 
@@ -90,12 +94,17 @@ namespace TrebleSketch_AIE_Platformer
             World = new WorldClass();
 
             Scene = new SceneClass();
+            SceneObject = new SceneObjects();
             Scene.InitiateSurface();
+            SceneLoad = new LoadScene();
+            SceneLoad.InitialiseScene(graphics);
 
             Audio = new AudioClass();
 
             Debug = new DevLogging();
             Debug.ShowDebug();
+
+            Console.WriteLine("[INFO] Finished Initializing Game");
 
             base.Initialize();
         }
@@ -106,6 +115,8 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void LoadContent()
         {
+            Console.WriteLine("[INFO] Started Loading Game Textures");
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -131,8 +142,10 @@ namespace TrebleSketch_AIE_Platformer
                 // Moons
 
             // SurfaceClass - Loads the Space Centre
+                // 00 - Test Map
+                SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
+
                 // 01 - Reception
-                Scene.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");
 
                 // 02 - Front Lawns
 
@@ -151,7 +164,9 @@ namespace TrebleSketch_AIE_Platformer
                 // InformationFont = Content.Load<SpriteFont>("");
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
 
-            // TODO: use this.Content to load your game content here
+                SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
+
+            Console.WriteLine("[INFO] Finished Loading Game Textures");
         }
 
         /// <summary>
@@ -191,14 +206,23 @@ namespace TrebleSketch_AIE_Platformer
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
+            // Console.WriteLine("[INFO] Started Drawing Game Textures");
+
             spriteBatch.Begin();
 
+            // Console.WriteLine("[INFO] Drawing Rocket Textures");
             Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
             Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
 
+            // Console.WriteLine("[INFO] Drawing Player Textures");
             Player.Draw(gameTime, spriteBatch, graphics);
 
+            // Console.WriteLine("[INFO] Drawing Scene Textures");
+            SceneLoad.Draw(gameTime, spriteBatch);
+
             spriteBatch.End();
+
+            // Console.WriteLine("[INFO] Finshed Drawing Game Textures");
 
             base.Draw(gameTime);
         }

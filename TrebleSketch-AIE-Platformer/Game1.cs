@@ -41,7 +41,8 @@ namespace TrebleSketch_AIE_Platformer
 
     /// <summary>
     /// TO DO:
-    /// - Player-to-Surface Collisions
+    /// - Player-Surface Collisions
+    /// - Weapons System
     /// - Scene Movements
     /// - Scene Transitions
     /// - Speech System
@@ -50,7 +51,6 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// BUGS:
     /// - Incomplete Game
-    /// - When you press D/A and then
     /// </summary>
     public class Game1 : Game
     {

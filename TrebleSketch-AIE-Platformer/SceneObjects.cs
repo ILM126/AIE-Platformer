@@ -32,6 +32,7 @@ namespace TrebleSketch_AIE_Platformer
                 (int)scene_Size.X / 2,
                 (int)scene_Size.Y / 2);
             scene_Scale = scale;
+            UpdateBounds();
         }
         
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D drawTexture = null)

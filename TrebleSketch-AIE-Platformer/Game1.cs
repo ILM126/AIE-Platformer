@@ -16,13 +16,11 @@ namespace TrebleSketch_AIE_Platformer
 {
 
     /// Notes for Reece:
-    /// 01. Currently, as of 6th of April 2016, there are no:
+    /// 01. Currently, as of 11st of April 2016, there are no:
+    ///     Collisions
     ///     Sounds
     ///     SFX
-    ///     Audio
     ///     Particle Systems
-    ///     Gravity
-    ///     Scene
     ///     Scrolling
     ///     And others
     /// Coding ftw

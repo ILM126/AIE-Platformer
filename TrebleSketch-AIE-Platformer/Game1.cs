@@ -11,12 +11,14 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
+using TrebleSketch_AIE_Platformer.Player;
+using TrebleSketch_AIE_Platformer.Scene;
 
 namespace TrebleSketch_AIE_Platformer
 {
 
     /// Notes for Reece:
-    /// 01. Currently, as of 11st of April 2016, there are no:
+    /// 01. Currently, as of 13st of April 2016, there are no:
     ///     Collisions
     ///     Sounds
     ///     SFX
@@ -30,16 +32,16 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.4.71 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.5.88 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
-    /// improve on my game design/programming skills. Yes, this game does contain ponies. As suggested in the title.
+    /// improve on my game design/programming skills. Yes, this game does contain ponies.
     /// </summary>
 
     /// <summary>
     /// TO DO:
-    /// - Player-Surface Collisions
+    /// - Player-Surface Collisions (WORKING ON IT)
     /// - Weapons System
     /// - Scene Movements
     /// - Scene Transitions
@@ -49,6 +51,7 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// BUGS:
     /// - Incomplete Game
+    /// - If Players press horizontal direction key too fast, sprite will flicker and disappear. And stay invisible until keys are lifted
     /// </summary>
     public class Game1 : Game
     {

@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using TrebleSketch_AIE_Platformer.Scene;
+using TrebleSketch_AIE_Platformer.Player;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -76,6 +78,20 @@ namespace TrebleSketch_AIE_Platformer
             {
                 groundTile.Draw(gameTime, spriteBatch, OutsideGrass);
             }
+        }
+
+        public void CheckCollisions(PlayerClass player)
+        {
+
+            // Check collision with ground tiles
+            foreach (SceneObjects groundTile in GroundTiles)
+            {
+                if (player.CheckCollisionsGround(groundTile))
+                {
+                    // do stuff
+                }
+            }
+
         }
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using TrebleSketch_AIE_Platformer.Player;
+using TrebleSketch_AIE_Platformer.Scene;
 
 namespace TrebleSketch_AIE_Platformer
 {

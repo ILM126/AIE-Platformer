@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using TrebleSketch_AIE_Platformer.Player;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -30,8 +31,7 @@ namespace TrebleSketch_AIE_Platformer
         public Texture2D FaceLeft;
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
-        { 
-
+        {
             Player.PlayerFacingRight = true;
             Player.PlayerFacingRight = false;
 
@@ -40,37 +40,8 @@ namespace TrebleSketch_AIE_Platformer
                     , graphics.PreferredBackBufferHeight / 2);
             Velocity = new Vector2(0, 0);
             Acceleration = Velocity.X;
+            Rotation = 0;
             // Player.Size = new Vector2(85.0f, 85.0f);
-        }
-
-        // Loads Player Texture 
-
-        public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
-        {
-            spriteBatch.Draw(FaceRight
-                , Position
-                , null
-                , Color.White
-                , 0
-                , new Vector2(FaceRight.Width / 2
-                    , FaceRight.Height / 2)
-                , new Vector2(1, 1)
-                , SpriteEffects.None
-                , 0);
-        }
-
-        public void loadPlayerTrebleSketchLeft(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
-        {
-            spriteBatch.Draw(FaceLeft
-                , Position
-                , null
-                , Color.White
-                , 0
-                , new Vector2(FaceLeft.Width / 2
-                    , FaceLeft.Height / 2)
-                , new Vector2(1, 1)
-                , SpriteEffects.None
-                , 0);
         }
     }
 }

@@ -87,7 +87,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (player.CheckCollisionsGround(groundTile))
                 {
-                    Console.WriteLine("[INFO] " + player.);
+                    // Console.WriteLine("[INFO] " + player.);
                 }
             }
 

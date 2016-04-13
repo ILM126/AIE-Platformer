@@ -51,9 +51,9 @@ namespace TrebleSketch_AIE_Platformer
     /// - Incomplete Game
     /// - (Collisions) Players sink into the ground
     /// - (Collisions) Player can only jump once
+    /// - (Collisions) If Player jumps and moves sideways, it works the way it should. But not if you jump up and down right onto block, you will stay stuck.
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
     /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
-    /// - ()
     /// - If Players press horizontal direction key too fast, sprite will flicker and disappear. And stay invisible until keys are lifted
     /// </summary>
     public class Game1 : Game

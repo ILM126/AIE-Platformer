@@ -44,14 +44,16 @@ namespace TrebleSketch_AIE_Platformer
         public bool BothSidesPressed;
         bool IsJumping;
         bool IsGrounded;
+        float JumpForce;
 
         public void InitialisePlayer()
         {
             BoxCollision = new SquareCollision(Position, Size);
 
-            Gravity = 50f;
+            Gravity = 40.0f;
+            JumpForce = 20.0f;
             Scale = 1f;
-            GroundHeight = 400f;
+            GroundHeight = 40f;
             IsGrounded = false;
             IsJumping = false;
         }
@@ -62,21 +64,39 @@ namespace TrebleSketch_AIE_Platformer
 
             // Player.SpawnPosition = Player.Position;
 
+
+            Position = new Vector2(graphics.PreferredBackBufferWidth / 2
+                , graphics.PreferredBackBufferHeight / 2);
+            Velocity = new Vector2(0);
+            Size = new Vector2(80, 80);
+            Origin = new Vector2(
+                (int)Size.X / 2,
+                (int)Size.Y / 2);
+            //public float Acceleration;
+            //public float Rotation;
+
+            /*
             Position = new Vector2(graphics.PreferredBackBufferWidth / 2
                     , graphics.PreferredBackBufferHeight / 2);
             Velocity = new Vector2(0, 0);
             Origin = new Vector2(
-                (int)Size.X / 2,
-                (int)Size.Y / 2);
+                Size.X / 2,
+                Size.Y / 2);
             Size = new Vector2(80, 80);
             Acceleration = Velocity.X;
             Velocity = new Vector2(0, 0);
-            Acceleration = Velocity.X;
-            Rotation = 0;
+            Acceleration = Velocity.X;*/
+            // Rotation = 0;
         }
 
         void PlayerMovement(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
+            Rectangle srcRect = new Rectangle(
+                                    0,
+                                    0,
+                                    (int)(Size.X),
+                                    (int)(Size.Y));
+
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Velocity = new Vector2(0, 0);
 
@@ -116,9 +136,11 @@ namespace TrebleSketch_AIE_Platformer
             }
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
+            else Velocity.Y = 0;
+
+            Jumping(gameTime);
 
             Position.Y += Velocity.Y * time;
-            // isGrounded = false;
 
             Position += Velocity;
         }
@@ -133,6 +155,23 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
+        protected void Jumping(GameTime gameTime)
+        {
+            if (IsJumping)
+            {
+                if (JumpForce > 0)
+                {
+                    Velocity.Y -= JumpForce * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    JumpForce -= Gravity * 2 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    IsJumping = false;
+                }
+            }
+
+        }
+
         public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             spriteBatch.Draw(FaceRight
@@ -140,9 +179,10 @@ namespace TrebleSketch_AIE_Platformer
                 , null
                 , Color.White
                 , 0
-                , new Vector2(FaceRight.Width / 2
-                    , FaceRight.Height / 2)
-                , new Vector2(1, 1)
+                , new Vector2(Origin.X
+                        , Origin.Y)
+                , new Vector2(Scale
+                        , Scale)
                 , SpriteEffects.None
                 , 0);
         }
@@ -154,9 +194,10 @@ namespace TrebleSketch_AIE_Platformer
                 , null
                 , Color.White
                 , 0
-                , new Vector2(FaceLeft.Width / 2
-                    , FaceLeft.Height / 2)
-                , new Vector2(1, 1)
+                , new Vector2(Origin.X
+                        , Origin.Y)
+                , new Vector2(Scale
+                        , Scale)
                 , SpriteEffects.None
                 , 0);
         }
@@ -218,17 +259,5 @@ namespace TrebleSketch_AIE_Platformer
 
             return false;
         }
-        /*
-        protected virtual void UpdateBounds()
-        {
-            /// Note: this should be called whenever the object position,
-            /// size, or scale are changed
-            BoxCollision = new SquareCollision(Position, Size * Scale);
-        }
-        protected bool SquareCollisionCheck(SceneObjects pOther)
-        {
-            return BoxCollision.CollsionCheck(pOther.BoxCollision);
-        }
-        */
     }
 }

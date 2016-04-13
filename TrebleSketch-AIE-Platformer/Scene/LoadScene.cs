@@ -11,8 +11,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
-using TrebleSketch_AIE_Platformer.Scene;
-using TrebleSketch_AIE_Platformer.Player;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -35,7 +33,7 @@ namespace TrebleSketch_AIE_Platformer
         public void InitialiseScene(GraphicsDeviceManager graphics)
         {
             GroundTiles = new List<SceneObjects>();
-            Scale = 0.5f;
+            Scale = 0.75f;
             Tile_Size = 50f;
             SceneID = 0;
             SceneLoader(graphics);
@@ -49,7 +47,8 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     SceneObjects GroundTile = new SceneObjects(
                         OutsideGrass
-                        , new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 + 40)
+                        , new Vector2(graphics.PreferredBackBufferWidth / 2
+                            , graphics.PreferredBackBufferHeight / 2 + 70)
                         , new Vector2(Tile_Size, Tile_Size)
                         , Scale);
                     GroundTiles.Add(GroundTile);
@@ -88,7 +87,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (player.CheckCollisionsGround(groundTile))
                 {
-                    // do stuff
+                    Console.WriteLine("[INFO] " + player.);
                 }
             }
 

@@ -11,8 +11,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
-using TrebleSketch_AIE_Platformer.Player;
-using TrebleSketch_AIE_Platformer.Scene;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -32,16 +30,16 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.5.88 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.6.91 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
-    /// Game Engine: MonoGame
+    /// Game Engine: MonoGame/XNA
+    /// Language: C#
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
     /// improve on my game design/programming skills. Yes, this game does contain ponies.
     /// </summary>
 
     /// <summary>
     /// TO DO:
-    /// - Player-Surface Collisions (WORKING ON IT)
     /// - Weapons System
     /// - Scene Movements
     /// - Scene Transitions
@@ -49,8 +47,13 @@ namespace TrebleSketch_AIE_Platformer
     /// </summary>
 
     /// <summary>
-    /// BUGS:
+    /// BUGS / UPCOMING FEATURES:
     /// - Incomplete Game
+    /// - (Collisions) Players sink into the ground
+    /// - (Collisions) Player can only jump once
+    /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
+    /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
+    /// - ()
     /// - If Players press horizontal direction key too fast, sprite will flicker and disappear. And stay invisible until keys are lifted
     /// </summary>
     public class Game1 : Game
@@ -92,6 +95,7 @@ namespace TrebleSketch_AIE_Platformer
             Debug.ShowDebug();
 
             Player = new PlayerClass();
+            Player.InitialisePlayer();
             Player.InitializeTrebleSketch(graphics);
 
             Rocket = new RocketClass();
@@ -192,6 +196,10 @@ namespace TrebleSketch_AIE_Platformer
                 Exit();
 
             Audio.ToggleMusic(gameTime);
+
+            SceneLoad.CheckCollisions(Player);
+
+            Player.Update(gameTime);
 
             base.Update(gameTime);
         }

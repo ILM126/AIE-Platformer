@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 
-namespace TrebleSketch_AIE_Platformer.Scene
+namespace TrebleSketch_AIE_Platformer
 {
     class SceneObjects
     {
@@ -34,7 +34,7 @@ namespace TrebleSketch_AIE_Platformer.Scene
             scene_Scale = scale;
             UpdateBounds();
         }
-        
+
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D drawTexture = null)
         {
             Texture2D texture = drawTexture;
@@ -58,14 +58,14 @@ namespace TrebleSketch_AIE_Platformer.Scene
                 0,
                 0);
         }
-        
+
         protected virtual void UpdateBounds()
         {
             /// Note: this should be called whenever the object position,
             /// size, or scale are changed
             BoxCollision = new SquareCollision(scene_Position, scene_Size * scene_Scale);
         }
-        protected bool SquareCollisionCheck(SceneObjects pOther)
+        protected bool SquareCollisionCheck(PlayerClass pOther)
         {
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }

@@ -10,16 +10,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
-using TrebleSketch_AIE_Platformer.Scene;
 
-namespace TrebleSketch_AIE_Platformer.Player
+namespace TrebleSketch_AIE_Platformer
 {
-    class PlayerClass : SceneObjects
+    class PlayerClass
     {
-        // public SquareCollision BoxCollision;
+        public SquareCollision BoxCollision;
         // public SceneObjects SceneObject;
 
-        // Player Avaliable Textures
+        // Player Textures (Treble Sketch only)
         public Texture2D FaceRight;
         public Texture2D FaceLeft;
 
@@ -30,10 +29,7 @@ namespace TrebleSketch_AIE_Platformer.Player
         public Vector2 Origin;
         public Vector2 Size;
         public float Acceleration;
-
         public float Rotation;
-
-        //public Vector2 Size;
 
         // Player Scene Stuff
         float Gravity;
@@ -49,23 +45,34 @@ namespace TrebleSketch_AIE_Platformer.Player
         bool IsJumping;
         bool IsGrounded;
 
+        public void InitialisePlayer()
+        {
+            BoxCollision = new SquareCollision(Position, Size);
+
+            Gravity = 50f;
+            Scale = 1f;
+            GroundHeight = 400f;
+            IsGrounded = false;
+            IsJumping = false;
+        }
+
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
         {
             PlayerFacingRight = true;
-            BothSidesPressed = false;
-
-
 
             // Player.SpawnPosition = Player.Position;
+
             Position = new Vector2(graphics.PreferredBackBufferWidth / 2
                     , graphics.PreferredBackBufferHeight / 2);
             Velocity = new Vector2(0, 0);
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
+            Size = new Vector2(80, 80);
             Acceleration = Velocity.X;
-            Gravity = 50f;
-            // Player.Size = new Vector2(85.0f, 85.0f);
+            Velocity = new Vector2(0, 0);
+            Acceleration = Velocity.X;
+            Rotation = 0;
         }
 
         void PlayerMovement(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
@@ -109,7 +116,6 @@ namespace TrebleSketch_AIE_Platformer.Player
             }
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
-            else Velocity.Y = 0;    
 
             Position.Y += Velocity.Y * time;
             // isGrounded = false;
@@ -122,6 +128,7 @@ namespace TrebleSketch_AIE_Platformer.Player
             if (IsGrounded)
             {
                 IsJumping = true;
+                IsGrounded = false;
                 Velocity.Y = -100f;
             }
         }
@@ -154,11 +161,28 @@ namespace TrebleSketch_AIE_Platformer.Player
                 , 0);
         }
 
+        public void Update(GameTime gameTime)
+        {
+            UpdateBounds();
+        }
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             PlayerMovement(gameTime, spriteBatch, graphics);
         }
-        
+
+        protected virtual void UpdateBounds()
+        {
+            /// Note: this should be called whenever the object position,
+            /// size, or scale are changed
+            BoxCollision = new SquareCollision(Position, Size * Scale);
+        }
+
+        protected bool SquareCollisionCheck(SceneObjects pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
@@ -166,12 +190,11 @@ namespace TrebleSketch_AIE_Platformer.Player
             Position.Y = groundHeight;
             UpdateBounds();
         }
-        
 
         public bool CheckCollisionsGround(SceneObjects other)
         {
-            bool playerCollision = SquareCollisionCheck(other);
-            if (playerCollision)
+            bool sceneCollision = SquareCollisionCheck(other);
+            if (sceneCollision)
             {
                 /// if player position is above top of ground and player is falling
                 if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)

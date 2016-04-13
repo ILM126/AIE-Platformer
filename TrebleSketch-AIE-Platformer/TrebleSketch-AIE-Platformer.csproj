@@ -45,7 +45,6 @@
     <Compile Include="Audio\AudioClass.cs" />
     <Compile Include="DevLogging.cs" />
     <Compile Include="Player\PlayerClass.cs" />
-    <Compile Include="Player\PlayerTrebleSketch.cs" />
     <Compile Include="Scene\SceneObjects.cs" />
     <Compile Include="Rocket\EngineClass.cs" />
     <Compile Include="Rocket\FuelTankClass.cs" />

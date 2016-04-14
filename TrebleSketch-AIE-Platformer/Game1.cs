@@ -133,7 +133,7 @@ namespace TrebleSketch_AIE_Platformer
 
             // RocketClass - Loads all rocket components
                 // Engines
-                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v1");
+                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
 
                 // Fuel Tanks
                 Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");

@@ -14,17 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Rocket/engine-Titus-v1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:Rocket/engine-Titus-v1.png
-
 #begin Rocket/fuelTank-Medium-v1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -139,4 +128,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:scene-errorTexturev1.png
+
+#begin Rocket/engine-Titus-v2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:Rocket/engine-Titus-v2.png
 

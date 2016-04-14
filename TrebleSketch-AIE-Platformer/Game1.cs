@@ -30,7 +30,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.6.91 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.6.97 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -49,12 +49,9 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// BUGS / UPCOMING FEATURES:
     /// - Incomplete Game
-    /// - (Collisions) Players sink into the ground
-    /// - (Collisions) Player can only jump once
     /// - (Collisions) If Player jumps and moves sideways, it works the way it should. But not if you jump up and down right onto block, you will stay stuck.
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
     /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
-    /// - If Players press horizontal direction key too fast, sprite will flicker and disappear. And stay invisible until keys are lifted
     /// </summary>
     public class Game1 : Game
     {

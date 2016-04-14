@@ -100,6 +100,14 @@ namespace TrebleSketch_AIE_Platformer
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Velocity = new Vector2(0, 0);
 
+            if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
+                {
+                    BothSidesPressed = false;
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
             {
                 loadPlayerTrebleSketchLeft(spriteBatch, graphics);
@@ -113,6 +121,8 @@ namespace TrebleSketch_AIE_Platformer
                 PlayerFacingRight = true;
                 Velocity.X = 4.8f;
             }
+
+
 
             if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
             {
@@ -130,7 +140,7 @@ namespace TrebleSketch_AIE_Platformer
                 else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !IsJumping)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !IsJumping && IsGrounded)
             {
                 Jump();
             }
@@ -151,7 +161,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 IsJumping = true;
                 IsGrounded = false;
-                Velocity.Y = -100f;
+                Velocity.Y = -150f;
             }
         }
 

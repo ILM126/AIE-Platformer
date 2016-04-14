@@ -51,9 +51,9 @@ namespace TrebleSketch_AIE_Platformer
             BoxCollision = new SquareCollision(Position, Size);
 
             Gravity = 40.0f;
-            JumpForce = 20.0f;
+            JumpForce = 10.0f;
             Scale = 1f;
-            GroundHeight = 40f;
+            GroundHeight = 400f;
             IsGrounded = false;
             IsJumping = false;
         }
@@ -61,9 +61,10 @@ namespace TrebleSketch_AIE_Platformer
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
         {
             PlayerFacingRight = true;
+            IsGrounded = false;
+            IsJumping = false;
 
             // Player.SpawnPosition = Player.Position;
-
 
             Position = new Vector2(graphics.PreferredBackBufferWidth / 2
                 , graphics.PreferredBackBufferHeight / 2);
@@ -72,21 +73,10 @@ namespace TrebleSketch_AIE_Platformer
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
-            //public float Acceleration;
-            //public float Rotation;
-
-            /*
-            Position = new Vector2(graphics.PreferredBackBufferWidth / 2
-                    , graphics.PreferredBackBufferHeight / 2);
-            Velocity = new Vector2(0, 0);
-            Origin = new Vector2(
-                Size.X / 2,
-                Size.Y / 2);
-            Size = new Vector2(80, 80);
+            Size = new Vector2(08, 80);
+            Velocity = new Vector2(0);
             Acceleration = Velocity.X;
-            Velocity = new Vector2(0, 0);
-            Acceleration = Velocity.X;*/
-            // Rotation = 0;
+            Rotation = 0;
         }
 
         void PlayerMovement(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)

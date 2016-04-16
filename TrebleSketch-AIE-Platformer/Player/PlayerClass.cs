@@ -50,8 +50,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             BoxCollision = new SquareCollision(Position, Size);
 
-            Gravity = 40.0f;
-            JumpForce = 10.0f;
+            Gravity = 300f;
             Scale = 1f;
             GroundHeight = 400f;
             IsGrounded = false;
@@ -61,6 +60,7 @@ namespace TrebleSketch_AIE_Platformer
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
         {
             PlayerFacingRight = true;
+            BothSidesPressed = false;
             IsGrounded = false;
             IsJumping = false;
 
@@ -79,97 +79,14 @@ namespace TrebleSketch_AIE_Platformer
             Rotation = 0;
         }
 
-        void PlayerMovement(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
-        {
-            Rectangle srcRect = new Rectangle(
-                                    0,
-                                    0,
-                                    (int)(Size.X),
-                                    (int)(Size.Y));
-
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Velocity = new Vector2(0, 0);
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
-                {
-                    BothSidesPressed = false;
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
-            {
-                loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-                PlayerFacingRight = false;
-                Velocity.X = -4.8f;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
-            {
-                loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                PlayerFacingRight = true;
-                Velocity.X = 4.8f;
-            }
-
-
-
-            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
-            {
-                BothSidesPressed = false;
-
-                if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                BothSidesPressed = true;
-
-                if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !IsJumping && IsGrounded)
-            {
-                Jump();
-            }
-
-            if (!IsGrounded) Velocity.Y += Gravity * time;
-            else Velocity.Y = 0;
-
-            Jumping(gameTime);
-
-            Position.Y += Velocity.Y * time;
-
-            Position += Velocity;
-        }
-
         public void Jump()
         {
             if (IsGrounded)
             {
                 IsJumping = true;
                 IsGrounded = false;
-                Velocity.Y = -150f;
+                Velocity.Y -= 400f;
             }
-        }
-
-        protected void Jumping(GameTime gameTime)
-        {
-            if (IsJumping)
-            {
-                if (JumpForce > 0)
-                {
-                    Velocity.Y -= JumpForce * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    JumpForce -= Gravity * 2 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    IsJumping = false;
-                }
-            }
-
         }
 
         public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
@@ -204,12 +121,58 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update(GameTime gameTime)
         {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
+                {
+                    BothSidesPressed = false;
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
+            {
+                Velocity.X = -4.8f;
+                PlayerFacingRight = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
+            {
+                Velocity.X = 4.8f;
+                PlayerFacingRight = true;
+            }
+
+            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A)) BothSidesPressed = false;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A)) BothSidesPressed = true;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump();
+
+
+            if (!IsGrounded) Velocity.Y += Gravity * time;
+            else Velocity.Y = 0;
+            Position.Y += Velocity.Y * time;
+            Position.X += Velocity.X;
             UpdateBounds();
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
+        public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            PlayerMovement(gameTime, spriteBatch, graphics);
+            Rectangle srcRect = new Rectangle(
+                                    0,
+                                    0,
+                                    (int)(Size.X),
+                                    (int)(Size.Y));
+
+            if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+            else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+
+            if (BothSidesPressed)
+            {
+                if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+            }
         }
 
         protected virtual void UpdateBounds()

@@ -15,30 +15,39 @@ namespace TrebleSketch_AIE_Platformer
 {
     class RocketClass
     {
-        public float Speed;
-        public float Acceleration;
+        //Plan: Have base rocket transmit position, rotation but have nothing special itself
+        //      Add list of parts that have the textures and stack dynamically
+        public List<RocketPart> parts = new List<RocketPart>();
 
         public Vector2 Position;
-
-        public float Height;
-        public float Width;
+        public Vector2 SpawnPosition;
+        public Vector2 Velocity;
+        public Vector2 Origin;
+        public Vector2 Size;
+        public float Acceleration;
+        public float DeltaV;
+        public float Rotation;
 
         public bool Spawned;
 
-        public EngineClass Engine;
-        public FuelTankClass FuelTank;
-
-        public void RocketSpawnPosition(GraphicsDeviceManager graphics)
+        public void AddPart(RocketPart part)
         {
-            Position = new Vector2(graphics.PreferredBackBufferWidth / 2,
-                graphics.PreferredBackBufferHeight / 2);
+            parts.Add(part);
         }
 
-        public RocketClass()
+        public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            Engine = new EngineClass();
-            FuelTank = new FuelTankClass();
+            foreach(RocketPart part in parts)
+            {
+                part.Draw(spriteBatch);
+
+            }
         }
-        
+
+        public void VehicleSpawnPosition(GraphicsDeviceManager graphics)
+        {
+            SpawnPosition = new Vector2(graphics.PreferredBackBufferHeight / 2,
+                graphics.PreferredBackBufferWidth / 2);
+        }
     }
 }

@@ -68,6 +68,9 @@ namespace TrebleSketch_AIE_Platformer
         AudioClass Audio;
         DevLogging Debug;
 
+        Texture2D[] rocketParts = new Texture2D[3];
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -82,6 +85,7 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void Initialize()
         {
+
             Console.WriteLine("[INFO] Started Initializing Game");
 
             graphics.PreferredBackBufferHeight = 720;
@@ -96,6 +100,14 @@ namespace TrebleSketch_AIE_Platformer
             Player.InitializeTrebleSketch(graphics);
 
             Rocket = new RocketClass();
+            RocketPart Engine = new RocketPart(rocketParts[0]);
+            RocketPart FuelTank = new RocketPart(rocketParts[1]);
+            RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
+            Rocket.AddPart(Engine);
+            Rocket.AddPart(FuelTank);
+            Rocket.AddPart(Capsule);
+            
+
 
             World = new WorldClass();
 
@@ -133,10 +145,10 @@ namespace TrebleSketch_AIE_Platformer
 
             // RocketClass - Loads all rocket components
                 // Engines
-                Rocket.Engine.Titus = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
+                rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
 
-                // Fuel Tanks
-                Rocket.FuelTank.Medium = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+            // Fuel Tanks
+            rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
 
@@ -219,11 +231,10 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.Begin();
 
             // Console.WriteLine("[INFO] Drawing Rocket Textures");
-            Rocket.Engine.loadEngineTitus(spriteBatch, graphics);
-            Rocket.FuelTank.loadFuelTankMedium(spriteBatch, graphics);
+            Rocket.Draw(spriteBatch, graphics);
 
             // Console.WriteLine("[INFO] Drawing Player Textures");
-            Player.Draw(gameTime, spriteBatch, graphics);
+            Player.Draw(spriteBatch, graphics);
 
             // Console.WriteLine("[INFO] Drawing Scene Textures");
             SceneLoad.Draw(gameTime, spriteBatch);

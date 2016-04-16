@@ -46,9 +46,8 @@
     <Compile Include="DevLogging.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\StoryMode.cs" />
+    <Compile Include="Rocket\RocketPart.cs" />
     <Compile Include="Scene\SceneObjects.cs" />
-    <Compile Include="Rocket\EngineClass.cs" />
-    <Compile Include="Rocket\FuelTankClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

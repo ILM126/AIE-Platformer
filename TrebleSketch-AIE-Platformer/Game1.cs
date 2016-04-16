@@ -70,6 +70,7 @@ namespace TrebleSketch_AIE_Platformer
 
         Texture2D[] rocketParts = new Texture2D[3];
 
+        public Vector2 CentreScreen;
 
         public Game1()
         {
@@ -92,20 +93,27 @@ namespace TrebleSketch_AIE_Platformer
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
 
+            CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
+                , graphics.PreferredBackBufferHeight / 2);
+
+            Console.WriteLine("[Game01] Centre Screen Position: " + CentreScreen.ToString());
+
             Debug = new DevLogging();
             Debug.ShowDebug();
 
             Player = new PlayerClass();
+            Player.SpawnPosition = CentreScreen;
             Player.InitialisePlayer();
             Player.InitializeTrebleSketch(graphics);
 
             Rocket = new RocketClass();
-            RocketPart Engine = new RocketPart(rocketParts[0]);
-            RocketPart FuelTank = new RocketPart(rocketParts[1]);
-            RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
+            CentreScreen = Rocket.SpawnPosition;
+            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition);
+            RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition);
+            // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
             Rocket.AddPart(Engine);
             Rocket.AddPart(FuelTank);
-            Rocket.AddPart(Capsule);
+            // Rocket.AddPart(Capsule);
             
 
 
@@ -121,6 +129,8 @@ namespace TrebleSketch_AIE_Platformer
             Audio.Debug = Debug;
 
             Console.WriteLine("[INFO] Finished Initializing Game");
+
+            Console.WriteLine("[Player] Treble Sketch spawned at " + Player.Position);
 
             base.Initialize();
         }
@@ -147,8 +157,8 @@ namespace TrebleSketch_AIE_Platformer
                 // Engines
                 rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
 
-            // Fuel Tanks
-            rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+                // Fuel Tanks
+                rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
 
                 // Capsules
 
@@ -231,7 +241,7 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.Begin();
 
             // Console.WriteLine("[INFO] Drawing Rocket Textures");
-            Rocket.Draw(spriteBatch, graphics);
+            Rocket.Draw(spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Player Textures");
             Player.Draw(spriteBatch, graphics);

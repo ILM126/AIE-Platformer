@@ -23,7 +23,7 @@ namespace TrebleSketch_AIE_Platformer
         public Texture2D FaceLeft;
 
         // Player Values
-        //public Vector2 SpawnPosition;
+        public Vector2 SpawnPosition;
         public Vector2 Position;
         public Vector2 Velocity;
         public Vector2 Origin;
@@ -55,6 +55,7 @@ namespace TrebleSketch_AIE_Platformer
             GroundHeight = 400f;
             IsGrounded = false;
             IsJumping = false;
+            Console.WriteLine("Spawn Position: " + SpawnPosition.ToString());
         }
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
@@ -64,10 +65,8 @@ namespace TrebleSketch_AIE_Platformer
             IsGrounded = false;
             IsJumping = false;
 
-            // Player.SpawnPosition = Player.Position;
-
-            Position = new Vector2(graphics.PreferredBackBufferWidth / 2
-                , graphics.PreferredBackBufferHeight / 2);
+            Position = new Vector2(SpawnPosition.X
+                , SpawnPosition.Y);
             Velocity = new Vector2(0);
             Size = new Vector2(80, 80);
             Origin = new Vector2(
@@ -143,12 +142,20 @@ namespace TrebleSketch_AIE_Platformer
                 PlayerFacingRight = true;
             }
 
-            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A)) BothSidesPressed = false;
+            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
+            {
+                BothSidesPressed = false;
+                if (IsGrounded)
+                {
+                    Velocity = new Vector2(0);
+                }
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A)) BothSidesPressed = true;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); }
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;

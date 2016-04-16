@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TrebleSketch_AIE_Platformer
@@ -21,7 +23,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Texture2D tex = texture; //Try to use the parameter texture
             if (tex == null) tex = m_texture; //If none was set try to use the base m_texture
-            if (tex == null) return; //if the base m_texture is null then don't crash trying to draw nothing
+            if (tex == null) /*Console.WriteLine("[ERROR] Texture Null");*/ return; //if the base m_texture is null then don't crash trying to draw nothing
             spriteBatch.Draw(tex
             , new Vector2(m_position.X
                 , m_position.Y)

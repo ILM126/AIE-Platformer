@@ -19,24 +19,39 @@ namespace TrebleSketch_AIE_Platformer
         public DevLogging Debug;
 
         public Song Bright_DJStartchAttack;
-        TimeSpan lastChange;
+        TimeSpan lastRepeatChange;
+        TimeSpan lastAudioChange;
         bool playedOnce;
 
         public void ToggleMusic(GameTime gameTime)
         {
+            TimeSpan last = gameTime.TotalGameTime - lastAudioChange;
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                if (MediaPlayer.State != MediaState.Playing)
+                if (!playedOnce)
                 {
-                    MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
-                    if (!playedOnce) MediaPlayer.Volume -= 0.75f; playedOnce = true;
+                    if (MediaPlayer.State != MediaState.Playing)
+                    {
+                        MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
+                        MediaPlayer.Volume -= 0.75f;
+                        playedOnce = true;
+                    }
+                } else {
+                    if (last > new TimeSpan(0, 0, 0, 5, 0))
+                    {
+                        if (MediaPlayer.State != MediaState.Playing)
+                        {
+                            MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
+                        }
+                    }
+                    lastAudioChange = gameTime.TotalGameTime;
                 }
             }
-            TimeSpan last = gameTime.TotalGameTime - lastChange;
-            if (Keyboard.GetState().IsKeyDown(Keys.L) && last > new TimeSpan(0, 0, 0, 2, 0))
+            TimeSpan lastRepeat = gameTime.TotalGameTime - lastRepeatChange;
+            if (Keyboard.GetState().IsKeyDown(Keys.L) && lastRepeat > new TimeSpan(0, 0, 0, 2, 0))
             {
                 MediaPlayer.IsRepeating = !MediaPlayer.IsRepeating;
-                lastChange = gameTime.TotalGameTime;
+                lastRepeatChange = gameTime.TotalGameTime;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.K))
             {
@@ -56,10 +71,10 @@ namespace TrebleSketch_AIE_Platformer
 
             if (MediaPlayer.IsRepeating)
             {
-                spriteBatch.DrawString(Debug.InformationFont, "Repeating: True", new Vector2(10, 70), Color.Black);
+                spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), Color.Black);
             } else if (!MediaPlayer.IsRepeating)
             {
-                spriteBatch.DrawString(Debug.InformationFont, "Repeating: False", new Vector2(10, 70), Color.Black);
+                spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), Color.Black);
             }
         }
     }

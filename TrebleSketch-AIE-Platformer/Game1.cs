@@ -49,7 +49,6 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// BUGS / UPCOMING FEATURES:
     /// - Incomplete Game
-    /// - (Collisions) If Player jumps and moves sideways, it works the way it should. But not if you jump up and down right onto block, you will stay stuck.
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
     /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
     /// </summary>
@@ -68,7 +67,7 @@ namespace TrebleSketch_AIE_Platformer
         AudioClass Audio;
         DevLogging Debug;
 
-        Texture2D[] rocketParts = new Texture2D[3];
+        Texture2D[] rocketParts = new Texture2D[4];
 
         public Vector2 CentreScreen;
 
@@ -96,8 +95,6 @@ namespace TrebleSketch_AIE_Platformer
             CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
                 , graphics.PreferredBackBufferHeight / 2);
 
-            Console.WriteLine("[Game01] Centre Screen Position: " + CentreScreen.ToString());
-
             Debug = new DevLogging();
             Debug.ShowDebug();
 
@@ -107,15 +104,8 @@ namespace TrebleSketch_AIE_Platformer
             Player.InitializeTrebleSketch(graphics);
 
             Rocket = new RocketClass();
-            CentreScreen = Rocket.SpawnPosition;
-            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition);
-            RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition);
-            // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
-            Rocket.AddPart(Engine);
-            Rocket.AddPart(FuelTank);
-            // Rocket.AddPart(Capsule);
-            
 
+            Rocket.SpawnPosition = CentreScreen;
 
             World = new WorldClass();
 
@@ -129,8 +119,6 @@ namespace TrebleSketch_AIE_Platformer
             Audio.Debug = Debug;
 
             Console.WriteLine("[INFO] Finished Initializing Game");
-
-            Console.WriteLine("[Player] Treble Sketch spawned at " + Player.Position);
 
             base.Initialize();
         }
@@ -193,6 +181,18 @@ namespace TrebleSketch_AIE_Platformer
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
 
             Console.WriteLine("[INFO] Finished Loading Game Textures");
+
+            RocketParts();
+        }
+
+        public void RocketParts()
+        {
+            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition);
+            RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition);
+            // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
+            Rocket.AddPart(Engine);
+            Rocket.AddPart(FuelTank);
+            // Rocket.AddPart(Capsule);
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.CheckCollisions(Player);
 
             Player.Update(gameTime);
-
+            Player.IsGrounded = false;
             base.Update(gameTime);
         }
 

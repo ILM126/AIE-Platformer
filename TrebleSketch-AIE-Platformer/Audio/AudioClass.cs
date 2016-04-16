@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -35,6 +36,7 @@ namespace TrebleSketch_AIE_Platformer
                         MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
                         MediaPlayer.Volume -= 0.75f;
                         playedOnce = true;
+                        Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just played for the first time.");
                     }
                 } else {
                     if (last > new TimeSpan(0, 0, 0, 5, 0))
@@ -43,6 +45,21 @@ namespace TrebleSketch_AIE_Platformer
                         {
                             MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
                         }
+
+                        /*if (MediaPlayer.State == MediaState.Playing)
+                        {
+                            MediaPlayer.Pause();
+                            Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just paused.");
+                        } else if (MediaPlayer.State != MediaState.Playing && MediaPlayer.State == MediaState.Paused && MediaPlayer.State != MediaState.Stopped)
+                        {
+                            MediaPlayer.Resume();
+                            Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just resumed.");
+                        }
+                        if (MediaPlayer.State != MediaState.Playing && MediaPlayer.State != MediaState.Paused)
+                        {
+                            MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
+                            Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just played for second time.");
+                        }*/
                     }
                     lastAudioChange = gameTime.TotalGameTime;
                 }
@@ -56,6 +73,7 @@ namespace TrebleSketch_AIE_Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.K))
             {
                 MediaPlayer.Stop();
+                Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just stopped.");
             }
         }
 

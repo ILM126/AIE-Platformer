@@ -43,7 +43,7 @@ namespace TrebleSketch_AIE_Platformer
         public bool PlayerFacingRight;
         public bool BothSidesPressed;
         bool IsJumping;
-        bool IsGrounded;
+        public bool IsGrounded;
         float JumpForce;
 
         public void InitialisePlayer()
@@ -55,7 +55,6 @@ namespace TrebleSketch_AIE_Platformer
             GroundHeight = 400f;
             IsGrounded = false;
             IsJumping = false;
-            Console.WriteLine("Spawn Position: " + SpawnPosition.ToString());
         }
 
         public void InitializeTrebleSketch(GraphicsDeviceManager graphics)

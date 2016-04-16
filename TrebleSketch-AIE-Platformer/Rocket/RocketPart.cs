@@ -11,10 +11,11 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 m_size;
         public Vector2 m_position;
 
-        public RocketPart(Texture2D tex = null, Vector2 pos = new Vector2())
+        public RocketPart(Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2())
         {
             m_texture = tex;
             m_position = pos;
+            m_size = size;
         }
 
         

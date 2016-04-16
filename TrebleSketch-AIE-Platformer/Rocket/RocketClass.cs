@@ -35,6 +35,21 @@ namespace TrebleSketch_AIE_Platformer
             parts.Add(part);
         }
 
+        public void Update(GameTime gameTime)
+        {
+            StackParts();
+        }
+
+        void StackParts()
+        {
+            float height = 0;
+            foreach(RocketPart part in parts)
+            {
+                part.m_position.Y = Position.Y - height;
+                height -= part.m_size.Y;
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach(RocketPart part in parts)

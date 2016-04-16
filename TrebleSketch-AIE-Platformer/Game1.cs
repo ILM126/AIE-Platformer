@@ -30,7 +30,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.6.97 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.7.108 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -187,11 +187,12 @@ namespace TrebleSketch_AIE_Platformer
 
         public void RocketParts()
         {
-            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition);
-            RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition);
+            Rocket.Position = CentreScreen;
+            RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
+            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
-            Rocket.AddPart(Engine);
             Rocket.AddPart(FuelTank);
+            Rocket.AddPart(Engine);
             // Rocket.AddPart(Capsule);
         }
 
@@ -213,7 +214,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            Rocket.Update(gameTime);
             Audio.ToggleMusic(gameTime);
 
             SceneLoad.CheckCollisions(Player);

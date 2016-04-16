@@ -35,19 +35,13 @@ namespace TrebleSketch_AIE_Platformer
             parts.Add(part);
         }
 
-        public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
+        public void Draw(SpriteBatch spriteBatch)
         {
             foreach(RocketPart part in parts)
             {
                 part.Draw(spriteBatch);
 
             }
-        }
-
-        public void VehicleSpawnPosition(GraphicsDeviceManager graphics)
-        {
-            SpawnPosition = new Vector2(graphics.PreferredBackBufferHeight / 2,
-                graphics.PreferredBackBufferWidth / 2);
         }
     }
 }

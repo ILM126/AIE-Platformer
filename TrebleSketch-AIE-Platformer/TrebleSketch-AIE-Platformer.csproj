@@ -87,7 +87,6 @@
     </Content>
     <Content Include="Content\Player\treble-sketch_stand_left.png" />
     <Content Include="Content\Player\treble-sketch_stand_right.png" />
-    <Content Include="Content\Rocket\engine-Titus-v1.png" />
     <Content Include="Content\Rocket\engine-Titus-v2.png" />
     <Content Include="Content\Rocket\fuelTank-Medium-v1.png" />
     <Content Include="Content\scene-errorTexturev1.png">

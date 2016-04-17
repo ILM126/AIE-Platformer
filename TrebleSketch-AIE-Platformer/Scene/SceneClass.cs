@@ -35,11 +35,6 @@ namespace TrebleSketch_AIE_Platformer
         // List of Tiles rendered :3
         protected List<SceneObjects> sceneTiles;
 
-        // Scene Stats
-        float Scene_Width;
-        float Scene_Height;
-        float Scene_Size;
-
         // Player Scene Stats
         public int PlayerInScene;
 

@@ -16,8 +16,7 @@ namespace TrebleSketch_AIE_Platformer
 {
 
     /// Notes for Reece:
-    /// 01. Currently, as of 13st of April 2016, there are no:
-    ///     Collisions
+    /// 01. Currently, as of 16rd of April 2016, there are no:
     ///     Sounds
     ///     SFX
     ///     Particle Systems
@@ -113,7 +112,8 @@ namespace TrebleSketch_AIE_Platformer
             SceneObject = new SceneObjects();
             Scene.InitiateSurface();
             SceneLoad = new LoadScene();
-            SceneLoad.InitialiseScene(graphics);
+            SceneLoad.CentreScreen = CentreScreen;
+            SceneLoad.InitialiseScene();
 
             Audio = new AudioClass();
             Audio.Debug = Debug;
@@ -187,7 +187,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void RocketParts()
         {
-            Rocket.Position = CentreScreen;
+            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y - rocketParts[0].Height);
             RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
             RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);

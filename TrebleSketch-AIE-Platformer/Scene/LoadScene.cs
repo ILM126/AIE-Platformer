@@ -20,6 +20,11 @@ namespace TrebleSketch_AIE_Platformer
         float Scale;
         float Tile_Size;
 
+        float Scene_Width;
+        float Scene_Height;
+        float Scene_Size;
+        public Vector2 CentreScreen;
+
         // Scene Textures
         public Texture2D OutsideGrass;
 
@@ -30,28 +35,34 @@ namespace TrebleSketch_AIE_Platformer
         // public Texture2D InsideMetalFloor;
         // public Texture2D InsideConcreteFloor;
 
-        public void InitialiseScene(GraphicsDeviceManager graphics)
+        public void InitialiseScene()
         {
             GroundTiles = new List<SceneObjects>();
-            Scale = 0.75f;
+            Scale = 1f;
             Tile_Size = 50f;
             SceneID = 0;
-            SceneLoader(graphics);
+            SceneLoader();
         }
 
-        public void SceneLoader(GraphicsDeviceManager graphics)
+        public void SceneLoader()
         {
             switch(SceneID)
             {
                 case 0:
                     SceneName = "Test Map";
-                    SceneObjects GroundTile = new SceneObjects(
+                    Scene_Width = 5f;
+                    for (int i = 0; i < 20; i++)
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
                         OutsideGrass
-                        , new Vector2(graphics.PreferredBackBufferWidth / 2
-                            , graphics.PreferredBackBufferHeight / 2 + 70)
+                        , new Vector2(CentreScreen.X + i * 50
+                            , CentreScreen.Y + 75)
                         , new Vector2(Tile_Size, Tile_Size)
                         , Scale);
-                    GroundTiles.Add(GroundTile);
+                        GroundTiles.Add(GroundTile);
+                    }
+                        
+                    
                     break;
                 case 1:
                     SceneName = "Main Menu";

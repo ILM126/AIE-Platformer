@@ -50,19 +50,16 @@ namespace TrebleSketch_AIE_Platformer
             {
                 case 0:
                     SceneName = "Test Map";
-                    Scene_Width = 5f;
-                    for (int i = 0; i < 20; i++)
+                    for (int i = 0; i < CentreScreen.X / 25; i++)
                     {
                         SceneObjects GroundTile = new SceneObjects(
                         OutsideGrass
-                        , new Vector2(CentreScreen.X + i * 50
-                            , CentreScreen.Y + 75)
+                        , new Vector2(i * 50
+                            , CentreScreen.Y * 2 - 25)
                         , new Vector2(Tile_Size, Tile_Size)
                         , Scale);
                         GroundTiles.Add(GroundTile);
                     }
-                        
-                    
                     break;
                 case 1:
                     SceneName = "Main Menu";

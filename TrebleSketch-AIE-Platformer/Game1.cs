@@ -16,9 +16,9 @@ namespace TrebleSketch_AIE_Platformer
 {
 
     /// Notes for Reece:
-    /// 01. Currently, as of 16rd of April 2016, there are no:
-    ///     Sounds
-    ///     SFX
+    /// 01. Currently, as of 18rd of April 2016, there are no:
+    ///     Enemy AIs
+    ///     Sounds/SFX
     ///     Particle Systems
     ///     Scrolling
     ///     And others
@@ -29,7 +29,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.7.108 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.8.113 (Developmental Stages, plus 10 builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -41,7 +41,9 @@ namespace TrebleSketch_AIE_Platformer
     /// TO DO:
     /// - Weapons System
     /// - Scene Movements
+    /// - Scene Scrolling for maps larger then screen
     /// - Scene Transitions
+    /// - Audio System
     /// - Speech System
     /// </summary>
 
@@ -146,7 +148,7 @@ namespace TrebleSketch_AIE_Platformer
                 rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
 
                 // Fuel Tanks
-                rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v1");
+                rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
 
                 // Capsules
 
@@ -187,7 +189,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void RocketParts()
         {
-            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y - rocketParts[0].Height);
+            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y * 2 -175);
             RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
             RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
@@ -241,14 +243,14 @@ namespace TrebleSketch_AIE_Platformer
 
             spriteBatch.Begin();
 
+            // Console.WriteLine("[INFO] Drawing Scene Textures");
+            SceneLoad.Draw(gameTime, spriteBatch);
+
             // Console.WriteLine("[INFO] Drawing Rocket Textures");
             Rocket.Draw(spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Player Textures");
             Player.Draw(spriteBatch, graphics);
-
-            // Console.WriteLine("[INFO] Drawing Scene Textures");
-            SceneLoad.Draw(gameTime, spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Audio Name");
             Audio.CurrentSong(spriteBatch);

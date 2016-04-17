@@ -71,9 +71,12 @@ namespace TrebleSketch_AIE_Platformer
         Texture2D[] rocketParts = new Texture2D[4];
 
         public Vector2 CentreScreen;
+        string GameVersionBuild;
 
         public Game1()
         {
+            GameVersionBuild = "v0.0.8.113 (18/04/16)";
+            Console.WriteLine("[INFO] Starting Space Program Simulator 2016 " + GameVersionBuild);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -226,9 +229,10 @@ namespace TrebleSketch_AIE_Platformer
             base.Update(gameTime);
         }
 
-        private void GameBuild() // Displays the Game Build Number on the lower right hand side
+        private void GameBuild(SpriteBatch spriteBatch) // Displays the Game Build Number on the lower right hand side
         {
             // spriteBatch.DrawString(InformationFont, "SCORE : " + Ship.Score.ToString(), new Vector2(10, 10), Color.White);
+            // spriteBatch.DrawString(Debug.InformationFont, "Game Build: " + GameVersionBuild, new Vector2(CentreScreen.X, 50), Color.Black);
         }
 
         /// <summary>
@@ -255,6 +259,7 @@ namespace TrebleSketch_AIE_Platformer
             // Console.WriteLine("[INFO] Drawing Audio Name");
             Audio.CurrentSong(spriteBatch);
 
+            GameBuild(spriteBatch);
             // Debug.InGameDebug(spriteBatch);
 
             spriteBatch.End();

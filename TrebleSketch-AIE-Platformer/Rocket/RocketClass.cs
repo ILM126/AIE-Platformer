@@ -42,11 +42,24 @@ namespace TrebleSketch_AIE_Platformer
 
         void StackParts()
         {
-            float height = 0;
-            foreach(RocketPart part in parts)
+            float height = 25;
+            foreach (RocketPart part in parts)
             {
-                part.m_position.Y = Position.Y - height;
-                height -= part.m_size.Y;
+                int partHeight = (int)part.m_size.Y;
+                switch (partHeight)
+                {
+                    case 75:
+                        part.m_position.Y = Position.Y - height - 38;
+                        height -= part.m_size.Y;
+                        break;
+                    case 150:
+                        part.m_position.Y = Position.Y - height;
+                        height -= part.m_size.Y;
+                        break;
+                }
+                // part.m_position.Y = Position.Y - height;
+                // height -= part.m_size.Y;
+                // This is the default code, keeping it here as a reference
             }
         }
 

@@ -33,7 +33,16 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update()
         {
-            
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad0))
+            {
+                SceneID = 0;
+                Console.WriteLine("[INFO] Loaded " + SceneName);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+            {
+                SceneID = 1;
+                Console.WriteLine("[INFO] Loaded " + SceneName);
+            }
         }
 
         public void Draw()

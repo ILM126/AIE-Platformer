@@ -45,6 +45,7 @@ namespace TrebleSketch_AIE_Platformer
         bool IsJumping;
         public bool IsGrounded;
         float JumpForce;
+        public bool PlayerInScene;
 
         public void InitialisePlayer()
         {
@@ -119,66 +120,73 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update(GameTime gameTime)
         {
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+            if (PlayerInScene)
             {
-                if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
+                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
+                    {
+                        BothSidesPressed = false;
+                    }
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
+                {
+                    Velocity.X = -4.8f;
+                    PlayerFacingRight = false;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
+                {
+                    Velocity.X = 4.8f;
+                    PlayerFacingRight = true;
+                }
+
+                if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
                 {
                     BothSidesPressed = false;
+                    if (IsGrounded)
+                    {
+                        Velocity = new Vector2(0);
+                    }
                 }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A)) BothSidesPressed = true;
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump();
+
+                if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); }
+
+                if (!IsGrounded) Velocity.Y += Gravity * time;
+                else Velocity.Y = 0;
+                Position.Y += Velocity.Y * time;
+                Position.X += Velocity.X;
+                UpdateBounds();
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
-            {
-                Velocity.X = -4.8f;
-                PlayerFacingRight = false;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
-            {
-                Velocity.X = 4.8f;
-                PlayerFacingRight = true;
-            }
-
-            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
-            {
-                BothSidesPressed = false;
-                if (IsGrounded)
-                {
-                    Velocity = new Vector2(0);
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A)) BothSidesPressed = true;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); }
-
-            if (!IsGrounded) Velocity.Y += Gravity * time;
-            else Velocity.Y = 0;
-            Position.Y += Velocity.Y * time;
-            Position.X += Velocity.X;
-            UpdateBounds();
+            //else if (!PlayerInScene)
+            //{
+            //    Console.WriteLine("[INFO] Player is not being updated on screen");
+            //}
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            Rectangle srcRect = new Rectangle(
-                                    0,
-                                    0,
-                                    (int)(Size.X),
-                                    (int)(Size.Y));
+                Rectangle srcRect = new Rectangle(
+                                                    0,
+                                                    0,
+                                                    (int)(Size.X),
+                                                    (int)(Size.Y));
 
-            if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
-            else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-
-            if (BothSidesPressed)
-            {
                 if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
                 else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
-            }
+
+                if (BothSidesPressed)
+                {
+                    if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+                    else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                }
         }
 
         protected virtual void UpdateBounds()

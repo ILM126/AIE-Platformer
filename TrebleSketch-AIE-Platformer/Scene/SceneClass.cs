@@ -25,21 +25,15 @@ namespace TrebleSketch_AIE_Platformer
             InGameUIGone
         }
 
-        protected int SceneID;
+        public int SceneID;
         public string SceneName;
 
-        PlayerClass Player;
-        SceneClass Scene;
-        LoadScene SceneLoad;
-
         // List of Tiles rendered :3
-        protected List<SceneObjects> sceneTiles;
+        // protected List<SceneObjects> sceneTiles;
 
-        // Player Scene Stats
-        public int PlayerInScene;
-
-        public void InitiateSurface()
+        public void Update()
         {
+            
         }
 
         public void Draw()

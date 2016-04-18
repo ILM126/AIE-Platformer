@@ -67,6 +67,7 @@ namespace TrebleSketch_AIE_Platformer
         SceneObjects SceneObject;
         AudioClass Audio;
         DevLogging Debug;
+        Cursor UserMouse;
 
         Texture2D[] rocketParts = new Texture2D[4];
 
@@ -102,8 +103,17 @@ namespace TrebleSketch_AIE_Platformer
             Debug = new DevLogging();
             Debug.ShowDebug();
 
+            UserMouse = new Cursor();
+
+            Scene = new SceneClass();
+            SceneObject = new SceneObjects();
+            SceneLoad = new LoadScene();
+            SceneLoad.CentreScreen = CentreScreen;
+            SceneLoad.InitialiseScene();
+
             Player = new PlayerClass();
             Player.SpawnPosition = CentreScreen;
+            Player.PlayerInScene = SceneLoad.PlayerInScene;
             Player.InitialisePlayer();
             Player.InitializeTrebleSketch(graphics);
 
@@ -112,13 +122,6 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.SpawnPosition = CentreScreen;
 
             World = new WorldClass();
-
-            Scene = new SceneClass();
-            SceneObject = new SceneObjects();
-            Scene.InitiateSurface();
-            SceneLoad = new LoadScene();
-            SceneLoad.CentreScreen = CentreScreen;
-            SceneLoad.InitialiseScene();
 
             Audio = new AudioClass();
             Audio.Debug = Debug;
@@ -160,9 +163,12 @@ namespace TrebleSketch_AIE_Platformer
 
                 // Moons
 
-            // SurfaceClass - Loads the Space Centre
+            // SceneClass - Loads the Space Centre
                 // 00 - Test Map
                 SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
+
+                // 01 - Main Menu
+                SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
 
                 // 01 - Reception
 
@@ -184,6 +190,8 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
 
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
+
+                UserMouse.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
 
             Console.WriteLine("[INFO] Finished Loading Game Textures");
 
@@ -218,11 +226,17 @@ namespace TrebleSketch_AIE_Platformer
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                Console.WriteLine("[INFO] Ending Game...");
                 Exit();
+            }
+
+            UserMouse.Update();
             Rocket.Update(gameTime);
             Audio.ToggleMusic(gameTime);
 
             SceneLoad.CheckCollisions(Player);
+            // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
             Player.Update(gameTime);
             Player.IsGrounded = false;
@@ -251,16 +265,32 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.Draw(gameTime, spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Rocket Textures");
-            Rocket.Draw(spriteBatch);
+            if (SceneLoad.RocketInScene)
+            {
+                Rocket.Draw(spriteBatch);
+            }
+            //else if (!RocketInScene)
+            //{
+            //    Console.WriteLine("[INFO] Rocket is not being drawn on screen");
+            //}
 
             // Console.WriteLine("[INFO] Drawing Player Textures");
-            Player.Draw(spriteBatch, graphics);
+            if (SceneLoad.PlayerInScene)
+            {
+                Player.Draw(spriteBatch, graphics);
+            }
+            //else if (!PlayerInScene)
+            //{
+            //    Console.WriteLine("[INFO] Player is not being drawn on screen");
+            //}
 
             // Console.WriteLine("[INFO] Drawing Audio Name");
             Audio.CurrentSong(spriteBatch);
 
             GameBuild(spriteBatch);
             // Debug.InGameDebug(spriteBatch);
+
+            UserMouse.Draw(spriteBatch);
 
             spriteBatch.End();
 

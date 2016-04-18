@@ -231,15 +231,38 @@ namespace TrebleSketch_AIE_Platformer
                 Exit();
             }
 
+            // SceneLoad.PlayerInScene = false;
+            // SceneLoad.RocketInScene = false;
+
             UserMouse.Update();
-            Rocket.Update(gameTime);
+
+            SceneLoad.Update();
+            SceneLoad.SceneLoader();
+
+            if (SceneLoad.RocketInScene)
+            {
+                Rocket.Update(gameTime);
+            }
+            //else if (!SceneLoad.RocketInScene)
+            //{
+            //    Console.WriteLine("[INFO] Rocket is not being updated on screen");
+            //}
+
+
             Audio.ToggleMusic(gameTime);
 
             SceneLoad.CheckCollisions(Player);
             // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
-            Player.Update(gameTime);
-            Player.IsGrounded = false;
+            if (SceneLoad.PlayerInScene)
+            {
+                Player.Update(gameTime);
+                Player.IsGrounded = false;
+            }
+            //else if (!SceneLoad.PlayerInScene)
+            //{
+            //    Console.WriteLine("[INFO] Player is not being updated on screen");
+            //}
             base.Update(gameTime);
         }
 

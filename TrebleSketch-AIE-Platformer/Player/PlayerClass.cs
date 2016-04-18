@@ -16,7 +16,6 @@ namespace TrebleSketch_AIE_Platformer
     class PlayerClass
     {
         public SquareCollision BoxCollision;
-        // public SceneObjects SceneObject;
 
         // Player Textures (Treble Sketch only)
         public Texture2D FaceRight;
@@ -120,8 +119,6 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update(GameTime gameTime)
         {
-            if (PlayerInScene)
-            {
                 float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
@@ -164,11 +161,7 @@ namespace TrebleSketch_AIE_Platformer
                 Position.Y += Velocity.Y * time;
                 Position.X += Velocity.X;
                 UpdateBounds();
-            }
-            //else if (!PlayerInScene)
-            //{
-            //    Console.WriteLine("[INFO] Player is not being updated on screen");
-            //}
+                // Console.WriteLine("[INFO] Player is being updated on screen");
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)

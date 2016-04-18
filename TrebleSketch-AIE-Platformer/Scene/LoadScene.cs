@@ -55,6 +55,8 @@ namespace TrebleSketch_AIE_Platformer
             switch(SceneID)
             {
                 case 0:
+                    GroundTiles.Clear();
+                    MenuTiles.Clear();
                     SceneName = "Test Map";
                     Scene_Width = 1280;
                     Scene_Height = 720;
@@ -72,6 +74,8 @@ namespace TrebleSketch_AIE_Platformer
                     RocketInScene = true;
                     break;
                 case 1:
+                    GroundTiles.Clear();
+                    MenuTiles.Clear();
                     SceneName = "Main Menu";
                     Scene_Width = 1280;
                     Scene_Height = 720;
@@ -90,15 +94,15 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Settings Menu";
                     break;
                 case 3:
+                    SceneName = "Pause Menu";
+                    break;
+                case 4:
                     SceneName = "Front Lawns";
                     break;
                 default:
                     SceneName = "Test Map";
-                    // Scene00_TestMap();
                     break;
             }
-
-            Console.WriteLine("[INFO] Loaded " + SceneName + ".");
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -121,7 +125,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (player.CheckCollisionsGround(groundTile))
                 {
-                    Console.WriteLine("[TERRAIN] I am being touched!");
+                    // Console.WriteLine("[TERRAIN] I am being touched!");
                 }
             }
 

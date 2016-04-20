@@ -74,6 +74,9 @@
     <Content Include="Content\Audio\Bright by DJStratchAttack.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Cursor-v1-clicked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Cursor-v1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

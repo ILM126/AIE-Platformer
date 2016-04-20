@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -33,12 +34,12 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.D0))
+            if (InputHandler.IsKeyDownOnce(Keys.D0))
             {
                 SceneID = 0;
                 Console.WriteLine("[INFO] Loaded " + SceneName);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            if (InputHandler.IsKeyDownOnce(Keys.D1))
             {
                 SceneID = 1;
                 Console.WriteLine("[INFO] Loaded " + SceneName);

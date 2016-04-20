@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -35,6 +36,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Language: C#
     /// Dev Notes: The second MonoGame project for the Academy of Interactive Entertainment (AIE) Cert II C# Course, hope to massively
     /// improve on my game design/programming skills. Yes, this game does contain ponies.
+    /// Also, thanks to my friend Eclipsing Rainbows (@EclipsingR) and Max Iraci-Sareri (@SerMax_) for helping me out with the code!
     /// </summary>
 
     /// <summary>
@@ -52,6 +54,8 @@ namespace TrebleSketch_AIE_Platformer
     /// - Incomplete Game
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
     /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
+    /// - (Scene) Map loads via mouse clicks, also to make it toggleable.
+    /// - (UI) Make cursor able to click buttons!
     /// </summary>
     public class Game1 : Game
     {
@@ -67,7 +71,8 @@ namespace TrebleSketch_AIE_Platformer
         SceneObjects SceneObject;
         AudioClass Audio;
         DevLogging Debug;
-        Cursor UserMouse;
+        Cursor MouseMovement;
+        InputHandler MouseInput;
 
         Texture2D[] rocketParts = new Texture2D[4];
 
@@ -103,7 +108,8 @@ namespace TrebleSketch_AIE_Platformer
             Debug = new DevLogging();
             Debug.ShowDebug();
 
-            UserMouse = new Cursor();
+            MouseMovement = new Cursor();
+            MouseInput = new InputHandler();
 
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
@@ -191,7 +197,8 @@ namespace TrebleSketch_AIE_Platformer
 
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
 
-                UserMouse.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
+                MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
+                MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
 
             Console.WriteLine("[INFO] Finished Loading Game Textures");
 
@@ -234,7 +241,7 @@ namespace TrebleSketch_AIE_Platformer
             // SceneLoad.PlayerInScene = false;
             // SceneLoad.RocketInScene = false;
 
-            UserMouse.Update();
+            MouseMovement.Update();
 
             SceneLoad.Update();
             SceneLoad.SceneLoader();
@@ -263,6 +270,9 @@ namespace TrebleSketch_AIE_Platformer
             //{
             //    Console.WriteLine("[INFO] Player is not being updated on screen");
             //}
+
+            InputHandler.Update();
+
             base.Update(gameTime);
         }
 
@@ -313,7 +323,7 @@ namespace TrebleSketch_AIE_Platformer
             GameBuild(spriteBatch);
             // Debug.InGameDebug(spriteBatch);
 
-            UserMouse.Draw(spriteBatch);
+            MouseMovement.Draw(spriteBatch);
 
             spriteBatch.End();
 

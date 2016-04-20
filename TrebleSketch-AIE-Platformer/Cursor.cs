@@ -21,7 +21,13 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 MouseSize;
         public int MouseScale;
         public MouseState state;
+
         public Texture2D MouseTexture;
+        public Texture2D MouseTexturePressed;
+
+        public Rectangle MenuButton;
+
+        int i = 0;
 
         public void Initialize()
         {
@@ -33,6 +39,23 @@ namespace TrebleSketch_AIE_Platformer
         {
             state = Mouse.GetState();
             MousePosition = new Vector2(state.X, state.Y);
+
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                // Do cool stuff here
+                // Console.WriteLine(++;
+                Console.WriteLine("[INFO] Mouse: I am being left pressed for " + ++i + " frames!");
+            }
+
+            // Check if the mouse position is inside the rectangle
+            //if (area.Contains(mousePosition))
+            //{
+            //    backgroundTexture = hoverTexture;
+            //}
+            //else
+            //{
+            //    backgroundTexture = defaultTexture;
+            //}
 
             //var destination = new Rectangle(100, 1000, 50, 50);
             //bool mouseOver = destination.Contains(state.X, state.Y);
@@ -57,11 +80,29 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(
-                MouseTexture
-                , MousePosition
-                , new Rectangle(0, 0, MouseTexture.Width, MouseTexture.Height)
-                , Color.White);
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                spriteBatch.Draw(
+                    MouseTexturePressed
+                    , MousePosition
+                    , new Rectangle(
+                        0
+                        , 0
+                        , MouseTexture.Width
+                        , MouseTexture.Height)
+                    , Color.White);
+            } else if (state.LeftButton == ButtonState.Released)
+            {
+                spriteBatch.Draw(
+                    MouseTexture
+                    , MousePosition
+                    , new Rectangle(
+                        0
+                        , 0
+                        , MouseTexture.Width
+                        , MouseTexture.Height)
+                    , Color.White);
+            }
         }
 
         protected virtual void UpdateBounds()
@@ -83,7 +124,6 @@ namespace TrebleSketch_AIE_Platformer
             {
                 return true;
             }
-
             return false;
         }
     }

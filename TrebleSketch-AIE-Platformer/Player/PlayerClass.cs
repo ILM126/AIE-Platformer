@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -77,16 +78,6 @@ namespace TrebleSketch_AIE_Platformer
             Rotation = 0;
         }
 
-        public void Jump()
-        {
-            if (IsGrounded)
-            {
-                IsJumping = true;
-                IsGrounded = false;
-                Velocity.Y -= 400f;
-            }
-        }
-
         public void loadPlayerTrebleSketchRight(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
             spriteBatch.Draw(FaceRight
@@ -117,51 +108,42 @@ namespace TrebleSketch_AIE_Platformer
                 , 0);
         }
 
+        public void Jump()
+        {
+            if (IsGrounded)
+            {
+                IsJumping = true;
+                IsGrounded = false;
+                Velocity.Y -= 400f;
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
-                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.D))
+            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
+            {
+                if (IsGrounded)
                 {
-                    if (Keyboard.GetState().IsKeyUp(Keys.D) || Keyboard.GetState().IsKeyUp(Keys.A))
-                    {
-                        BothSidesPressed = false;
-                    }
+                    Velocity = new Vector2(0);
                 }
+            }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.A) && !BothSidesPressed)
-                {
-                    Velocity.X = -4.8f;
-                    PlayerFacingRight = false;
-                }
+            if (InputHandler.IsKeyDownOnce(Keys.A)) Velocity.X = -4.8f; PlayerFacingRight = false; // Move Left
 
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && !BothSidesPressed)
-                {
-                    Velocity.X = 4.8f;
-                    PlayerFacingRight = true;
-                }
+            if (InputHandler.IsKeyDownOnce(Keys.D)) Velocity.X = 4.8f; PlayerFacingRight = true; // Move Right
 
-                if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
-                {
-                    BothSidesPressed = false;
-                    if (IsGrounded)
-                    {
-                        Velocity = new Vector2(0);
-                    }
-                }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump(); // Jump!
 
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A)) BothSidesPressed = true;
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); } // Get Your Pony Ass Back Here Treble!
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump();
-
-                if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); }
-
-                if (!IsGrounded) Velocity.Y += Gravity * time;
-                else Velocity.Y = 0;
-                Position.Y += Velocity.Y * time;
-                Position.X += Velocity.X;
-                UpdateBounds();
-                // Console.WriteLine("[INFO] Player is being updated on screen");
+            if (!IsGrounded) Velocity.Y += Gravity * time;
+            else Velocity.Y = 0;
+            Position.Y += Velocity.Y * time;
+            Position.X += Velocity.X;
+            UpdateBounds();
+            // Console.WriteLine("[INFO] Player is being updated on screen");
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)

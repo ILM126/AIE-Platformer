@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,7 +67,8 @@ namespace TrebleSketch_AIE_Platformer
                         , new Vector2(i * 50
                             , CentreScreen.Y * 2 - 25)
                         , new Vector2(Tile_Size, Tile_Size)
-                        , Scale);
+                        , Scale
+                        , false);
                         GroundTiles.Add(GroundTile);
                     }
                     PlayerInScene = true;
@@ -85,7 +86,8 @@ namespace TrebleSketch_AIE_Platformer
                             , CentreScreen.Y)
                         , new Vector2(100
                             , 40)
-                        , Scale);
+                        , Scale
+                        , true);
                     MenuTiles.Add(MenuTile);
                     PlayerInScene = false;
                     RocketInScene = false;

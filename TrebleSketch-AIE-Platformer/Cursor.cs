@@ -26,8 +26,6 @@ namespace TrebleSketch_AIE_Platformer
         public Texture2D MouseTexture;
         public Texture2D MouseTexturePressed;
 
-        public Rectangle MenuButton;
-
         int i = 0;
 
         public void Initialize()
@@ -44,39 +42,9 @@ namespace TrebleSketch_AIE_Platformer
             if (state.LeftButton == ButtonState.Pressed)
             {
                 // Do cool stuff here
-                // Console.WriteLine(++;
                 Console.WriteLine("[INFO] Mouse: I am being left pressed for " + ++i + " frames!");
             }
 
-            // Check if the mouse position is inside the rectangle
-            //if (area.Contains(mousePosition))
-            //{
-            //    backgroundTexture = hoverTexture;
-            //}
-            //else
-            //{
-            //    backgroundTexture = defaultTexture;
-            //}
-
-            //var destination = new Rectangle(100, 1000, 50, 50);
-            //bool mouseOver = destination.Contains(state.X, state.Y);
-
-            /*
-            Rectangle area = someRectangle;
-
-            // Check if the mouse position is inside the rectangle
-            if (area.Contains(mousePosition))
-            {
-                backgroundTexture = hoverTexture;
-            }
-            else
-            {
-                backgroundTexture = defaultTexture;
-            }
-
-            Console.WriteLine("[INFO] mouseOver = " + mouseOver.ToString());*/
-
-            // UpdateBounds();
         }
 
         public void Draw(SpriteBatch spriteBatch)

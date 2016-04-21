@@ -72,7 +72,7 @@ namespace TrebleSketch_AIE_Platformer
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
-            Size = new Vector2(08, 80);
+            Size = new Vector2(80, 80);
             Velocity = new Vector2(0);
             Acceleration = Velocity.X;
             Rotation = 0;

@@ -30,7 +30,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.8.113 (Developmental Stages, plus 10 builds before Git)
+    /// Version: 0.0.9.135 (Developmental Stages, plus a few builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -42,20 +42,21 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// TO DO:
     /// - Weapons System
-    /// - Scene Movements
     /// - Scene Scrolling for maps larger then screen
     /// - Scene Transitions
     /// - Audio System
     /// - Speech System
+    /// - Enemy AI
     /// </summary>
 
     /// <summary>
     /// BUGS / UPCOMING FEATURES:
     /// - Incomplete Game
-    /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
-    /// - (Textures) Convert all textures to v2, where the standard for the scene is 50x50, 50x75 for rocket engines, players are 75x75, ect. All increments of 25.
-    /// - (Scene) Map loads via mouse clicks, also to make it toggleable.
     /// - (UI) Make cursor able to click buttons!
+    /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
+    /// - (Scene) Map loads via mouse clicks, also to make it toggleable
+    /// - (Enemy) Make Enemy textures
+    /// - (Enemy) Get enemy AI working
     /// </summary>
     public class Game1 : Game
     {
@@ -72,7 +73,7 @@ namespace TrebleSketch_AIE_Platformer
         AudioClass Audio;
         DevLogging Debug;
         Cursor MouseMovement;
-        InputHandler MouseInput;
+        InputHandler UserInput;
 
         Texture2D[] rocketParts = new Texture2D[4];
 
@@ -109,12 +110,13 @@ namespace TrebleSketch_AIE_Platformer
             Debug.ShowDebug();
 
             MouseMovement = new Cursor();
-            MouseInput = new InputHandler();
+            UserInput = new InputHandler();
 
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
             SceneLoad.CentreScreen = CentreScreen;
+            SceneLoad.UserInput = UserInput;
             SceneLoad.InitialiseScene();
 
             Player = new PlayerClass();
@@ -150,8 +152,8 @@ namespace TrebleSketch_AIE_Platformer
 
             // PlayerClass - Loads Treble Sketch and Adelaide Player Sprites
                 // Treble Sketch
-                Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left");
-                Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right");
+                Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left-v2");
+                Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right-v2");
 
                 // Adelaide
 
@@ -175,6 +177,8 @@ namespace TrebleSketch_AIE_Platformer
 
                 // 01 - Main Menu
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
+                SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
+                SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
 
                 // 01 - Reception
 
@@ -243,8 +247,7 @@ namespace TrebleSketch_AIE_Platformer
 
             MouseMovement.Update();
 
-            SceneLoad.Update();
-            SceneLoad.SceneLoader();
+            SceneLoad.SceneLoader(spriteBatch);
 
             if (SceneLoad.RocketInScene)
             {
@@ -254,7 +257,6 @@ namespace TrebleSketch_AIE_Platformer
             //{
             //    Console.WriteLine("[INFO] Rocket is not being updated on screen");
             //}
-
 
             Audio.ToggleMusic(gameTime);
 

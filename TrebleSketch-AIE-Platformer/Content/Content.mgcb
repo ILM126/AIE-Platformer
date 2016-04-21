@@ -14,7 +14,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Player/treble-sketch_stand_left.png
+#begin Player/treble-sketch_stand_left-v2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,9 +23,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Player/treble-sketch_stand_left.png
+/build:Player/treble-sketch_stand_left-v2.png
 
-#begin Player/treble-sketch_stand_right.png
+#begin Player/treble-sketch_stand_right-v2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -34,7 +34,7 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Player/treble-sketch_stand_right.png
+/build:Player/treble-sketch_stand_right-v2.png
 
 #begin debugfont.fnt
 /importer:BitmapFontImporter

@@ -16,6 +16,7 @@ namespace TrebleSketch_AIE_Platformer
 {
     class SceneClass
     {
+
         protected enum UIMode
         {
             MainMenu,
@@ -45,13 +46,10 @@ namespace TrebleSketch_AIE_Platformer
                 Console.WriteLine("[INFO] Loaded " + SceneName);
             }
         }
+        
+        // public void 
 
         public void Draw()
-        {
-
-        }
-
-        public void ConfirmPlayerGrounded()
         {
 
         }

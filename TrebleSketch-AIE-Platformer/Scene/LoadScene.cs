@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +11,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
 {
     class LoadScene : SceneClass
     {
+        public InputHandler UserInput;
+
         public List<SceneObjects> GroundTiles;
-        public List<SceneObjects> MenuTiles;
         float Scale;
         float Tile_Size;
 
@@ -32,6 +34,8 @@ namespace TrebleSketch_AIE_Platformer
 
         // Menu Texture
         public Texture2D MainMenu_StartButton;
+        public Texture2D MainMenu_StartButton_Hover;
+        public Texture2D MainMenu_StartButton_Clicked;
 
         // public Texture2D BuildingOutsideWalls;
         // public Texture2D BuildingInsideWalls;
@@ -43,20 +47,17 @@ namespace TrebleSketch_AIE_Platformer
         public void InitialiseScene()
         {
             GroundTiles = new List<SceneObjects>();
-            MenuTiles = new List<SceneObjects>();
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
-            SceneLoader();
         }
 
-        public void SceneLoader()
+        public void SceneLoader(SpriteBatch spriteBatch)
         {
             switch(SceneID)
             {
                 case 0:
                     GroundTiles.Clear();
-                    MenuTiles.Clear();
                     SceneName = "Test Map";
                     Scene_Width = 1280;
                     Scene_Height = 720;
@@ -76,19 +77,51 @@ namespace TrebleSketch_AIE_Platformer
                     break;
                 case 1:
                     GroundTiles.Clear();
-                    MenuTiles.Clear();
                     SceneName = "Main Menu";
                     Scene_Width = 1280;
                     Scene_Height = 720;
-                    SceneObjects MenuTile = new SceneObjects(
-                        MainMenu_StartButton
-                        , new Vector2(CentreScreen.X
-                            , CentreScreen.Y)
-                        , new Vector2(100
-                            , 40)
-                        , Scale
-                        , true);
-                    MenuTiles.Add(MenuTile);
+                    Rectangle Button = new Rectangle(
+                                0,
+                                0,
+                                (int)(MainMenu_StartButton.Width),
+                                (int)(MainMenu_StartButton.Height));
+                    if (UserInput.MouseInRectangle(Button))
+                    {
+                        spriteBatch.Draw(
+                            MainMenu_StartButton_Hover,
+                            CentreScreen,
+                            Button,
+                            Color.White,
+                            0,
+                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                            Scale,
+                            0,
+                            0);
+                        if (UserInput.MouseButtonClickedOnce(MouseButton.Left))
+                        {
+                            spriteBatch.Draw(
+                            MainMenu_StartButton_Clicked,
+                            CentreScreen,
+                            Button,
+                            Color.White,
+                            0,
+                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                            Scale,
+                            0,
+                            0);
+                        }
+                    } else {
+                        spriteBatch.Draw(
+                            MainMenu_StartButton,
+                            CentreScreen,
+                            Button,
+                            Color.White,
+                            0,
+                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                            Scale,
+                            0,
+                            0);
+                    }
                     PlayerInScene = false;
                     RocketInScene = false;
                     break;
@@ -112,10 +145,6 @@ namespace TrebleSketch_AIE_Platformer
             foreach (SceneObjects groundTile in GroundTiles)
             {
                 groundTile.Draw(gameTime, spriteBatch, OutsideGrass);
-            }
-            foreach (SceneObjects MenuTile in MenuTiles)
-            {
-                MenuTile.Draw(gameTime, spriteBatch, MainMenu_StartButton);
             }
         }
 

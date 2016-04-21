@@ -82,7 +82,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public Game1()
         {
-            GameVersionBuild = "v0.0.8.113 (18/04/16)";
+            GameVersionBuild = "v0.0.9.135 (21/04/16)";
             Console.WriteLine("[INFO] Starting Space Program Simulator 2016 " + GameVersionBuild);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

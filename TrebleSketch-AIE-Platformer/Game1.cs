@@ -247,7 +247,7 @@ namespace TrebleSketch_AIE_Platformer
 
             MouseMovement.Update();
 
-            SceneLoad.SceneLoader(spriteBatch);
+            // SceneLoad.SceneLoader(spriteBatch);
 
             if (SceneLoad.RocketInScene)
             {
@@ -297,6 +297,7 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.Begin();
 
             // Console.WriteLine("[INFO] Drawing Scene Textures");
+            SceneLoad.SceneLoader(spriteBatch);
             SceneLoad.Draw(gameTime, spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Rocket Textures");

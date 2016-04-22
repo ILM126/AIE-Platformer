@@ -54,6 +54,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void SceneLoader(SpriteBatch spriteBatch)
         {
+            //spriteBatch.Begin();
             switch(SceneID)
             {
                 case 0:
@@ -89,7 +90,7 @@ namespace TrebleSketch_AIE_Platformer
                     {
                         spriteBatch.Draw(
                             MainMenu_StartButton_Hover,
-                            CentreScreen,
+                            new Vector2(CentreScreen.X, CentreScreen.Y),
                             Button,
                             Color.White,
                             0,
@@ -101,7 +102,7 @@ namespace TrebleSketch_AIE_Platformer
                         {
                             spriteBatch.Draw(
                             MainMenu_StartButton_Clicked,
-                            CentreScreen,
+                            new Vector2(CentreScreen.X, CentreScreen.Y),
                             Button,
                             Color.White,
                             0,
@@ -110,10 +111,11 @@ namespace TrebleSketch_AIE_Platformer
                             0,
                             0);
                         }
-                    } else {
+                    }
+                    else {
                         spriteBatch.Draw(
                             MainMenu_StartButton,
-                            CentreScreen,
+                            new Vector2(CentreScreen.X, CentreScreen.Y),
                             Button,
                             Color.White,
                             0,
@@ -138,6 +140,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     break;
             }
+            //spriteBatch.End();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -146,6 +149,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 groundTile.Draw(gameTime, spriteBatch, OutsideGrass);
             }
+
         }
 
         public void CheckCollisions(PlayerClass player)

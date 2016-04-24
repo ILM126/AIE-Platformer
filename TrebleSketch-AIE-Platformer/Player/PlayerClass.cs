@@ -56,10 +56,7 @@ namespace TrebleSketch_AIE_Platformer
             GroundHeight = 400f;
             IsGrounded = false;
             IsJumping = false;
-        }
 
-        public void InitializeTrebleSketch(GraphicsDeviceManager graphics)
-        {
             PlayerFacingRight = true;
             BothSidesPressed = false;
             IsGrounded = false;
@@ -130,9 +127,17 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            if (InputHandler.IsKeyDownOnce(Keys.A)) Velocity.X = -4.8f; PlayerFacingRight = false; // Move Left
+            if (InputHandler.IsKeyDownOnce(Keys.A)) // Move Left
+            {
+                Velocity.X = -4.8f;
+                PlayerFacingRight = false;
+            }
 
-            if (InputHandler.IsKeyDownOnce(Keys.D)) Velocity.X = 4.8f; PlayerFacingRight = true; // Move Right
+            if (InputHandler.IsKeyDownOnce(Keys.D)) // Move Right
+            {
+                Velocity.X = 4.8f;
+                PlayerFacingRight = true;
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump(); // Jump!
 

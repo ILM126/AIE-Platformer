@@ -75,6 +75,9 @@ namespace TrebleSketch_AIE_Platformer
         Cursor MouseMovement;
         InputHandler UserInput;
 
+        public Rectangle Button;
+        public Rectangle CursorRect;
+
         Texture2D[] rocketParts = new Texture2D[4];
 
         public Vector2 CentreScreen;
@@ -110,11 +113,14 @@ namespace TrebleSketch_AIE_Platformer
             Debug.ShowDebug();
 
             MouseMovement = new Cursor();
+            MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
 
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
+            // SceneLoad.Button = Button;
+            SceneLoad.CursonRect = CursorRect;
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
             SceneLoad.InitialiseScene();
@@ -123,7 +129,6 @@ namespace TrebleSketch_AIE_Platformer
             Player.SpawnPosition = CentreScreen;
             Player.PlayerInScene = SceneLoad.PlayerInScene;
             Player.InitialisePlayer();
-            Player.InitializeTrebleSketch(graphics);
 
             Rocket = new RocketClass();
 
@@ -247,7 +252,9 @@ namespace TrebleSketch_AIE_Platformer
 
             MouseMovement.Update();
 
-            // SceneLoad.SceneLoader(spriteBatch);
+            SceneLoad.state = MouseMovement.state;
+
+            SceneLoad.SceneLoader(spriteBatch);
 
             if (SceneLoad.RocketInScene)
             {
@@ -267,11 +274,14 @@ namespace TrebleSketch_AIE_Platformer
             {
                 Player.Update(gameTime);
                 Player.IsGrounded = false;
+                // Console.WriteLine("[INFO] Playing...");
             }
             //else if (!SceneLoad.PlayerInScene)
             //{
             //    Console.WriteLine("[INFO] Player is not being updated on screen");
             //}
+
+            // Console.WriteLine("[INFO] Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
 
             InputHandler.Update();
 
@@ -291,13 +301,13 @@ namespace TrebleSketch_AIE_Platformer
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.SkyBlue);
+            // GraphicsDevice.Clear(Color.Black);
 
             // Console.WriteLine("[INFO] Started Drawing Game Textures");
 
             spriteBatch.Begin();
 
             // Console.WriteLine("[INFO] Drawing Scene Textures");
-            SceneLoad.SceneLoader(spriteBatch);
             SceneLoad.Draw(gameTime, spriteBatch);
 
             // Console.WriteLine("[INFO] Drawing Rocket Textures");

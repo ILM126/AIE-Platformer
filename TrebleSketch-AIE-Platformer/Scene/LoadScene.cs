@@ -22,6 +22,12 @@ namespace TrebleSketch_AIE_Platformer
         public List<SceneObjects> GroundTiles;
         float Scale;
         float Tile_Size;
+        public Rectangle Button;
+        public Rectangle CursonRect;
+        public bool isHoveringButton;
+        public Vector2 button_Position;
+
+        public MouseState state;
 
         float Scene_Width;
         float Scene_Height;
@@ -50,6 +56,7 @@ namespace TrebleSketch_AIE_Platformer
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
+
         }
 
         public void SceneLoader(SpriteBatch spriteBatch)
@@ -77,55 +84,32 @@ namespace TrebleSketch_AIE_Platformer
                     RocketInScene = true;
                     break;
                 case 1:
-                    GroundTiles.Clear();
                     SceneName = "Main Menu";
                     Scene_Width = 1280;
                     Scene_Height = 720;
-                    Rectangle Button = new Rectangle(
-                                0,
-                                0,
-                                (int)(MainMenu_StartButton.Width),
-                                (int)(MainMenu_StartButton.Height));
+                    button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
+                    Button = new Rectangle(
+                       0,
+                       0,
+                       (int)(MainMenu_StartButton.Width),
+                       (int)(MainMenu_StartButton.Height));
+                    Console.WriteLine("[INFO] Is cursor touch button rect? " + UserInput.MouseInRectangle(Button).ToString());
+                    if (state.LeftButton == ButtonState.Pressed)
+                    {
+                        Console.WriteLine("[INFO] BUTTON LEFT PRESS VIA LOADSCENE");
+                    }
                     if (UserInput.MouseInRectangle(Button))
                     {
-                        spriteBatch.Draw(
-                            MainMenu_StartButton_Hover,
-                            new Vector2(CentreScreen.X, CentreScreen.Y),
-                            Button,
-                            Color.White,
-                            0,
-                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                            Scale,
-                            0,
-                            0);
-                        if (UserInput.MouseButtonClickedOnce(MouseButton.Left))
-                        {
-                            spriteBatch.Draw(
-                            MainMenu_StartButton_Clicked,
-                            new Vector2(CentreScreen.X, CentreScreen.Y),
-                            Button,
-                            Color.White,
-                            0,
-                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                            Scale,
-                            0,
-                            0);
-                        }
+                        isHoveringButton = true;
+                        Console.WriteLine("[INFO] BUTTON HOVERED BY MOUSE VIA LOADSCENE");
+                    } else
+                    {
+                        isHoveringButton = false;
                     }
-                    else {
-                        spriteBatch.Draw(
-                            MainMenu_StartButton,
-                            new Vector2(CentreScreen.X, CentreScreen.Y),
-                            Button,
-                            Color.White,
-                            0,
-                            new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                            Scale,
-                            0,
-                            0);
-                    }
+                    // Console.WriteLine("[INFO] Button rect data: " + Button.ToString());
                     PlayerInScene = false;
                     RocketInScene = false;
+                    // FirstButtonRectLoad = true;
                     break;
                 case 2:
                     SceneName = "Settings Menu";
@@ -150,11 +134,68 @@ namespace TrebleSketch_AIE_Platformer
                 groundTile.Draw(gameTime, spriteBatch, OutsideGrass);
             }
 
+            if (SceneID == 1)
+            {
+                if (isHoveringButton)
+                {
+                    spriteBatch.Draw(
+                        MainMenu_StartButton_Hover,
+                        button_Position,
+                        Button,
+                        Color.White,
+                        0,
+                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0);
+                    Console.WriteLine("[INFO] Hovering over the button");
+                    //if (state.LeftButton == ButtonState.Pressed)
+                    //{
+                    //    spriteBatch.Draw(
+                    //    MainMenu_StartButton_Clicked,
+                    //    new Vector2(CentreScreen.X, CentreScreen.Y),
+                    //    Button,
+                    //    Color.White,
+                    //    0,
+                    //    new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                    //    Scale,
+                    //    0,
+                    //    0);
+                    //    Console.WriteLine("[INFO] Clicking the button");
+                    //}
+                }
+                else {
+                    spriteBatch.Draw(
+                        MainMenu_StartButton,
+                        button_Position,
+                        Button,
+                        Color.White,
+                        0,
+                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0);
+                    // Console.WriteLine("[INFO] Drawing the button");
+                }
+                if (state.LeftButton == ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(
+                    MainMenu_StartButton_Clicked,
+                    button_Position,
+                    Button,
+                    Color.White,
+                    0,
+                    new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                    Scale,
+                    0,
+                    0);
+                    Console.WriteLine("[INFO] Clicking the button");
+                }
+            }
         }
 
         public void CheckCollisions(PlayerClass player)
         {
-
             // Check collision with ground tiles
             foreach (SceneObjects groundTile in GroundTiles)
             {

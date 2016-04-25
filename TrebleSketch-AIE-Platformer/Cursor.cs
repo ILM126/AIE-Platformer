@@ -16,6 +16,13 @@ namespace TrebleSketch_AIE_Platformer
 {
     class Cursor
     {
+        public enum MenuButtonState
+        {
+            Render,
+            Hover,
+            Clicking
+        }
+
         public SquareCollision BoxCollision;
 
         public Vector2 MousePosition;
@@ -25,6 +32,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public Texture2D MouseTexture;
         public Texture2D MouseTexturePressed;
+
+        public Rectangle CursorRect;
 
         int i = 0;
 
@@ -44,32 +53,29 @@ namespace TrebleSketch_AIE_Platformer
                 // Do cool stuff here
                 Console.WriteLine("[INFO] Mouse: I am being left pressed for " + ++i + " frames!");
             }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            CursorRect = new Rectangle(
+                        0
+                        , 0
+                        , MouseTexture.Width
+                        , MouseTexture.Height);
+
             if (state.LeftButton == ButtonState.Pressed)
             {
                 spriteBatch.Draw(
                     MouseTexturePressed
                     , MousePosition
-                    , new Rectangle(
-                        0
-                        , 0
-                        , MouseTexture.Width
-                        , MouseTexture.Height)
+                    , CursorRect
                     , Color.White);
             } else if (state.LeftButton == ButtonState.Released)
             {
                 spriteBatch.Draw(
                     MouseTexture
                     , MousePosition
-                    , new Rectangle(
-                        0
-                        , 0
-                        , MouseTexture.Width
-                        , MouseTexture.Height)
+                    , CursorRect
                     , Color.White);
             }
         }

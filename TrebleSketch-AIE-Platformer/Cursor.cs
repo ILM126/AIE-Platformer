@@ -47,12 +47,6 @@ namespace TrebleSketch_AIE_Platformer
         {
             state = Mouse.GetState();
             MousePosition = new Vector2(state.X, state.Y);
-
-            if (state.LeftButton == ButtonState.Pressed)
-            {
-                // Do cool stuff here
-                Console.WriteLine("[INFO] Mouse: I am being left pressed for " + ++i + " frames!");
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

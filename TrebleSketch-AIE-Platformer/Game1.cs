@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace TrebleSketch_AIE_Platformer
 {
 
     /// Notes for Reece:
-    /// 01. Currently, as of 18rd of April 2016, there are no:
+    /// 01. Currently, as of 26rd of April 2016, there are no:
     ///     Enemy AIs
     ///     Sounds/SFX
     ///     Particle Systems
@@ -30,7 +31,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.9.135 (Developmental Stages, plus a few builds before Git)
+    /// Version: 0.0.10.146 (Developmental Stages, plus a few builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -85,8 +86,10 @@ namespace TrebleSketch_AIE_Platformer
 
         public Game1()
         {
-            GameVersionBuild = "v0.0.9.135 (21/04/16)";
-            Console.WriteLine("[INFO] Starting Space Program Simulator 2016 " + GameVersionBuild);
+            Debug = new DevLogging();
+            File.Delete(Debug.GetCurrentDirectory());
+            GameVersionBuild = "v0.0.10.146 (26/04/16)";
+            Debug.WriteToFile("[INFO] Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -120,6 +123,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
             // SceneLoad.Button = Button;
+            SceneLoad.Debug = Debug;
             SceneLoad.CursonRect = CursorRect;
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
@@ -243,7 +247,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                Console.WriteLine("[INFO] Ending Game...");
+                Debug.WriteToFile("[INFO] Ending Game...", true);
                 Exit();
             }
 

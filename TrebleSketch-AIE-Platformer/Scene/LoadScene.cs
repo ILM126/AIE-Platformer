@@ -18,19 +18,26 @@ namespace TrebleSketch_AIE_Platformer
     class LoadScene : SceneClass
     {
         public InputHandler UserInput;
+        public DevLogging Debug;
 
         public List<SceneObjects> GroundTiles;
-        float Scale;
-        float Tile_Size;
+
         public Rectangle Button;
         public Rectangle CursonRect;
         public bool isHoveringButton;
+        public bool isClickingWhileHovering;
         public Vector2 button_Position;
+
+        bool StartButton;
+        bool ExitButton;
 
         public MouseState state;
 
         float Scene_Width;
         float Scene_Height;
+        float Scale;
+        float Tile_Size;
+
         public Vector2 CentreScreen;
         public bool PlayerInScene;
         public bool RocketInScene;
@@ -56,12 +63,21 @@ namespace TrebleSketch_AIE_Platformer
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
+            button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
+            Button = new Rectangle(
+                    (int)button_Position.X - 50,
+                    (int)button_Position.Y - 20,
+                    100,
+                    40);
+        }
 
+        public void AddPart(RocketPart p)
+        {
+            // parts.Add(part);
         }
 
         public void SceneLoader(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Begin();
             switch(SceneID)
             {
                 case 0:
@@ -84,32 +100,29 @@ namespace TrebleSketch_AIE_Platformer
                     RocketInScene = true;
                     break;
                 case 1:
+                    GroundTiles.Clear();
                     SceneName = "Main Menu";
                     Scene_Width = 1280;
                     Scene_Height = 720;
-                    button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
-                    Button = new Rectangle(
-                       0,
-                       0,
-                       (int)(MainMenu_StartButton.Width),
-                       (int)(MainMenu_StartButton.Height));
-                    Console.WriteLine("[INFO] Is cursor touch button rect? " + UserInput.MouseInRectangle(Button).ToString());
                     if (state.LeftButton == ButtonState.Pressed)
                     {
-                        Console.WriteLine("[INFO] BUTTON LEFT PRESS VIA LOADSCENE");
+                        isClickingWhileHovering = true;
                     }
-                    if (UserInput.MouseInRectangle(Button))
+                    else if (UserInput.MouseInRectangle(Button))
                     {
                         isHoveringButton = true;
-                        Console.WriteLine("[INFO] BUTTON HOVERED BY MOUSE VIA LOADSCENE");
+                        isClickingWhileHovering = false;
                     } else
                     {
+                        isClickingWhileHovering = false;
                         isHoveringButton = false;
                     }
-                    // Console.WriteLine("[INFO] Button rect data: " + Button.ToString());
+                    if (UserInput.MouseButtonClickedOnce(MouseButton.Left) && UserInput.MouseInRectangle(Button))
+                    {
+                        SceneID = 0;
+                    }
                     PlayerInScene = false;
                     RocketInScene = false;
-                    // FirstButtonRectLoad = true;
                     break;
                 case 2:
                     SceneName = "Settings Menu";
@@ -124,7 +137,16 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     break;
             }
-            //spriteBatch.End();
+            if (InputHandler.IsKeyDownOnce(Keys.D0))
+            {
+                SceneID = 0;
+                Console.WriteLine("[INFO] Loaded " + SceneName);
+            }
+            if (InputHandler.IsKeyDownOnce(Keys.D1))
+            {
+                SceneID = 1;
+                Console.WriteLine("[INFO] Loaded " + SceneName);
+            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -136,60 +158,43 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneID == 1)
             {
-                if (isHoveringButton)
-                {
-                    spriteBatch.Draw(
-                        MainMenu_StartButton_Hover,
-                        button_Position,
-                        Button,
-                        Color.White,
-                        0,
-                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                        Scale,
-                        0,
-                        0);
-                    Console.WriteLine("[INFO] Hovering over the button");
-                    //if (state.LeftButton == ButtonState.Pressed)
-                    //{
-                    //    spriteBatch.Draw(
-                    //    MainMenu_StartButton_Clicked,
-                    //    new Vector2(CentreScreen.X, CentreScreen.Y),
-                    //    Button,
-                    //    Color.White,
-                    //    0,
-                    //    new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                    //    Scale,
-                    //    0,
-                    //    0);
-                    //    Console.WriteLine("[INFO] Clicking the button");
-                    //}
-                }
-                else {
-                    spriteBatch.Draw(
-                        MainMenu_StartButton,
-                        button_Position,
-                        Button,
-                        Color.White,
-                        0,
-                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
-                        Scale,
-                        0,
-                        0);
-                    // Console.WriteLine("[INFO] Drawing the button");
-                }
-                if (state.LeftButton == ButtonState.Pressed)
+                if (isClickingWhileHovering && isHoveringButton)
                 {
                     spriteBatch.Draw(
                     MainMenu_StartButton_Clicked,
-                    button_Position,
-                    Button,
+                    new Vector2(CentreScreen.X, CentreScreen.Y),
+                    null,
                     Color.White,
                     0,
                     new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
                     Scale,
                     0,
                     0);
-                    Console.WriteLine("[INFO] Clicking the button");
+                }
+                else if (isHoveringButton)
+                {
+                    spriteBatch.Draw(
+                        MainMenu_StartButton_Hover,
+                        button_Position,
+                        null,
+                        Color.White,
+                        0,
+                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0);
+                }
+                else {
+                    spriteBatch.Draw(
+                        MainMenu_StartButton,
+                        button_Position,
+                        null,
+                        Color.White,
+                        0,
+                        new Vector2(MainMenu_StartButton_Hover.Width / 2, MainMenu_StartButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0); 
                 }
             }
         }

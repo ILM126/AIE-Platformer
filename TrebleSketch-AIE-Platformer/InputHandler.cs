@@ -58,6 +58,7 @@ namespace EclipsingGameUtils
             currentState = Mouse.GetState();
             if (new Rectangle(currentState.Position, new Point(1, 1)).Intersects(input))
                 return true;
+            // Console.WriteLine("[INFO] Mouse Positon: " + currentState.Position.ToString());
             return false;
         }
 

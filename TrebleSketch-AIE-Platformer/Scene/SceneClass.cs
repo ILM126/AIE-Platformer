@@ -33,22 +33,6 @@ namespace TrebleSketch_AIE_Platformer
         // List of Tiles rendered :3
         // protected List<SceneObjects> sceneTiles;
 
-        public void Update()
-        {
-            if (InputHandler.IsKeyDownOnce(Keys.D0))
-            {
-                SceneID = 0;
-                Console.WriteLine("[INFO] Loaded " + SceneName);
-            }
-            if (InputHandler.IsKeyDownOnce(Keys.D1))
-            {
-                SceneID = 1;
-                Console.WriteLine("[INFO] Loaded " + SceneName);
-            }
-        }
-        
-        // public void 
-
         public void Draw()
         {
 

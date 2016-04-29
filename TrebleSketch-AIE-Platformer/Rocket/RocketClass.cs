@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -18,6 +19,9 @@ namespace TrebleSketch_AIE_Platformer
         //Plan: Have base rocket transmit position, rotation but have nothing special itself
         //      Add list of parts that have the textures and stack dynamically
         public List<RocketPart> parts = new List<RocketPart>();
+
+        public InputHandler UserInput;
+        public SquareCollision BoxCollision;
 
         public Vector2 Position;
         public Vector2 SpawnPosition;
@@ -29,14 +33,37 @@ namespace TrebleSketch_AIE_Platformer
         public float Rotation;
 
         public bool Spawned;
+        public bool IsGrounded;
+        public float Scale;
+        public float Gravity;
+        public float GroundHeight;
 
         public void AddPart(RocketPart part)
         {
             parts.Add(part);
         }
 
+        public void InitialiseRocket()
+        {
+            BoxCollision = new SquareCollision(Position, Size);
+
+
+        }
+
         public void Update(GameTime gameTime)
         {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (InputHandler.IsKeyDownOnce(Keys.Up))
+            {
+                Velocity.Y = 2.4f;
+            }
+            if (!IsGrounded) Velocity.Y += Gravity * time;
+            else Velocity.Y = 0;
+            Position.Y += Velocity.Y * time;
+            Position.X += Velocity.X;
+            UpdateBounds();
+
             StackParts();
         }
 
@@ -70,6 +97,54 @@ namespace TrebleSketch_AIE_Platformer
                 part.Draw(spriteBatch);
 
             }
+        }
+
+        protected virtual void UpdateBounds()
+        {
+            /// Note: this should be called whenever the object position,
+            /// size, or scale are changed
+            BoxCollision = new SquareCollision(Position, Size * Scale);
+        }
+
+        protected bool SquareCollisionCheck(SceneObjects pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
+        protected void SetGrounded(float groundHeight)
+        {
+            IsGrounded = true;
+            GroundHeight = groundHeight;
+            Position.Y = groundHeight;
+            UpdateBounds();
+        }
+
+        public bool CheckCollisionsGround(SceneObjects other)
+        {
+            bool sceneCollision = SquareCollisionCheck(other);
+            if (sceneCollision)
+            {
+                /// if player position is above top of ground and player is falling
+                if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
+                {
+                    SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
+                }
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public bool CollisionCheck(SceneObjects other)
+        {
+            bool playerCollision = SquareCollisionCheck(other);
+            if (playerCollision)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

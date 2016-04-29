@@ -82,6 +82,9 @@ namespace TrebleSketch_AIE_Platformer
         Texture2D[] rocketParts = new Texture2D[4];
 
         public Vector2 CentreScreen;
+        public float Scale;
+        public float Gravity;
+        public float GroundHeight;
         string GameVersionBuild;
 
         public Game1()
@@ -89,7 +92,7 @@ namespace TrebleSketch_AIE_Platformer
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
             GameVersionBuild = "v0.0.10.146 (26/04/16)";
-            Debug.WriteToFile("[INFO] Starting Space Program Simulator 2016 " + GameVersionBuild, true);
+            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -119,6 +122,10 @@ namespace TrebleSketch_AIE_Platformer
             MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
 
+            Scale = 1f;
+            Gravity = 300f;
+            GroundHeight = 400f;
+
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
@@ -132,11 +139,18 @@ namespace TrebleSketch_AIE_Platformer
             Player = new PlayerClass();
             Player.SpawnPosition = CentreScreen;
             Player.PlayerInScene = SceneLoad.PlayerInScene;
+            Player.Scale = Scale;
+            Player.Gravity = Gravity;
+            Player.GroundHeight = GroundHeight;
             Player.InitialisePlayer();
 
             Rocket = new RocketClass();
-
+            Rocket.UserInput = UserInput;
             Rocket.SpawnPosition = CentreScreen;
+            Rocket.Scale = Scale;
+            Rocket.Gravity = Gravity;
+            Rocket.GroundHeight = GroundHeight;
+            Rocket.InitialiseRocket();
 
             World = new WorldClass();
 
@@ -247,7 +261,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                Debug.WriteToFile("[INFO] Ending Game...", true);
+                Debug.WriteToFile("Ending Game...", true);
                 Exit();
             }
 
@@ -263,6 +277,7 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.RocketInScene)
             {
                 Rocket.Update(gameTime);
+                Rocket.IsGrounded = false;
             }
             //else if (!SceneLoad.RocketInScene)
             //{

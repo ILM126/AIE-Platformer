@@ -52,8 +52,16 @@ namespace TrebleSketch_AIE_Platformer
             {
                 using (StreamWriter writer = new StreamWriter(GetCurrentDirectory(), true))
                 {
-                    writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
-                    writer.Close();
+                    if (!toConsole)
+                    {
+                        writer.WriteLine("[DEBUG] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
+                        writer.Close();
+                    }
+                    else
+                    {
+                        writer.WriteLine("[INFO] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
+                        writer.Close();
+                    }
                 }
             }
             catch (System.UnauthorizedAccessException)

@@ -47,7 +47,18 @@ namespace TrebleSketch_AIE_Platformer
         {
             BoxCollision = new SquareCollision(Position, Size);
 
+            IsGrounded = false;
 
+            IsGrounded = false;
+
+            Position = new Vector2(SpawnPosition.X
+                , SpawnPosition.Y);
+            Velocity = new Vector2(0);
+            Size = new Vector2(80, 80);
+            Size = new Vector2(80, 80);
+            Velocity = new Vector2(0);
+            Acceleration = Velocity.X;
+            Rotation = 0;
         }
 
         public void Update(GameTime gameTime)
@@ -56,20 +67,20 @@ namespace TrebleSketch_AIE_Platformer
 
             if (InputHandler.IsKeyDownOnce(Keys.Up))
             {
-                Velocity.Y = 2.4f;
+                Velocity.Y = 20f;
             }
+
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
             UpdateBounds();
-
             StackParts();
         }
 
         void StackParts()
         {
-            float height = 25;
+            float height = 60;
             foreach (RocketPart part in parts)
             {
                 int partHeight = (int)part.m_size.Y;
@@ -138,8 +149,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public bool CollisionCheck(SceneObjects other)
         {
-            bool playerCollision = SquareCollisionCheck(other);
-            if (playerCollision)
+            bool rocketCollision = SquareCollisionCheck(other);
+            if (rocketCollision)
             {
                 return true;
             }

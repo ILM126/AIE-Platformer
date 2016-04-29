@@ -71,5 +71,9 @@ namespace TrebleSketch_AIE_Platformer
         {
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
+        protected bool SquareCollisionCheck(RocketClass pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
     }
 }

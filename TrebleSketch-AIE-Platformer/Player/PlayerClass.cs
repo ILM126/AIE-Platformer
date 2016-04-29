@@ -32,9 +32,9 @@ namespace TrebleSketch_AIE_Platformer
         public float Rotation;
 
         // Player Scene Stuff
-        float Gravity;
-        float GroundHeight;
-        float Scale;
+        public float Gravity;
+        public float GroundHeight;
+        public float Scale;
         public int InScene;
         public int FromScene;
         public int ToScene;
@@ -51,9 +51,6 @@ namespace TrebleSketch_AIE_Platformer
         {
             BoxCollision = new SquareCollision(Position, Size);
 
-            Gravity = 300f;
-            Scale = 1f;
-            GroundHeight = 400f;
             IsGrounded = false;
             IsJumping = false;
 

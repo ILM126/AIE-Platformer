@@ -36,7 +36,7 @@ namespace TrebleSketch_AIE_Platformer
                         MediaPlayer.Play(Bright_DJStartchAttack); // PLAY DIS
                         MediaPlayer.Volume -= 0.75f;
                         playedOnce = true;
-                        Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just played for the first time.");
+                        Debug.WriteToFile(Bright_DJStartchAttack.Name.ToString() + " just played for the first time", true);
                     }
                 } else {
                     if (last > new TimeSpan(0, 0, 0, 5, 0))
@@ -73,7 +73,7 @@ namespace TrebleSketch_AIE_Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.K))
             {
                 MediaPlayer.Stop();
-                Console.WriteLine(Bright_DJStartchAttack.Name.ToString() + " just stopped.");
+                Debug.WriteToFile(Bright_DJStartchAttack.Name.ToString() + " just stopped", true);
             }
         }
 

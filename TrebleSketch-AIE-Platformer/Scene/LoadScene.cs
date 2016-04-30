@@ -62,7 +62,7 @@ namespace TrebleSketch_AIE_Platformer
             GroundTiles = new List<SceneObjects>();
             Scale = 1f;
             Tile_Size = 50f;
-            SceneID = 1; // Controls what is being shown on screen
+            SceneID = 0; // Controls what is being shown on screen
             button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
             Button = new Rectangle(
                     (int)button_Position.X - 50,
@@ -140,12 +140,12 @@ namespace TrebleSketch_AIE_Platformer
             if (InputHandler.IsKeyDownOnce(Keys.D0))
             {
                 SceneID = 0;
-                Console.WriteLine("[INFO] Loaded " + SceneName);
+                Debug.WriteToFile("Loaded " + SceneName, true);
             }
             if (InputHandler.IsKeyDownOnce(Keys.D1))
             {
                 SceneID = 1;
-                Console.WriteLine("[INFO] Loaded " + SceneName);
+                Debug.WriteToFile("Loaded " + SceneName, true);
             }
         }
 
@@ -209,7 +209,18 @@ namespace TrebleSketch_AIE_Platformer
                     // Console.WriteLine("[TERRAIN] I am being touched!");
                 }
             }
+        }
 
+        public void CheckCollisions(RocketClass rocket)
+        {
+            // Check collision with ground tiles
+            foreach (SceneObjects groundTile in GroundTiles)
+            {
+                if (rocket.CheckCollisionsGround(groundTile))
+                {
+                    // Debug.WriteToFile("Rocket is touching the terrain", false);
+                }
+            }
         }
     }
 }

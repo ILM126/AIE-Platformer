@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer
@@ -17,6 +18,7 @@ namespace TrebleSketch_AIE_Platformer
     class PlayerClass
     {
         public SquareCollision BoxCollision;
+        public DevLogging Debug;
 
         // Player Textures (Treble Sketch only)
         public Texture2D FaceRight;
@@ -46,6 +48,7 @@ namespace TrebleSketch_AIE_Platformer
         public bool IsGrounded;
         float JumpForce;
         public bool PlayerInScene;
+        public bool PewPew;
 
         public void InitialisePlayer()
         {
@@ -56,8 +59,6 @@ namespace TrebleSketch_AIE_Platformer
 
             PlayerFacingRight = true;
             BothSidesPressed = false;
-            IsGrounded = false;
-            IsJumping = false;
 
             Position = new Vector2(SpawnPosition.X
                 , SpawnPosition.Y);
@@ -66,8 +67,6 @@ namespace TrebleSketch_AIE_Platformer
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
-            Size = new Vector2(80, 80);
-            Velocity = new Vector2(0);
             Acceleration = Velocity.X;
             Rotation = 0;
         }
@@ -108,7 +107,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 IsJumping = true;
                 IsGrounded = false;
-                Velocity.Y -= 400f;
+                Velocity.Y -= 350f * Scale;
             }
         }
 
@@ -136,7 +135,12 @@ namespace TrebleSketch_AIE_Platformer
                 PlayerFacingRight = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && IsGrounded) Jump(); // Jump!
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && IsGrounded) Jump(); // Jump!
+
+            if (InputHandler.IsKeyDownOnce(Keys.Space)) // Pew Pew
+            {
+                PewPew = true;
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); } // Get Your Pony Ass Back Here Treble!
 
@@ -145,25 +149,37 @@ namespace TrebleSketch_AIE_Platformer
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
             UpdateBounds();
-            // Console.WriteLine("[INFO] Player is being updated on screen");
+            // Debug.WriteToFile("Player is being updated on screen");
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-                Rectangle srcRect = new Rectangle(
-                                                    0,
-                                                    0,
-                                                    (int)(Size.X),
-                                                    (int)(Size.Y));
+            Rectangle srcRect = new Rectangle(
+                                                0,
+                                                0,
+                                                (int)(Size.X),
+                                                (int)(Size.Y));
 
+            if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
+            else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+
+            if (BothSidesPressed)
+            {
                 if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
                 else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+            }
 
-                if (BothSidesPressed)
+            if (PewPew)
+            {
+                if (PlayerFacingRight)
                 {
-                    if (PlayerFacingRight) loadPlayerTrebleSketchRight(spriteBatch, graphics);
-                    else if (!PlayerFacingRight) loadPlayerTrebleSketchLeft(spriteBatch, graphics);
+                    spriteBatch.DrawString(Debug.InformationFont, "Pew Pew!", new Vector2(Position.X + 10, Position.Y - 10), Color.Black);
+                } else if (!PlayerFacingRight)
+                {
+                    spriteBatch.DrawString(Debug.InformationFont, "Pew Pew!", new Vector2(Position.X - 50, Position.Y - 10), Color.Black);
                 }
+                Debug.WriteToFile("Pew Pew is activated", false);
+            }
         }
 
         protected virtual void UpdateBounds()
@@ -178,9 +194,15 @@ namespace TrebleSketch_AIE_Platformer
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
 
+        protected bool SquareCollisionCheck(RocketClass pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
+            IsJumping = false;
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
             UpdateBounds();
@@ -198,9 +220,22 @@ namespace TrebleSketch_AIE_Platformer
                 }
                 return true;
             }
-
             return false;
+        }
 
+        public bool CheckCollisionsGround(RocketClass other)
+        {
+            bool rocketCollision = SquareCollisionCheck(other);
+            if (rocketCollision)
+            {
+                /// if player position is above top of ground and player is falling
+                if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
+                {
+                    SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool CollisionCheck(SceneObjects other)
@@ -210,7 +245,6 @@ namespace TrebleSketch_AIE_Platformer
             {
                 return true;
             }
-
             return false;
         }
     }

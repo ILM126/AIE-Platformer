@@ -31,7 +31,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.10.152 (Developmental Stages, plus a few builds before Git)
+    /// Version: 0.0.10.158 (Developmental Stages, plus a few builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -91,7 +91,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.10.152 (30/04/16)";
+            GameVersionBuild = "v0.0.10.158 (30/04/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -106,7 +106,7 @@ namespace TrebleSketch_AIE_Platformer
         protected override void Initialize()
         {
 
-            Console.WriteLine("[INFO] Started Initializing Game");
+            Debug.WriteToFile("Started Initializing Game", true);
 
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
@@ -122,9 +122,9 @@ namespace TrebleSketch_AIE_Platformer
             MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
 
-            Scale = 1f;
+            Scale = 1;
             Gravity = 300f;
-            GroundHeight = 400f;
+            GroundHeight = 0f;
 
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
@@ -137,6 +137,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.InitialiseScene();
 
             Player = new PlayerClass();
+            Player.Debug = Debug;
             Player.SpawnPosition = CentreScreen;
             Player.PlayerInScene = SceneLoad.PlayerInScene;
             Player.Scale = Scale;
@@ -146,6 +147,7 @@ namespace TrebleSketch_AIE_Platformer
 
             Rocket = new RocketClass();
             Rocket.UserInput = UserInput;
+            Rocket.Debug = Debug;
             Rocket.SpawnPosition = CentreScreen;
             Rocket.Scale = Scale;
             Rocket.Gravity = Gravity;
@@ -157,7 +159,7 @@ namespace TrebleSketch_AIE_Platformer
             Audio = new AudioClass();
             Audio.Debug = Debug;
 
-            Console.WriteLine("[INFO] Finished Initializing Game");
+            Debug.WriteToFile("Finished Initializing Game", true);
 
             base.Initialize();
         }
@@ -168,7 +170,7 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void LoadContent()
         {
-            Console.WriteLine("[INFO] Started Loading Game Textures");
+            Debug.WriteToFile("Started Loading Game Textures", true);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -227,14 +229,16 @@ namespace TrebleSketch_AIE_Platformer
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
 
-            Console.WriteLine("[INFO] Finished Loading Game Textures");
+            Debug.WriteToFile("Finished Loading Game Textures", true);
 
             RocketParts();
+            Rocket.InitialiseRocket();
+            Rocket.SetSize(new Vector2(rocketParts[0].Width, rocketParts[1].Height + rocketParts[0].Height));
         }
 
         public void RocketParts()
         {
-            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y * 2 -175);
+            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y * 2 - 250);
             RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
             RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
@@ -264,7 +268,11 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Ending Game...", true);
                 Exit();
             }
-
+            // Check collision with player
+            if (Player.CheckCollisionsGround(Rocket))
+            {
+                // Console.WriteLine("[TERRAIN] I am being touched!");
+            }
             // SceneLoad.PlayerInScene = false;
             // SceneLoad.RocketInScene = false;
 
@@ -281,36 +289,45 @@ namespace TrebleSketch_AIE_Platformer
             }
             //else if (!SceneLoad.RocketInScene)
             //{
-            //    Console.WriteLine("[INFO] Rocket is not being updated on screen");
+            //    Debug.WriteToFile("Rocket is not being updated on screen");
             //}
 
             Audio.ToggleMusic(gameTime);
 
             SceneLoad.CheckCollisions(Player);
+            SceneLoad.CheckCollisions(Rocket);
             // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
             if (SceneLoad.PlayerInScene)
             {
                 Player.Update(gameTime);
                 Player.IsGrounded = false;
-                // Console.WriteLine("[INFO] Playing...");
+                Player.PewPew = false;
+                // Debug.WriteToFile("Playing...");
             }
             //else if (!SceneLoad.PlayerInScene)
             //{
-            //    Console.WriteLine("[INFO] Player is not being updated on screen");
+            //    Debug.WriteToFile("Player is not being updated on screen");
             //}
 
-            // Console.WriteLine("[INFO] Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
+            // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
 
             InputHandler.Update();
 
             base.Update(gameTime);
         }
 
-        private void GameBuild(SpriteBatch spriteBatch) // Displays the Game Build Number on the lower right hand side
+        void GameBuild(SpriteBatch spriteBatch) // Displays the Game Build Number on the lower right hand side
         {
             // spriteBatch.DrawString(InformationFont, "SCORE : " + Ship.Score.ToString(), new Vector2(10, 10), Color.White);
             // spriteBatch.DrawString(Debug.InformationFont, "Game Build: " + GameVersionBuild, new Vector2(CentreScreen.X, 50), Color.Black);
+        }
+
+        void DrawRectangle(Rectangle coords, Color color)
+        {
+            var rect = new Texture2D(GraphicsDevice, 1, 1);
+            rect.SetData(new[] { color });
+            spriteBatch.Draw(rect, coords, color);
         }
 
         /// <summary>
@@ -322,34 +339,37 @@ namespace TrebleSketch_AIE_Platformer
             GraphicsDevice.Clear(Color.SkyBlue);
             // GraphicsDevice.Clear(Color.Black);
 
-            // Console.WriteLine("[INFO] Started Drawing Game Textures");
+            // Debug.WriteToFile("Started Drawing Game Textures");
 
             spriteBatch.Begin();
 
-            // Console.WriteLine("[INFO] Drawing Scene Textures");
+            // Debug.WriteToFile("Drawing Scene Textures");
             SceneLoad.Draw(gameTime, spriteBatch);
 
-            // Console.WriteLine("[INFO] Drawing Rocket Textures");
-            if (SceneLoad.RocketInScene)
-            {
-                Rocket.Draw(spriteBatch);
-            }
-            //else if (!RocketInScene)
-            //{
-            //    Console.WriteLine("[INFO] Rocket is not being drawn on screen");
-            //}
-
-            // Console.WriteLine("[INFO] Drawing Player Textures");
+            // Debug.WriteToFile("Drawing Player Textures");
             if (SceneLoad.PlayerInScene)
             {
                 Player.Draw(spriteBatch, graphics);
             }
             //else if (!PlayerInScene)
             //{
-            //    Console.WriteLine("[INFO] Player is not being drawn on screen");
+            //    Debug.WriteToFile("Player is not being drawn on screen");
             //}
 
-            // Console.WriteLine("[INFO] Drawing Audio Name");
+            // Debug.WriteToFile("Drawing Rocket Textures");
+            if (SceneLoad.RocketInScene)
+            {
+                Rocket.Draw(spriteBatch);
+
+                Rectangle tempRect = new Rectangle((int)Rocket.Position.X - 5, (int)Rocket.Position.Y - 5, 10, 10);
+                DrawRectangle(tempRect, Color.White);
+            }
+            //else if (!RocketInScene)
+            //{
+            //    Debug.WriteToFile("Rocket is not being drawn on screen");
+            //}
+
+            // Debug.WriteToFile("Drawing Audio Name");
             Audio.CurrentSong(spriteBatch);
 
             GameBuild(spriteBatch);
@@ -359,7 +379,7 @@ namespace TrebleSketch_AIE_Platformer
 
             spriteBatch.End();
 
-            // Console.WriteLine("[INFO] Finshed Drawing Game Textures");
+            // Debug.WriteToFile("Finshed Drawing Game Textures");
 
             base.Draw(gameTime);
         }

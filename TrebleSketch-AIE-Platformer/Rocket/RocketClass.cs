@@ -22,6 +22,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
+        public DevLogging Debug;
 
         public Vector2 Position;
         public Vector2 SpawnPosition;
@@ -34,9 +35,12 @@ namespace TrebleSketch_AIE_Platformer
 
         public bool Spawned;
         public bool IsGrounded;
+        bool IsFlying;
         public float Scale;
         public float Gravity;
         public float GroundHeight;
+
+        float height;
 
         public void AddPart(RocketPart part)
         {
@@ -49,16 +53,22 @@ namespace TrebleSketch_AIE_Platformer
 
             IsGrounded = false;
 
-            IsGrounded = false;
-
             Position = new Vector2(SpawnPosition.X
                 , SpawnPosition.Y);
             Velocity = new Vector2(0);
-            Size = new Vector2(80, 80);
-            Size = new Vector2(80, 80);
-            Velocity = new Vector2(0);
             Acceleration = Velocity.X;
             Rotation = 0;
+        }
+
+        public void SetSize(Vector2 size)
+        {
+            Size = new Vector2(size.X, size.Y);
+            Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
+            Origin = new Vector2(
+                (int)Size.X / 2,
+                (int)Size.Y / 2);
+            Debug.WriteToFile("Rocket Origin: " + Origin.ToString(), false);
+            Debug.WriteToFile("Rocket Origin: " + Position.ToString(), false);
         }
 
         public void Update(GameTime gameTime)
@@ -67,36 +77,47 @@ namespace TrebleSketch_AIE_Platformer
 
             if (InputHandler.IsKeyDownOnce(Keys.Up))
             {
-                Velocity.Y = 20f;
+                if (IsGrounded)
+                {
+                    IsFlying = true;
+                    IsGrounded = false;
+                    Velocity.Y -= 500f;
+                }
+            }
+
+            foreach (RocketPart part in parts)
+            {
+                
             }
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
-            UpdateBounds();
+            
             StackParts();
+            UpdateBounds();
         }
 
         void StackParts()
         {
-            float height = 60;
+            height = 38;
             foreach (RocketPart part in parts)
             {
                 int partHeight = (int)part.m_size.Y;
                 switch (partHeight)
                 {
                     case 75:
-                        part.m_position.Y = Position.Y - height - 38;
+                        part.m_position.Y = Position.Y - height - 50;
                         height -= part.m_size.Y;
                         break;
-                    case 150:
+                    case 175:
                         part.m_position.Y = Position.Y - height;
                         height -= part.m_size.Y;
                         break;
                 }
-                // part.m_position.Y = Position.Y - height;
-                // height -= part.m_size.Y;
+                //part.m_position.Y = Position.Y - height;
+                //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference
             }
         }
@@ -125,6 +146,7 @@ namespace TrebleSketch_AIE_Platformer
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
+            IsFlying = false;
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
             UpdateBounds();
@@ -142,9 +164,7 @@ namespace TrebleSketch_AIE_Platformer
                 }
                 return true;
             }
-
             return false;
-
         }
 
         public bool CollisionCheck(SceneObjects other)
@@ -154,7 +174,6 @@ namespace TrebleSketch_AIE_Platformer
             {
                 return true;
             }
-
             return false;
         }
     }

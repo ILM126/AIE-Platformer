@@ -35,8 +35,6 @@ namespace TrebleSketch_AIE_Platformer
 
         public Rectangle CursorRect;
 
-        int i = 0;
-
         public void Initialize()
         {
             MouseSize = new Vector2(MouseTexture.Width, MouseTexture.Height);

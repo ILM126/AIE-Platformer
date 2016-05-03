@@ -123,7 +123,7 @@ namespace TrebleSketch_AIE_Platformer
             UserInput = new InputHandler();
 
             Scale = 1;
-            Gravity = 300f;
+            Gravity = 500f;
             GroundHeight = 0f;
 
             Scene = new SceneClass();

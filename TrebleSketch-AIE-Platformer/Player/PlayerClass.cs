@@ -107,7 +107,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 IsJumping = true;
                 IsGrounded = false;
-                Velocity.Y -= 350f * Scale;
+                Velocity.Y -= 425f * Scale;
             }
         }
 
@@ -125,13 +125,13 @@ namespace TrebleSketch_AIE_Platformer
 
             if (InputHandler.IsKeyDownOnce(Keys.A)) // Move Left
             {
-                Velocity.X = -4.8f;
+                Velocity.X = -2.7f;
                 PlayerFacingRight = false;
             }
 
             if (InputHandler.IsKeyDownOnce(Keys.D)) // Move Right
             {
-                Velocity.X = 4.8f;
+                Velocity.X = 2.7f;
                 PlayerFacingRight = true;
             }
 

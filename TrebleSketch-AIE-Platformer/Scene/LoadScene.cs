@@ -62,7 +62,7 @@ namespace TrebleSketch_AIE_Platformer
             GroundTiles = new List<SceneObjects>();
             Scale = 1f;
             Tile_Size = 50f;
-            SceneID = 0; // Controls what is being shown on screen
+            SceneID = 5; // Controls what is being shown on screen
             button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
             Button = new Rectangle(
                     (int)button_Position.X - 50,
@@ -119,7 +119,7 @@ namespace TrebleSketch_AIE_Platformer
                     }
                     if (UserInput.MouseButtonClickedOnce(MouseButton.Left) && UserInput.MouseInRectangle(Button))
                     {
-                        SceneID = 0;
+                        SceneID = 5;
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -132,6 +132,80 @@ namespace TrebleSketch_AIE_Platformer
                     break;
                 case 4:
                     SceneName = "Front Lawns";
+                    break;
+                case 5:
+                    GroundTiles.Clear();
+                    SceneName = "Mini Game: Collect the Parts";
+                    Scene_Width = 1280;
+                    Scene_Height = 720;
+                    for (int i = 0; i < CentreScreen.X / 25; i++) // Ground at the bottom
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2(5 + i * 50
+                            , CentreScreen.Y * 2 - 25)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, right
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2((CentreScreen.X * 2f) - (i / 3) * 50
+                            , CentreScreen.Y * 1.45f)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, left
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2(5 + (i / 3) * 50
+                            , CentreScreen.Y * 1.45f)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, right
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2((CentreScreen.X * 2f) - (i / 2) * 50
+                            , CentreScreen.Y - 5)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, left
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2(5 + (i / 2) * 50
+                            , CentreScreen.Y - 5)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    for (int i = 0; i < CentreScreen.X / 50; i++) // top floor, middle
+                    {
+                        SceneObjects GroundTile = new SceneObjects(
+                        OutsideGrass
+                        , new Vector2((CentreScreen.X / 4 * 3) + 15 + (i / 2) * 50
+                            , CentreScreen.Y / 2)
+                        , new Vector2(Tile_Size, Tile_Size)
+                        , Scale
+                        , false);
+                        GroundTiles.Add(GroundTile);
+                    }
+                    PlayerInScene = true;
+                    RocketInScene = true;
                     break;
                 default:
                     SceneName = "Test Map";

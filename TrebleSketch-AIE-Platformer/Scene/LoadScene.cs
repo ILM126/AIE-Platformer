@@ -60,7 +60,7 @@ namespace TrebleSketch_AIE_Platformer
             ScrapMetals = new List<BuildTheRocket>();
             Scale = 1f;
             Tile_Size = 50f;
-            SceneID = 5; // Controls what is being shown on screen
+            SceneID = 1; // Controls what is being shown on screen
             button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
             Button = new Rectangle(
                     (int)button_Position.X - 50,
@@ -288,6 +288,7 @@ namespace TrebleSketch_AIE_Platformer
                 foreach (BuildTheRocket ScrapMetal in ScrapMetals)
                 {
                     ScrapMetal.Draw(gameTime, spriteBatch, MiniGame_BuildTheRocket.ScrapMetal);
+                    Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.ToString(), false);
                 }
             }
         }

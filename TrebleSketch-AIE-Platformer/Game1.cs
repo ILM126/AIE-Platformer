@@ -32,7 +32,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.10.158 (Developmental Stages, plus a few builds before Git)
+    /// Version: 0.0.11.161 (Developmental Stages, plus a few builds before Git)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -68,6 +68,7 @@ namespace TrebleSketch_AIE_Platformer
         // "Start" the Classes
         PlayerClass Player;
         RocketClass Rocket;
+        RocketPart RocketParts;
         WorldClass World;
         SceneClass Scene;
         LoadScene SceneLoad;
@@ -95,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.10.158 (30/04/16)";
+            GameVersionBuild = "v0.0.10.161 (04/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -126,7 +127,7 @@ namespace TrebleSketch_AIE_Platformer
             MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
 
-            Scale = 1;
+            Scale = 1f;
             Gravity = 500f;
             GroundHeight = 0f;
 
@@ -154,12 +155,14 @@ namespace TrebleSketch_AIE_Platformer
             Player.InitialisePlayer();
 
             Rocket = new RocketClass();
+            RocketParts = new RocketPart();
             Rocket.UserInput = UserInput;
             Rocket.Debug = Debug;
             Rocket.SpawnPosition = CentreScreen;
             Rocket.Scale = Scale;
             Rocket.Gravity = Gravity;
             Rocket.GroundHeight = GroundHeight;
+            RocketParts.m_scale = Scale;
             Rocket.InitialiseRocket();
 
             World = new WorldClass();
@@ -236,14 +239,14 @@ namespace TrebleSketch_AIE_Platformer
 
             Debug.WriteToFile("Finished Loading Game Textures", true);
 
-            RocketParts();
+            InitialiseRocketParts();
             Rocket.InitialiseRocket();
             Rocket.SetSize(new Vector2(rocketParts[0].Width, rocketParts[1].Height + rocketParts[0].Height));
         }
 
-        public void RocketParts()
+        public void InitialiseRocketParts()
         {
-            Rocket.Position = new Vector2(CentreScreen.X, CentreScreen.Y * 2 - 250);
+            // Rocket.Position = new Vector2(CentreScreen.X, 0);
             RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
             RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
@@ -274,10 +277,10 @@ namespace TrebleSketch_AIE_Platformer
                 Exit();
             }
             // Check collision with player
-            if (Player.CheckCollisionsGround(Rocket))
-            {
-                // Console.WriteLine("[TERRAIN] I am being touched!");
-            }
+            //if (Player.CheckCollisionsGround(Rocket))
+            //{
+            //    // Console.WriteLine("[TERRAIN] I am being touched!");
+            //}
             // SceneLoad.PlayerInScene = false;
             // SceneLoad.RocketInScene = false;
 

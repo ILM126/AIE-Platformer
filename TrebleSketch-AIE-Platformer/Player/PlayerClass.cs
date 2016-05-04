@@ -61,7 +61,7 @@ namespace TrebleSketch_AIE_Platformer
             BothSidesPressed = false;
 
             Position = new Vector2(SpawnPosition.X
-                , SpawnPosition.Y);
+                , SpawnPosition.Y * 2 - 180);
             Velocity = new Vector2(0);
             Size = new Vector2(80, 80);
             Origin = new Vector2(
@@ -194,10 +194,10 @@ namespace TrebleSketch_AIE_Platformer
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
 
-        protected bool SquareCollisionCheck(RocketClass pOther)
-        {
-            return BoxCollision.CollsionCheck(pOther.BoxCollision);
-        }
+        //protected bool SquareCollisionCheck(RocketClass pOther)
+        //{
+        //    return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        //}
 
         protected void SetGrounded(float groundHeight)
         {
@@ -223,20 +223,20 @@ namespace TrebleSketch_AIE_Platformer
             return false;
         }
 
-        public bool CheckCollisionsGround(RocketClass other)
-        {
-            bool rocketCollision = SquareCollisionCheck(other);
-            if (rocketCollision)
-            {
-                /// if player position is above top of ground and player is falling
-                if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
-                {
-                    SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
-                }
-                return true;
-            }
-            return false;
-        }
+        //public bool CheckCollisionsGround(RocketClass other)
+        //{
+        //    bool rocketCollision = SquareCollisionCheck(other);
+        //    if (rocketCollision)
+        //    {
+        //        /// if player position is above top of ground and player is falling
+        //        if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
+        //        {
+        //            SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
+        //        }
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         public bool CollisionCheck(SceneObjects other)
         {

@@ -54,7 +54,7 @@ namespace TrebleSketch_AIE_Platformer
             IsGrounded = false;
 
             Position = new Vector2(SpawnPosition.X
-                , SpawnPosition.Y);
+                , SpawnPosition.Y / 2);
             Velocity = new Vector2(0);
             Acceleration = Velocity.X;
             Rotation = 0;

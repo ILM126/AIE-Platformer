@@ -191,7 +191,7 @@ namespace TrebleSketch_AIE_Platformer
                         SceneObjects GroundTile = new SceneObjects(
                         OutsideGrass
                         , new Vector2((CentreScreen.X / 4 * 3) + 15 + (i / 2) * 50
-                            , CentreScreen.Y / 2)
+                            , CentreScreen.Y - 125)
                         , new Vector2(Tile_Size, Tile_Size)
                         , Scale
                         , false);

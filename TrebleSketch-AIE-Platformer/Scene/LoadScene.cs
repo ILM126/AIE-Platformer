@@ -14,6 +14,7 @@ namespace TrebleSketch_AIE_Platformer
         public BuildTheRocket MiniGame_BuildTheRocket;
 
         public List<SceneObjects> GroundTiles;
+        public List<BuildTheRocket> ScrapMetals;
 
         public Rectangle Button;
         public Rectangle CursonRect;
@@ -26,6 +27,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public MouseState state;
 
+        public bool RunOnceTest;
+
         float Scene_Width;
         float Scene_Height;
         float Scale;
@@ -34,6 +37,7 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 CentreScreen;
         public bool PlayerInScene;
         public bool RocketInScene;
+        public bool MiniGame;
 
         // Scene Textures
         public Texture2D OutsideGrass;
@@ -53,6 +57,7 @@ namespace TrebleSketch_AIE_Platformer
         public void InitialiseScene()
         {
             GroundTiles = new List<SceneObjects>();
+            ScrapMetals = new List<BuildTheRocket>();
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 5; // Controls what is being shown on screen
@@ -62,6 +67,7 @@ namespace TrebleSketch_AIE_Platformer
                     (int)button_Position.Y - 20,
                     100,
                     40);
+            RunOnceTest = false;
         }
 
         public void AddPart(RocketPart p)
@@ -91,6 +97,7 @@ namespace TrebleSketch_AIE_Platformer
                     }
                     PlayerInScene = true;
                     RocketInScene = true;
+                    MiniGame = false;
                     break;
                 case 1:
                     GroundTiles.Clear();
@@ -116,6 +123,7 @@ namespace TrebleSketch_AIE_Platformer
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
+                    MiniGame = false;
                     break;
                 case 2:
                     SceneName = "Settings Menu";
@@ -197,8 +205,19 @@ namespace TrebleSketch_AIE_Platformer
                         , false);
                         GroundTiles.Add(GroundTile);
                     }
+                    if (RunOnceTest)
+                    {
+                        BuildTheRocket ScrapMetal = new BuildTheRocket(
+                        MiniGame_BuildTheRocket.ScrapMetal,
+                        CentreScreen,
+                        new Vector2(50, 30),
+                        Scale);
+                        ScrapMetals.Add(ScrapMetal);
+                        RunOnceTest = false;
+                    }
                     PlayerInScene = true;
                     RocketInScene = true;
+                    MiniGame = true;
                     break;
                 default:
                     SceneName = "Test Map";
@@ -266,7 +285,10 @@ namespace TrebleSketch_AIE_Platformer
             }
             if (SceneID == 5) // Mini Game: Build the Rocket
             {
-                MiniGame_BuildTheRocket.Draw(spriteBatch);
+                foreach (BuildTheRocket ScrapMetal in ScrapMetals)
+                {
+                    ScrapMetal.Draw(gameTime, spriteBatch, MiniGame_BuildTheRocket.ScrapMetal);
+                }
             }
         }
 
@@ -288,6 +310,18 @@ namespace TrebleSketch_AIE_Platformer
             foreach (SceneObjects groundTile in GroundTiles)
             {
                 if (rocket.CheckCollisionsGround(groundTile))
+                {
+                    // Debug.WriteToFile("Rocket is touching the terrain", false);
+                }
+            }
+        }
+
+        public void CheckCollisions(BuildTheRocket miniGame_BuildTheRocket)
+        {
+            // Check collision with ground tiles
+            foreach (SceneObjects groundTile in GroundTiles)
+            {
+                if (miniGame_BuildTheRocket.CheckCollisionsGround(groundTile))
                 {
                     // Debug.WriteToFile("Rocket is touching the terrain", false);
                 }

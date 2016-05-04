@@ -67,6 +67,7 @@ namespace TrebleSketch_AIE_Platformer
 
         // "Start" the Classes
         PlayerClass Player;
+        EnemyClass Enemy;
         RocketClass Rocket;
         RocketPart RocketParts;
         WorldClass World;
@@ -134,6 +135,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
             MiniGame_BuildTheRocket = new BuildTheRocket(); // MiniGames
+            // SceneObject.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             // SceneLoad.Button = Button;
             SceneLoad.Debug = Debug;
             SceneLoad.CursonRect = CursorRect;
@@ -142,7 +144,10 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             MiniGame_BuildTheRocket.CentreScreen = CentreScreen;
             MiniGame_BuildTheRocket.Scale = Scale;
+            MiniGame_BuildTheRocket.Gravity = Gravity;
+            MiniGame_BuildTheRocket.GroundHeight = GroundHeight;
             SceneLoad.InitialiseScene();
+            MiniGame_BuildTheRocket.Initialize();
 
             Player = new PlayerClass();
             Player.Debug = Debug;
@@ -152,6 +157,9 @@ namespace TrebleSketch_AIE_Platformer
             Player.Gravity = Gravity;
             Player.GroundHeight = GroundHeight;
             Player.InitialisePlayer();
+
+            Enemy = new EnemyClass();
+            Enemy.Debug = Debug;
 
             Rocket = new RocketClass();
             RocketParts = new RocketPart();
@@ -168,6 +176,8 @@ namespace TrebleSketch_AIE_Platformer
 
             Audio = new AudioClass();
             Audio.Debug = Debug;
+
+            //Debug.WriteToFile(SceneLoad.SceneID + "", true);
 
             Debug.WriteToFile("Finished Initializing Game", true);
 
@@ -303,6 +313,7 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.CheckCollisions(Player);
             SceneLoad.CheckCollisions(Rocket);
+            SceneLoad.CheckCollisions(MiniGame_BuildTheRocket);
             // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
             if (SceneLoad.PlayerInScene)
@@ -316,6 +327,12 @@ namespace TrebleSketch_AIE_Platformer
             //{
             //    Debug.WriteToFile("Player is not being updated on screen");
             //}
+
+            if (SceneLoad.MiniGame && SceneLoad.SceneID == 5)
+            {
+                MiniGame_BuildTheRocket.Update(gameTime);
+                Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
+            }
 
             // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
 

@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Design;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
+using TrebleSketch_AIE_Platformer.MiniGames;
+
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -22,6 +15,7 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 scene_Origin;
         public float scene_Scale;
         public bool scene_IsMenu;
+
         public SquareCollision BoxCollision;
 
         public SceneObjects(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f, bool isMenu = false)
@@ -72,6 +66,10 @@ namespace TrebleSketch_AIE_Platformer
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
         protected bool SquareCollisionCheck(RocketClass pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+        protected bool SquareCollisionCheck(BuildTheRocket pOther)
         {
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }

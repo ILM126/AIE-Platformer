@@ -110,7 +110,6 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void Initialize()
         {
-
             Debug.WriteToFile("Started Initializing Game", true);
 
             graphics.PreferredBackBufferHeight = 720;

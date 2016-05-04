@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Design;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
 using EclipsingGameUtils;
+using TrebleSketch_AIE_Platformer.MiniGames;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -19,6 +11,7 @@ namespace TrebleSketch_AIE_Platformer
     {
         public InputHandler UserInput;
         public DevLogging Debug;
+        public BuildTheRocket MiniGame_BuildTheRocket;
 
         public List<SceneObjects> GroundTiles;
 
@@ -135,7 +128,7 @@ namespace TrebleSketch_AIE_Platformer
                     break;
                 case 5:
                     GroundTiles.Clear();
-                    SceneName = "Mini Game: Collect the Parts";
+                    SceneName = "Mini Game: Build the Rocket";
                     Scene_Width = 1280;
                     Scene_Height = 720;
                     for (int i = 0; i < CentreScreen.X / 25; i++) // Ground at the bottom
@@ -270,6 +263,10 @@ namespace TrebleSketch_AIE_Platformer
                         0,
                         0); 
                 }
+            }
+            if (SceneID == 5) // Mini Game: Build the Rocket
+            {
+                MiniGame_BuildTheRocket.Draw(spriteBatch);
             }
         }
 

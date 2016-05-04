@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
+using TrebleSketch_AIE_Platformer.MiniGames;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -79,6 +80,9 @@ namespace TrebleSketch_AIE_Platformer
         public Rectangle Button;
         public Rectangle CursorRect;
 
+        // MiniGames
+        BuildTheRocket MiniGame_BuildTheRocket;
+
         Texture2D[] rocketParts = new Texture2D[4];
 
         public Vector2 CentreScreen;
@@ -129,11 +133,15 @@ namespace TrebleSketch_AIE_Platformer
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
+            MiniGame_BuildTheRocket = new BuildTheRocket(); // MiniGames
             // SceneLoad.Button = Button;
             SceneLoad.Debug = Debug;
             SceneLoad.CursonRect = CursorRect;
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
+            SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
+            MiniGame_BuildTheRocket.CentreScreen = CentreScreen;
+            MiniGame_BuildTheRocket.Scale = Scale;
             SceneLoad.InitialiseScene();
 
             Player = new PlayerClass();
@@ -205,12 +213,9 @@ namespace TrebleSketch_AIE_Platformer
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
 
-                // 01 - Reception
-
-                // 02 - Front Lawns
-
-                // 03 - Conference Room
-
+                // 05 - Mini Game: Build the Rocket
+                MiniGame_BuildTheRocket.ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
+                
             // AudioClass - Loads the Sounds and Sound Effects
                 // Rocket
 

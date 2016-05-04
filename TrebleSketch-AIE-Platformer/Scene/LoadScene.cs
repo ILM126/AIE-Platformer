@@ -67,7 +67,7 @@ namespace TrebleSketch_AIE_Platformer
                     (int)button_Position.Y - 20,
                     100,
                     40);
-            RunOnceTest = false;
+            RunOnceTest = true;
         }
 
         public void AddPart(RocketPart p)
@@ -205,7 +205,7 @@ namespace TrebleSketch_AIE_Platformer
                         , false);
                         GroundTiles.Add(GroundTile);
                     }
-                    if (RunOnceTest)
+                    for (int i = 0; i < 2; i++)
                     {
                         BuildTheRocket ScrapMetal = new BuildTheRocket(
                         MiniGame_BuildTheRocket.ScrapMetal,
@@ -214,6 +214,7 @@ namespace TrebleSketch_AIE_Platformer
                         Scale);
                         ScrapMetals.Add(ScrapMetal);
                         RunOnceTest = false;
+                        Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
                     }
                     PlayerInScene = true;
                     RocketInScene = true;

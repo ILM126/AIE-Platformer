@@ -328,7 +328,7 @@ namespace TrebleSketch_AIE_Platformer
             //    Debug.WriteToFile("Player is not being updated on screen");
             //}
 
-            if (SceneLoad.MiniGame && SceneLoad.SceneID == 5)
+            if (SceneLoad.MiniGame)
             {
                 MiniGame_BuildTheRocket.Update(gameTime);
                 Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);

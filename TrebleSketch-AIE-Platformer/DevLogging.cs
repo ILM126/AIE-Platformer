@@ -34,7 +34,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (toConsole)
             {
-                Console.WriteLine(text);
+                Console.WriteLine("[INFO] " + text);
             }
             try
             {

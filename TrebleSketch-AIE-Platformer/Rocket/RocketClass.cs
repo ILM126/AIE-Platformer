@@ -54,7 +54,7 @@ namespace TrebleSketch_AIE_Platformer
             IsGrounded = false;
 
             Position = new Vector2(SpawnPosition.X
-                , SpawnPosition.Y / 2);
+                , 15);
             Velocity = new Vector2(0);
             Acceleration = Velocity.X;
             Rotation = 0;
@@ -63,12 +63,12 @@ namespace TrebleSketch_AIE_Platformer
         public void SetSize(Vector2 size)
         {
             Size = new Vector2(size.X, size.Y);
-            Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
+            // Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
-            Debug.WriteToFile("Rocket Origin: " + Origin.ToString(), false);
-            Debug.WriteToFile("Rocket Origin: " + Position.ToString(), false);
+            // Debug.WriteToFile("Rocket Origin: " + Origin.ToString(), false);
+            // Debug.WriteToFile("Rocket Origin: " + Position.ToString(), false);
         }
 
         public void Update(GameTime gameTime)
@@ -138,11 +138,6 @@ namespace TrebleSketch_AIE_Platformer
             BoxCollision = new SquareCollision(Position, Size * Scale);
         }
 
-        protected bool SquareCollisionCheck(SceneObjects pOther)
-        {
-            return BoxCollision.CollsionCheck(pOther.BoxCollision);
-        }
-
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
@@ -150,6 +145,11 @@ namespace TrebleSketch_AIE_Platformer
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
             UpdateBounds();
+        }
+
+        protected bool SquareCollisionCheck(SceneObjects pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
 
         public bool CheckCollisionsGround(SceneObjects other)

@@ -1,16 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Design;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
 using TrebleSketch_AIE_Platformer.MiniGames;
@@ -142,6 +134,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
+            MiniGame_BuildTheRocket.Debug = Debug;
             MiniGame_BuildTheRocket.CentreScreen = CentreScreen;
             MiniGame_BuildTheRocket.Scale = Scale;
             MiniGame_BuildTheRocket.Gravity = Gravity;
@@ -331,7 +324,8 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.MiniGame)
             {
                 MiniGame_BuildTheRocket.Update(gameTime);
-                Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
+                MiniGame_BuildTheRocket.IsGrounded = false;
+                //Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
             }
 
             // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());

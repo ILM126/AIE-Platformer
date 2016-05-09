@@ -68,6 +68,14 @@ namespace TrebleSketch_AIE_Platformer
                     100,
                     40);
             RunOnceTest = true;
+            BuildTheRocket ScrapMetal = new BuildTheRocket(
+                        MiniGame_BuildTheRocket.ScrapMetal,
+                        CentreScreen,
+                        new Vector2(50, 30),
+                        Scale);
+            ScrapMetals.Add(ScrapMetal);
+            //RunOnceTest = false;
+            // Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
         }
 
         public void AddPart(RocketPart p)
@@ -205,17 +213,6 @@ namespace TrebleSketch_AIE_Platformer
                         , false);
                         GroundTiles.Add(GroundTile);
                     }
-                    for (int i = 0; i < 2; i++)
-                    {
-                        BuildTheRocket ScrapMetal = new BuildTheRocket(
-                        MiniGame_BuildTheRocket.ScrapMetal,
-                        CentreScreen,
-                        new Vector2(50, 30),
-                        Scale);
-                        ScrapMetals.Add(ScrapMetal);
-                        RunOnceTest = false;
-                        Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
-                    }
                     PlayerInScene = true;
                     RocketInScene = true;
                     MiniGame = true;
@@ -289,7 +286,7 @@ namespace TrebleSketch_AIE_Platformer
                 foreach (BuildTheRocket ScrapMetal in ScrapMetals)
                 {
                     ScrapMetal.Draw(gameTime, spriteBatch, MiniGame_BuildTheRocket.ScrapMetal);
-                    Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.ToString(), false);
+                    // Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.ToString(), false);
                 }
             }
         }

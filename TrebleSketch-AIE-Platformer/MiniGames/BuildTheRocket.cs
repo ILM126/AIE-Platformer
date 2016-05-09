@@ -8,6 +8,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     class BuildTheRocket
     {
         public SquareCollision BoxCollision;
+        public DevLogging Debug;
 
         public Texture2D ScrapMetal;
         public Vector2 CentreScreen;
@@ -24,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public float Scale;
 
-        public bool IsGrounded { get; private set; }
+        public bool IsGrounded;
 
         public void Initialize()
         {
@@ -57,11 +58,16 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 }
             }
 
-            if (!IsGrounded) m_velocity.Y += Gravity * time;
+            if (!IsGrounded)
+            {
+                m_velocity.Y += Gravity * time;
+                //Debug.WriteToFile("Scrap Metal Gravity: " + Gravity.ToString(), true);
+                //Debug.WriteToFile("IsGrounded is false and gravity is supposed to be working!", true);
+            }
             else m_velocity.Y = 0;
             m_position.Y += m_velocity.Y * time;
             m_position.X += m_velocity.X;
-
+            //Debug.WriteToFile("Is Grounded: " + IsGrounded.ToString(), false);
             UpdateBounds();
         }
 
@@ -92,9 +98,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             Texture2D tex = texture; //Try to use the parameter texture
             if (tex == null) tex = m_texture; //If none was set try to use the base m_texture
             if (tex == null) /*Console.WriteLine("[ERROR] Texture Null");*/ return; //if the base m_texture is null then don't crash trying to draw nothing
+
             spriteBatch.Draw(tex
-            , new Vector2(m_position.X
-                , m_position.Y)
+            , m_position
             , null
             , Color.White
             , 0
@@ -122,6 +128,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             GroundHeight = groundHeight;
             m_position.Y = groundHeight;
             UpdateBounds();
+            Debug.WriteToFile("Ground Height in BTR: " + GroundHeight.ToString(), false);
         }
 
         public bool CollisionCheck(SceneObjects other)

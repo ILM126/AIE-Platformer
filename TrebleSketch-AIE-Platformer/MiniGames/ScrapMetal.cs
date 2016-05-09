@@ -9,9 +9,10 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     {
         public SquareCollision BoxCollision;
         public DevLogging Debug;
+        public Game1 RealGame;
 
         public Texture2D tex_ScrapMetal;
-        public Vector2 CentreScreen;
+        //public Vector2 CentreScreen;
 
         public float Gravity;
         public float GroundHeight;
@@ -22,6 +23,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public Vector2 m_position;
         public Vector2 m_origin;
         public float m_scale;
+        public float m_gravity;
 
         public float Scale;
 
@@ -33,7 +35,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             // SceneID = 5;
         }
 
-        public ScrapMetal(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
+        public ScrapMetal(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f, float gravity = 500f)
         {
             m_texture = texture;
             m_position = position;
@@ -42,7 +44,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 (int)m_size.X / 2,
                 (int)m_size.Y / 2);
             m_scale = scale;
+            m_gravity = gravity;
             UpdateBounds();
+            //BTR_ScrapMetal.CentreScreen = CentreScreen;
+            Scale = RealGame.Scale;
+            Gravity = RealGame.Gravity;
         }
 
         public void Update(GameTime gameTime)
@@ -66,6 +72,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
             else m_velocity.Y = 0;
             m_position.Y += m_velocity.Y * time;
+            Debug.WriteToFile("Position Y: " + m_position.Y, false);
             m_position.X += m_velocity.X;
             //Debug.WriteToFile("Is Grounded: " + IsGrounded.ToString(), false);
             UpdateBounds();

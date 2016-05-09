@@ -127,7 +127,6 @@ namespace TrebleSketch_AIE_Platformer
             foreach(RocketPart part in parts)
             {
                 part.Draw(spriteBatch);
-
             }
         }
 

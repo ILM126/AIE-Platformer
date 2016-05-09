@@ -49,6 +49,7 @@
     <Compile Include="InputHandler.cs" />
     <Compile Include="MenuObjects.cs" />
     <Compile Include="MiniGames\BuildTheRocket.cs" />
+    <Compile Include="MiniGames\ScrapMetal.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\StoryMode.cs" />
     <Compile Include="Rocket\RocketPart.cs" />

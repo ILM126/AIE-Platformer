@@ -54,6 +54,7 @@ namespace TrebleSketch_AIE_Platformer
     /// </summary>
     public class Game1 : Game
     {
+        #region Begin
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -76,6 +77,7 @@ namespace TrebleSketch_AIE_Platformer
 
         // MiniGames
         BuildTheRocket MiniGame_BuildTheRocket;
+        ScrapMetal BTR_ScrapMetal;
 
         Texture2D[] rocketParts = new Texture2D[4];
 
@@ -84,6 +86,8 @@ namespace TrebleSketch_AIE_Platformer
         public float Gravity;
         public float GroundHeight;
         string GameVersionBuild;
+
+        #endregion
 
         public Game1()
         {
@@ -119,6 +123,8 @@ namespace TrebleSketch_AIE_Platformer
             MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
 
+            #region Scene
+
             Scale = 1f;
             Gravity = 500f;
             GroundHeight = 0f;
@@ -126,7 +132,8 @@ namespace TrebleSketch_AIE_Platformer
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
             SceneLoad = new LoadScene();
-            MiniGame_BuildTheRocket = new BuildTheRocket(); // MiniGames
+            MiniGame_BuildTheRocket = new BuildTheRocket(); // MiniGame - Build The Rocket
+            BTR_ScrapMetal = new ScrapMetal(); // Scrap Metal for "Build The Rocket" Minigame
             // SceneObject.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             // SceneLoad.Button = Button;
             SceneLoad.Debug = Debug;
@@ -134,13 +141,21 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
-            MiniGame_BuildTheRocket.Debug = Debug;
-            MiniGame_BuildTheRocket.CentreScreen = CentreScreen;
-            MiniGame_BuildTheRocket.Scale = Scale;
-            MiniGame_BuildTheRocket.Gravity = Gravity;
-            MiniGame_BuildTheRocket.GroundHeight = GroundHeight;
+            SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
+            SceneLoad.scrapMetalCount = MiniGame_BuildTheRocket.scrapMetalCount;
+            BTR_ScrapMetal.Debug = Debug;
+            BTR_ScrapMetal.CentreScreen = CentreScreen;
+            BTR_ScrapMetal.Scale = Scale;
+            BTR_ScrapMetal.Gravity = Gravity;
+            BTR_ScrapMetal.GroundHeight = GroundHeight;
+            BTR_ScrapMetal.BoxCollision = 
             SceneLoad.InitialiseScene();
-            MiniGame_BuildTheRocket.Initialize();
+            MiniGame_BuildTheRocket.Initialise();
+            BTR_ScrapMetal.Initialize();
+
+            #endregion
+
+            #region Player/Enemy/Rocket
 
             Player = new PlayerClass();
             Player.Debug = Debug;
@@ -164,6 +179,8 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.GroundHeight = GroundHeight;
             RocketParts.m_scale = Scale;
             Rocket.InitialiseRocket();
+
+            #endregion
 
             World = new WorldClass();
 
@@ -219,7 +236,7 @@ namespace TrebleSketch_AIE_Platformer
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
 
                 // 05 - Mini Game: Build the Rocket
-                MiniGame_BuildTheRocket.ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
+                BTR_ScrapMetal.tex_ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
                 
             // AudioClass - Loads the Sounds and Sound Effects
                 // Rocket
@@ -306,7 +323,7 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.CheckCollisions(Player);
             SceneLoad.CheckCollisions(Rocket);
-            SceneLoad.CheckCollisions(MiniGame_BuildTheRocket);
+            SceneLoad.CheckCollisions(BTR_ScrapMetal);
             // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
             if (SceneLoad.PlayerInScene)
@@ -323,8 +340,8 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneLoad.MiniGame)
             {
-                MiniGame_BuildTheRocket.Update(gameTime);
-                MiniGame_BuildTheRocket.IsGrounded = false;
+                BTR_ScrapMetal.Update(gameTime);
+                BTR_ScrapMetal.IsGrounded = false;
                 //Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
             }
 
@@ -341,12 +358,12 @@ namespace TrebleSketch_AIE_Platformer
             // spriteBatch.DrawString(Debug.InformationFont, "Game Build: " + GameVersionBuild, new Vector2(CentreScreen.X, 50), Color.Black);
         }
 
-        void DrawRectangle(Rectangle coords, Color color)
-        {
-            var rect = new Texture2D(GraphicsDevice, 1, 1);
-            rect.SetData(new[] { color });
-            spriteBatch.Draw(rect, coords, color);
-        }
+        //void DrawRectangle(Rectangle coords, Color color)
+        //{
+        //    var rect = new Texture2D(GraphicsDevice, 1, 1);
+        //    rect.SetData(new[] { color });
+        //    spriteBatch.Draw(rect, coords, color);
+        //}
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -380,12 +397,17 @@ namespace TrebleSketch_AIE_Platformer
                 Rocket.Draw(spriteBatch);
 
                 Rectangle tempRect = new Rectangle((int)Rocket.Position.X - 5, (int)Rocket.Position.Y - 5, 10, 10);
-                DrawRectangle(tempRect, Color.White);
+                //DrawRectangle(tempRect, Color.White);
             }
             //else if (!RocketInScene)
             //{
             //    Debug.WriteToFile("Rocket is not being drawn on screen");
             //}
+
+            if (SceneLoad.MiniGame)
+            {
+                
+            }
 
             // Debug.WriteToFile("Drawing Audio Name");
             Audio.CurrentSong(spriteBatch);

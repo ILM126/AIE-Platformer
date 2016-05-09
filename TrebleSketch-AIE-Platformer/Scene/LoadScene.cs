@@ -12,9 +12,10 @@ namespace TrebleSketch_AIE_Platformer
         public InputHandler UserInput;
         public DevLogging Debug;
         public BuildTheRocket MiniGame_BuildTheRocket;
+        public ScrapMetal BTR_ScrapMetal;
 
         public List<SceneObjects> GroundTiles;
-        public List<BuildTheRocket> ScrapMetals;
+        public List<ScrapMetal> ScrapMetals;
 
         public Rectangle Button;
         public Rectangle CursonRect;
@@ -54,10 +55,12 @@ namespace TrebleSketch_AIE_Platformer
         // public Texture2D InsideMetalFloor;
         // public Texture2D InsideConcreteFloor;
 
+        public int scrapMetalCount;
+
         public void InitialiseScene()
         {
             GroundTiles = new List<SceneObjects>();
-            ScrapMetals = new List<BuildTheRocket>();
+            ScrapMetals = new List<ScrapMetal>();
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
@@ -68,12 +71,6 @@ namespace TrebleSketch_AIE_Platformer
                     100,
                     40);
             RunOnceTest = true;
-            BuildTheRocket ScrapMetal = new BuildTheRocket(
-                        MiniGame_BuildTheRocket.ScrapMetal,
-                        CentreScreen,
-                        new Vector2(50, 30),
-                        Scale);
-            ScrapMetals.Add(ScrapMetal);
             //RunOnceTest = false;
             // Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
         }
@@ -213,6 +210,9 @@ namespace TrebleSketch_AIE_Platformer
                         , false);
                         GroundTiles.Add(GroundTile);
                     }
+                    //for (int i = 0; i < scrapMetalCount; i++)
+                    //{
+                    //}
                     PlayerInScene = true;
                     RocketInScene = true;
                     MiniGame = true;
@@ -230,6 +230,15 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneID = 1;
                 Debug.WriteToFile("Loaded " + SceneName, true);
+            }
+            if (InputHandler.IsKeyDownOnce(Keys.P))
+            {
+                ScrapMetal scrapMetal = new ScrapMetal(
+                        BTR_ScrapMetal.tex_ScrapMetal,
+                        new Vector2(100, 100),
+                        new Vector2(50, 30),
+                        Scale);
+                ScrapMetals.Add(scrapMetal);
             }
         }
 
@@ -283,10 +292,10 @@ namespace TrebleSketch_AIE_Platformer
             }
             if (SceneID == 5) // Mini Game: Build the Rocket
             {
-                foreach (BuildTheRocket ScrapMetal in ScrapMetals)
+                foreach (ScrapMetal scrapMetal in ScrapMetals)
                 {
-                    ScrapMetal.Draw(gameTime, spriteBatch, MiniGame_BuildTheRocket.ScrapMetal);
-                    // Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.ToString(), false);
+                    BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
+                    Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.ToString(), false);
                 }
             }
         }
@@ -315,12 +324,12 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
-        public void CheckCollisions(BuildTheRocket miniGame_BuildTheRocket)
+        public void CheckCollisions(ScrapMetal BTR_ScrapMetal)
         {
             // Check collision with ground tiles
             foreach (SceneObjects groundTile in GroundTiles)
             {
-                if (miniGame_BuildTheRocket.CheckCollisionsGround(groundTile))
+                if (BTR_ScrapMetal.CheckCollisionsGround(groundTile))
                 {
                     // Debug.WriteToFile("Rocket is touching the terrain", false);
                 }

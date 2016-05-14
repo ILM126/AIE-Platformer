@@ -46,11 +46,10 @@ namespace TrebleSketch_AIE_Platformer
     /// <summary>
     /// BUGS / UPCOMING FEATURES:
     /// - Incomplete Game
-    /// - (UI) Make cursor able to click buttons!
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts
-    /// - (Scene) Map loads via mouse clicks, also to make it toggleable
     /// - (Enemy) Make Enemy textures
     /// - (Enemy) Get enemy AI working
+    /// - (Mini Game - Build the Rocket) Scrap Metal is broken, problem might be spawning without a list... Darn..
     /// </summary>
     public class Game1 : Game
     {
@@ -185,6 +184,14 @@ namespace TrebleSketch_AIE_Platformer
 
             Debug.WriteToFile("Finished Initializing Game", true);
 
+            Debug.WriteToFile("Started checking for Scrap Metal Info", false);
+
+            Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
+            Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+            Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+
+            Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
+
             base.Initialize();
         }
 
@@ -303,6 +310,24 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.SceneLoader(spriteBatch);
 
+            if (SceneLoad.ScrapMetals.Count > 0)
+            {
+                SceneLoad.MiniGame = true;
+                Debug.WriteToFile("Started checking for Scrap Metal Info", false);
+
+                Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.Y, false);
+
+                Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
+                Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+                Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+
+                Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
+            }
+            else
+            {
+                SceneLoad.MiniGame = false;
+            }
+
             if (SceneLoad.RocketInScene)
             {
                 Rocket.Update(gameTime);
@@ -334,9 +359,20 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneLoad.MiniGame)
             {
-                BTR_ScrapMetal.Update(gameTime);
-                BTR_ScrapMetal.IsGrounded = false;
+                foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
+                {
+                    BTR_ScrapMetal.IsGrounded = false;
+                    BTR_ScrapMetal.Update(gameTime);
+                }
+
                 //Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
+                Debug.WriteToFile("Started checking for Scrap Metal Info", false);
+
+                Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
+                Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+                Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+
+                Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
             }
 
             // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());

@@ -213,9 +213,17 @@ namespace TrebleSketch_AIE_Platformer
                     //for (int i = 0; i < scrapMetalCount; i++)
                     //{
                     //}
+                    if (InputHandler.IsKeyDownOnce(Keys.Z))
+                    {
+                        ScrapMetal scrapMetal = new ScrapMetal(
+                                BTR_ScrapMetal.tex_ScrapMetal,
+                                new Vector2(300, 50),
+                                new Vector2(50, 30),
+                                1f);
+                        ScrapMetals.Add(scrapMetal);
+                    }
                     PlayerInScene = true;
                     RocketInScene = true;
-                    MiniGame = true;
                     break;
                 default:
                     SceneName = "Test Map";
@@ -230,16 +238,6 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneID = 1;
                 Debug.WriteToFile("Loaded " + SceneName, true);
-            }
-            if (InputHandler.IsKeyDownOnce(Keys.Z))
-            {
-                ScrapMetal scrapMetal = new ScrapMetal(
-                        BTR_ScrapMetal.tex_ScrapMetal,
-                        new Vector2(300, 50),
-                        new Vector2(50, 30),
-                        Scale,
-                        500f);
-                ScrapMetals.Add(scrapMetal);
             }
             if (ScrapMetals.Count > 0)
             {
@@ -298,14 +296,10 @@ namespace TrebleSketch_AIE_Platformer
             }
             if (SceneID == 5) // Mini Game: Build the Rocket
             {
-                //foreach (ScrapMetal scrapMetal in ScrapMetals)
-                //{
-                //    BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
-                //}
-            }
-            foreach (ScrapMetal scrapMetal in ScrapMetals)
-            {
-                BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
+                foreach (ScrapMetal scrapMetal in ScrapMetals)
+                {
+                    BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
+                }
             }
         }
 

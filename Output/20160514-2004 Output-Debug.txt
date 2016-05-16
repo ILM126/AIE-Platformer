@@ -1,0 +1,669 @@
+﻿'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.HostingProcess.Utilities\14.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.HostingProcess.Utilities.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.HostingProcess.Utilities.Sync\14.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.HostingProcess.Utilities.Sync.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.Debugger.Runtime\14.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Debugger.Runtime.dll'. 
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\TrebleSketch-AIE-Platformer.vshost.exe'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll'. Cannot find or open the PDB file.
+The thread 0x3f34 has exited with code 0 (0x0).
+The thread 0x16e4 has exited with code 0 (0x0).
+The thread 0x3e38 has exited with code 0 (0x0).
+The thread 0x500 has exited with code 0 (0x0).
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\TrebleSketch-AIE-Platformer.exe'. Symbols loaded.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\MonoGame.Framework.dll'. Module was built without symbols.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.RawInput.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll'. Cannot find or open the PDB file.
+[INFO] Starting Space Program Simulator 2016 v0.0.12.170 (09/05/16)
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.Direct3D11.dll'. Cannot find or open the PDB file.
+[INFO] Started Initializing Game
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.DXGI.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll'. Cannot find or open the PDB file.
+[INFO] LOL WAT MATE!
+[DEBUG] ScrapMetal position: {X:0 Y:0}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 0
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\MonoGame.Extended.dll'. Cannot find or open the PDB file.
+[INFO] Finished Initializing Game
+[INFO] Started Loading Game Textures
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.MediaFoundation.dll'. Cannot find or open the PDB file.
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.XInput.dll'. Cannot find or open the PDB file.
+[INFO] Finished Loading Game Textures
+[DEBUG] ScrapMetal position: {X:300 Y:50}
+[DEBUG] ScrapMetal size: {X:50 Y:30}
+[DEBUG] ScrapMetal scale: 0
+[DEBUG] ScrapMetal position: {X:0 Y:0.001388894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.004166683}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.008333365}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.01388894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.02083341}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.02916678}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.03888904}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.05000019}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.06250025}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.07638919}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.09166703}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.1083338}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.1263894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.1458339}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.1666673}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.1888896}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.2125008}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.2375009}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.2638899}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.2916678}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.3208346}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.3513903}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.3833348}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.4166683}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.4513907}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.4875019}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.5250021}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.5638911}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.6041691}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.6458359}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.6888916}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.7333362}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.7791697}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.8263921}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.8750034}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.9250036}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:0.9763927}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.029171}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.083338}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.138893}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.195838}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.254171}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.313894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.375005}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.437505}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.501395}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.566673}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.63334}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.701396}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.77084}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.841674}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.913896}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:1.987508}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.062508}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.138897}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.216675}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.295842}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.376398}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.458343}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.541676}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.626399}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.71251}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.800011}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.8889}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:2.979178}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.070845}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.163901}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.258346}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.354179}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.451402}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.550014}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.650014}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.751403}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.854181}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:3.958348}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.063904}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.170849}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.279183}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.388906}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.500017}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.612518}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.726407}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.841685}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:4.958353}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.076408}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.195853}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.316687}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.43891}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.562521}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.687522}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.813911}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:5.941689}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.070857}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.201413}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.333358}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.466691}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.601414}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.737526}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:6.875027}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.013916}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.154194}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.295862}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.438918}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.583363}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.729197}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:7.87642}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.025032}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.175033}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.326422}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.4792}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.633368}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.788924}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:8.945869}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.104203}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.263927}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.425038}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.587539}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.751429}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:9.916707}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.08337}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.25143}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.42088}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.59171}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.76393}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:10.93755}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:11.11255}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:11.28894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:11.46671}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:11.64588}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:11.82644}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.00838}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.19172}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.37644}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.56255}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.75006}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:12.93894}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:13.12922}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:13.32089}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:13.51395}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:13.70839}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:13.90423}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:14.10145}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:14.30006}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:14.50006}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:14.70146}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:14.90423}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:15.1084}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:15.31396}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:15.5209}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:15.72924}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:15.93896}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:16.15008}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:16.36258}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:16.57647}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:16.79175}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:17.00841}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:17.22647}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:17.44592}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:17.66675}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:17.88898}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:18.11259}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:18.33759}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:18.56398}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:18.79176}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:19.02093}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:19.25148}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:19.48343}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:19.71676}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:19.95149}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:20.1876}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:20.4251}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:20.66399}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:20.90427}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:21.14594}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:21.389}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:21.63344}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:21.87928}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:22.1265}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:22.37511}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:22.62512}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[INFO] Ending Game...
+[DEBUG] ScrapMetal position: {X:0 Y:22.87651}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:23.12929}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:23.38345}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:23.63901}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:23.89596}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:24.15429}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:24.41402}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:24.67513}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:24.93763}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:25.20152}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:25.4668}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:25.73347}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:26.00153}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:26.27097}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:26.54181}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:26.81403}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:27.08765}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:27.36265}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:27.63904}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:27.91682}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:28.19599}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:28.47655}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:28.75849}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:29.04183}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:29.32655}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:29.61266}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:29.90017}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:30.18906}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+[DEBUG] ScrapMetal position: {X:0 Y:30.47934}
+[DEBUG] ScrapMetal size: {X:0 Y:0}
+[DEBUG] ScrapMetal scale: 1
+'TrebleSketch-AIE-Platformer.vshost.exe' (CLR v4.0.30319: TrebleSketch-AIE-Platformer.vshost.exe): Loaded 'C:\Users\TrebleSketch\Documents\Visual Studio 2015\Projects\TrebleSketch-AIE-Platformer\TrebleSketch-AIE-Platformer\bin\Windows\Debug\SharpDX.XAudio2.dll'. Cannot find or open the PDB file.
+The thread 0x36d0 has exited with code 0 (0x0).
+The thread 0x548 has exited with code 0 (0x0).
+The thread 0x3e34 has exited with code 0 (0x0).
+The program '[15028] TrebleSketch-AIE-Platformer.vshost.exe' has exited with code 0 (0x0).

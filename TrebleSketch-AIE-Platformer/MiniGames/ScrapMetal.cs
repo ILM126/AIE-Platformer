@@ -33,7 +33,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             // SceneID = 5;
             Gravity = 5f;
             Scale = 1f;
-            Debug.WriteLine("[DEBUG] ScrapMetal Scale: " + Scale.ToString());
         }
 
         public ScrapMetal(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
@@ -130,9 +129,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             /// Note: this should be called whenever the object position,
             /// size, or scale are changed
             BoxCollision = new SquareCollision(m_position, m_size * Scale);
-            Debug.WriteLine("[DEBUG] ScrapMetal position: " + m_position.ToString());
-            Debug.WriteLine("[DEBUG] ScrapMetal size: " + m_size.ToString());
-            Debug.WriteLine("[DEBUG] ScrapMetal scale: " + Scale.ToString());
+            //Debug.WriteLine("[DEBUG] ScrapMetal position: " + m_position.ToString());
+            //Debug.WriteLine("[DEBUG] ScrapMetal size: " + m_size.ToString());
+            //Debug.WriteLine("[DEBUG] ScrapMetal scale: " + Scale.ToString());
         }
         protected bool SquareCollisionCheck(SceneObjects pOther)
         {

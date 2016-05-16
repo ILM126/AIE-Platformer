@@ -145,6 +145,9 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.InitialiseScene();
             MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
+            Debug.WriteToFile("ScrapMetal Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+            Debug.WriteToFile("ScrapMetal Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+            Debug.WriteToFile("ScrapMetal Position: " + BTR_ScrapMetal.m_position.ToString(), false);
 
             #endregion
 
@@ -175,6 +178,7 @@ namespace TrebleSketch_AIE_Platformer
 
             #endregion
 
+            #region World/Audio/Debugs
             World = new WorldClass();
 
             Audio = new AudioClass();
@@ -191,6 +195,7 @@ namespace TrebleSketch_AIE_Platformer
             Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
 
             Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
+            #endregion
 
             base.Initialize();
         }
@@ -296,6 +301,7 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Ending Game...", true);
                 Exit();
             }
+
             // Check collision with player
             //if (Player.CheckCollisionsGround(Rocket))
             //{
@@ -313,21 +319,22 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.ScrapMetals.Count > 0)
             {
                 SceneLoad.MiniGame = true;
-                Debug.WriteToFile("Started checking for Scrap Metal Info", false);
+                //Debug.WriteToFile("Started checking for Scrap Metal Info", false);
 
-                Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.Y, false);
+                //Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.Y, false);
 
-                Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
-                Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-                Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+                //Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
+                //Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+                //Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
 
-                Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
+                //Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
             }
             else
             {
                 SceneLoad.MiniGame = false;
             }
 
+            #region Rocket/Player/MiniGames
             if (SceneLoad.RocketInScene)
             {
                 Rocket.Update(gameTime);
@@ -363,17 +370,26 @@ namespace TrebleSketch_AIE_Platformer
                 {
                     BTR_ScrapMetal.IsGrounded = false;
                     BTR_ScrapMetal.Update(gameTime);
+                    Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.ToString(), false);
+                    Debug.WriteToFile("Scale via list: " + SceneLoad.ScrapMetals[0].Scale, false);
+                    Debug.WriteToFile("Size via list: " + SceneLoad.ScrapMetals[0].m_size.ToString(), false);
+                }
+
+                if (BTR_ScrapMetal.m_position.Y == 50)
+                {
+                    Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
                 }
 
                 //Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
-                Debug.WriteToFile("Started checking for Scrap Metal Info", false);
+                //Debug.WriteToFile("Started checking for Scrap Metal Info", false);
 
-                Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
-                Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-                Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
+                //Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
+                //Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
+                //Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
 
-                Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
+                //Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
             }
+            #endregion
 
             // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
 

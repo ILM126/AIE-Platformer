@@ -222,6 +222,10 @@ namespace TrebleSketch_AIE_Platformer
                                 1f);
                         ScrapMetals.Add(scrapMetal);
                     }
+                    if (BTR_ScrapMetal.m_position.Y == 50)
+                    {
+                        Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
+                    }
                     PlayerInScene = true;
                     RocketInScene = true;
                     break;
@@ -241,8 +245,8 @@ namespace TrebleSketch_AIE_Platformer
             }
             if (ScrapMetals.Count > 0)
             {
-                Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.Y, false);
-                Debug.WriteToFile("Scrap Metal count: " + ScrapMetals.Count, false);
+                //Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.Y, false);
+                //Debug.WriteToFile("Scrap Metal count: " + ScrapMetals.Count, false);
             }
         }
 

@@ -85,6 +85,7 @@ namespace TrebleSketch_AIE_Platformer
             switch(SceneID)
             {
                 case 0:
+                    #region Test Map
                     GroundTiles.Clear();
                     SceneName = "Test Map";
                     Scene_Width = 1280;
@@ -103,6 +104,7 @@ namespace TrebleSketch_AIE_Platformer
                     PlayerInScene = true;
                     RocketInScene = true;
                     MiniGame = false;
+                    #endregion
                     break;
                 case 1:
                     GroundTiles.Clear();
@@ -140,94 +142,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Front Lawns";
                     break;
                 case 5:
-                    GroundTiles.Clear();
-                    SceneName = "Mini Game: Build the Rocket";
-                    Scene_Width = 1280;
-                    Scene_Height = 720;
-                    for (int i = 0; i < CentreScreen.X / 25; i++) // Ground at the bottom
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2(5 + i * 50
-                            , CentreScreen.Y * 2 - 25)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, right
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2((CentreScreen.X * 2f) - (i / 3) * 50
-                            , CentreScreen.Y * 1.45f)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, left
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2(5 + (i / 3) * 50
-                            , CentreScreen.Y * 1.45f)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, right
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2((CentreScreen.X * 2f) - (i / 2) * 50
-                            , CentreScreen.Y - 5)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, left
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2(5 + (i / 2) * 50
-                            , CentreScreen.Y - 5)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    for (int i = 0; i < CentreScreen.X / 50; i++) // top floor, middle
-                    {
-                        SceneObjects GroundTile = new SceneObjects(
-                        OutsideGrass
-                        , new Vector2((CentreScreen.X / 4 * 3) + 15 + (i / 2) * 50
-                            , CentreScreen.Y - 125)
-                        , new Vector2(Tile_Size, Tile_Size)
-                        , Scale
-                        , false);
-                        GroundTiles.Add(GroundTile);
-                    }
-                    //for (int i = 0; i < scrapMetalCount; i++)
-                    //{
-                    //}
-                    if (InputHandler.IsKeyDownOnce(Keys.Z))
-                    {
-                        ScrapMetal scrapMetal = new ScrapMetal(
-                                BTR_ScrapMetal.tex_ScrapMetal,
-                                new Vector2(300, 50),
-                                new Vector2(50, 30),
-                                1f);
-                        ScrapMetals.Add(scrapMetal);
-                    }
-                    if (BTR_ScrapMetal.m_position.Y == 50)
-                    {
-                        Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
-                    }
-                    PlayerInScene = true;
-                    RocketInScene = true;
+                    MiniGame_BTR();
                     break;
                 default:
                     SceneName = "Test Map";
@@ -305,6 +220,98 @@ namespace TrebleSketch_AIE_Platformer
                     BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
                 }
             }
+        }
+
+        public void MiniGame_BTR()
+        {
+            GroundTiles.Clear();
+            SceneName = "Mini Game: Build the Rocket";
+            Scene_Width = 1280;
+            Scene_Height = 720;
+            for (int i = 0; i < CentreScreen.X / 25; i++) // Ground at the bottom
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2(5 + i * 50
+                    , CentreScreen.Y * 2 - 25)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, right
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2((CentreScreen.X * 2f) - (i / 3) * 50
+                    , CentreScreen.Y * 1.45f)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            for (int i = 0; i < CentreScreen.X / 50; i++) // 1st floor, left
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2(5 + (i / 3) * 50
+                    , CentreScreen.Y * 1.45f)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, right
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2((CentreScreen.X * 2f) - (i / 2) * 50
+                    , CentreScreen.Y - 5)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            for (int i = 0; i < CentreScreen.X / 50; i++) // 2nd floor, left
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2(5 + (i / 2) * 50
+                    , CentreScreen.Y - 5)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            for (int i = 0; i < CentreScreen.X / 50; i++) // top floor, middle
+            {
+                SceneObjects GroundTile = new SceneObjects(
+                OutsideGrass
+                , new Vector2((CentreScreen.X / 4 * 3) + 15 + (i / 2) * 50
+                    , CentreScreen.Y - 125)
+                , new Vector2(Tile_Size, Tile_Size)
+                , Scale
+                , false);
+                GroundTiles.Add(GroundTile);
+            }
+            //for (int i = 0; i < scrapMetalCount; i++)
+            //{
+            //}
+            if (InputHandler.IsKeyDownOnce(Keys.Z))
+            {
+                ScrapMetal scrapMetal = new ScrapMetal(
+                        BTR_ScrapMetal.tex_ScrapMetal,
+                        new Vector2(300, 50),
+                        new Vector2(50, 30),
+                        1f);
+                ScrapMetals.Add(scrapMetal);
+            }
+            if (BTR_ScrapMetal.m_position.Y == 50)
+            {
+                Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
+            }
+            PlayerInScene = true;
+            RocketInScene = true;
         }
 
         public void CheckCollisions(PlayerClass player)

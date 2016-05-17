@@ -10,9 +10,12 @@ namespace TrebleSketch_AIE_Platformer
         public BitmapFont DebugFont;
         public BitmapFont InformationFont;
 
+        public bool SwitchOnce;
+
         public void ShowDebug()
         {
             Debug.WriteLine("[INFO] LOL WAT MATE!");
+            SwitchOnce = false;
         }
 
         public string GetCurrentDirectory()

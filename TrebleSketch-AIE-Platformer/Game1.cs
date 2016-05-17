@@ -142,9 +142,11 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
             SceneLoad.scrapMetalCount = MiniGame_BuildTheRocket.scrapMetalCount;
+            BTR_ScrapMetal.SceneLoad = SceneLoad;
             SceneLoad.InitialiseScene();
             MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
+
             Debug.WriteToFile("ScrapMetal Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
             Debug.WriteToFile("ScrapMetal Size: " + BTR_ScrapMetal.m_size.ToString(), false);
             Debug.WriteToFile("ScrapMetal Position: " + BTR_ScrapMetal.m_position.ToString(), false);
@@ -319,6 +321,13 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.ScrapMetals.Count > 0)
             {
                 SceneLoad.MiniGame = true;
+                //if (!Debug.SwitchOnce)
+                //{
+                //    int numScrapMetals;
+                //    numScrapMetals = SceneLoad.ScrapMetals.Count;
+                //    SceneLoad.ScrapMetals[numScrapMetals].m_position = new Vector2(300, 50);
+                //    Debug.SwitchOnce = true;
+                //}
                 //Debug.WriteToFile("Started checking for Scrap Metal Info", false);
 
                 //Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.Y, false);

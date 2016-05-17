@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
@@ -9,6 +10,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     class ScrapMetal
     {
         public SquareCollision BoxCollision;
+        public LoadScene SceneLoad;
         //public DevLogging Debug;
         //public Game1 RealGame;
 
@@ -90,12 +92,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)
         {
-            Rectangle srcRect = new Rectangle(
-                                                0,
-                                                0,
-                                                (int)(m_size.X),
-                                                (int)(m_size.Y));
-
             //spriteBatch.Draw(
             //            ScrapMetal,
             //            CentreScreen,
@@ -111,17 +107,22 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             if (tex == null) tex = m_texture; //If none was set try to use the base m_texture
             if (tex == null) /*Console.WriteLine("[ERROR] Texture Null");*/ return; //if the base m_texture is null then don't crash trying to draw nothing
             float scale = Scale;
+                Rectangle srcRect = new Rectangle(
+                                                0,
+                                                0,
+                                                (int)(m_size.X),
+                                                (int)(m_size.Y));
 
-            spriteBatch.Draw(tex
-            , m_position
-            , null
-            , Color.White
-            , 0
-            , new Vector2(tex.Width / 2
-                , tex.Height / 2)
-            , new Vector2(scale)
-            , SpriteEffects.None
-            , 0);
+                spriteBatch.Draw(tex
+                    , m_position
+                    , null
+                    , Color.White
+                    , 0
+                    , new Vector2(tex.Width / 2
+                        , tex.Height / 2)
+                    , new Vector2(scale)
+                    , SpriteEffects.None
+                    , 0);
         }
 
         protected virtual void UpdateBounds()

@@ -217,7 +217,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 foreach (ScrapMetal scrapMetal in ScrapMetals)
                 {
-                    BTR_ScrapMetal.Draw(gameTime, spriteBatch, BTR_ScrapMetal.tex_ScrapMetal);
+                    scrapMetal.Draw(gameTime, spriteBatch, scrapMetal.tex_ScrapMetal);
                 }
             }
         }
@@ -294,21 +294,14 @@ namespace TrebleSketch_AIE_Platformer
                 , false);
                 GroundTiles.Add(GroundTile);
             }
-            //for (int i = 0; i < scrapMetalCount; i++)
-            //{
-            //}
             if (InputHandler.IsKeyDownOnce(Keys.Z))
             {
                 ScrapMetal scrapMetal = new ScrapMetal(
                         BTR_ScrapMetal.tex_ScrapMetal,
-                        new Vector2(300, 50),
+                        new Vector2(GroundTiles[1].scene_Position.X, GroundTiles[1].scene_Position.Y - 50),
                         new Vector2(50, 30),
                         1f);
                 ScrapMetals.Add(scrapMetal);
-            }
-            if (BTR_ScrapMetal.m_position.Y == 50)
-            {
-                Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
             }
             PlayerInScene = true;
             RocketInScene = true;
@@ -338,14 +331,17 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
-        public void CheckCollisions(ScrapMetal BTR_ScrapMetal)
+        public void CheckCollisions(ScrapMetal BTR_ScrapRocket)
         {
             // Check collision with ground tiles
             foreach (SceneObjects groundTile in GroundTiles)
             {
-                if (BTR_ScrapMetal.CheckCollisionsGround(groundTile))
+                foreach (ScrapMetal scrapMetal in ScrapMetals)
                 {
-                    // Debug.WriteToFile("Rocket is touching the terrain", false);
+                    if (scrapMetal.CheckCollisionsGround(groundTile))
+                    {
+                        // Debug.WriteToFile("Rocket is touching the terrain", false);
+                    }
                 }
             }
         }

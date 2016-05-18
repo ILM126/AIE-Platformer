@@ -33,7 +33,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void Initialize()
         {
             // SceneID = 5;
-            Gravity = 5f;
+            Gravity = 20f;
             Scale = 1f;
         }
 
@@ -47,6 +47,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 (int)m_size.Y / 2);
             Scale = scale;
             UpdateBounds();
+            Initialize();
             //BTR_ScrapMetal.CentreScreen = CentreScreen;
             // Scale = RealGame.Scale;
             // Gravity = RealGame.Gravity;
@@ -146,8 +147,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             m_position.Y = groundHeight;
             UpdateBounds();
             // Debug.WriteToFile("Ground Height in BTR: " + GroundHeight.ToString(), false);
-            Debug.WriteLine("[INFO] ScrapMetal is Gounded...");
-
+            // Debug.WriteLine("[INFO] ScrapMetal is Gounded...");
         }
 
         public bool CollisionCheck(SceneObjects other)
@@ -155,7 +155,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             bool scrapMetalCollision = SquareCollisionCheck(other);
             if (scrapMetalCollision)
             {
-                Debug.WriteLine("[DEBUG] ScrapMetal Collisions triggered!");
+                // Debug.WriteLine("[DEBUG] ScrapMetal Collisions triggered!");
                 return true;
             }
             return false;
@@ -169,10 +169,10 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 /// if player position is above top of ground and player is falling
                 if (m_position.Y < other.BoxCollision.min.Y && m_velocity.Y > 0)
                 {
-                    Debug.WriteLine("[DEBUG] ScrapMetal SetGrounded Triggered");
+                    // Debug.WriteLine("[DEBUG] ScrapMetal SetGrounded Triggered");
                     SetGrounded(other.BoxCollision.min.Y - m_origin.Y * Scale);
                 }
-                Debug.WriteLine("[DEBUG] ScrapMetal CheckCollisionGround Triggered");
+                // Debug.WriteLine("[DEBUG] ScrapMetal CheckCollisionGround Triggered");
                 return true;
             }
             return false;

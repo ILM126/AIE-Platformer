@@ -377,8 +377,8 @@ namespace TrebleSketch_AIE_Platformer
             {
                 foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
                 {
-                    BTR_ScrapMetal.IsGrounded = false;
-                    BTR_ScrapMetal.Update(gameTime);
+                    scrapMetal.IsGrounded = false;
+                    scrapMetal.Update(gameTime);
                     Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.ToString(), false);
                     Debug.WriteToFile("Scale via list: " + SceneLoad.ScrapMetals[0].Scale, false);
                     Debug.WriteToFile("Size via list: " + SceneLoad.ScrapMetals[0].m_size.ToString(), false);
@@ -436,16 +436,6 @@ namespace TrebleSketch_AIE_Platformer
             // Debug.WriteToFile("Drawing Scene Textures");
             SceneLoad.Draw(gameTime, spriteBatch);
 
-            // Debug.WriteToFile("Drawing Player Textures");
-            if (SceneLoad.PlayerInScene)
-            {
-                Player.Draw(spriteBatch, graphics);
-            }
-            //else if (!PlayerInScene)
-            //{
-            //    Debug.WriteToFile("Player is not being drawn on screen");
-            //}
-
             // Debug.WriteToFile("Drawing Rocket Textures");
             if (SceneLoad.RocketInScene)
             {
@@ -457,6 +447,16 @@ namespace TrebleSketch_AIE_Platformer
             //else if (!RocketInScene)
             //{
             //    Debug.WriteToFile("Rocket is not being drawn on screen");
+            //}
+
+            // Debug.WriteToFile("Drawing Player Textures");
+            if (SceneLoad.PlayerInScene)
+            {
+                Player.Draw(spriteBatch, graphics);
+            }
+            //else if (!PlayerInScene)
+            //{
+            //    Debug.WriteToFile("Player is not being drawn on screen");
             //}
 
             // Debug.WriteToFile("Drawing Audio Name");

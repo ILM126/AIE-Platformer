@@ -49,6 +49,11 @@ namespace TrebleSketch_AIE_Platformer
         float JumpForce;
         public bool PlayerInScene;
         public bool PewPew;
+        public bool JumpingDown;
+        TimeSpan HalfSecond = new TimeSpan(0, 0, 0, 0, 500);
+        TimeSpan FiftyMilliseconds = new TimeSpan(0, 0, 0, 0, 50);
+        TimeSpan SeventyFiveMilliseconds = new TimeSpan(0, 0, 0, 0, 75);
+        TimeSpan lastJumpingDown;
 
         public void InitialisePlayer()
         {
@@ -111,6 +116,17 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
+        public void JumpDown()
+        {
+            if (IsGrounded)
+            {
+                IsJumping = true;
+                IsGrounded = false;
+                JumpingDown = true;
+                Velocity.Y += 475f * Scale;
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -142,7 +158,45 @@ namespace TrebleSketch_AIE_Platformer
                 PewPew = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); } // Get Your Pony Ass Back Here Treble!
+            TimeSpan lastSwitch = gameTime.TotalGameTime - lastJumpingDown;
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                if (Position.Y < 200)
+                {
+                    if (lastSwitch > HalfSecond)
+                    {
+                        JumpDown();
+                        lastJumpingDown = gameTime.TotalGameTime;
+                    }
+                } else if (200 < Position.Y && Position.Y < 500) {
+                    if (lastSwitch > SeventyFiveMilliseconds)
+                    {
+                        JumpDown();
+                        lastJumpingDown = gameTime.TotalGameTime;
+                    }
+                } else if (Position.Y > SpawnPosition.Y * 2 - 150)
+                {
+                    JumpingDown = false;
+                }
+            }
+            else if (JumpingDown)
+            {
+                if (Position.Y < 200)
+                {
+                    if (lastSwitch > HalfSecond)
+                    {
+                        JumpingDown = false;
+                    }
+                } else if (200 < Position.Y && Position.Y < 500)
+                {
+                    if (lastSwitch > SeventyFiveMilliseconds)
+                    {
+                        JumpingDown = false;
+                    }
+                }
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); } // Get Your Pony Ass Back Here Treble!
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
@@ -203,6 +257,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             IsGrounded = true;
             IsJumping = false;
+            JumpingDown = false;
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
             UpdateBounds();
@@ -213,12 +268,15 @@ namespace TrebleSketch_AIE_Platformer
             bool sceneCollision = SquareCollisionCheck(other);
             if (sceneCollision)
             {
-                /// if player position is above top of ground and player is falling
-                if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
+                if (!JumpingDown)
                 {
-                    SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
+                    /// if player position is above top of ground and player is falling
+                    if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
+                    {
+                        SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
+                    }
+                    return true;
                 }
-                return true;
             }
             return false;
         }

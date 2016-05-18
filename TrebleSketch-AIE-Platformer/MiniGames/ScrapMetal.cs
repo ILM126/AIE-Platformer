@@ -48,9 +48,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             Scale = scale;
             UpdateBounds();
             Initialize();
-            //BTR_ScrapMetal.CentreScreen = CentreScreen;
-            // Scale = RealGame.Scale;
-            // Gravity = RealGame.Gravity;
         }
 
         public void Update(GameTime gameTime)
@@ -71,19 +68,10 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 }
             }
 
-            //if (!IsGrounded)
-            //{
-            //    m_velocity.Y += Gravity * time;
-            //    //Debug.WriteToFile("Scrap Metal Gravity: " + Gravity.ToString(), true);
-            //    //Debug.WriteToFile("IsGrounded is false and gravity is supposed to be working!", true);
-            //}
             if (!IsGrounded) m_velocity.Y += Gravity * time;
             else m_velocity.Y = 0;
             m_position.Y += m_velocity.Y * time;
-            //Debug.WriteToFile("Position Y: " + m_position.Y, false);
             m_position.X += m_velocity.X;
-            //Debug.WriteToFile("Is Grounded: " + IsGrounded.ToString(), false);
-            //Debug.WriteLine("[INFO] ScrapMetal is Updating...");
             UpdateBounds();
         }
 
@@ -93,16 +81,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)
         {
-            //spriteBatch.Draw(
-            //            ScrapMetal,
-            //            CentreScreen,
-            //            null,
-            //            Color.White,
-            //            0,
-            //            new Vector2(ScrapMetal.Width / 2, ScrapMetal.Height / 2),
-            //            Scale,
-            //            0,
-            //            0);
 
             Texture2D tex = texture; //Try to use the parameter texture
             if (tex == null) tex = m_texture; //If none was set try to use the base m_texture
@@ -131,9 +109,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             /// Note: this should be called whenever the object position,
             /// size, or scale are changed
             BoxCollision = new SquareCollision(m_position, m_size * Scale);
-            //Debug.WriteLine("[DEBUG] ScrapMetal position: " + m_position.ToString());
-            //Debug.WriteLine("[DEBUG] ScrapMetal size: " + m_size.ToString());
-            //Debug.WriteLine("[DEBUG] ScrapMetal scale: " + Scale.ToString());
         }
         protected bool SquareCollisionCheck(SceneObjects pOther)
         {
@@ -146,8 +121,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             GroundHeight = groundHeight;
             m_position.Y = groundHeight;
             UpdateBounds();
-            // Debug.WriteToFile("Ground Height in BTR: " + GroundHeight.ToString(), false);
-            // Debug.WriteLine("[INFO] ScrapMetal is Gounded...");
         }
 
         public bool CollisionCheck(SceneObjects other)
@@ -155,7 +128,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             bool scrapMetalCollision = SquareCollisionCheck(other);
             if (scrapMetalCollision)
             {
-                // Debug.WriteLine("[DEBUG] ScrapMetal Collisions triggered!");
                 return true;
             }
             return false;
@@ -169,10 +141,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 /// if player position is above top of ground and player is falling
                 if (m_position.Y < other.BoxCollision.min.Y && m_velocity.Y > 0)
                 {
-                    // Debug.WriteLine("[DEBUG] ScrapMetal SetGrounded Triggered");
                     SetGrounded(other.BoxCollision.min.Y - m_origin.Y * Scale);
                 }
-                // Debug.WriteLine("[DEBUG] ScrapMetal CheckCollisionGround Triggered");
                 return true;
             }
             return false;

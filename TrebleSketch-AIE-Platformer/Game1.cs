@@ -426,7 +426,13 @@ namespace TrebleSketch_AIE_Platformer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.SkyBlue);
+            if (SceneLoad.SceneID == 1)
+            {
+                GraphicsDevice.Clear(Color.Black);
+            } else
+            {
+                GraphicsDevice.Clear(Color.SkyBlue);
+            }
             // GraphicsDevice.Clear(Color.Black);
 
             // Debug.WriteToFile("Started Drawing Game Textures");
@@ -460,7 +466,12 @@ namespace TrebleSketch_AIE_Platformer
             //}
 
             // Debug.WriteToFile("Drawing Audio Name");
-            Audio.CurrentSong(spriteBatch);
+            if (SceneLoad.SceneID == 1)
+            {
+                Audio.CurrentSong(spriteBatch, Color.White);
+            } else {
+                Audio.CurrentSong(spriteBatch, Color.Black);
+            }
 
             GameBuild(spriteBatch);
             // Debug.InGameDebug(spriteBatch);

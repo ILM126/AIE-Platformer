@@ -52,9 +52,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update(GameTime gameTime)
         {
-            if (m_position.Y == 50)
+            UpdateBounds();
+
+            if (IsGrounded)
             {
-                Debug.WriteLine("[DEBUG] ScrapMetal Y POSITION: " + m_position.ToString());
+                m_velocity = new Vector2(0);
             }
 
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -72,7 +74,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             else m_velocity.Y = 0;
             m_position.Y += m_velocity.Y * time;
             m_position.X += m_velocity.X;
-            UpdateBounds();
         }
 
         public void DrawScrapMetal()
@@ -139,7 +140,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             if (scrapMetalCollision)
             {
                 /// if player position is above top of ground and player is falling
-                if (m_position.Y < other.BoxCollision.min.Y && m_velocity.Y > 0)
+                if (m_position.Y < other.BoxCollision.min.Y && m_velocity.Y >= 0)
                 {
                     SetGrounded(other.BoxCollision.min.Y - m_origin.Y * Scale);
                 }

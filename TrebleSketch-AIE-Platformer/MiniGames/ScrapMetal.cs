@@ -52,6 +52,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update(GameTime gameTime)
         {
+            Debug.WriteLine("[INFO] IsGrounded pre UpdateBounds in Update: " + IsGrounded);
             UpdateBounds();
             Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in Update: " + IsGrounded);
 

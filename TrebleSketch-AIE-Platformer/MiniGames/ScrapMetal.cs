@@ -53,11 +53,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void Update(GameTime gameTime)
         {
             UpdateBounds();
-
-            if (IsGrounded)
-            {
-                m_velocity = new Vector2(0);
-            }
+            Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in Update: " + IsGrounded);
 
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -70,10 +66,22 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 }
             }
 
-            if (!IsGrounded) m_velocity.Y += Gravity * time;
-            else m_velocity.Y = 0;
+            if (!IsGrounded)
+            {
+                m_velocity.Y += Gravity * time;
+            }
+            else
+            {
+                m_velocity.Y = 0;
+            }
             m_position.Y += m_velocity.Y * time;
             m_position.X += m_velocity.X;
+
+            if (IsGrounded)
+            {
+                m_velocity = new Vector2(0, 0);
+            }
+            Debug.WriteLine("[INFO] IsGrounded end of Update: " + IsGrounded);
         }
 
         public void DrawScrapMetal()
@@ -110,6 +118,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             /// Note: this should be called whenever the object position,
             /// size, or scale are changed
             BoxCollision = new SquareCollision(m_position, m_size * Scale);
+            Debug.WriteLine("[INFO] IsGrounded after BoxCollision: " + IsGrounded);
         }
         protected bool SquareCollisionCheck(SceneObjects pOther)
         {
@@ -122,6 +131,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             GroundHeight = groundHeight;
             m_position.Y = groundHeight;
             UpdateBounds();
+            Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in SetGrounded: " + IsGrounded);
         }
 
         public bool CollisionCheck(SceneObjects other)

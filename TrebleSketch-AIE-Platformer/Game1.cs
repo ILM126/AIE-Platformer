@@ -24,7 +24,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.14.186 (Developmental Stages)
+    /// Version: 0.0.14.187 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -92,7 +92,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.14.186 (25/05/16)";
+            GameVersionBuild = "v0.0.14.187 (25/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -144,7 +144,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.scrapMetalCount = MiniGame_BuildTheRocket.scrapMetalCount;
             BTR_ScrapMetal.SceneLoad = SceneLoad;
             SceneLoad.InitialiseScene();
-            MiniGame_BuildTheRocket.Initialise();
+            //MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
 
             Debug.WriteToFile("ScrapMetal Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
@@ -212,55 +212,20 @@ namespace TrebleSketch_AIE_Platformer
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // PlayerClass - Loads Treble Sketch and Adelaide Player Sprites
-                // Treble Sketch
+            
                 Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left-v2");
                 Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right-v2");
-
-                // Adelaide
-
-            // RocketClass - Loads all rocket components
-                // Engines
                 rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
-
-                // Fuel Tanks
                 rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
-
-                // Capsules
-
-            // WorldClass - Loads the planets and moons
-                // Planets
-
-                // Moons
-
-            // SceneClass - Loads the Space Centre
-                // 00 - Test Map
                 SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
-
-                // 01 - Main Menu
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
-
-                // 05 - Mini Game: Build the Rocket
                 BTR_ScrapMetal.tex_ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
-                
-            // AudioClass - Loads the Sounds and Sound Effects
-                // Rocket
-
-                // People
-
-                // Music
                 Audio.Bright_DJStartchAttack = Content.Load<Song>("Audio/Bright by DJStratchAttack");
-
-            // Extra Assets - Loads the extra fonts and what no
-                // Fonts
                 Debug.InformationFont = Content.Load<BitmapFont>("informationfont");
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
-
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
-
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
 
@@ -304,14 +269,6 @@ namespace TrebleSketch_AIE_Platformer
                 Exit();
             }
 
-            // Check collision with player
-            //if (Player.CheckCollisionsGround(Rocket))
-            //{
-            //    // Console.WriteLine("[TERRAIN] I am being touched!");
-            //}
-            // SceneLoad.PlayerInScene = false;
-            // SceneLoad.RocketInScene = false;
-
             MouseMovement.Update();
 
             SceneLoad.state = MouseMovement.state;
@@ -321,22 +278,6 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.ScrapMetals.Count > 0)
             {
                 SceneLoad.MiniGame = true;
-                //if (!Debug.SwitchOnce)
-                //{
-                //    int numScrapMetals;
-                //    numScrapMetals = SceneLoad.ScrapMetals.Count;
-                //    SceneLoad.ScrapMetals[numScrapMetals].m_position = new Vector2(300, 50);
-                //    Debug.SwitchOnce = true;
-                //}
-                //Debug.WriteToFile("Started checking for Scrap Metal Info", false);
-
-                //Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.Y, false);
-
-                //Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
-                //Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-                //Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
-
-                //Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
             }
             else
             {
@@ -407,18 +348,17 @@ namespace TrebleSketch_AIE_Platformer
             base.Update(gameTime);
         }
 
-        void GameBuild(SpriteBatch spriteBatch) // Displays the Game Build Number on the lower right hand side
-        {
-            // spriteBatch.DrawString(InformationFont, "SCORE : " + Ship.Score.ToString(), new Vector2(10, 10), Color.White);
-            // spriteBatch.DrawString(Debug.InformationFont, "Game Build: " + GameVersionBuild, new Vector2(CentreScreen.X, 50), Color.Black);
-        }
-
         //void DrawRectangle(Rectangle coords, Color color)
         //{
         //    var rect = new Texture2D(GraphicsDevice, 1, 1);
         //    rect.SetData(new[] { color });
         //    spriteBatch.Draw(rect, coords, color);
         //}
+
+        #region Draw UI
+
+
+        #endregion
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -472,9 +412,6 @@ namespace TrebleSketch_AIE_Platformer
             } else {
                 Audio.CurrentSong(spriteBatch, Color.Black);
             }
-
-            GameBuild(spriteBatch);
-            // Debug.InGameDebug(spriteBatch);
 
             MouseMovement.Draw(spriteBatch);
 

@@ -204,6 +204,7 @@ namespace TrebleSketch_AIE_Platformer
             IsGrounded = true;
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
+            Velocity.Y = 0;
             UpdateBounds();
         }
 

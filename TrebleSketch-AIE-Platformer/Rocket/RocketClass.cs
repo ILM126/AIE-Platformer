@@ -143,6 +143,7 @@ namespace TrebleSketch_AIE_Platformer
             IsFlying = false;
             GroundHeight = groundHeight;
             Position.Y = groundHeight;
+            Velocity.Y = 0;
             UpdateBounds();
         }
 

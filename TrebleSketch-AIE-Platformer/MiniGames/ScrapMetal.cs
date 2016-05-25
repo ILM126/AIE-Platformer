@@ -131,6 +131,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             IsGrounded = true;
             GroundHeight = groundHeight;
             m_position.Y = groundHeight;
+            m_velocity.Y = 0;
             UpdateBounds();
             Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in SetGrounded: " + IsGrounded);
         }

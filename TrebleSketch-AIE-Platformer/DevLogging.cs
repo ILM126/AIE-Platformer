@@ -2,6 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 using MonoGame.Extended.BitmapFonts;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -9,6 +10,7 @@ namespace TrebleSketch_AIE_Platformer
     {
         public BitmapFont DebugFont;
         public BitmapFont InformationFont;
+        public SpriteFont scoreText;
 
         public bool SwitchOnce;
 

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
 using TrebleSketch_AIE_Platformer.MiniGames;
+using System.Collections.Generic;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -67,9 +68,11 @@ namespace TrebleSketch_AIE_Platformer
         LoadScene SceneLoad;
         SceneObjects SceneObject;
         AudioClass Audio;
+
         DevLogging Debug;
         Cursor MouseMovement;
         InputHandler UserInput;
+        Message ListMessages;
 
         public Rectangle Button;
         public Rectangle CursorRect;
@@ -121,6 +124,8 @@ namespace TrebleSketch_AIE_Platformer
             MouseMovement = new Cursor();
             MouseMovement.CursorRect = CursorRect;
             UserInput = new InputHandler();
+            ListMessages = new Message();
+            ListMessages.messages = new List<Message>();
 
             #region Scene
 
@@ -215,6 +220,7 @@ namespace TrebleSketch_AIE_Platformer
                 Audio.Bright_DJStartchAttack = Content.Load<Song>("Audio/Bright by DJStratchAttack");
                 Debug.InformationFont = Content.Load<BitmapFont>("informationfont");
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
+                Debug.scoreText = Content.Load<SpriteFont>("scoreFont");
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
@@ -333,6 +339,12 @@ namespace TrebleSketch_AIE_Platformer
 
             // Debug.WriteToFile("Mouse Intersecting with Button: " + UserInput.MouseInRectangle(Button).ToString());
 
+            while (ListMessages.messages.Count > 0 && ListMessages.messages[0].Appeared + ListMessages.MaxAgeMessage < gameTime.TotalGameTime)
+            {
+                ListMessages.messages.RemoveAt(0);
+                Debug.WriteToFile("[DEBUG] Message being removed", false);
+            }
+
             InputHandler.Update();
 
             base.Update(gameTime);
@@ -408,6 +420,9 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.End();
 
             // Debug.WriteToFile("Finshed Drawing Game Textures");
+
+            foreach (var message in ListMessages.messages)
+                spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
 
             base.Draw(gameTime);
         }

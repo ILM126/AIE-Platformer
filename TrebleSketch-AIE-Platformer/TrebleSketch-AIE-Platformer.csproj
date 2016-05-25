@@ -48,6 +48,7 @@
     <Compile Include="Enemy\EnemyClass.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="MenuObjects.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MiniGames\BuildTheRocket.cs" />
     <Compile Include="MiniGames\ScrapMetal.cs" />
     <Compile Include="Player\PlayerClass.cs" />
@@ -127,6 +128,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Content\informationfont.fnt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\scoreFont.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

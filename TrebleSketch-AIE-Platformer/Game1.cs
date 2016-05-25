@@ -140,16 +140,14 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.CentreScreen = CentreScreen;
             SceneLoad.UserInput = UserInput;
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
-            SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
+            //SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
             SceneLoad.scrapMetalCount = MiniGame_BuildTheRocket.scrapMetalCount;
             BTR_ScrapMetal.SceneLoad = SceneLoad;
+            MiniGame_BuildTheRocket.BTR_ScrapMetal = BTR_ScrapMetal;
+            MiniGame_BuildTheRocket.SceneLoad = SceneLoad;
             SceneLoad.InitialiseScene();
-            //MiniGame_BuildTheRocket.Initialise();
+            MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
-
-            Debug.WriteToFile("ScrapMetal Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
-            Debug.WriteToFile("ScrapMetal Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-            Debug.WriteToFile("ScrapMetal Position: " + BTR_ScrapMetal.m_position.ToString(), false);
 
             #endregion
 
@@ -189,14 +187,6 @@ namespace TrebleSketch_AIE_Platformer
             //Debug.WriteToFile(SceneLoad.SceneID + "", true);
 
             Debug.WriteToFile("Finished Initializing Game", true);
-
-            Debug.WriteToFile("Started checking for Scrap Metal Info", false);
-
-            Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
-            Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-            Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
-
-            Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
             #endregion
 
             base.Initialize();

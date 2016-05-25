@@ -12,7 +12,7 @@ namespace TrebleSketch_AIE_Platformer
         public InputHandler UserInput;
         public DevLogging Debug;
         public BuildTheRocket MiniGame_BuildTheRocket;
-        public ScrapMetal BTR_ScrapMetal;
+        //public ScrapMetal BTR_ScrapMetal;
 
         public List<SceneObjects> GroundTiles;
         public List<ScrapMetal> ScrapMetals;
@@ -294,15 +294,9 @@ namespace TrebleSketch_AIE_Platformer
                 , false);
                 GroundTiles.Add(GroundTile);
             }
-            if (InputHandler.IsKeyDownOnce(Keys.Z))
-            {
-                ScrapMetal scrapMetal = new ScrapMetal(
-                        BTR_ScrapMetal.tex_ScrapMetal,
-                        new Vector2(GroundTiles[1].scene_Position.X, GroundTiles[1].scene_Position.Y - 50),
-                        new Vector2(50, 30),
-                        1f);
-                ScrapMetals.Add(scrapMetal);
-            }
+
+            MiniGame_BuildTheRocket.SpawnScrapMetals();
+
             PlayerInScene = true;
             RocketInScene = true;
         }

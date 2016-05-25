@@ -146,7 +146,7 @@ namespace TrebleSketch_AIE_Platformer
                 PewPew = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Console.WriteLine("[Player] Spawned at " + Position.ToPoint()); } // Get Your Pony Ass Back Here Treble!
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), true); } // Get Your Pony Ass Back Here Treble!
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;

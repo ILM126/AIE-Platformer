@@ -6,7 +6,6 @@
 
         public void Initialise()
         {
-            scrapMetalCount = 5;
         }
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
@@ -83,10 +82,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 m_velocity = new Vector2(0, 0);
             }
             Debug.WriteLine("[INFO] IsGrounded end of Update: " + IsGrounded);
-        }
-
-        public void DrawScrapMetal()
-        {
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)

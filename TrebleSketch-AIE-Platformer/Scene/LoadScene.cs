@@ -13,6 +13,7 @@ namespace TrebleSketch_AIE_Platformer
         public DevLogging Debug;
         public BuildTheRocket MiniGame_BuildTheRocket;
         //public ScrapMetal BTR_ScrapMetal;
+        public Message ListMessages;
 
         public List<SceneObjects> GroundTiles;
         public List<ScrapMetal> ScrapMetals;
@@ -57,6 +58,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public int scrapMetalCount;
 
+        public bool GameFirstLoad;
+
         public void InitialiseScene()
         {
             GroundTiles = new List<SceneObjects>();
@@ -71,6 +74,10 @@ namespace TrebleSketch_AIE_Platformer
                     100,
                     40);
             RunOnceTest = true;
+            GameFirstLoad = true;
+
+            ListMessages.MessagePosition = new Vector2(CentreScreen.X * 2 - 140, CentreScreen.Y * 2 - 30);
+
             //RunOnceTest = false;
             // Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
         }
@@ -80,7 +87,7 @@ namespace TrebleSketch_AIE_Platformer
             // parts.Add(part);
         }
 
-        public void SceneLoader(SpriteBatch spriteBatch)
+        public void SceneLoader(SpriteBatch spriteBatch, GameTime gameTime)
         {
             switch(SceneID)
             {
@@ -148,20 +155,22 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     break;
             }
-            if (InputHandler.IsKeyDownOnce(Keys.D0))
+            MessageOnLoad(gameTime);
+        }
+
+        public void MessageOnLoad(GameTime gameTime)
+        {
+            if (GameFirstLoad)
             {
-                SceneID = 0;
-                Debug.WriteToFile("Loaded " + SceneName, true);
-            }
-            if (InputHandler.IsKeyDownOnce(Keys.D1))
-            {
-                SceneID = 1;
-                Debug.WriteToFile("Loaded " + SceneName, true);
-            }
-            if (ScrapMetals.Count > 0)
-            {
-                //Debug.WriteToFile("Scrap Metal location: " + ScrapMetals[0].m_position.Y, false);
-                //Debug.WriteToFile("Scrap Metal count: " + ScrapMetals.Count, false);
+                ListMessages.messages.Add(new Message()
+                {
+                    Text = "Scene ID: " + SceneID,
+                    Appeared = gameTime.TotalGameTime,
+                    Position = ListMessages.MessagePosition
+                });
+                Debug.WriteToFile("[DEBUG] Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
+                GameFirstLoad = false;
+                Debug.WriteToFile("[DEBUG] Game First Load: " + GameFirstLoad.ToString(), false);
             }
         }
 

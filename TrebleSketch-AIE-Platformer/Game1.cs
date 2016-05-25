@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.14.187 (Developmental Stages)
+    /// Version: 0.0.15.193 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -95,7 +95,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.14.187 (25/05/16)";
+            GameVersionBuild = "v0.0.15.193 (25/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -150,6 +150,7 @@ namespace TrebleSketch_AIE_Platformer
             BTR_ScrapMetal.SceneLoad = SceneLoad;
             MiniGame_BuildTheRocket.BTR_ScrapMetal = BTR_ScrapMetal;
             MiniGame_BuildTheRocket.SceneLoad = SceneLoad;
+            SceneLoad.ListMessages = ListMessages;
             SceneLoad.InitialiseScene();
             MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
@@ -269,7 +270,7 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.state = MouseMovement.state;
 
-            SceneLoad.SceneLoader(spriteBatch);
+            SceneLoad.SceneLoader(spriteBatch, gameTime);
 
             if (SceneLoad.ScrapMetals.Count > 0)
             {
@@ -417,12 +418,12 @@ namespace TrebleSketch_AIE_Platformer
 
             MouseMovement.Draw(spriteBatch);
 
+            foreach (var message in ListMessages.messages)
+                spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
+
             spriteBatch.End();
 
             // Debug.WriteToFile("Finshed Drawing Game Textures");
-
-            foreach (var message in ListMessages.messages)
-                spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
 
             base.Draw(gameTime);
         }

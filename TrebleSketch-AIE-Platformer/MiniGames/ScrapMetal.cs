@@ -57,15 +57,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (InputHandler.IsKeyDownOnce(Keys.Up))
-            {
-                if (IsGrounded)
-                {
-                    IsGrounded = false;
-                    m_velocity.Y -= 500f;
-                }
-            }
-
             if (!IsGrounded)
             {
                 m_velocity.Y += Gravity * time;

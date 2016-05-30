@@ -125,7 +125,56 @@ namespace TrebleSketch_AIE_Platformer
                 IsJumping = true;
                 IsGrounded = false;
                 JumpingDown = true;
-                Velocity.Y += 475f * Scale;
+                Velocity.Y += 300f * Scale;
+            }
+        }
+
+        void StageLevelJumper(GameTime gameTime)
+        {
+            TimeSpan lastSwitch = gameTime.TotalGameTime - lastJumpingDown;
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                if (Position.Y < 200)
+                {
+                    if (lastSwitch > HalfSecond)
+                    {
+                        JumpDown();
+                        lastJumpingDown = gameTime.TotalGameTime;
+                    }
+                }
+                else if (200 < Position.Y && Position.Y < 500)
+                {
+                    if (lastSwitch > SeventyFiveMilliseconds)
+                    {
+                        JumpDown();
+                        lastJumpingDown = gameTime.TotalGameTime;
+                    }
+                }
+                else if (Position.Y > SpawnPosition.Y * 2 - 150)
+                {
+                    JumpingDown = false;
+                }
+            }
+            else if (JumpingDown)
+            {
+                if (Position.Y < 200)
+                {
+                    if (lastSwitch > HalfSecond)
+                    {
+                        JumpingDown = false;
+                    }
+                }
+                else if (200 < Position.Y && Position.Y < 500)
+                {
+                    if (lastSwitch > SeventyFiveMilliseconds)
+                    {
+                        JumpingDown = false;
+                    }
+                }
+                else if (Position.Y > (SpawnPosition.Y * 2 - 150))
+                {
+                    JumpingDown = false;
+                }
             }
         }
 
@@ -160,44 +209,8 @@ namespace TrebleSketch_AIE_Platformer
                 PewPew = true;
             }
 
-            TimeSpan lastSwitch = gameTime.TotalGameTime - lastJumpingDown;
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                if (Position.Y < 200)
-                {
-                    if (lastSwitch > HalfSecond)
-                    {
-                        JumpDown();
-                        lastJumpingDown = gameTime.TotalGameTime;
-                    }
-                } else if (200 < Position.Y && Position.Y < 500) {
-                    if (lastSwitch > SeventyFiveMilliseconds)
-                    {
-                        JumpDown();
-                        lastJumpingDown = gameTime.TotalGameTime;
-                    }
-                } else if (Position.Y > SpawnPosition.Y * 2 - 150)
-                {
-                    JumpingDown = false;
-                }
-            }
-            else if (JumpingDown)
-            {
-                if (Position.Y < 200)
-                {
-                    if (lastSwitch > HalfSecond)
-                    {
-                        JumpingDown = false;
-                    }
-                } else if (200 < Position.Y && Position.Y < 500)
-                {
-                    if (lastSwitch > SeventyFiveMilliseconds)
-                    {
-                        JumpingDown = false;
-                    }
-                }
-            }
-            
+            StageLevelJumper(gameTime);
+
             if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), false); } // Get Your Pony Ass Back Here Treble!
 
             if (!IsGrounded) Velocity.Y += Gravity * time;

@@ -13,6 +13,7 @@ namespace TrebleSketch_AIE_Platformer
         public SquareCollision BoxCollision;
         public DevLogging Debug;
         public LoadScene SceneLoad;
+        public BuildTheRocket MiniGame_BuildTheRocket;
 
         // Player Textures (Treble Sketch only)
         public Texture2D FaceRight;
@@ -313,13 +314,19 @@ namespace TrebleSketch_AIE_Platformer
         public void CheckCollisions(ScrapMetal BTR_ScrapRocket)
         {
             // Check collision with ground tiles
+            int ToRemove = -1;
             foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
             {
                 if (scrapMetal.CollisionCheck(this))
                 {
                     Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
-                    
+                    ToRemove = SceneLoad.ScrapMetals.IndexOf(scrapMetal);
                 }
+            }
+            if (ToRemove != -1)
+            {
+                SceneLoad.ScrapMetals.RemoveAt(ToRemove);
+                MiniGame_BuildTheRocket.Score++;
             }
         }
     }

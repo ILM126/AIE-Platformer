@@ -69,23 +69,23 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
-        public void CurrentSong(SpriteBatch spriteBatch, Color colours)
-        {
-            if (MediaPlayer.State == MediaState.Playing)
-            {
-                spriteBatch.DrawString(Debug.InformationFont, "Current Song: " + Bright_DJStartchAttack.Name.ToString(), new Vector2(10, 5), colours);
-            } else
-            {
-                spriteBatch.DrawString(Debug.InformationFont, "Current Song: ", new Vector2(10, 5), colours);
-            }
+        //public void CurrentSong(SpriteBatch spriteBatch, Color colours)
+        //{
+        //    if (MediaPlayer.State == MediaState.Playing)
+        //    {
+        //        spriteBatch.DrawString(Debug.InformationFont, "Current Song: " + Bright_DJStartchAttack.Name.ToString(), new Vector2(10, 5), colours);
+        //    } else
+        //    {
+        //        spriteBatch.DrawString(Debug.InformationFont, "Current Song: ", new Vector2(10, 5), colours);
+        //    }
 
-            if (MediaPlayer.IsRepeating)
-            {
-                spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), colours);
-            } else if (!MediaPlayer.IsRepeating)
-            {
-                spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), colours);
-            }
-        }
+        //    if (MediaPlayer.IsRepeating)
+        //    {
+        //        spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), colours);
+        //    } else if (!MediaPlayer.IsRepeating)
+        //    {
+        //        spriteBatch.DrawString(Debug.InformationFont, "Repeating: " + MediaPlayer.IsRepeating.ToString(), new Vector2(10, 70), colours);
+        //    }
+        //}
     }
 }

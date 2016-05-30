@@ -11,7 +11,12 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public ScrapMetal BTR_ScrapMetal;
         public LoadScene SceneLoad;
 
-        public int scrapMetalCount;
+        public int Score;
+        public int RocketsBuilt;
+        public float PercentageOfRocket;
+
+        public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
+        
         int frameCounter;
         Random randNum;
 

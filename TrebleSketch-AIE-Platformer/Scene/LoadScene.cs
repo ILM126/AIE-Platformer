@@ -56,8 +56,6 @@ namespace TrebleSketch_AIE_Platformer
         // public Texture2D InsideMetalFloor;
         // public Texture2D InsideConcreteFloor;
 
-        public int scrapMetalCount;
-
         public bool MessageNotLoaded;
 
         public void InitialiseScene()

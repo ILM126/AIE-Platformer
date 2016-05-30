@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.16.199 (Developmental Stages)
+    /// Version: 0.0.17.200 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -51,6 +51,7 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Enemy) Make Enemy textures
     /// - (Enemy) Get enemy AI working
     /// - (Mini Game - Build the Rocket) Scrap Metal to get collisions with players for points!
+    /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game
     {
@@ -95,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.16.199 (30/05/16)";
+            GameVersionBuild = "v0.0.17.200 (30/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -145,7 +146,6 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.UserInput = UserInput;
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             //SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
-            SceneLoad.scrapMetalCount = MiniGame_BuildTheRocket.scrapMetalCount;
             BTR_ScrapMetal.SceneLoad = SceneLoad;
             MiniGame_BuildTheRocket.BTR_ScrapMetal = BTR_ScrapMetal;
             MiniGame_BuildTheRocket.SceneLoad = SceneLoad;
@@ -166,6 +166,7 @@ namespace TrebleSketch_AIE_Platformer
             Player.Scale = Scale;
             Player.Gravity = Gravity;
             Player.GroundHeight = GroundHeight;
+            Player.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             Player.InitialisePlayer();
 
             Enemy = new EnemyClass();
@@ -360,7 +361,29 @@ namespace TrebleSketch_AIE_Platformer
         //}
 
         #region Draw UI
+        
+        public void BTR_UI()
+        {
+            spriteBatch.DrawString // Score
+                        (Debug.scoreText,
+                        "Score: " + MiniGame_BuildTheRocket.Score,
+                        new Vector2(20, 45), Color.Black);
 
+            //spriteBatch.DrawString // Rockets Built
+            //            (Debug.scoreText,
+            //            "blah blah",
+            //            new Vector2(150, 45), Color.White);
+
+            //spriteBatch.DrawString // Percentage Complete with rocket
+            //            (Debug.scoreText,
+            //            "blah blah",
+            //            new Vector2(CentreScreen.X, 45), Color.White);
+
+            //spriteBatch.DrawString // Time Remaining!
+            //            (Debug.scoreText,
+            //            "blah blah",
+            //            new Vector2(CentreScreen.X, 45), Color.White);
+        }
 
         #endregion
 
@@ -410,11 +433,16 @@ namespace TrebleSketch_AIE_Platformer
             //}
 
             // Debug.WriteToFile("Drawing Audio Name");
-            if (SceneLoad.SceneID == 1)
+            //if (SceneLoad.SceneID == 1)
+            //{
+            //    Audio.CurrentSong(spriteBatch, Color.White);
+            //} else {
+            //    Audio.CurrentSong(spriteBatch, Color.Black);
+            //}
+
+            if (SceneLoad.SceneID == 5)
             {
-                Audio.CurrentSong(spriteBatch, Color.White);
-            } else {
-                Audio.CurrentSong(spriteBatch, Color.Black);
+                BTR_UI();
             }
 
             MouseMovement.Draw(spriteBatch);

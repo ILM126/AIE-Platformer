@@ -32,7 +32,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             if (frameCounter > 200 && SceneLoad.ScrapMetals.Count < 20)
             {
-                Vector2 pos = new Vector2(randNum.Next(800), randNum.Next(200));
+                Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
                         BTR_ScrapMetal.tex_ScrapMetal,
                         pos,
@@ -46,7 +46,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         void RandomPostion()
         {
-
+            // Grab number of blocks via Count, minus it by one. Random Next thingy
+            // randNum.Next(0, groundTiles - 1)
         }
     }
 }

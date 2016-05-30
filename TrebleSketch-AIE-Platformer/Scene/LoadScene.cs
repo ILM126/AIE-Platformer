@@ -58,7 +58,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public int scrapMetalCount;
 
-        public bool GameFirstLoad;
+        public bool MessageNotLoaded;
 
         public void InitialiseScene()
         {
@@ -74,7 +74,7 @@ namespace TrebleSketch_AIE_Platformer
                     100,
                     40);
             RunOnceTest = true;
-            GameFirstLoad = true;
+            MessageNotLoaded = true;
 
             ListMessages.MessagePosition = new Vector2(CentreScreen.X * 2 - 140, CentreScreen.Y * 2 - 30);
 
@@ -134,6 +134,7 @@ namespace TrebleSketch_AIE_Platformer
                     if (UserInput.MouseButtonClickedOnce(MouseButton.Left) && UserInput.MouseInRectangle(Button))
                     {
                         SceneID = 5;
+                        MessageNotLoaded = true;
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -149,6 +150,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Front Lawns";
                     break;
                 case 5:
+                    LoadMessage(gameTime);
                     MiniGame_BTR();
                     break;
                 default:
@@ -160,17 +162,32 @@ namespace TrebleSketch_AIE_Platformer
 
         public void MessageOnLoad(GameTime gameTime)
         {
-            if (GameFirstLoad)
+            if (MessageNotLoaded)
             {
                 ListMessages.messages.Add(new Message()
-                {
-                    Text = "Scene ID: " + SceneID,
-                    Appeared = gameTime.TotalGameTime,
-                    Position = ListMessages.MessagePosition
-                });
-                Debug.WriteToFile("[DEBUG] Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
-                GameFirstLoad = false;
-                Debug.WriteToFile("[DEBUG] Game First Load: " + GameFirstLoad.ToString(), false);
+                    {
+                        Text = "Scene ID: " + SceneID,
+                        Appeared = gameTime.TotalGameTime,
+                        Position = ListMessages.MessagePosition
+                    });
+                Debug.WriteToFile("Switched to Scene: " + SceneID, true);
+                Debug.WriteToFile("Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
+                MessageNotLoaded = false;
+                Debug.WriteToFile("Game First Load: " + MessageNotLoaded.ToString(), false);
+            }
+        }
+
+        public void LoadMessage(GameTime gameTime)
+        {
+            if (MessageNotLoaded)
+            {
+                ListMessages.messages.Add(new Message()
+                    {
+                        Text = "Scene ID: " + SceneID,
+                        Appeared = gameTime.TotalGameTime,
+                        Position = ListMessages.MessagePosition
+                    });
+                MessageNotLoaded = false;
             }
         }
 
@@ -310,6 +327,7 @@ namespace TrebleSketch_AIE_Platformer
             RocketInScene = true;
         }
 
+        #region Check Collisions
         public void CheckCollisions(PlayerClass player)
         {
             // Check collision with ground tiles
@@ -348,5 +366,6 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
         }
+        #endregion
     }
 }

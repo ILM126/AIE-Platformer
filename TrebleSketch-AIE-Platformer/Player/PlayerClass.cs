@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
+using TrebleSketch_AIE_Platformer.MiniGames;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -19,6 +20,7 @@ namespace TrebleSketch_AIE_Platformer
     {
         public SquareCollision BoxCollision;
         public DevLogging Debug;
+        public LoadScene SceneLoad;
 
         // Player Textures (Treble Sketch only)
         public Texture2D FaceRight;
@@ -305,6 +307,19 @@ namespace TrebleSketch_AIE_Platformer
                 return true;
             }
             return false;
+        }
+
+        public void CheckCollisions(ScrapMetal BTR_ScrapRocket)
+        {
+            // Check collision with ground tiles
+            foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
+            {
+                if (scrapMetal.CollisionCheck(this))
+                {
+                    Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
+                    
+                }
+            }
         }
     }
 }

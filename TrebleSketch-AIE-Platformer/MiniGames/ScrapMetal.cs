@@ -121,6 +121,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
 
+        protected bool SquareCollisionCheck(PlayerClass pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
@@ -129,6 +134,16 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             m_velocity.Y = 0;
             UpdateBounds();
             //Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in SetGrounded: " + IsGrounded);
+        }
+
+        public bool CollisionCheck(PlayerClass other)
+        {
+            bool scrapMetalCollision = SquareCollisionCheck(other);
+            if (scrapMetalCollision)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool CollisionCheck(SceneObjects other)
@@ -155,5 +170,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
             return false;
         }
+
     }
 }

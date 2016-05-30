@@ -31,16 +31,12 @@ namespace TrebleSketch_AIE_Platformer
         public float Gravity;
         public float GroundHeight;
         public float Scale;
-        public int InScene;
-        public int FromScene;
-        public int ToScene;
 
         // Player Movement
         public bool PlayerFacingRight;
         public bool BothSidesPressed;
         bool IsJumping;
         public bool IsGrounded;
-        float JumpForce;
         public bool PlayerInScene;
         public bool PewPew;
         public bool JumpingDown;

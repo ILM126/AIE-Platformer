@@ -1,8 +1,5 @@
-﻿using EclipsingGameUtils;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Diagnostics;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
 {

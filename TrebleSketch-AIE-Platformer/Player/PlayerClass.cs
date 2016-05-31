@@ -207,7 +207,6 @@ namespace TrebleSketch_AIE_Platformer
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
             UpdateBounds();
-            // Debug.WriteToFile("Player is being updated on screen");
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
@@ -252,11 +251,6 @@ namespace TrebleSketch_AIE_Platformer
             return BoxCollision.CollsionCheck(pOther.BoxCollision);
         }
 
-        //protected bool SquareCollisionCheck(RocketClass pOther)
-        //{
-        //    return BoxCollision.CollsionCheck(pOther.BoxCollision);
-        //}
-
         protected void SetGrounded(float groundHeight)
         {
             IsGrounded = true;
@@ -286,21 +280,6 @@ namespace TrebleSketch_AIE_Platformer
             return false;
         }
 
-        //public bool CheckCollisionsGround(RocketClass other)
-        //{
-        //    bool rocketCollision = SquareCollisionCheck(other);
-        //    if (rocketCollision)
-        //    {
-        //        /// if player position is above top of ground and player is falling
-        //        if (Position.Y < other.BoxCollision.min.Y && Velocity.Y > 0)
-        //        {
-        //            SetGrounded(other.BoxCollision.min.Y - Origin.Y * Scale);
-        //        }
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
         public bool CollisionCheck(SceneObjects other)
         {
             bool playerCollision = SquareCollisionCheck(other);
@@ -319,7 +298,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (scrapMetal.CollisionCheck(this))
                 {
-                    Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
+                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
                     ToRemove = SceneLoad.ScrapMetals.IndexOf(scrapMetal);
                 }
             }
@@ -327,6 +306,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneLoad.ScrapMetals.RemoveAt(ToRemove);
                 MiniGame_BuildTheRocket.Score++;
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.Score + " scrap metal pieces", true);
             }
         }
     }

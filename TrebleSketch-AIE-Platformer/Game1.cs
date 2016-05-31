@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.17.202 (Developmental Stages)
+    /// Version: 0.0.17.204 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -96,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.17.202 (30/05/16)";
+            GameVersionBuild = "v0.0.17.204 (31/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -130,7 +130,7 @@ namespace TrebleSketch_AIE_Platformer
             #region Scene
 
             Scale = 1f;
-            Gravity = 500f;
+            Gravity = 600f;
             GroundHeight = 0f;
 
             Scene = new SceneClass();

@@ -422,6 +422,14 @@ namespace TrebleSketch_AIE_Platformer
             //    Debug.WriteToFile("Rocket is not being drawn on screen");
             //}
 
+            if (SceneLoad.SceneID == 5) // Mini Game: Build the Rocket
+            {
+                foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
+                {
+                    scrapMetal.Draw(gameTime, spriteBatch, scrapMetal.tex_ScrapMetal);
+                }
+            }
+
             // Debug.WriteToFile("Drawing Player Textures");
             if (SceneLoad.PlayerInScene)
             {

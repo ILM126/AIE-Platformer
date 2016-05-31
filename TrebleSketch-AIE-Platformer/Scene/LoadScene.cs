@@ -237,13 +237,6 @@ namespace TrebleSketch_AIE_Platformer
                         0); 
                 }
             }
-            if (SceneID == 5) // Mini Game: Build the Rocket
-            {
-                foreach (ScrapMetal scrapMetal in ScrapMetals)
-                {
-                    scrapMetal.Draw(gameTime, spriteBatch, scrapMetal.tex_ScrapMetal);
-                }
-            }
         }
 
         public void MiniGame_BTR()

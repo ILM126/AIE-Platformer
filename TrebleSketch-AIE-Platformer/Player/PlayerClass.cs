@@ -103,7 +103,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 IsJumping = true;
                 IsGrounded = false;
-                Velocity.Y -= 425f * Scale;
+                Velocity.Y -= 475f * Scale;
             }
         }
 
@@ -123,7 +123,7 @@ namespace TrebleSketch_AIE_Platformer
             TimeSpan lastSwitch = gameTime.TotalGameTime - lastJumpingDown;
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                if (Position.Y < 200)
+                if (Position.Y < 150)
                 {
                     if (lastSwitch > HalfSecond)
                     {
@@ -131,7 +131,7 @@ namespace TrebleSketch_AIE_Platformer
                         lastJumpingDown = gameTime.TotalGameTime;
                     }
                 }
-                else if (200 < Position.Y && Position.Y < 500)
+                else if (150 < Position.Y && Position.Y < 500)
                 {
                     if (lastSwitch > SeventyFiveMilliseconds)
                     {
@@ -146,14 +146,14 @@ namespace TrebleSketch_AIE_Platformer
             }
             else if (JumpingDown)
             {
-                if (Position.Y < 200)
+                if (Position.Y < 150)
                 {
                     if (lastSwitch > HalfSecond)
                     {
                         JumpingDown = false;
                     }
                 }
-                else if (200 < Position.Y && Position.Y < 500)
+                else if (150 < Position.Y && Position.Y < 500)
                 {
                     if (lastSwitch > SeventyFiveMilliseconds)
                     {

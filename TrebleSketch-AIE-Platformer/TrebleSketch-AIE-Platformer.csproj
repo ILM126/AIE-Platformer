@@ -106,6 +106,9 @@
     </Content>
     <Content Include="Content\Player\treble-sketch_stand_left-v2.png" />
     <Content Include="Content\Player\treble-sketch_stand_right-v2.png" />
+    <Content Include="Content\Rocket\capsule-PipingShrike-v1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Rocket\engine-Titus-v2.png" />
     <Content Include="Content\Rocket\fuelTank-Medium-v2.png" />
     <Content Include="Content\scene-errorTexturev1.png">

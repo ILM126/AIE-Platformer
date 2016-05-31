@@ -55,7 +55,7 @@ namespace TrebleSketch_AIE_Platformer
         public void SetSize(Vector2 size)
         {
             Size = new Vector2(size.X, size.Y);
-            // Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
+            Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
@@ -93,12 +93,16 @@ namespace TrebleSketch_AIE_Platformer
 
         void StackParts()
         {
-            height = 38;
+            height = 63;
             foreach (RocketPart part in parts)
             {
                 int partHeight = (int)part.m_size.Y;
                 switch (partHeight)
                 {
+                    case 50:
+                        part.m_position.Y = Position.Y - height - 60;
+                        height -= part.m_size.Y;
+                        break;
                     case 75:
                         part.m_position.Y = Position.Y - height - 50;
                         height -= part.m_size.Y;

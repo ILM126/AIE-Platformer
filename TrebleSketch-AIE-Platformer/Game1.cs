@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.17.204 (Developmental Stages)
+    /// Version: 0.0.17.206 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -96,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.17.204 (31/05/16)";
+            GameVersionBuild = "v0.0.17.206 (31/05/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -214,6 +214,7 @@ namespace TrebleSketch_AIE_Platformer
                 Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right-v2");
                 rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
                 rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
+                rocketParts[2] = Content.Load<Texture2D>("Rocket/capsule-PipingShrike-v1");
                 SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
@@ -231,18 +232,18 @@ namespace TrebleSketch_AIE_Platformer
 
             InitialiseRocketParts();
             Rocket.InitialiseRocket();
-            Rocket.SetSize(new Vector2(rocketParts[0].Width, rocketParts[1].Height + rocketParts[0].Height));
+            Rocket.SetSize(new Vector2(rocketParts[0].Width, rocketParts[2].Height + rocketParts[1].Height + rocketParts[0].Height));
         }
 
         public void InitialiseRocketParts()
         {
             // Rocket.Position = new Vector2(CentreScreen.X, 0);
+            RocketPart Capsule = new RocketPart(rocketParts[2], Rocket.SpawnPosition, new Vector2(rocketParts[2].Width, rocketParts[2].Height));
             RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
             RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
-            // RocketPart Capsule = new RocketPart(/*rocketParts[2]*/);
+            Rocket.AddPart(Capsule);
             Rocket.AddPart(FuelTank);
             Rocket.AddPart(Engine);
-            // Rocket.AddPart(Capsule);
         }
 
         /// <summary>

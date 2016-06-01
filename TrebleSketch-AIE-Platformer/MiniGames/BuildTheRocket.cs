@@ -1,8 +1,5 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using TrebleSketch_AIE_Platformer;
-using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
 {
@@ -10,8 +7,18 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     {
         public ScrapMetal BTR_ScrapMetal;
         public LoadScene SceneLoad;
+        public DevLogging Debug;
 
-        public int Score;
+        public enum LaunchVehicles
+        {
+            LightLauncher_Magpie
+        }
+
+        public LaunchVehicles LaunchVehicle;
+        public int PlannedRocketHeight;
+
+        public int ScrapMetalCollected;
+        public int RocketFuelCollected;
         public int RocketsBuilt;
         public float PercentageOfRocket;
 
@@ -24,6 +31,14 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             frameCounter = 0;
             randNum = new Random();
+        }
+
+        public void SetRocketHeight(LaunchVehicles rocket)
+        {
+            if (LaunchVehicle == rocket)
+            {
+                PlannedRocketHeight = 300;
+            }
         }
 
         public void SpawnScrapMetals()
@@ -52,12 +67,23 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update()
         {
-            
+            SetRocketHeight(LaunchVehicles.LightLauncher_Magpie);
+
+            RocketBuild();
         }
 
         public void RocketBuild() // Increments of 25 for one scrapmetal
         {
-            
+            int ScrapMetalNeeded = PlannedRocketHeight / 25;
+
+            if (ScrapMetalCollected >= ScrapMetalNeeded)
+            {
+                // fire the rocket, next level etc.
+
+                ScrapMetalCollected = 0;
+                RocketsBuilt++;
+                Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false);
+            }
         }
     }
 }

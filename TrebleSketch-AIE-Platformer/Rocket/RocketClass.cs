@@ -87,47 +87,49 @@ namespace TrebleSketch_AIE_Platformer
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
             
+            
+
             StackParts();
             UpdateBounds();
         }
 
         void StackParts()
         {
-            height = /*63*/0f;
+            height = 63;
             foreach (RocketPart part in parts)
             {
-                //int partHeight = (int)part.m_size.Y;
+                int partHeight = (int)part.m_size.Y;
 
-                int rocketPartCount = parts.Count;
-                switch (rocketPartCount)
-                {
-                    case 1:
-                        part.m_position.Y = Position.Y - height/* - 50*/;
-                        height -= part.m_size.Y;
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        break;
-                }
-
-                //switch (partHeight)
+                //int rocketPartCount = parts.Count;
+                //switch (rocketPartCount)
                 //{
-                //    case 50: // crew capsule
-                //        part.m_position.Y = Position.Y - height - 60;
-                //        height -= part.m_size.Y;
-                //        break;
-                //    case 75: // engine
+                //    case 1:
                 //        part.m_position.Y = Position.Y - height/* - 50*/;
                 //        height -= part.m_size.Y;
                 //        break;
-                //    case 175: // fuel tank
-                //        part.m_position.Y = Position.Y - height;
-                //        height -= part.m_size.Y;
+                //    case 2:
+                //        break;
+                //    case 3:
+                //        break;
+                //    default:
                 //        break;
                 //}
+
+                switch (partHeight)
+                {
+                    case 50: // crew capsule
+                        part.m_position.Y = Position.Y - height - 60;
+                        height -= part.m_size.Y;
+                        break;
+                    case 75: // engine
+                        part.m_position.Y = Position.Y - height - 50;
+                        height -= part.m_size.Y;
+                        break;
+                    case 175: // fuel tank
+                        part.m_position.Y = Position.Y - height;
+                        height -= part.m_size.Y;
+                        break;
+                }
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference

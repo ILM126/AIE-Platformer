@@ -10,6 +10,16 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 m_position;
         public float m_scale;
 
+        public enum PartType
+        {
+            Engine_Titus,
+            FuelTank_Small,
+            FuelTank_Medium,
+            FuelTank_Large,
+            Capsule_Unmanned,
+            Capsule_Manned_PipingShrike
+        }
+
         public RocketPart(Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
         {
             m_texture = tex;
@@ -35,7 +45,5 @@ namespace TrebleSketch_AIE_Platformer
             , SpriteEffects.None
             , 0);
         }
-
-
     }
 }

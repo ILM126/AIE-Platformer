@@ -30,7 +30,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             frameCounter++;
 
-            if (frameCounter > 200 && SceneLoad.ScrapMetals.Count < 20)
+            if (frameCounter > 150 && SceneLoad.ScrapMetals.Count < 20)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(

@@ -55,7 +55,7 @@ namespace TrebleSketch_AIE_Platformer
         public void SetSize(Vector2 size)
         {
             Size = new Vector2(size.X, size.Y);
-            Debug.WriteToFile("Rocket Size: " + Size.ToString(), false);
+            Debug.WriteToFile("Rocket Size: " + Size.ToString(), true);
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
@@ -93,25 +93,41 @@ namespace TrebleSketch_AIE_Platformer
 
         void StackParts()
         {
-            height = 63;
+            height = /*63*/0f;
             foreach (RocketPart part in parts)
             {
-                int partHeight = (int)part.m_size.Y;
-                switch (partHeight)
+                //int partHeight = (int)part.m_size.Y;
+
+                int rocketPartCount = parts.Count;
+                switch (rocketPartCount)
                 {
-                    case 50:
-                        part.m_position.Y = Position.Y - height - 60;
+                    case 1:
+                        part.m_position.Y = Position.Y - height/* - 50*/;
                         height -= part.m_size.Y;
                         break;
-                    case 75:
-                        part.m_position.Y = Position.Y - height - 50;
-                        height -= part.m_size.Y;
+                    case 2:
                         break;
-                    case 175:
-                        part.m_position.Y = Position.Y - height;
-                        height -= part.m_size.Y;
+                    case 3:
+                        break;
+                    default:
                         break;
                 }
+
+                //switch (partHeight)
+                //{
+                //    case 50: // crew capsule
+                //        part.m_position.Y = Position.Y - height - 60;
+                //        height -= part.m_size.Y;
+                //        break;
+                //    case 75: // engine
+                //        part.m_position.Y = Position.Y - height/* - 50*/;
+                //        height -= part.m_size.Y;
+                //        break;
+                //    case 175: // fuel tank
+                //        part.m_position.Y = Position.Y - height;
+                //        height -= part.m_size.Y;
+                //        break;
+                //}
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference

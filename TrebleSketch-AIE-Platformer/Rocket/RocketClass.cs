@@ -73,7 +73,7 @@ namespace TrebleSketch_AIE_Platformer
                 {
                     IsFlying = true;
                     IsGrounded = false;
-                    Velocity.Y -= 500f;
+                    Velocity.Y -= 1000f;
                 }
             }
 

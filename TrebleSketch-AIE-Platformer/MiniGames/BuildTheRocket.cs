@@ -49,5 +49,15 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             // Grab number of blocks via Count, minus it by one. Random Next thingy
             // randNum.Next(0, groundTiles - 1)
         }
+
+        public void Update()
+        {
+            
+        }
+
+        public void RocketBuild() // Increments of 25 for one scrapmetal
+        {
+            
+        }
     }
 }

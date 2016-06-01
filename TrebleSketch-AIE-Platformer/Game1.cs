@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.17.210 (Developmental Stages)
+    /// Version: 0.0.18.211 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -97,7 +97,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.17.210 (01/06/16)";
+            GameVersionBuild = "v0.0.18.211 (01/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -174,7 +174,6 @@ namespace TrebleSketch_AIE_Platformer
             Enemy.Debug = Debug;
 
             Rocket = new RocketClass();
-            RocketParts = new RocketPart();
             Rocket.UserInput = UserInput;
             Rocket.Debug = Debug;
             Rocket.SpawnPosition = CentreScreen;
@@ -241,7 +240,7 @@ namespace TrebleSketch_AIE_Platformer
             // Rocket.Position = new Vector2(CentreScreen.X, 0);
             //RocketPart Capsule = new RocketPart(rocketParts[2], Rocket.SpawnPosition, new Vector2(rocketParts[2].Width, rocketParts[2].Height));
             //RocketPart FuelTank = new RocketPart(rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
-            RocketPart Engine = new RocketPart(rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
+            RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
             //Rocket.AddPart(Capsule);
             //Rocket.AddPart(FuelTank);
             Rocket.AddPart(Engine);

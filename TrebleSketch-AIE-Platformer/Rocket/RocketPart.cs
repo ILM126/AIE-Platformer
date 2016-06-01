@@ -9,6 +9,7 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 m_size;
         public Vector2 m_position;
         public float m_scale;
+        PartType m_type;
 
         public enum PartType
         {
@@ -20,12 +21,13 @@ namespace TrebleSketch_AIE_Platformer
             Capsule_Manned_PipingShrike
         }
 
-        public RocketPart(Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
+        public RocketPart(PartType type, Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
         {
             m_texture = tex;
             m_position = pos;
             m_size = size;
             m_scale = scale;
+            m_type = type;
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D texture = null)

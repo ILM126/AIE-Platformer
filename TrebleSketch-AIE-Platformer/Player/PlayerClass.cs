@@ -306,7 +306,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneLoad.ScrapMetals.RemoveAt(ToRemove);
                 MiniGame_BuildTheRocket.Score++;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.Score + " scrap metal pieces", true);
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.Score + " scrap metal pieces", false);
             }
         }
     }

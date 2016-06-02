@@ -68,7 +68,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)
         {
-
             Texture2D tex = texture; //Try to use the parameter texture
             if (tex == null) tex = m_texture; //If none was set try to use the base m_texture
             if (tex == null) /*Console.WriteLine("[ERROR] Texture Null");*/ return; //if the base m_texture is null then don't crash trying to draw nothing

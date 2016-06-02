@@ -50,6 +50,7 @@
     <Compile Include="MenuObjects.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MiniGames\BuildTheRocket.cs" />
+    <Compile Include="MiniGames\FuelUnit.cs" />
     <Compile Include="MiniGames\ScrapMetal.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\StoryMode.cs" />

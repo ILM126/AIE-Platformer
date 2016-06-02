@@ -180,7 +180,7 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.Scale = Scale;
             Rocket.Gravity = Gravity;
             Rocket.GroundHeight = GroundHeight;
-            RocketParts.m_scale = Scale;
+            //RocketParts.m_scale = Scale;
             Rocket.InitialiseRocket();
 
             #endregion

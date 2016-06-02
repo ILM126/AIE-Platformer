@@ -162,6 +162,10 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (MessageNotLoaded)
             {
+                if (ListMessages.messages.Count > 0)
+                {
+                    ListMessages.messages.Clear();
+                }
                 ListMessages.messages.Add(new Message()
                     {
                         Text = "Scene ID: " + SceneID,

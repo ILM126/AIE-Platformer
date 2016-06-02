@@ -181,15 +181,35 @@ namespace TrebleSketch_AIE_Platformer
 
             if (InputHandler.IsKeyDownOnce(Keys.A)) // Move Left
             {
-                Velocity.X = -2.7f;
+               
+               
+                {
+                    Velocity.X = -4.2f;
+                }
                 PlayerFacingRight = false;
             }
 
+            if (InputHandler.IsKeyDownOnce(Keys.A) && InputHandler.IsKeyDownOnce(Keys.LeftShift))
+            {
+                Velocity.X = -10f;
+            }
             if (InputHandler.IsKeyDownOnce(Keys.D)) // Move Right
             {
-                Velocity.X = 2.7f;
+                if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
+                {
+                    Velocity.X = 10f;
+                }
+                else
+                {
+                    Velocity.X = 4.2f;
+                }
                 PlayerFacingRight = true;
             }
+
+            //if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
+            //{
+            //    Debug.WriteToFile("LEFT SHIFT KEY IS BEING PRESSED", true);
+            //}
 
             if (Keyboard.GetState().IsKeyDown(Keys.W) && IsGrounded) Jump(); // Jump!
 
@@ -305,8 +325,8 @@ namespace TrebleSketch_AIE_Platformer
             if (ToRemove != -1)
             {
                 SceneLoad.ScrapMetals.RemoveAt(ToRemove);
-                MiniGame_BuildTheRocket.Score++;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.Score + " scrap metal pieces", false);
+                MiniGame_BuildTheRocket.ScrapMetalCollected++;
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.ScrapMetalCollected + " scrap metal pieces", false);
             }
         }
     }

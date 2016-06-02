@@ -7,6 +7,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     {
         public SquareCollision BoxCollision;
         public LoadScene SceneLoad;
+        public ScrapMetal BTR_ScrapMetal;
 
         public Texture2D tex_FuelUnit;
         public float Gravity;
@@ -19,8 +20,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public Vector2 m_origin;
 
         public float Scale;
-
         public bool IsGrounded;
+
+        // Fuel Units
+        float fuel_LiquidOxygen;
+        float fuel_LiquidKerosene;
 
         public FuelUnit(Texture2D texture = null, Vector2 position = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
         {
@@ -35,7 +39,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             Initialize();
         }
 
-        public void Initialize()
+        public void Initialize() // If the size of the fuel tank it huge, increase the fuel size in propotion to it
         {
             Gravity = 20f;
             Scale = 1f;

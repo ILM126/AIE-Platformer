@@ -15,8 +15,11 @@ namespace TrebleSketch_AIE_Platformer
         //public ScrapMetal BTR_ScrapMetal;
         public Message ListMessages;
 
-        public List<SceneObjects> GroundTiles;
+        public List<SceneObjects> GroundTiles; // For all scenes uses
+
+        /// MiniGame Uses only
         public List<ScrapMetal> ScrapMetals;
+        public List<FuelUnit> FuelUnits;
 
         public Rectangle Button;
         public Rectangle CursonRect;
@@ -62,6 +65,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             GroundTiles = new List<SceneObjects>();
             ScrapMetals = new List<ScrapMetal>();
+            FuelUnits = new List<FuelUnit>();
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
@@ -317,6 +321,7 @@ namespace TrebleSketch_AIE_Platformer
             }
 
             MiniGame_BuildTheRocket.SpawnScrapMetals();
+            MiniGame_BuildTheRocket.SpawnFuelUnits();
 
             PlayerInScene = true;
             RocketInScene = true;

@@ -8,10 +8,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public SquareCollision BoxCollision;
         public LoadScene SceneLoad;
         //public DevLogging Debug;
-        //public Game1 RealGame;
 
         public Texture2D tex_ScrapMetal;
-        //public Vector2 CentreScreen;
 
         public float Gravity;
         public float GroundHeight;
@@ -28,7 +26,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Initialize()
         {
-            // SceneID = 5;
             Gravity = 20f;
             Scale = 1f;
         }
@@ -48,9 +45,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update(GameTime gameTime)
         {
-            //Debug.WriteLine("[INFO] IsGrounded pre UpdateBounds in Update: " + IsGrounded);
             UpdateBounds();
-            //Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in Update: " + IsGrounded);
 
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -69,7 +64,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             {
                 m_velocity = new Vector2(0, 0);
             }
-            //Debug.WriteLine("[INFO] IsGrounded end of Update: " + IsGrounded);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)
@@ -102,7 +96,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             /// Note: this should be called whenever the object position,
             /// size, or scale are changed
             BoxCollision = new SquareCollision(m_position, m_size * Scale);
-            //Debug.WriteLine("[INFO] IsGrounded after BoxCollision: " + IsGrounded);
         }
         protected bool SquareCollisionCheck(SceneObjects pOther)
         {
@@ -121,7 +114,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             m_position.Y = groundHeight;
             m_velocity.Y = 0;
             UpdateBounds();
-            //Debug.WriteLine("[INFO] IsGrounded after UpdateBounds in SetGrounded: " + IsGrounded);
         }
 
         public bool CollisionCheck(PlayerClass other)

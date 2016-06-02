@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.18.215 (Developmental Stages)
+    /// Version: 0.0.19.218 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -64,7 +64,6 @@ namespace TrebleSketch_AIE_Platformer
         PlayerClass Player;
         EnemyClass Enemy;
         RocketClass Rocket;
-        RocketPart RocketParts;
         WorldClass World;
         SceneClass Scene;
         LoadScene SceneLoad;
@@ -82,6 +81,7 @@ namespace TrebleSketch_AIE_Platformer
         // MiniGames
         BuildTheRocket MiniGame_BuildTheRocket;
         ScrapMetal BTR_ScrapMetal;
+        FuelUnit BTR_FuelUnit;
 
         Texture2D[] rocketParts = new Texture2D[4];
 
@@ -97,7 +97,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.18.215 (01/06/16)";
+            GameVersionBuild = "v0.0.19.218 (01/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -139,6 +139,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad = new LoadScene();
             MiniGame_BuildTheRocket = new BuildTheRocket(); // MiniGame - Build The Rocket
             BTR_ScrapMetal = new ScrapMetal(); // Scrap Metal for "Build The Rocket" Minigame
+            BTR_FuelUnit = new FuelUnit();
             // SceneObject.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             // SceneLoad.Button = Button;
             SceneLoad.Debug = Debug;
@@ -148,6 +149,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.MiniGame_BuildTheRocket = MiniGame_BuildTheRocket;
             //SceneLoad.BTR_ScrapMetal = BTR_ScrapMetal;
             BTR_ScrapMetal.SceneLoad = SceneLoad;
+            BTR_FuelUnit.SceneLoad = SceneLoad;
             MiniGame_BuildTheRocket.BTR_ScrapMetal = BTR_ScrapMetal;
             MiniGame_BuildTheRocket.SceneLoad = SceneLoad;
             MiniGame_BuildTheRocket.Debug = Debug;
@@ -155,6 +157,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.InitialiseScene();
             MiniGame_BuildTheRocket.Initialise();
             BTR_ScrapMetal.Initialize();
+            BTR_FuelUnit.Initialize();
 
             #endregion
 
@@ -221,6 +224,7 @@ namespace TrebleSketch_AIE_Platformer
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
                 BTR_ScrapMetal.tex_ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
+                BTR_FuelUnit.tex_FuelUnit = Content.Load<Texture2D>("MiniGame/miniGame_FuelUnits-v1");
                 Audio.Bright_DJStartchAttack = Content.Load<Song>("Audio/Bright by DJStratchAttack");
                 Debug.InformationFont = Content.Load<BitmapFont>("informationfont");
                 Debug.DebugFont = Content.Load<BitmapFont>("debugfont");
@@ -326,6 +330,10 @@ namespace TrebleSketch_AIE_Platformer
                     //Debug.WriteToFile("Size via list: " + SceneLoad.ScrapMetals[0].m_size.ToString(), false);
                 }
 
+                foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+                {
+                    fuelUnit.Update();
+                }
                 //if (BTR_ScrapMetal.m_position.Y == 50)
                 //{
                 //    Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
@@ -436,6 +444,10 @@ namespace TrebleSketch_AIE_Platformer
                 foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
                 {
                     scrapMetal.Draw(gameTime, spriteBatch, scrapMetal.tex_ScrapMetal);
+                }
+                foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+                {
+                    fuelUnit.Draw(gameTime, spriteBatch, fuelUnit.tex_FuelUnit);
                 }
             }
 

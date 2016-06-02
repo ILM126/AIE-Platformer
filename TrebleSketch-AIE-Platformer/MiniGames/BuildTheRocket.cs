@@ -6,6 +6,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
     class BuildTheRocket
     {
         public ScrapMetal BTR_ScrapMetal;
+        public FuelUnit BTR_FuelUnit;
         public LoadScene SceneLoad;
         public DevLogging Debug;
 
@@ -24,12 +25,13 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
         
-        int frameCounter;
+        int scrapMetalFrameCounter;
+        int fuelUnitFrameCounter;
         Random randNum;
 
         public void Initialise()
         {
-            frameCounter = 0;
+            scrapMetalFrameCounter = 0;
             randNum = new Random();
         }
 
@@ -43,9 +45,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void SpawnScrapMetals()
         {
-            frameCounter++;
+            scrapMetalFrameCounter++;
 
-            if (frameCounter > 150 && SceneLoad.ScrapMetals.Count < 20)
+            if (scrapMetalFrameCounter > 150 && SceneLoad.ScrapMetals.Count < 20)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
@@ -54,9 +56,25 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                         new Vector2(50, 30),
                         1f);
                 SceneLoad.ScrapMetals.Add(scrapMetal);
-                frameCounter = 0;
+                scrapMetalFrameCounter = 0;
             }
+        }
 
+        public void SpawnFuelUnits()
+        {
+            fuelUnitFrameCounter++;
+
+            if (fuelUnitFrameCounter > 300 && SceneLoad.FuelUnits.Count < 10)
+            {
+                Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
+                FuelUnit fuelUnit = new FuelUnit(
+                        BTR_FuelUnit.tex_FuelUnit,
+                        pos,
+                        new Vector2(50, 30),
+                        1f);
+                SceneLoad.FuelUnits.Add(fuelUnit);
+                fuelUnitFrameCounter = 0;
+            }
         }
 
         void RandomPostion()
@@ -84,6 +102,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 RocketsBuilt++;
                 Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false);
             }
+            
+            
         }
     }
 }

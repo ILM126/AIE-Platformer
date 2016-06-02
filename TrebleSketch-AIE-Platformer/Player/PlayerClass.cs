@@ -10,6 +10,7 @@ namespace TrebleSketch_AIE_Platformer
 {
     class PlayerClass
     {
+        #region Variables and Classes
         public SquareCollision BoxCollision;
         public DevLogging Debug;
         public LoadScene SceneLoad;
@@ -45,6 +46,8 @@ namespace TrebleSketch_AIE_Platformer
         TimeSpan FiftyMilliseconds = new TimeSpan(0, 0, 0, 0, 50);
         TimeSpan SeventyFiveMilliseconds = new TimeSpan(0, 0, 0, 0, 75);
         TimeSpan lastJumpingDown;
+
+        #endregion
 
         public void InitialisePlayer()
         {
@@ -259,6 +262,8 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
+        #region Collisions
+
         protected virtual void UpdateBounds()
         {
             /// Note: this should be called whenever the object position,
@@ -349,5 +354,6 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false);
             }
         }
+        #endregion
     }
 }

@@ -91,6 +91,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                     , 0);
         }
 
+        #region Collisions
+
         protected virtual void UpdateBounds()
         {
             /// Note: this should be called whenever the object position,
@@ -150,6 +152,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
             return false;
         }
-
+#endregion
     }
 }

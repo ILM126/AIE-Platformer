@@ -19,9 +19,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public int PlannedRocketHeight;
 
         public int ScrapMetalCollected;
-        public int RocketFuelCollected;
+        public int RocketFuelCollected; // To be changed to AmmountRocketFueled
         public int RocketsBuilt;
-        public float PercentageOfRocket;
+        public float PercentageOfRocketBuilt; // Not nessasary?
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
         
@@ -64,7 +64,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             fuelUnitFrameCounter++;
 
-            if (fuelUnitFrameCounter > 300 && SceneLoad.FuelUnits.Count < 10)
+            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(

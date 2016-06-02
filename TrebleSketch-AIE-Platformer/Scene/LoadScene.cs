@@ -366,6 +366,21 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
         }
+
+        public void CheckCollisions(FuelUnit BTR_FuelUnit)
+        {
+            // Check collision with ground tiles
+            foreach (SceneObjects groundTile in GroundTiles)
+            {
+                foreach (FuelUnit fuelUnit in FuelUnits)
+                {
+                    if (fuelUnit.CheckCollisionsGround(groundTile))
+                    {
+                        // Debug.WriteToFile("Rocket is touching the terrain", false);
+                    }
+                }
+            }
+        }
         #endregion
     }
 }

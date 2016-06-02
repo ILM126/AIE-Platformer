@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.19.219 (Developmental Stages)
+    /// Version: 0.0.20.220 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -97,7 +97,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.19.219 (01/06/16)";
+            GameVersionBuild = "v0.0.20.220 (01/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -304,7 +304,6 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.CheckCollisions(Player);
             SceneLoad.CheckCollisions(Rocket);
-            SceneLoad.CheckCollisions(BTR_ScrapMetal);
             // SceneLoad.PlayerInScene = Player.PlayerInScene;
 
             if (SceneLoad.PlayerInScene)
@@ -313,6 +312,7 @@ namespace TrebleSketch_AIE_Platformer
                 Player.IsGrounded = false;
                 Player.PewPew = false;
                 Player.CheckCollisions(BTR_ScrapMetal);
+                Player.CheckCollisions(BTR_FuelUnit);
                 // Debug.WriteToFile("Playing...");
             }
             //else if (!SceneLoad.PlayerInScene)
@@ -322,32 +322,20 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneLoad.MiniGame)
             {
+                SceneLoad.CheckCollisions(BTR_ScrapMetal);
+                SceneLoad.CheckCollisions(BTR_FuelUnit);
+
                 foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
                 {
                     scrapMetal.IsGrounded = false;
                     scrapMetal.Update(gameTime);
-                    //Debug.WriteToFile("Position via list: " + SceneLoad.ScrapMetals[0].m_position.ToString(), false);
-                    //Debug.WriteToFile("Scale via list: " + SceneLoad.ScrapMetals[0].Scale, false);
-                    //Debug.WriteToFile("Size via list: " + SceneLoad.ScrapMetals[0].m_size.ToString(), false);
                 }
 
                 foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
                 {
-                    fuelUnit.Update();
+                    fuelUnit.IsGrounded = false;
+                    fuelUnit.Update(gameTime);
                 }
-                //if (BTR_ScrapMetal.m_position.Y == 50)
-                //{
-                //    Debug.WriteToFile("ScrapMetal Y POSITION: " + BTR_ScrapMetal.m_position.ToString(), false);
-                //}
-
-                //Debug.WriteToFile("MiniGame 'Build The Rocket' is updating", false);
-                //Debug.WriteToFile("Started checking for Scrap Metal Info", false);
-
-                //Debug.WriteToFile("Position: " + BTR_ScrapMetal.m_position.ToString(), false);
-                //Debug.WriteToFile("Size: " + BTR_ScrapMetal.m_size.ToString(), false);
-                //Debug.WriteToFile("Scale: " + BTR_ScrapMetal.Scale.ToString(), false);
-
-                //Debug.WriteToFile("Finished checking for Scrap Metal Info", false);
 
                 MiniGame_BuildTheRocket.Update();
             }
@@ -382,15 +370,15 @@ namespace TrebleSketch_AIE_Platformer
                         "Scrap Metal: " + MiniGame_BuildTheRocket.ScrapMetalCollected,
                         new Vector2(20, 20), Color.Black);
 
-            spriteBatch.DrawString // Fuel units collected
+            spriteBatch.DrawString // Rocket Fueled
                         (Debug.scoreText,
-                        "Fuel units: " + MiniGame_BuildTheRocket.RocketFuelCollected,
+                        "Rocket Fueled: " + MiniGame_BuildTheRocket.RocketFuelCollected,
                         new Vector2(200, 20), Color.Black);
 
             spriteBatch.DrawString // Rockets Built
                         (Debug.scoreText,
                         "Rockets Built: " + MiniGame_BuildTheRocket.RocketsBuilt,
-                        new Vector2(375, 20), Color.Black);
+                        new Vector2(CentreScreen.X * 2 - 200, 20), Color.Black);
 
             //spriteBatch.DrawString // Percentage Complete with rocket
             //            (Debug.scoreText,

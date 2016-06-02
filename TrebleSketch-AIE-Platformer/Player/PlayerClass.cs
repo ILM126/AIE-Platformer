@@ -329,5 +329,25 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.ScrapMetalCollected + " scrap metal pieces", false);
             }
         }
+
+        public void CheckCollisions(FuelUnit BTR_FuelUnit)
+        {
+            // Check collision with ground tiles
+            int ToRemove = -1;
+            foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+            {
+                if (fuelUnit.CollisionCheck(this))
+                {
+                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
+                    ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
+                }
+            }
+            if (ToRemove != -1)
+            {
+                SceneLoad.FuelUnits.RemoveAt(ToRemove);
+                MiniGame_BuildTheRocket.RocketFuelCollected++;
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false);
+            }
+        }
     }
 }

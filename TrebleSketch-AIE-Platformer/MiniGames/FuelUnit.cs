@@ -31,7 +31,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 (int)m_size.X / 2,
                 (int)m_size.Y / 2);
             Scale = scale;
-            // UpdateBounds();
+            UpdateBounds();
             Initialize();
         }
 
@@ -41,9 +41,27 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             Scale = 1f;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
+            UpdateBounds();
 
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (!IsGrounded)
+            {
+                m_velocity.Y += Gravity * time;
+            }
+            else
+            {
+                m_velocity.Y = 0;
+            }
+            m_position.Y += m_velocity.Y * time;
+            m_position.X += m_velocity.X;
+
+            if (IsGrounded)
+            {
+                m_velocity = new Vector2(0, 0);
+            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture = null)
@@ -74,5 +92,67 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
 
         }
+
+        #region Collisions
+        protected virtual void UpdateBounds()
+        {
+            /// Note: this should be called whenever the object position,
+            /// size, or scale are changed
+            BoxCollision = new SquareCollision(m_position, m_size * Scale);
+        }
+        protected bool SquareCollisionCheck(SceneObjects pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
+        protected bool SquareCollisionCheck(PlayerClass pOther)
+        {
+            return BoxCollision.CollsionCheck(pOther.BoxCollision);
+        }
+
+        protected void SetGrounded(float groundHeight)
+        {
+            IsGrounded = true;
+            GroundHeight = groundHeight;
+            m_position.Y = groundHeight;
+            m_velocity.Y = 0;
+            UpdateBounds();
+        }
+
+        public bool CollisionCheck(PlayerClass other)
+        {
+            bool scrapMetalCollision = SquareCollisionCheck(other);
+            if (scrapMetalCollision)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CollisionCheck(SceneObjects other)
+        {
+            bool scrapMetalCollision = SquareCollisionCheck(other);
+            if (scrapMetalCollision)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CheckCollisionsGround(SceneObjects other)
+        {
+            bool scrapMetalCollision = SquareCollisionCheck(other);
+            if (scrapMetalCollision)
+            {
+                /// if player position is above top of ground and player is falling
+                if (m_position.Y < other.BoxCollision.min.Y && m_velocity.Y >= 0)
+                {
+                    SetGrounded(other.BoxCollision.min.Y - m_origin.Y * Scale);
+                }
+                return true;
+            }
+            return false;
+        }
+        #endregion
     }
 }

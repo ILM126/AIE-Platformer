@@ -15,6 +15,7 @@ namespace TrebleSketch_AIE_Platformer
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
         public DevLogging Debug;
+        public RocketPart.PartType LaunchVehicle;
 
         public Vector2 Position;
         public Vector2 SpawnPosition;
@@ -77,17 +78,11 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            foreach (RocketPart part in parts)
-            {
-                
-            }
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
-            Position.X += Velocity.X;
-            
-            
+            Position.X += Velocity.X; 
 
             StackParts();
             UpdateBounds();
@@ -99,6 +94,12 @@ namespace TrebleSketch_AIE_Platformer
             foreach (RocketPart part in parts)
             {
                 int partHeight = (int)part.m_size.Y;
+
+
+                if (LaunchVehicle == RocketPart.PartType.Engine_Titus)
+                {
+
+                }
 
                 //int rocketPartCount = parts.Count;
                 //switch (rocketPartCount)

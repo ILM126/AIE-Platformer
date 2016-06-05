@@ -178,7 +178,6 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Switched to Scene: " + SceneID, true);
                 Debug.WriteToFile("Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
                 MessageNotLoaded = false;
-                Debug.WriteToFile("Game First Load: " + MessageNotLoaded.ToString(), false);
             }
         }
 

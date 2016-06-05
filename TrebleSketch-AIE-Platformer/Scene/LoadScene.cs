@@ -152,7 +152,6 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Front Lawns";
                     break;
                 case 5:
-                    LoadMessage(gameTime);
                     MiniGame_BTR();
                     break;
                 default:
@@ -180,20 +179,6 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
                 MessageNotLoaded = false;
                 Debug.WriteToFile("Game First Load: " + MessageNotLoaded.ToString(), false);
-            }
-        }
-
-        public void LoadMessage(GameTime gameTime)
-        {
-            if (MessageNotLoaded)
-            {
-                ListMessages.messages.Add(new Message()
-                    {
-                        Text = "Scene ID: " + SceneID,
-                        Appeared = gameTime.TotalGameTime,
-                        Position = ListMessages.MessagePosition
-                    });
-                MessageNotLoaded = false;
             }
         }
 

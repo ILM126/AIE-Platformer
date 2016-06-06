@@ -56,7 +56,7 @@ namespace TrebleSketch_AIE_Platformer
         public void SetSize(Vector2 size)
         {
             Size = new Vector2(size.X, size.Y);
-            Debug.WriteToFile("Rocket Size: " + Size.ToString(), true);
+            Debug.WriteToFile("Rocket Size: " + Size.ToString(), true, false);
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);

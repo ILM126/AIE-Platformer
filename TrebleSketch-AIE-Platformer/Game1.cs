@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.20.227 (Developmental Stages)
+    /// Version: 0.0.21.240 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -97,8 +97,8 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.20.227 (06/06/16)";
-            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true);
+            GameVersionBuild = "v0.0.21.240 (06/06/16)";
+            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 720;
@@ -114,7 +114,7 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void Initialize()
         {
-            Debug.WriteToFile("Started Initializing Game", true);
+            Debug.WriteToFile("Started Initializing Game", true, false);
 
             CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
                 , graphics.PreferredBackBufferHeight / 2);
@@ -199,7 +199,7 @@ namespace TrebleSketch_AIE_Platformer
 
             //Debug.WriteToFile(SceneLoad.SceneID + "", true);
 
-            Debug.WriteToFile("Finished Initializing Game", true);
+            Debug.WriteToFile("Finished Initializing Game", true, false);
             #endregion
 
             base.Initialize();
@@ -211,7 +211,7 @@ namespace TrebleSketch_AIE_Platformer
         /// </summary>
         protected override void LoadContent()
         {
-            Debug.WriteToFile("Started Loading Game Textures", true);
+            Debug.WriteToFile("Started Loading Game Textures", true, false);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -235,7 +235,7 @@ namespace TrebleSketch_AIE_Platformer
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
 
-            Debug.WriteToFile("Finished Loading Game Textures", true);
+            Debug.WriteToFile("Finished Loading Game Textures", true, false);
 
             InitialiseRocketParts();
             Rocket.InitialiseRocket();
@@ -271,7 +271,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                Debug.WriteToFile("Ending Game...", true);
+                Debug.WriteToFile("Ending Game...", true, false);
                 Exit();
             }
 
@@ -347,7 +347,7 @@ namespace TrebleSketch_AIE_Platformer
             while (ListMessages.messages.Count > 0 && ListMessages.messages[0].Appeared + ListMessages.MaxAgeMessage < gameTime.TotalGameTime)
             {
                 ListMessages.messages.RemoveAt(0);
-                Debug.WriteToFile("Message being removed", false);
+                Debug.WriteToFile("Message being removed", false, false);
             }
 
             InputHandler.Update();

@@ -223,7 +223,7 @@ namespace TrebleSketch_AIE_Platformer
 
             StageLevelJumper(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), false); } // Get Your Pony Ass Back Here Treble!
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), false, false); } // Get Your Pony Ass Back Here Treble!
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
@@ -258,7 +258,7 @@ namespace TrebleSketch_AIE_Platformer
                 {
                     spriteBatch.DrawString(Debug.InformationFont, "Pew Pew!", new Vector2(Position.X - 50, Position.Y - 10), Color.Black);
                 }
-                Debug.WriteToFile("Pew Pew is activated", false);
+                Debug.WriteToFile("Pew Pew is activated", false, false);
             }
         }
 
@@ -331,7 +331,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneLoad.ScrapMetals.RemoveAt(ToRemove);
                 MiniGame_BuildTheRocket.ScrapMetalCollected++;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.ScrapMetalCollected + " scrap metal pieces", false);
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.ScrapMetalCollected + " scrap metal pieces", false, false);
             }
         }
 
@@ -351,7 +351,7 @@ namespace TrebleSketch_AIE_Platformer
             {
                 SceneLoad.FuelUnits.RemoveAt(ToRemove);
                 MiniGame_BuildTheRocket.RocketFuelCollected++;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false);
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
             }
         }
         #endregion

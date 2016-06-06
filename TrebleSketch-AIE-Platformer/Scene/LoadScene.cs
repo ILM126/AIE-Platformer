@@ -175,8 +175,8 @@ namespace TrebleSketch_AIE_Platformer
                         Appeared = gameTime.TotalGameTime,
                         Position = ListMessages.MessagePosition
                     });
-                Debug.WriteToFile("Switched to Scene: " + SceneID, true);
-                Debug.WriteToFile("Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false);
+                Debug.WriteToFile("Switched to Scene: " + SceneID, true, false);
+                Debug.WriteToFile("Message Appeared Time: " + ListMessages.messages[0].Appeared.ToString(), false, false);
                 MessageNotLoaded = false;
             }
         }

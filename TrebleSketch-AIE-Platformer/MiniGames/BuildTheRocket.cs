@@ -100,7 +100,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
                 ScrapMetalCollected = 0;
                 RocketsBuilt++;
-                Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false);
+                Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false, false);
             }
             
             

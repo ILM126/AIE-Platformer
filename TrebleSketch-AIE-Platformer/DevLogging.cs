@@ -80,11 +80,11 @@ namespace TrebleSketch_AIE_Platformer
             }
             catch (System.UnauthorizedAccessException)
             {
-                WriteToFile("[DEBUG] SHIT, not again. Another Unauthorized Access Exception at StreamWriter, I thought I fixed it!", true);
+                WriteToFile("[DEBUG] SHIT, not again. Another Unauthorized Access Exception at StreamWriter, I thought I fixed it!", true, false);
             }
             catch (Exception)
             {
-                WriteToFile("[DEBUG] StreamWriter encountered an exception", true);
+                WriteToFile("[DEBUG] StreamWriter encountered an exception", true, false);
             }
         }
     }

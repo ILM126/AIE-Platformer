@@ -137,7 +137,7 @@ namespace TrebleSketch_AIE_Platformer
                 PewPew = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), true); } // Get Your Pony Ass Back Here Treble!
+            if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), true, false); } // Get Your Pony Ass Back Here Treble!
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
@@ -174,7 +174,7 @@ namespace TrebleSketch_AIE_Platformer
                 {
                     spriteBatch.DrawString(Debug.InformationFont, "Pew Pew!", new Vector2(Position.X - 50, Position.Y - 10), Color.Black);
                 }
-                Debug.WriteToFile("Pew Pew is activated", false);
+                Debug.WriteToFile("Pew Pew is activated", false, false);
             }
         }
 

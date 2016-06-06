@@ -95,6 +95,19 @@ namespace TrebleSketch_AIE_Platformer
             {
                 int partHeight = (int)part.m_size.Y;
 
+                switch (LaunchVehicle)
+                {
+                    case RocketPart.PartType.Engine_Titus:
+                        break;
+                    case RocketPart.PartType.Capsule_Manned_PipingShrike:
+                        break;
+                    case RocketPart.PartType.FuelTank_Medium:
+                        break;
+                    default:
+                        
+                        break;
+                }
+
 
                 if (LaunchVehicle == RocketPart.PartType.Engine_Titus)
                 {

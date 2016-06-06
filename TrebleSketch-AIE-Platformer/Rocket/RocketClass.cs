@@ -16,6 +16,7 @@ namespace TrebleSketch_AIE_Platformer
         public SquareCollision BoxCollision;
         public DevLogging Debug;
         public RocketPart.PartType PartType;
+        public LaunchVehicles LaunchVehicle;
 
         public Vector2 Position;
         public Vector2 SpawnPosition;
@@ -37,7 +38,9 @@ namespace TrebleSketch_AIE_Platformer
 
         public enum LaunchVehicles
         {
-            LightLauncher_Magpie
+            LightLauncher_Magpie_Crewed,
+            LightLauncher_Magpie_Uncrewed
+
         }
 
         public void AddPart(RocketPart part)
@@ -99,27 +102,29 @@ namespace TrebleSketch_AIE_Platformer
             height = 63;
             foreach (RocketPart part in parts)
             {
-
-                switch (PartType = part.m_type)
+                if (LaunchVehicle == LaunchVehicles.LightLauncher_Magpie_Crewed)
                 {
-                    case RocketPart.PartType.Capsule_Manned_PipingShrike:
-                        part.m_position.Y = Position.Y - height - 60;
-                        Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
-                        height -= part.m_size.Y;
-                        break;
-                    case RocketPart.PartType.FuelTank_Medium:
-                        part.m_position.Y = Position.Y - height;
-                        height -= part.m_size.Y;
-                        break;
-                    case RocketPart.PartType.Engine_Titus:
-                        part.m_position.Y = Position.Y - height - 50;
-                        height -= part.m_size.Y;
-                        break;
-                    default:
-                        int currentPart = -1;
-                        currentPart = parts.IndexOf(part);
-                        Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartType'", true, true);
-                        break;
+                    switch (PartType = part.m_type)
+                    {
+                        case RocketPart.PartType.Capsule_Manned_PipingShrike:
+                            part.m_position.Y = Position.Y - height - 60;
+                            Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
+                            height -= part.m_size.Y;
+                            break;
+                        case RocketPart.PartType.FuelTank_Medium:
+                            part.m_position.Y = Position.Y - height;
+                            height -= part.m_size.Y;
+                            break;
+                        case RocketPart.PartType.Engine_Titus:
+                            part.m_position.Y = Position.Y - height - 50;
+                            height -= part.m_size.Y;
+                            break;
+                        default:
+                            int currentPart = -1;
+                            currentPart = parts.IndexOf(part);
+                            Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartType'", true, true);
+                            break;
+                    }
                 }
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;

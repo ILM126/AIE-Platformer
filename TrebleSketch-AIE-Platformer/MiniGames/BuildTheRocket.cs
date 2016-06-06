@@ -80,7 +80,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update()
         {
-            SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie);
+            SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie_Crewed);
 
             RocketBuild();
         }

@@ -99,9 +99,8 @@ namespace TrebleSketch_AIE_Platformer
             height = 63;
             foreach (RocketPart part in parts)
             {
-                int partHeight = (int)part.m_size.Y;
 
-                switch (PartType)
+                switch (PartType = part.m_type)
                 {
                     case RocketPart.PartType.Capsule_Manned_PipingShrike:
                         part.m_position.Y = Position.Y - height - 60;
@@ -122,22 +121,6 @@ namespace TrebleSketch_AIE_Platformer
                         Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartType'", true, true);
                         break;
                 }
-                //switch (partHeight)
-                //{
-                //    case 50: // crew capsule
-                //        part.m_position.Y = Position.Y - height - 60;
-                //        height -= part.m_size.Y;
-                //        //Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
-                //        break;
-                //    case 75: // engine
-                //        part.m_position.Y = Position.Y - height - 50;
-                //        height -= part.m_size.Y;
-                //        break;
-                //    case 175: // fuel tank
-                //        part.m_position.Y = Position.Y - height;
-                //        height -= part.m_size.Y;
-                //        break;
-                //}
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference

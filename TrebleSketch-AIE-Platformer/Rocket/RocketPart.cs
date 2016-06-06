@@ -9,7 +9,7 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 m_size;
         public Vector2 m_position;
         public float m_scale;
-        PartType m_type;
+        public PartType m_type;
 
         public enum PartType
         {

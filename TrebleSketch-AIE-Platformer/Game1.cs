@@ -91,6 +91,7 @@ namespace TrebleSketch_AIE_Platformer
         public float GroundHeight;
         string GameVersionBuild;
 
+        bool FullScreen;
         #endregion
 
         public Game1()
@@ -133,6 +134,7 @@ namespace TrebleSketch_AIE_Platformer
             Scale = 1f;
             Gravity = 600f;
             GroundHeight = 0f;
+            FullScreen = false;
 
             Scene = new SceneClass();
             SceneObject = new SceneObjects();
@@ -350,6 +352,8 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Message being removed", false, false);
             }
 
+            CallFullScreen();
+
             InputHandler.Update();
 
             base.Update(gameTime);
@@ -361,6 +365,32 @@ namespace TrebleSketch_AIE_Platformer
         //    rect.SetData(new[] { color });
         //    spriteBatch.Draw(rect, coords, color);
         //}
+
+        void CallFullScreen()
+        {
+            if (InputHandler.IsKeyDownOnce(Keys.F))
+            {
+                if (!FullScreen)
+                {
+                    graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                    graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    graphics.ApplyChanges();
+                    CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
+                        , graphics.PreferredBackBufferHeight / 2);
+                    graphics.ToggleFullScreen();
+                    FullScreen = true;
+                }
+                else if (FullScreen)
+                {
+                    graphics.PreferredBackBufferHeight = 720;
+                    graphics.PreferredBackBufferWidth = 1280;
+                    graphics.ApplyChanges();
+                    CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
+                        , graphics.PreferredBackBufferHeight / 2);
+                    graphics.ToggleFullScreen();
+                }
+            }
+        }
 
         #region Draw UI
         

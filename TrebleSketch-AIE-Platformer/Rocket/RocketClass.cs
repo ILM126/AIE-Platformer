@@ -15,7 +15,7 @@ namespace TrebleSketch_AIE_Platformer
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
         public DevLogging Debug;
-        public RocketPart.PartType LaunchVehicle;
+        public RocketPart.PartType PartType;
 
         public Vector2 Position;
         public Vector2 SpawnPosition;
@@ -34,6 +34,11 @@ namespace TrebleSketch_AIE_Platformer
         public float GroundHeight;
 
         float height;
+
+        public enum LaunchVehicles
+        {
+            LightLauncher_Magpie
+        }
 
         public void AddPart(RocketPart part)
         {
@@ -78,6 +83,7 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
+            //Debug.WriteToFile("Position of the Piping Shrike capsule: " + parts[0].m_position.ToString(), false, false);
 
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
@@ -95,55 +101,43 @@ namespace TrebleSketch_AIE_Platformer
             {
                 int partHeight = (int)part.m_size.Y;
 
-                switch (LaunchVehicle)
+                switch (PartType)
                 {
-                    case RocketPart.PartType.Engine_Titus:
-                        break;
                     case RocketPart.PartType.Capsule_Manned_PipingShrike:
+                        part.m_position.Y = Position.Y - height - 60;
+                        Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
+                        height -= part.m_size.Y;
                         break;
                     case RocketPart.PartType.FuelTank_Medium:
-                        break;
-                    default:
-                        
-                        break;
-                }
-
-
-                if (LaunchVehicle == RocketPart.PartType.Engine_Titus)
-                {
-
-                }
-
-                //int rocketPartCount = parts.Count;
-                //switch (rocketPartCount)
-                //{
-                //    case 1:
-                //        part.m_position.Y = Position.Y - height/* - 50*/;
-                //        height -= part.m_size.Y;
-                //        break;
-                //    case 2:
-                //        break;
-                //    case 3:
-                //        break;
-                //    default:
-                //        break;
-                //}
-
-                switch (partHeight)
-                {
-                    case 50: // crew capsule
-                        part.m_position.Y = Position.Y - height - 60;
-                        height -= part.m_size.Y;
-                        break;
-                    case 75: // engine
-                        part.m_position.Y = Position.Y - height - 50;
-                        height -= part.m_size.Y;
-                        break;
-                    case 175: // fuel tank
                         part.m_position.Y = Position.Y - height;
                         height -= part.m_size.Y;
                         break;
+                    case RocketPart.PartType.Engine_Titus:
+                        part.m_position.Y = Position.Y - height - 50;
+                        height -= part.m_size.Y;
+                        break;
+                    default:
+                        int currentPart = -1;
+                        currentPart = parts.IndexOf(part);
+                        Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartType'", true, true);
+                        break;
                 }
+                //switch (partHeight)
+                //{
+                //    case 50: // crew capsule
+                //        part.m_position.Y = Position.Y - height - 60;
+                //        height -= part.m_size.Y;
+                //        //Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
+                //        break;
+                //    case 75: // engine
+                //        part.m_position.Y = Position.Y - height - 50;
+                //        height -= part.m_size.Y;
+                //        break;
+                //    case 175: // fuel tank
+                //        part.m_position.Y = Position.Y - height;
+                //        height -= part.m_size.Y;
+                //        break;
+                //}
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference

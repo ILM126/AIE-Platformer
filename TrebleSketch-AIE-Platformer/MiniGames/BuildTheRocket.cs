@@ -10,12 +10,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public LoadScene SceneLoad;
         public DevLogging Debug;
 
-        public enum LaunchVehicles
-        {
-            LightLauncher_Magpie
-        }
-
-        public LaunchVehicles LaunchVehicle;
+        public RocketClass.LaunchVehicles LaunchVehicle;
         public int PlannedRocketHeight;
 
         public int ScrapMetalCollected;
@@ -35,7 +30,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             randNum = new Random();
         }
 
-        public void SetRocketHeight(LaunchVehicles rocket)
+        public void SetRocketHeight(RocketClass.LaunchVehicles rocket)
         {
             if (LaunchVehicle == rocket)
             {
@@ -85,7 +80,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update()
         {
-            SetRocketHeight(LaunchVehicles.LightLauncher_Magpie);
+            SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie);
 
             RocketBuild();
         }

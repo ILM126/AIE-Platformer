@@ -118,8 +118,6 @@ namespace TrebleSketch_AIE_Platformer
                 case 1:
                     GroundTiles.Clear();
                     SceneName = "Main Menu";
-                    Scene_Width = 1280;
-                    Scene_Height = 720;
                     if (state.LeftButton == ButtonState.Pressed)
                     {
                         isClickingWhileHovering = true;

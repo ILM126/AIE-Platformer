@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TrebleSketch_AIE_Platformer
 {
-    class DevLogging
+    class DevLogging // Version 5
     {
         public BitmapFont DebugFont;
         public BitmapFont InformationFont;
@@ -35,25 +35,46 @@ namespace TrebleSketch_AIE_Platformer
         /// All debugging shall be written to this
         /// </summary>
         /// <param name="text"></param>
-        public void WriteToFile(string text, bool toConsole)
+        public void WriteToFile(string text, bool toConsole, bool warning)
         {
-            if (toConsole)
+            if (toConsole || !toConsole && !warning)
             {
                 Console.WriteLine("[INFO] " + text);
             }
+            else if (toConsole || !toConsole && warning)
+            {
+                Console.WriteLine("[WARNING] " + text);
+            }
+            else
+            {
+                Console.WriteLine("[WARNING] Debugging Error. Unknown cause of crash");
+                throw new System.InvalidOperationException("[WARNING] Debugging Error");
+            }
+
             try
             {
                 using (StreamWriter writer = new StreamWriter(GetCurrentDirectory(), true))
                 {
-                    if (!toConsole)
+                    if (!toConsole && !warning)
                     {
                         writer.WriteLine("[DEBUG] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
                         writer.Close();
                     }
-                    else
+                    else if (toConsole && !warning)
                     {
                         writer.WriteLine("[INFO] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
                         writer.Close();
+                    }
+                    else if (toConsole || !toConsole && warning)
+                    {
+                        writer.WriteLine("[WARNING] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt ") + text);
+                        writer.Close();
+                    }
+                    else
+                    {
+                        writer.WriteLine("[WARNING] Debugging Error. Unknonw cause of crash.");
+                        writer.Close();
+                        throw new System.InvalidOperationException("[WARNING] Debugging Error");
                     }
                 }
             }

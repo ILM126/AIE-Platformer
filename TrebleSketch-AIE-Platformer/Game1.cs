@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.23.246 (Developmental Stages)
+    /// Version: 0.0.23.247 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -96,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.23.246 (15/06/16)";
+            GameVersionBuild = "v0.0.23.247 (15/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -394,18 +394,13 @@ namespace TrebleSketch_AIE_Platformer
 
             spriteBatch.DrawString // Rocket Fueled
                         (Debug.scoreText,
-                        "Rocket Fueled: " + MiniGame_BuildTheRocket.RocketFuelCollected,
+                        "Rocket Fueled: " + MiniGame_BuildTheRocket.RocketFuelCollected + "/" + MiniGame_BuildTheRocket.PlannedRocketFuel,
                         new Vector2(200, 20), Color.Black);
 
             spriteBatch.DrawString // Rockets Built
                         (Debug.scoreText,
                         "Rockets Built: " + MiniGame_BuildTheRocket.RocketsBuilt,
                         new Vector2(CentreScreen.X * 2 - 200, 20), Color.Black);
-
-            //spriteBatch.DrawString // Percentage Complete with rocket
-            //            (Debug.scoreText,
-            //            "blah blah",
-            //            new Vector2(CentreScreen.X, 45), Color.White);
 
             //spriteBatch.DrawString // Time Remaining!
             //            (Debug.scoreText,

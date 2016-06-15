@@ -17,7 +17,7 @@ namespace TrebleSketch_AIE_Platformer
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
         public DevLogging Debug;
-        public RocketPart.PartType PartType;
+        public RocketPart.PartTypes PartTypes;
         public LaunchVehicles LaunchVehicle;
 
         public Vector2 Position;
@@ -132,25 +132,25 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (LaunchVehicle == LaunchVehicles.LightLauncher_Magpie_Crewed)
                 {
-                    switch (PartType = part.m_type)
+                    switch (PartTypes = part.m_type)
                     {
-                        case RocketPart.PartType.Capsule_Manned_PipingShrike:
+                        case RocketPart.PartTypes.Capsule_Manned_PipingShrike:
                             part.m_position.Y = Position.Y - height - higherPart;
                             //Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
                             height -= part.m_size.Y;
                             break;
-                        case RocketPart.PartType.FuelTank_Medium:
+                        case RocketPart.PartTypes.FuelTank_Medium:
                             part.m_position.Y = Position.Y - height;
                             height -= part.m_size.Y;
                             break;
-                        case RocketPart.PartType.Engine_Titus:
+                        case RocketPart.PartTypes.Engine_Titus:
                             part.m_position.Y = Position.Y - height + lowerPart;
                             height -= part.m_size.Y;
                             break;
                         default:
                             int currentPart = -1;
                             currentPart = parts.IndexOf(part);
-                            Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartType'", true, true);
+                            Debug.WriteToFile("Part no. " + currentPart + ", is not assosiated with a 'PartTypes'", true, true);
                             break;
                     }
                 }

@@ -9,9 +9,10 @@ namespace TrebleSketch_AIE_Platformer
         public Vector2 m_size;
         public Vector2 m_position;
         public float m_scale;
-        public PartType m_type;
+        public PartTypes m_type;
+        public int fuelTankSize;
 
-        public enum PartType
+        public enum PartTypes
         {
             Engine_Titus,
             FuelTank_Small,
@@ -21,13 +22,28 @@ namespace TrebleSketch_AIE_Platformer
             Capsule_Manned_PipingShrike
         }
 
-        public RocketPart(PartType type, Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
+        public RocketPart(PartTypes type, Texture2D tex = null, Vector2 pos = new Vector2(), Vector2 size = new Vector2(), float scale = 1f)
         {
             m_texture = tex;
             m_position = pos;
             m_size = size;
             m_scale = scale;
             m_type = type;
+            if (type == PartTypes.FuelTank_Large)
+            {
+                fuelTankSize = 1500;
+            }
+            else if (type == PartTypes.FuelTank_Medium)
+            {
+                fuelTankSize = 1000;
+            }
+            else if (type == PartTypes.FuelTank_Small)
+            {
+                fuelTankSize = 500;
+            } else
+            {
+                fuelTankSize = 0;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D texture = null)

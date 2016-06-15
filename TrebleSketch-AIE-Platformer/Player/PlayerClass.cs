@@ -350,7 +350,7 @@ namespace TrebleSketch_AIE_Platformer
             if (ToRemove != -1)
             {
                 SceneLoad.FuelUnits.RemoveAt(ToRemove);
-                MiniGame_BuildTheRocket.RocketFuelCollected++;
+                MiniGame_BuildTheRocket.RocketFuelCollected += 400;
                 Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
             }
         }

@@ -89,6 +89,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             RocketBuild(gameTime);
 
+            //Debug.WriteToFile("Rocket Engine Position after RocketBuild(): " + parts[0].m_position.ToString(), true, false);
+
             switch (parts.Count)
             {
                 case 0:
@@ -103,6 +105,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                     Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height + Rocket.rocketParts[1].Height + Rocket.rocketParts[2].Height));
                     break;
             }
+            //Debug.WriteToFile("Rocket Engine Position after SetSize in BTR: " + parts[0].m_position.ToString(), true, false);
         }
 
         public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
@@ -118,19 +121,20 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false, false);
             }
             
-            if (ScrapMetalCollected == 3 && parts.Count == 0)
+            if (ScrapMetalCollected == 1 && parts.Count == 0) // 3
             {
                 RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, Rocket.rocketParts[0], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
                 Rocket.AddPart(Engine);
                 Debug.WriteToFile("Player has constructed the 'Titus' Kerlox Engine", true, false);
+                Debug.WriteToFile("Engine Spawned at: " + parts[0].m_position.ToString(), true, false);
             }
-            else if (ScrapMetalCollected == 9 && parts.Count == 1)
+            else if (ScrapMetalCollected == 2 && parts.Count == 1) // 10
             {
                 RocketPart FuelTank = new RocketPart(RocketPart.PartType.FuelTank_Medium, Rocket.rocketParts[1], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[1].Width, Rocket.rocketParts[1].Height));
                 Rocket.AddPart(FuelTank);
                 Debug.WriteToFile("Player has constructed the Medium sized Fuel Tank", true, false);
             }
-            else if (ScrapMetalCollected == 12 && parts.Count == 2)
+            else if (ScrapMetalCollected == 3 && parts.Count == 2) // 12
             {
                 RocketPart Capsule = new RocketPart(RocketPart.PartType.Capsule_Manned_PipingShrike, Rocket.rocketParts[2], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[2].Width, Rocket.rocketParts[2].Height));
                 Rocket.AddPart(Capsule);
@@ -140,25 +144,30 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 //Debug.WriteToFile("RocketBuild is being updated", false, false);
             }
 
-            foreach (RocketPart part in parts)
+            foreach (RocketPart part in Rocket.parts)
             {
-                Debug.WriteToFile("Current Rocket Part Position" + part.m_position.ToString(), false, false);
+                //Debug.WriteToFile("Current Rocket Part Position: " + part.m_position.ToString(), true, false);
             }
 
-            //if (parts.Count == 3)
-            //{
-            //    float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (parts.Count == 3)
+            {
+                //float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                //    if (Rocket.Position.Y < 0)
-                //    {
-                //        //Rocket.Velocity.Y += 1 * time;
-                //    } else if (Rocket.Position.Y == 0)
-                //    {
-                //        Debug.WriteToFile("Rocket Flight Animation complete", true, false);
-                //        Rocket.parts.Clear();
-                //        Rocket.InitialiseRocket();
-                //    }
+                //Debug.WriteToFile("Rocket Flight Animation complete", true, false);
+                //Rocket.parts.Clear();
+                //Rocket.InitialiseRocket();
+
+                //if (Rocket.Position.Y < 0)
+                //{
+                //    //Rocket.Velocity.Y += 1 * time;
                 //}
+                //else /*if (Rocket.Position.Y == 0)*/
+                //{
+                //    Debug.WriteToFile("Rocket Flight Animation complete", true, false);
+                //    Rocket.parts.Clear();
+                //    Rocket.InitialiseRocket();
+                //}
+            }
         }
     }
 }

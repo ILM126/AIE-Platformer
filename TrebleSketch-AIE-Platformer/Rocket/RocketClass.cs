@@ -37,6 +37,8 @@ namespace TrebleSketch_AIE_Platformer
         public float GroundHeight;
 
         float height;
+        int lowerPart;
+        int higherPart;
 
         public enum LaunchVehicles
         {
@@ -73,7 +75,9 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update(GameTime gameTime)
         {
+            //Debug.WriteToFile("Engine position before time in Update in RocketClass: " + parts[0].m_position.ToString(), true, false);
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //Debug.WriteToFile("Engine position after time in Update in RocketClass: " + parts[0].m_position.ToString(), true, false);
 
             if (InputHandler.IsKeyDownOnce(Keys.Up))
             {
@@ -93,6 +97,7 @@ namespace TrebleSketch_AIE_Platformer
             CalculatePositionAndCollisionBox();
             StackParts();
             UpdateBounds();
+            //Debug.WriteToFile("Rocket Engine Position end of RocketClass Update: " + parts[0].m_position.ToString(), true, false);
         }
 
         void CalculatePositionAndCollisionBox()
@@ -107,10 +112,13 @@ namespace TrebleSketch_AIE_Platformer
                         height = 0;
                         break;
                     case 2:
-                        height = 23;
+                        height = 113;
+                        lowerPart = 200;
                         break;
                     case 3:
-                        height = 63;
+                        height = 88;
+                        lowerPart = 200;
+                        higherPart = 287;
                         break;
                     default:
                         break;
@@ -127,7 +135,7 @@ namespace TrebleSketch_AIE_Platformer
                     switch (PartType = part.m_type)
                     {
                         case RocketPart.PartType.Capsule_Manned_PipingShrike:
-                            part.m_position.Y = Position.Y - height - 60;
+                            part.m_position.Y = Position.Y - height - higherPart;
                             //Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
                             height -= part.m_size.Y;
                             break;
@@ -136,7 +144,7 @@ namespace TrebleSketch_AIE_Platformer
                             height -= part.m_size.Y;
                             break;
                         case RocketPart.PartType.Engine_Titus:
-                            part.m_position.Y = Position.Y - height - 50;
+                            part.m_position.Y = Position.Y - height + lowerPart;
                             height -= part.m_size.Y;
                             break;
                         default:
@@ -149,6 +157,7 @@ namespace TrebleSketch_AIE_Platformer
                 //part.m_position.Y = Position.Y - height;
                 //height -= part.m_size.Y;
                 // This is the default code, keeping it here as a reference
+                //Debug.WriteToFile("Rocket Engine Position end of StackParts: " + parts[0].m_position.ToString(), true, false);
             }
         }
 

@@ -12,6 +12,8 @@ namespace TrebleSketch_AIE_Platformer
         //      Add list of parts that have the textures and stack dynamically
         public List<RocketPart> parts = new List<RocketPart>();
 
+        public Texture2D[] rocketParts = new Texture2D[4];
+
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
         public DevLogging Debug;
@@ -40,7 +42,6 @@ namespace TrebleSketch_AIE_Platformer
         {
             LightLauncher_Magpie_Crewed,
             LightLauncher_Magpie_Uncrewed
-
         }
 
         public void AddPart(RocketPart part)
@@ -68,8 +69,6 @@ namespace TrebleSketch_AIE_Platformer
             Origin = new Vector2(
                 (int)Size.X / 2,
                 (int)Size.Y / 2);
-            // Debug.WriteToFile("Rocket Origin: " + Origin.ToString(), false);
-            // Debug.WriteToFile("Rocket Origin: " + Position.ToString(), false);
         }
 
         public void Update(GameTime gameTime)
@@ -86,20 +85,41 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            //Debug.WriteToFile("Position of the Piping Shrike capsule: " + parts[0].m_position.ToString(), false, false);
-
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
-            Position.X += Velocity.X; 
+            Position.X += Velocity.X;
 
+            CalculatePositionAndCollisionBox();
             StackParts();
             UpdateBounds();
         }
 
+        void CalculatePositionAndCollisionBox()
+        {
+            int partCount = parts.Count;
+            if (LaunchVehicle == LaunchVehicles.LightLauncher_Magpie_Crewed)
+            {
+                switch (partCount)
+                {
+                    case 0:
+                    case 1:
+                        height = 0;
+                        break;
+                    case 2:
+                        height = 23;
+                        break;
+                    case 3:
+                        height = 63;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         void StackParts()
         {
-            height = 63;
             foreach (RocketPart part in parts)
             {
                 if (LaunchVehicle == LaunchVehicles.LightLauncher_Magpie_Crewed)
@@ -108,7 +128,7 @@ namespace TrebleSketch_AIE_Platformer
                     {
                         case RocketPart.PartType.Capsule_Manned_PipingShrike:
                             part.m_position.Y = Position.Y - height - 60;
-                            Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
+                            //Debug.WriteToFile("Position of Piping Shrike: " + part.m_position.ToString(), true, false);
                             height -= part.m_size.Y;
                             break;
                         case RocketPart.PartType.FuelTank_Medium:

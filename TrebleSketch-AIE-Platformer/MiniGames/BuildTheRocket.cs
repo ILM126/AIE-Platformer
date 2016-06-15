@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
 {
@@ -9,8 +10,10 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public FuelUnit BTR_FuelUnit;
         public LoadScene SceneLoad;
         public DevLogging Debug;
+        public RocketClass Rocket;
 
         public RocketClass.LaunchVehicles LaunchVehicle;
+        public List<RocketPart> parts;
         public int PlannedRocketHeight;
 
         public int ScrapMetalCollected;
@@ -78,14 +81,18 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             // randNum.Next(0, groundTiles - 1)
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
+            parts = Rocket.parts;
+
             SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie_Crewed);
 
-            RocketBuild();
+            RocketBuild(gameTime);
+
+            Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[2].Height + Rocket.rocketParts[1].Height + Rocket.rocketParts[0].Height));
         }
 
-        public void RocketBuild() // Increments of 25 for one scrapmetal
+        public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
         {
             int ScrapMetalNeeded = PlannedRocketHeight / 25;
 
@@ -98,7 +105,39 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false, false);
             }
             
-            
+            if (ScrapMetalCollected == 3 && parts.Count == 0)
+            {
+                RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, Rocket.rocketParts[0], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
+                Rocket.AddPart(Engine);
+            }
+            else if (ScrapMetalCollected == 7 && parts.Count == 1)
+            {
+                RocketPart FuelTank = new RocketPart(RocketPart.PartType.FuelTank_Medium, Rocket.rocketParts[1], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[1].Width, Rocket.rocketParts[1].Height));
+                Rocket.AddPart(FuelTank);
+            }
+            else if (ScrapMetalCollected == 2 && parts.Count == 2)
+            {
+                RocketPart Capsule = new RocketPart(RocketPart.PartType.Capsule_Manned_PipingShrike, Rocket.rocketParts[2], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[2].Width, Rocket.rocketParts[2].Height));
+                Rocket.AddPart(Capsule);
+            } else
+            {
+                Debug.WriteToFile("RocketBuild is being updated", false, false);
+            }
+
+            if (parts.Count == 3)
+            {
+                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (Rocket.Position.Y < 0)
+                {
+                    Rocket.Velocity.Y += 1 * time;
+                } else if (Rocket.Position.Y == 0)
+                {
+                    Debug.WriteToFile("Rocket Flight Animation complete", true, false);
+                    Rocket.parts.Clear();
+                    Rocket.InitialiseRocket();
+                }
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.22.243 (Developmental Stages)
+    /// Version: 0.0.22.244 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -83,8 +83,6 @@ namespace TrebleSketch_AIE_Platformer
         ScrapMetal BTR_ScrapMetal;
         FuelUnit BTR_FuelUnit;
 
-        Texture2D[] rocketParts = new Texture2D[4];
-
         public Vector2 CentreScreen;
         public float Scale;
         public float Gravity;
@@ -98,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.22.243 (06/06/16)";
+            GameVersionBuild = "v0.0.22.244 (15/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -188,8 +186,10 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.Scale = Scale;
             Rocket.Gravity = Gravity;
             Rocket.GroundHeight = GroundHeight;
-            //RocketParts.m_scale = Scale;
+            //Rocket.rocketParts.m_scale = Scale;
             Rocket.InitialiseRocket();
+
+            MiniGame_BuildTheRocket.parts = Rocket.parts;
 
             #endregion
 
@@ -220,9 +220,9 @@ namespace TrebleSketch_AIE_Platformer
             
                 Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left-v2");
                 Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right-v2");
-                rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
-                rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
-                rocketParts[2] = Content.Load<Texture2D>("Rocket/capsule-PipingShrike-v1");
+                Rocket.rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
+                Rocket.rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
+                Rocket.rocketParts[2] = Content.Load<Texture2D>("Rocket/capsule-PipingShrike-v1");
                 SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
@@ -239,21 +239,21 @@ namespace TrebleSketch_AIE_Platformer
 
             Debug.WriteToFile("Finished Loading Game Textures", true, false);
 
-            InitialiseRocketParts();
+            //InitialiseRocket.rocketParts();
             Rocket.InitialiseRocket();
-            Rocket.SetSize(new Vector2(rocketParts[0].Width, rocketParts[2].Height + rocketParts[1].Height + rocketParts[0].Height));
+            //Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[2].Height + Rocket.rocketParts[1].Height + Rocket.rocketParts[0].Height));
         }
 
-        public void InitialiseRocketParts()
-        {
-            // Rocket.Position = new Vector2(CentreScreen.X, 0);
-            RocketPart Capsule = new RocketPart(RocketPart.PartType.Capsule_Manned_PipingShrike, rocketParts[2], Rocket.SpawnPosition, new Vector2(rocketParts[2].Width, rocketParts[2].Height));
-            RocketPart FuelTank = new RocketPart(RocketPart.PartType.FuelTank_Medium, rocketParts[1], Rocket.SpawnPosition, new Vector2(rocketParts[1].Width, rocketParts[1].Height));
-            RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, rocketParts[0], Rocket.SpawnPosition, new Vector2(rocketParts[0].Width, rocketParts[0].Height));
-            Rocket.AddPart(Capsule);
-            Rocket.AddPart(FuelTank);
-            Rocket.AddPart(Engine);
-        }
+        //public void InitialiseRocket.rocketParts()
+        //{
+        //    // Rocket.Position = new Vector2(CentreScreen.X, 0);
+        //    RocketPart Capsule = new RocketPart(RocketPart.PartType.Capsule_Manned_PipingShrike, Rocket.rocketParts[2], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[2].Width, Rocket.rocketParts[2].Height));
+        //    RocketPart FuelTank = new RocketPart(RocketPart.PartType.FuelTank_Medium, Rocket.rocketParts[1], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[1].Width, Rocket.rocketParts[1].Height));
+        //    RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, Rocket.rocketParts[0], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
+        //    Rocket.AddPart(Capsule);
+        //    Rocket.AddPart(FuelTank);
+        //    Rocket.AddPart(Engine);
+        //}
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -340,7 +340,7 @@ namespace TrebleSketch_AIE_Platformer
                     fuelUnit.Update(gameTime);
                 }
 
-                MiniGame_BuildTheRocket.Update();
+                MiniGame_BuildTheRocket.Update(gameTime);
             }
             #endregion
 

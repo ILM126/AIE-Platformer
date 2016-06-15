@@ -89,7 +89,20 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             RocketBuild(gameTime);
 
-            Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[2].Height + Rocket.rocketParts[1].Height + Rocket.rocketParts[0].Height));
+            switch (parts.Count)
+            {
+                case 0:
+                    break;
+                case 1:
+                    Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
+                    break;
+                case 2:
+                    Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height + Rocket.rocketParts[1].Height));
+                    break;
+                case 3:
+                    Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height + Rocket.rocketParts[1].Height + Rocket.rocketParts[2].Height));
+                    break;
+            }
         }
 
         public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
@@ -109,35 +122,43 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             {
                 RocketPart Engine = new RocketPart(RocketPart.PartType.Engine_Titus, Rocket.rocketParts[0], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
                 Rocket.AddPart(Engine);
+                Debug.WriteToFile("Player has constructed the 'Titus' Kerlox Engine", true, false);
             }
-            else if (ScrapMetalCollected == 7 && parts.Count == 1)
+            else if (ScrapMetalCollected == 9 && parts.Count == 1)
             {
                 RocketPart FuelTank = new RocketPart(RocketPart.PartType.FuelTank_Medium, Rocket.rocketParts[1], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[1].Width, Rocket.rocketParts[1].Height));
                 Rocket.AddPart(FuelTank);
+                Debug.WriteToFile("Player has constructed the Medium sized Fuel Tank", true, false);
             }
-            else if (ScrapMetalCollected == 2 && parts.Count == 2)
+            else if (ScrapMetalCollected == 12 && parts.Count == 2)
             {
                 RocketPart Capsule = new RocketPart(RocketPart.PartType.Capsule_Manned_PipingShrike, Rocket.rocketParts[2], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[2].Width, Rocket.rocketParts[2].Height));
                 Rocket.AddPart(Capsule);
+                Debug.WriteToFile("Player has constructed the 'Piping Shrike' Manned Capsule", true, false);
             } else
             {
-                Debug.WriteToFile("RocketBuild is being updated", false, false);
+                //Debug.WriteToFile("RocketBuild is being updated", false, false);
             }
 
-            if (parts.Count == 3)
+            foreach (RocketPart part in parts)
             {
-                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (Rocket.Position.Y < 0)
-                {
-                    Rocket.Velocity.Y += 1 * time;
-                } else if (Rocket.Position.Y == 0)
-                {
-                    Debug.WriteToFile("Rocket Flight Animation complete", true, false);
-                    Rocket.parts.Clear();
-                    Rocket.InitialiseRocket();
-                }
+                Debug.WriteToFile("Current Rocket Part Position" + part.m_position.ToString(), false, false);
             }
+
+            //if (parts.Count == 3)
+            //{
+            //    float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                //    if (Rocket.Position.Y < 0)
+                //    {
+                //        //Rocket.Velocity.Y += 1 * time;
+                //    } else if (Rocket.Position.Y == 0)
+                //    {
+                //        Debug.WriteToFile("Rocket Flight Animation complete", true, false);
+                //        Rocket.parts.Clear();
+                //        Rocket.InitialiseRocket();
+                //    }
+                //}
         }
     }
 }

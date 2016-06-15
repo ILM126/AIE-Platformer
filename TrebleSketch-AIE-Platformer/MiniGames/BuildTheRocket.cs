@@ -65,7 +65,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             fuelUnitFrameCounter++;
 
-            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10)
+            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10 && fuelTotal >= PlannedRocketFuel[)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(

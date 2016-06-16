@@ -51,7 +51,10 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Enemy) Make Enemy textures
     /// - (Enemy) Get enemy AI working
     /// - (Mini Game - Build the Rocket) Rocket Launch sequence
-    /// - (Mini Game - Build the Rocket) Use for Fuel Units
+    /// - (Mini Game - Build the Rocket) Loading screen before first part spawn!
+    /// - (Mini Game - Build the Rocket) Rebuild rocket after launch
+    /// - (Mini Game - Build the Rocket) End game screen
+    /// - (Mini Game - Build the Rocket) Score management
     /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game

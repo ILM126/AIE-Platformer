@@ -31,15 +31,15 @@ namespace TrebleSketch_AIE_Platformer
             m_type = type;
             if (type == PartTypes.FuelTank_Large)
             {
-                fuelTankSize = 1500;
+                fuelTankSize = 5000;
             }
             else if (type == PartTypes.FuelTank_Medium)
             {
-                fuelTankSize = 1000;
+                fuelTankSize = 2000;
             }
             else if (type == PartTypes.FuelTank_Small)
             {
-                fuelTankSize = 500;
+                fuelTankSize = 1000;
             } else
             {
                 fuelTankSize = 0;

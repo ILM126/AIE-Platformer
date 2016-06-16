@@ -26,7 +26,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
         public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 3, 0, 0);
-        
+
+        int screenWidth;
+        int screenHeight;
         int scrapMetalFrameCounter;
         int fuelUnitFrameCounter;
         bool LiftOff;
@@ -52,10 +54,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void SpawnScrapMetals()
         {
             scrapMetalFrameCounter++;
+            int scrapMetalRandomFrames = randNum.Next(165, 205);
 
-            if (scrapMetalFrameCounter > 150 && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
+            if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
             {
-                Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
+                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 200), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 20)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
                         BTR_ScrapMetal.tex_ScrapMetal,
                         pos,
@@ -69,10 +72,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void SpawnFuelUnits()
         {
             fuelUnitFrameCounter++;
+            int fuelUnitRandomFrames = randNum.Next(375, 450);
 
-            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected <= PlannedRocketFuel)
+            if (fuelUnitFrameCounter > fuelUnitRandomFrames && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected <= PlannedRocketFuel)
             {
-                Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
+                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 200), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2 - 20)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(
                         BTR_FuelUnit.tex_FuelUnit,
                         pos,
@@ -96,6 +100,9 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie_Crewed);
 
             RocketBuild(gameTime);
+
+            //(int)SceneLoad.CentreScreen.X - 200 = screenWidth;
+            //screenHeight = (int)SceneLoad.CentreScreen.Y - 20;
 
             //Debug.WriteToFile("Rocket Engine Position after RocketBuild(): " + parts[0].m_position.ToString(), true, false);
 

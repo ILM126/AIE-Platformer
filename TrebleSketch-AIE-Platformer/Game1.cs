@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.23.247 (Developmental Stages)
+    /// Version: 0.0.24.249 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -96,7 +96,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.23.247 (15/06/16)";
+            GameVersionBuild = "v0.0.24.29 (16/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -303,8 +303,7 @@ namespace TrebleSketch_AIE_Platformer
                 Player.Update(gameTime);
                 Player.IsGrounded = false;
                 Player.PewPew = false;
-                Player.CheckCollisions(BTR_ScrapMetal);
-                Player.CheckCollisions(BTR_FuelUnit);
+                
                 // Debug.WriteToFile("Playing...");
             }
             //else if (!SceneLoad.PlayerInScene)
@@ -314,6 +313,16 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneLoad.MiniGame)
             {
+                if (MiniGame_BuildTheRocket.ScrapMetalCollected < MiniGame_BuildTheRocket.ScrapMetalNeeded)
+                {
+                    Player.CheckCollisions(BTR_ScrapMetal);
+                }
+
+                if (MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
+                {
+                    Player.CheckCollisions(BTR_FuelUnit);
+                }
+
                 SceneLoad.CheckCollisions(BTR_ScrapMetal);
                 SceneLoad.CheckCollisions(BTR_FuelUnit);
 

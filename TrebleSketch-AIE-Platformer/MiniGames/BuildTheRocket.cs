@@ -17,16 +17,21 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public List<RocketPart> parts;
         public int PlannedRocketHeight;
         public int PlannedRocketFuel;
+        public int ScrapMetalNeeded;
+        public int fuelTotal;
 
         public int ScrapMetalCollected;
         public int RocketFuelCollected; // To be changed to AmmountRocketFueled
         public int RocketsBuilt;
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
+        public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 3, 0, 0);
         
         int scrapMetalFrameCounter;
         int fuelUnitFrameCounter;
-        public int fuelTotal;
+        bool LiftOff;
+        bool Reset;
+
         Random randNum;
 
         public void Initialise()
@@ -48,7 +53,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             scrapMetalFrameCounter++;
 
-            if (scrapMetalFrameCounter > 150 && SceneLoad.ScrapMetals.Count < 20)
+            if (scrapMetalFrameCounter > 150 && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
@@ -65,7 +70,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             fuelUnitFrameCounter++;
 
-            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10 && fuelTotal >= PlannedRocketFuel[)
+            if (fuelUnitFrameCounter > 450 && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected <= PlannedRocketFuel)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, 1000), randNum.Next(20, 400)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(
@@ -113,27 +118,18 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
         {
-            int ScrapMetalNeeded = PlannedRocketHeight / 25;
+            ScrapMetalNeeded = PlannedRocketHeight / 25;
 
 
             // Needed for future modular fuel loading
-            //fuelTotal = 0;
-            //foreach (RocketPart part in parts)
-            //{
-            //    if (part.m_type == RocketPart.PartTypes.FuelTank_Large || part.m_type == RocketPart.PartTypes.FuelTank_Medium || part.m_type == RocketPart.PartTypes.FuelTank_Small)
-            //    {
-            //        fuelTotal += part.fuelTankSize;
-            //        Debug.WriteToFile("Fuel Total: " + fuelTotal, false, false);
-            //    }
-            //}
-
-            if (ScrapMetalCollected >= ScrapMetalNeeded)
+            fuelTotal = 0;
+            foreach (RocketPart part in parts)
             {
-                // fire the rocket, next level etc.
-
-                ScrapMetalCollected = 0;
-                RocketsBuilt++;
-                Debug.WriteToFile("Rockets now built: " + RocketsBuilt, false, false);
+                if (part.m_type == RocketPart.PartTypes.FuelTank_Large || part.m_type == RocketPart.PartTypes.FuelTank_Medium || part.m_type == RocketPart.PartTypes.FuelTank_Small)
+                {
+                    fuelTotal += part.fuelTankSize;
+                    //Debug.WriteToFile("Fuel Total: " + fuelTotal, false, false);
+                }
             }
 
             #region Actual Rocket Build
@@ -179,6 +175,13 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 //    Rocket.parts.Clear();
                 //    Rocket.InitialiseRocket();
                 //}
+            }
+
+            if (ScrapMetalCollected >= ScrapMetalNeeded && Reset)
+            {
+                ScrapMetalCollected = 0;
+                RocketsBuilt++;
+                Debug.WriteToFile("Rockets now built/launched: " + RocketsBuilt, false, false);
             }
         }
     }

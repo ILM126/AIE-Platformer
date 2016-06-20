@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.24.251 (Developmental Stages)
+    /// Version: 0.0.24.254 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -99,7 +99,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.24.251 (16/06/16)";
+            GameVersionBuild = "v0.0.24.254 (17/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -231,6 +231,9 @@ namespace TrebleSketch_AIE_Platformer
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
+                SceneLoad.Rocket_LaunchRocketButton = Content.Load<Texture2D>("Menu/menu-LaunchRocketButton-v1");
+                SceneLoad.Rocket_LaunchRocketButton_Hover = Content.Load<Texture2D>("Menu/menu-LaunchRocketButton-v1-hover");
+                SceneLoad.Rocket_LaunchRocketButton_Clicked = Content.Load<Texture2D>("Menu/menu-LaunchRocketButton-v1-clicked");
                 BTR_ScrapMetal.tex_ScrapMetal = Content.Load<Texture2D>("MiniGame/miniGame-ScrapMetal-v1");
                 BTR_FuelUnit.tex_FuelUnit = Content.Load<Texture2D>("MiniGame/miniGame_FuelUnits-v1");
                 Audio.Bright_DJStartchAttack = Content.Load<Song>("Audio/Bright by DJStratchAttack");
@@ -324,6 +327,7 @@ namespace TrebleSketch_AIE_Platformer
                 if (MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
                 {
                     Player.CheckCollisions(BTR_FuelUnit);
+                    MiniGame_BuildTheRocket.rocketFuelFull = true;
                 }
 
                 SceneLoad.CheckCollisions(BTR_ScrapMetal);

@@ -31,6 +31,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         int screenHeight;
         int scrapMetalFrameCounter;
         int fuelUnitFrameCounter;
+        public bool rocketFuelFull;
         bool LiftOff;
         bool Reset;
 
@@ -58,7 +59,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
             {
-                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 200), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 20)); // Temporary...
+                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 40)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
                         BTR_ScrapMetal.tex_ScrapMetal,
                         pos,
@@ -76,7 +77,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             if (fuelUnitFrameCounter > fuelUnitRandomFrames && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected <= PlannedRocketFuel)
             {
-                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 200), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2 - 20)); // Temporary...
+                Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2 - 40)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(
                         BTR_FuelUnit.tex_FuelUnit,
                         pos,

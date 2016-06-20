@@ -47,10 +47,15 @@ namespace TrebleSketch_AIE_Platformer
         // Scene Textures
         public Texture2D OutsideGrass;
 
-        // Menu Texture
+        // Menu Button Textures
         public Texture2D MainMenu_StartButton;
         public Texture2D MainMenu_StartButton_Hover;
         public Texture2D MainMenu_StartButton_Clicked;
+
+        // Rocket Launch Button Textures
+        public Texture2D Rocket_LaunchRocketButton;
+        public Texture2D Rocket_LaunchRocketButton_Hover;
+        public Texture2D Rocket_LaunchRocketButton_Clicked;
 
         // public Texture2D BuildingOutsideWalls;
         // public Texture2D BuildingInsideWalls;
@@ -135,6 +140,7 @@ namespace TrebleSketch_AIE_Platformer
                     {
                         SceneID = 5;
                         MessageNotLoaded = true;
+                        button_Position = new Vector2(CentreScreen.X + 50, 60);
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -192,7 +198,7 @@ namespace TrebleSketch_AIE_Platformer
                 {
                     spriteBatch.Draw(
                     MainMenu_StartButton_Clicked,
-                    new Vector2(CentreScreen.X, CentreScreen.Y),
+                    button_Position,
                     null,
                     Color.White,
                     0,
@@ -225,6 +231,48 @@ namespace TrebleSketch_AIE_Platformer
                         Scale,
                         0,
                         0); 
+                }
+            }
+
+            if (SceneID == 0 && MiniGame_BuildTheRocket.parts.Count == 3 && MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
+            {
+                if (isClickingWhileHovering && isHoveringButton)
+                {
+                    spriteBatch.Draw(
+                    Rocket_LaunchRocketButton_Clicked,
+                    button_Position,
+                    null,
+                    Color.White,
+                    0,
+                    new Vector2(Rocket_LaunchRocketButton_Hover.Width / 2, Rocket_LaunchRocketButton_Hover.Height / 2),
+                    Scale,
+                    0,
+                    0);
+                }
+                else if (isHoveringButton)
+                {
+                    spriteBatch.Draw(
+                        Rocket_LaunchRocketButton_Hover,
+                        button_Position,
+                        null,
+                        Color.White,
+                        0,
+                        new Vector2(Rocket_LaunchRocketButton_Hover.Width / 2, Rocket_LaunchRocketButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0);
+                }
+                else {
+                    spriteBatch.Draw(
+                        Rocket_LaunchRocketButton,
+                        button_Position,
+                        null,
+                        Color.White,
+                        0,
+                        new Vector2(Rocket_LaunchRocketButton_Hover.Width / 2, Rocket_LaunchRocketButton_Hover.Height / 2),
+                        Scale,
+                        0,
+                        0);
                 }
             }
         }

@@ -99,6 +99,21 @@
     <Content Include="Content\informationfont_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Menu\menu-LaunchRocketButton-v1-clicked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Menu\menu-LaunchRocketButton-v1-hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Menu\menu-LaunchRocketButton-v1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Menu\menu-StartGameButton-v1-clicked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Menu\menu-StartGameButton-v1-hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Menu\menu-StartGameButton-v1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -103,6 +103,8 @@ namespace TrebleSketch_AIE_Platformer
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.IsFixedTimeStep = false;
+            this.graphics.SynchronizeWithVerticalRetrace = false;
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();

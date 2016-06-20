@@ -104,6 +104,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Test Map";
                     Scene_Width = 1280;
                     Scene_Height = 720;
+                    MouseButtonRelationships();
                     for (int i = 0; i < CentreScreen.X / 25; i++)
                     {
                         SceneObjects GroundTile = new SceneObjects(
@@ -123,24 +124,17 @@ namespace TrebleSketch_AIE_Platformer
                 case 1:
                     GroundTiles.Clear();
                     SceneName = "Main Menu";
-                    if (state.LeftButton == ButtonState.Pressed)
-                    {
-                        isClickingWhileHovering = true;
-                    }
-                    else if (UserInput.MouseInRectangle(Button))
-                    {
-                        isHoveringButton = true;
-                        isClickingWhileHovering = false;
-                    } else
-                    {
-                        isClickingWhileHovering = false;
-                        isHoveringButton = false;
-                    }
+                    MouseButtonRelationships();
                     if (UserInput.MouseButtonClickedOnce(MouseButton.Left) && UserInput.MouseInRectangle(Button))
                     {
                         SceneID = 5;
                         MessageNotLoaded = true;
-                        button_Position = new Vector2(CentreScreen.X + 50, 60);
+                        button_Position = new Vector2(CentreScreen.X, 40);
+                        Button = new Rectangle(
+                            (int)button_Position.X - 50,
+                            (int)button_Position.Y - 20,
+                            100,
+                            40);
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -163,6 +157,24 @@ namespace TrebleSketch_AIE_Platformer
                     break;
             }
             MessageOnLoad(gameTime);
+        }
+
+        public void MouseButtonRelationships()
+        {
+            if (state.LeftButton == ButtonState.Pressed)
+            {
+                isClickingWhileHovering = true;
+            }
+            else if (UserInput.MouseInRectangle(Button))
+            {
+                isHoveringButton = true;
+                isClickingWhileHovering = false;
+            }
+            else
+            {
+                isClickingWhileHovering = false;
+                isHoveringButton = false;
+            }
         }
 
         public void MessageOnLoad(GameTime gameTime)
@@ -234,7 +246,7 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            if (SceneID == 0 && MiniGame_BuildTheRocket.parts.Count == 3 && MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
+            if (SceneID == 5 && MiniGame_BuildTheRocket.parts.Count == 3 && MiniGame_BuildTheRocket.RocketFuelCollected == MiniGame_BuildTheRocket.PlannedRocketFuel)
             {
                 if (isClickingWhileHovering && isHoveringButton)
                 {
@@ -283,6 +295,7 @@ namespace TrebleSketch_AIE_Platformer
             SceneName = "Mini Game: Build the Rocket";
             Scene_Width = 1280;
             Scene_Height = 720;
+            MouseButtonRelationships();
             for (int i = 0; i < CentreScreen.X / 25; i++) // Ground at the bottom
             {
                 SceneObjects GroundTile = new SceneObjects(

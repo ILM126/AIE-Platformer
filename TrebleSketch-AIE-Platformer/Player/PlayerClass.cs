@@ -172,7 +172,7 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Update(GameTime gameTime)
         {
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
             {
@@ -225,9 +225,9 @@ namespace TrebleSketch_AIE_Platformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), false, false); } // Get Your Pony Ass Back Here Treble!
 
-            if (!IsGrounded) Velocity.Y += Gravity * time;
+            if (!IsGrounded) Velocity.Y += Gravity * deltaTime;
             else Velocity.Y = 0;
-            Position.Y += Velocity.Y * time;
+            Position.Y += Velocity.Y * deltaTime;
             Position.X += Velocity.X;
             UpdateBounds();
         }

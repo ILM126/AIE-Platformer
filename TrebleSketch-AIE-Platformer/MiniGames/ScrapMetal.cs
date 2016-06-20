@@ -47,17 +47,17 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             UpdateBounds();
 
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!IsGrounded)
             {
-                m_velocity.Y += Gravity * time;
+                m_velocity.Y += Gravity * deltaTime;
             }
             else
             {
                 m_velocity.Y = 0;
             }
-            m_position.Y += m_velocity.Y * time;
+            m_position.Y += m_velocity.Y * deltaTime;
             m_position.X += m_velocity.X;
 
             if (IsGrounded)

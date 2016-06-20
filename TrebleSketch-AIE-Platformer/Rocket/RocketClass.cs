@@ -76,7 +76,7 @@ namespace TrebleSketch_AIE_Platformer
         public void Update(GameTime gameTime)
         {
             //Debug.WriteToFile("Engine position before time in Update in RocketClass: " + parts[0].m_position.ToString(), true, false);
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Debug.WriteToFile("Engine position after time in Update in RocketClass: " + parts[0].m_position.ToString(), true, false);
 
             if (InputHandler.IsKeyDownOnce(Keys.Up))
@@ -89,9 +89,9 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            if (!IsGrounded) Velocity.Y += Gravity * time;
+            if (!IsGrounded) Velocity.Y += Gravity * deltaTime;
             else Velocity.Y = 0;
-            Position.Y += Velocity.Y * time;
+            Position.Y += Velocity.Y * deltaTime;
             Position.X += Velocity.X;
 
             CalculatePositionAndCollisionBox();

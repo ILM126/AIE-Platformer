@@ -35,11 +35,14 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         bool LiftOff;
         bool Reset;
 
+        float scrapMetalSpawn;
+        float scrapMetalTime;
+        float scrapMetalTimer;
+
         Random randNum;
 
         public void Initialise()
         {
-            scrapMetalFrameCounter = 0;
             randNum = new Random();
         }
 
@@ -52,12 +55,20 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
         }
 
-        public void SpawnScrapMetals()
+        public void SpawnScrapMetals(GameTime gameTime)
         {
-            scrapMetalFrameCounter++;
-            int scrapMetalRandomFrames = randNum.Next(165, 205);
+            //scrapMetalFrameCounter++;
+            //int scrapMetalRandomFrames = randNum.Next(165, 205);
 
-            if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //int scrapMetalRandomSeconds = randNum.Next(2, 4);
+
+            if (scrapMetalTimer < 0)
+            {
+                scrapMetalTimer -= deltaTime;
+            }
+
+            if (scrapMetalTimer == 0f && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 60)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
@@ -66,11 +77,24 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                         new Vector2(50, 30),
                         1f);
                 SceneLoad.ScrapMetals.Add(scrapMetal);
-                scrapMetalFrameCounter = 0;
+                scrapMetalTime = randNum.Next(2, 4);
+                scrapMetalTimer = scrapMetalTime;
             }
+            
+            //if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
+            //{
+            //    Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 60)); // Temporary...
+            //    ScrapMetal scrapMetal = new ScrapMetal(
+            //            BTR_ScrapMetal.tex_ScrapMetal,
+            //            pos,
+            //            new Vector2(50, 30),
+            //            1f);
+            //    SceneLoad.ScrapMetals.Add(scrapMetal);
+            //    scrapMetalFrameCounter = 0;
+            //}
         }
 
-        public void SpawnFuelUnits()
+        public void SpawnFuelUnits(GameTime gameTime)
         {
             fuelUnitFrameCounter++;
             int fuelUnitRandomFrames = randNum.Next(375, 450);

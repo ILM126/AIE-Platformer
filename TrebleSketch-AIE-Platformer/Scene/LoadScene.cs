@@ -150,7 +150,7 @@ namespace TrebleSketch_AIE_Platformer
                     SceneName = "Front Lawns";
                     break;
                 case 5:
-                    MiniGame_BTR();
+                    MiniGame_BTR(gameTime);
                     break;
                 default:
                     SceneName = "Test Map";
@@ -289,7 +289,7 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
-        public void MiniGame_BTR()
+        public void MiniGame_BTR(GameTime gameTime)
         {
             GroundTiles.Clear();
             SceneName = "Mini Game: Build the Rocket";
@@ -363,8 +363,8 @@ namespace TrebleSketch_AIE_Platformer
                 GroundTiles.Add(GroundTile);
             }
 
-            MiniGame_BuildTheRocket.SpawnScrapMetals();
-            MiniGame_BuildTheRocket.SpawnFuelUnits();
+            MiniGame_BuildTheRocket.SpawnScrapMetals(gameTime);
+            MiniGame_BuildTheRocket.SpawnFuelUnits(gameTime);
 
             PlayerInScene = true;
             RocketInScene = true;

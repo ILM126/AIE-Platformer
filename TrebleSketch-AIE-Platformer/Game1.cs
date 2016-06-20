@@ -278,6 +278,7 @@ namespace TrebleSketch_AIE_Platformer
                 Exit();
             }
 
+            #region deltaTime
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             // calculate the current FPS (frames per second)
             // This is debug code, you can remove it from your final game
@@ -289,6 +290,13 @@ namespace TrebleSketch_AIE_Platformer
                 fpsCounter = 0;
             }
             fpsCounter++;
+
+            int counter = 0;
+            for (int i = 0; i < 4500000; i++)
+            {
+                counter += i;
+            }
+            #endregion
 
             MouseMovement.Update();
 

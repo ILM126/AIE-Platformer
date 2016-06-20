@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.25.255 (Developmental Stages)
+    /// Version: 0.0.25.256 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -93,14 +93,19 @@ namespace TrebleSketch_AIE_Platformer
         string GameVersionBuild;
 
         bool FullScreen;
+
+        // deltaTimer | FPS
+        int currentFPS = 0;
+        float fpsTimer = 0;
+        int fpsCounter = 0;
         #endregion
 
         public Game1()
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.25.255 (20/06/16)";
-            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
+            GameVersionBuild = "v0.0.25.256 (20/06/16)";
+            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild + " (dev-deltaTime branch)", true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsFixedTimeStep = false;
@@ -272,6 +277,18 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Ending Game...", true, false);
                 Exit();
             }
+
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            // calculate the current FPS (frames per second)
+            // This is debug code, you can remove it from your final game
+            fpsTimer += deltaTime;
+            if (fpsTimer > 1.0f)
+            {
+                fpsTimer = 0f;
+                currentFPS = fpsCounter;
+                fpsCounter = 0;
+            }
+            fpsCounter++;
 
             MouseMovement.Update();
 
@@ -502,6 +519,9 @@ namespace TrebleSketch_AIE_Platformer
 
             foreach (var message in ListMessages.messages)
                 spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
+
+            spriteBatch.DrawString(Debug.scoreText, currentFPS.ToString(),
+                new Vector2(20, 20), Color.Red);
 
             spriteBatch.End();
 

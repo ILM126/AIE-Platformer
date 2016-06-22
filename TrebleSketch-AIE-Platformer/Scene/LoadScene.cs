@@ -135,6 +135,7 @@ namespace TrebleSketch_AIE_Platformer
                             (int)button_Position.Y - 20,
                             100,
                             40);
+                        MiniGame_BuildTheRocket.LoadBTR();
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -365,6 +366,12 @@ namespace TrebleSketch_AIE_Platformer
 
             MiniGame_BuildTheRocket.SpawnScrapMetals();
             MiniGame_BuildTheRocket.SpawnFuelUnits();
+
+            if (state.LeftButton == ButtonState.Pressed && UserInput.MouseInRectangle(Button) && MiniGame_BuildTheRocket.ReadyForLiftOff)
+            {
+                MiniGame_BuildTheRocket.LiftOff = true;
+                MiniGame_BuildTheRocket.RocketsLiftedOff++;
+            }
 
             PlayerInScene = true;
             RocketInScene = true;

@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.25.255 (Developmental Stages)
+    /// Version: 0.0.26.264 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -99,7 +99,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.25.255 (20/06/16)";
+            GameVersionBuild = "v0.0.26.264 (22/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -327,6 +327,8 @@ namespace TrebleSketch_AIE_Platformer
                 if (MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
                 {
                     Player.CheckCollisions(BTR_FuelUnit);
+                } else if (MiniGame_BuildTheRocket.RocketFuelCollected == MiniGame_BuildTheRocket.PlannedRocketFuel)
+                {
                     MiniGame_BuildTheRocket.rocketFuelFull = true;
                 }
 
@@ -417,6 +419,11 @@ namespace TrebleSketch_AIE_Platformer
                         (Debug.scoreText,
                         "Rockets Built: " + MiniGame_BuildTheRocket.RocketsBuilt,
                         new Vector2(CentreScreen.X * 2 - 200, 20), Color.Black);
+
+            spriteBatch.DrawString // Rockets Built
+                        (Debug.scoreText,
+                        "Rockets Lifted Off: " + MiniGame_BuildTheRocket.RocketsLiftedOff,
+                        new Vector2(CentreScreen.X + 180, 20), Color.Black);
 
             //spriteBatch.DrawString // Time Remaining!
             //            (Debug.scoreText,

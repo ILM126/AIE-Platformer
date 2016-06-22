@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using EclipsingGameUtils;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
 {
@@ -15,14 +17,19 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public RocketClass.LaunchVehicles LaunchVehicle;
         public RocketPart.PartTypes PartType;
         public List<RocketPart> parts;
-        public int PlannedRocketHeight;
-        public int PlannedRocketFuel;
-        public int ScrapMetalNeeded;
-        public int fuelTotal;
 
+        public float PlannedRocketHeight;
+        public float PlannedRocketFuel;
+        public float ScrapMetalNeeded;
+        public float fuelTotal;
         public int ScrapMetalCollected;
-        public int RocketFuelCollected; // To be changed to AmmountRocketFueled
+        public int RocketFuelCollected; // To be changed to AmountRocketFueled
         public int RocketsBuilt;
+        public int RocketsLiftedOff;
+        public bool rocketFuelFull;
+        public bool ReadyForLiftOff;
+        public bool LiftOff;
+        public bool Reset;
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
         public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 3, 0, 0);
@@ -31,9 +38,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         int screenHeight;
         int scrapMetalFrameCounter;
         int fuelUnitFrameCounter;
-        public bool rocketFuelFull;
-        bool LiftOff;
-        bool Reset;
 
         Random randNum;
 
@@ -42,6 +46,34 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             scrapMetalFrameCounter = 0;
             randNum = new Random();
         }
+
+        public void LoadBTR()
+        {
+            ReadyForLiftOff = false;
+            rocketFuelFull = false;
+            LiftOff = false;
+            Reset = false;
+            Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2 - 60)); // Temporary...
+            ScrapMetal scrapMetal = new ScrapMetal(
+                    BTR_ScrapMetal.tex_ScrapMetal,
+                    pos,
+                    new Vector2(50, 30),
+                    1f);
+            SceneLoad.ScrapMetals.Add(scrapMetal);
+        }
+
+        public void ResetRocketBuild()
+        {
+            parts.Clear();
+            PlannedRocketHeight = 0f;
+            PlannedRocketFuel = 0f;
+            ScrapMetalNeeded = 0f;
+            fuelTotal = 0f;
+            ReadyForLiftOff = false;
+            rocketFuelFull = false;
+            LiftOff = false;
+            Reset = false;
+        }   
 
         public void SetRocketHeight(RocketClass.LaunchVehicles rocket)
         {
@@ -57,7 +89,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             scrapMetalFrameCounter++;
             int scrapMetalRandomFrames = randNum.Next(165, 205);
 
-            if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected <= ScrapMetalNeeded)
+            if (scrapMetalFrameCounter > scrapMetalRandomFrames && SceneLoad.ScrapMetals.Count < 20 && ScrapMetalCollected < ScrapMetalNeeded)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2- 60)); // Temporary...
                 ScrapMetal scrapMetal = new ScrapMetal(
@@ -75,7 +107,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             fuelUnitFrameCounter++;
             int fuelUnitRandomFrames = randNum.Next(375, 450);
 
-            if (fuelUnitFrameCounter > fuelUnitRandomFrames && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected <= PlannedRocketFuel)
+            if (fuelUnitFrameCounter > fuelUnitRandomFrames && SceneLoad.FuelUnits.Count < 10 && RocketFuelCollected < PlannedRocketFuel)
             {
                 Vector2 pos = new Vector2(randNum.Next(20, (int)SceneLoad.CentreScreen.X * 2 - 50), randNum.Next(20, (int)SceneLoad.CentreScreen.Y * 2 - 60)); // Temporary...
                 FuelUnit fuelUnit = new FuelUnit(
@@ -86,12 +118,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 SceneLoad.FuelUnits.Add(fuelUnit);
                 fuelUnitFrameCounter = 0;
             }
-        }
-
-        void RandomPostion()
-        {
-            // Grab number of blocks via Count, minus it by one. Random Next thingy
-            // randNum.Next(0, groundTiles - 1)
         }
 
         public void Update(GameTime gameTime)
@@ -127,7 +153,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
         {
             ScrapMetalNeeded = PlannedRocketHeight / 25;
-
 
             // Needed for future modular fuel loading
             fuelTotal = 0;
@@ -165,8 +190,10 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
             #endregion
 
-            if (parts.Count == 3) // Rocket Animation
+            if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel) // Rocket Animation
             {
+                ReadyForLiftOff = true;
+
                 //float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 //Debug.WriteToFile("Rocket Flight Animation complete", true, false);
@@ -185,11 +212,32 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 //}
             }
 
+            RocketLaunch();
+
             if (ScrapMetalCollected >= ScrapMetalNeeded && Reset)
             {
                 ScrapMetalCollected = 0;
                 RocketsBuilt++;
-                Debug.WriteToFile("Rockets now built/launched: " + RocketsBuilt, false, false);
+                Debug.WriteToFile(RocketsBuilt + " rockets now built + launched", false, false);
+                Debug.WriteToFile("Rocket " + RocketsBuilt + " just lifted off!", true, false);
+                Reset = false;
+            }
+        }
+
+        public void RocketLaunch()
+        {
+            if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel && LiftOff)
+            {
+                //Rocket.Velocity.Y -= 75f;
+            }
+            if (LiftOff && Rocket.Position.Y >= -1000f)
+            {
+                ResetRocketBuild();
+                Reset = true;
+            }
+            if (InputHandler.IsKeyDownOnce(Keys.R) && RocketFuelCollected < PlannedRocketFuel || ScrapMetalCollected < ScrapMetalNeeded)
+            {
+                ResetRocketBuild();
             }
         }
     }

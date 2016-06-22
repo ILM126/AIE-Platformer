@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.26.267 (Developmental Stages)
+    /// Version: 0.0.26.268 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -92,19 +92,36 @@ namespace TrebleSketch_AIE_Platformer
         string GameVersionBuild;
 
         bool FullScreen;
+
+        int res_OriginalGameHeight;
+        int res_OriginalGameWidth;
+        int res_ScreenHeight;
+        int res_ScreenWidth;
+        float res_ScreenScaleDifference;
         #endregion
 
         public Game1()
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.26.267 (22/06/16)";
+            GameVersionBuild = "v0.0.26.268 (22/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
+
+            res_OriginalGameHeight = graphics.PreferredBackBufferHeight;
+            res_OriginalGameWidth = graphics.PreferredBackBufferWidth;
+            res_ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            res_ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
+            Debug.WriteToFile("Screen size: " + res_ScreenWidth + " x " + res_ScreenHeight, true, false);
+            Debug.WriteToFile("Game screen size: " + res_OriginalGameWidth + " x " + res_OriginalGameHeight, true, false);
+
+            res_ScreenScaleDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
+            Debug.WriteToFile("Difference between ScreenHeight and OriginalGameHeight: " + res_ScreenScaleDifference, true, false);
         }
 
         /// <summary>
@@ -274,6 +291,8 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.state = MouseMovement.state;
 
+            SceneLoad.CentreScreen = CentreScreen;
+
             SceneLoad.SceneLoader(spriteBatch, gameTime);
 
             if (SceneLoad.ScrapMetals.Count > 0)
@@ -288,6 +307,7 @@ namespace TrebleSketch_AIE_Platformer
             #region Rocket/Player/MiniGames
             if (SceneLoad.RocketInScene && Rocket.parts.Count > 0)
             {
+                Rocket.SpawnPosition = CentreScreen;
                 Rocket.Update(gameTime);
                 Rocket.IsGrounded = false;
                 //Debug.WriteToFile("Rocket Engine Position after Rocker Update: " + Rocket.parts[0].m_position.ToString(), true, false);
@@ -305,6 +325,7 @@ namespace TrebleSketch_AIE_Platformer
 
             if (SceneLoad.PlayerInScene)
             {
+                Player.SpawnPosition = CentreScreen;
                 Player.Update(gameTime);
                 Player.IsGrounded = false;
                 Player.PewPew = false;
@@ -380,18 +401,26 @@ namespace TrebleSketch_AIE_Platformer
             {
                 if (!FullScreen)
                 {
-                    graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                    graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    graphics.PreferredBackBufferHeight = res_ScreenHeight;
+                    graphics.PreferredBackBufferWidth = res_ScreenWidth;
                     graphics.ApplyChanges();
                     CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
                         , graphics.PreferredBackBufferHeight / 2);
                     graphics.ToggleFullScreen();
+
+                    Scale = res_ScreenScaleDifference;
+                    Player.Scale = Scale;
+                    Rocket.Scale = Scale;
+                    // Add Scene Scale
+                    // Centre Screen all that
+
+
                     FullScreen = true;
                 }
                 else if (FullScreen)
                 {
-                    graphics.PreferredBackBufferHeight = 720;
-                    graphics.PreferredBackBufferWidth = 1280;
+                    graphics.PreferredBackBufferHeight = res_OriginalGameHeight;
+                    graphics.PreferredBackBufferWidth = res_OriginalGameWidth;
                     graphics.ApplyChanges();
                     CentreScreen = new Vector2(graphics.PreferredBackBufferWidth / 2
                         , graphics.PreferredBackBufferHeight / 2);

@@ -25,7 +25,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.26.266 (Developmental Stages)
+    /// Version: 0.0.26.267 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -50,12 +50,10 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Text) Currently using BitmapFonts, unable to change size. Need to convert to SpriteFonts (partial)
     /// - (Enemy) Make Enemy textures
     /// - (Enemy) Get enemy AI working
-    /// - (Mini Game - Build the Rocket) Rocket Launch sequence
     /// - (Mini Game - Build the Rocket) Loading screen before first part spawn!
-    /// - (Mini Game - Build the Rocket) Rebuild rocket after launch
     /// - (Mini Game - Build the Rocket) End game screen
-    /// - (Mini Game - Build the Rocket) Score management
-    /// - (Mini Game - Build the Rocket) The mysterious 1600 fuel unit update bug
+    /// - (Mini Game - Build the Rocket) Score management (score stored)
+    /// - (Mini Game - Build the Rocket) The mysterious 1600 fuel unit update bug ||||GAME BREAKING|||||
     /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game
@@ -100,7 +98,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.26.266 (22/06/16)";
+            GameVersionBuild = "v0.0.26.267 (22/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -424,7 +422,7 @@ namespace TrebleSketch_AIE_Platformer
             spriteBatch.DrawString // Rockets Built
                         (Debug.scoreText,
                         "Rockets Lifted Off: " + MiniGame_BuildTheRocket.RocketsLiftedOff,
-                        new Vector2(CentreScreen.X + 180, 20), Color.Black);
+                        new Vector2(CentreScreen.X * 2 - 450, 20), Color.Black);
 
             //spriteBatch.DrawString // Time Remaining!
             //            (Debug.scoreText,

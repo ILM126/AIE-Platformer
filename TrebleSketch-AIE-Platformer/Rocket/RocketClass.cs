@@ -110,6 +110,7 @@ namespace TrebleSketch_AIE_Platformer
                     case 0:
                     case 1:
                         height = 0;
+                        lowerPart = 0;
                         break;
                     case 2:
                         height = 113;

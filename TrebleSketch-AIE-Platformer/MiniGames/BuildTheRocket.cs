@@ -30,6 +30,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public bool ReadyForLiftOff;
         public bool LiftOff;
         public bool Reset;
+        bool finishedRocket;
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
         public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 3, 0, 0);
@@ -175,7 +176,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 RocketPart Engine = new RocketPart(RocketPart.PartTypes.Engine_Titus, Rocket.rocketParts[0], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
                 Rocket.AddPart(Engine);
                 Debug.WriteToFile("Player has constructed the 'Titus' Kerlox Engine", true, false);
-                Debug.WriteToFile("Engine Spawned at: " + parts[0].m_position.ToString(), true, false);
+                //Debug.WriteToFile("Engine Spawned at: " + parts[0].m_position.ToString(), true, false);
+                //Debug.WriteToFile("Engine Velosity now: " + Rocket.Velocity.ToString(), false, false);
             }
             else if (ScrapMetalCollected == 10 && parts.Count == 1) // 10
             {
@@ -188,6 +190,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 RocketPart Capsule = new RocketPart(RocketPart.PartTypes.Capsule_Manned_PipingShrike, Rocket.rocketParts[2], Rocket.SpawnPosition, new Vector2(Rocket.rocketParts[2].Width, Rocket.rocketParts[2].Height));
                 Rocket.AddPart(Capsule);
                 Debug.WriteToFile("Player has constructed the 'Piping Shrike' Manned Capsule", true, false);
+                finishedRocket = true;
             } else
             {
                 //Debug.WriteToFile("RocketBuild is being updated", false, false);
@@ -218,9 +221,14 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             RocketLaunch();
 
-            if (Reset)
+            if (ScrapMetalCollected == ScrapMetalNeeded && finishedRocket)
             {
                 RocketsBuilt++;
+                finishedRocket = false;
+            }
+
+            if (Reset)
+            {
                 Debug.WriteToFile(RocketsBuilt + " rockets now built + launched", false, false);
                 Debug.WriteToFile("Rocket " + RocketsBuilt + " just lifted off!", true, false);
                 Reset = false;
@@ -236,6 +244,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             if (LiftOff && Rocket.Position.Y < -1000f)
             {
                 ResetRocketBuild();
+                Rocket.Velocity.Y = 0;
                 Reset = true;
             }
             if (InputHandler.IsKeyDownOnce(Keys.R) && 0 < RocketFuelCollected || InputHandler.IsKeyDownOnce(Keys.R) && 0 < ScrapMetalCollected)

@@ -174,6 +174,8 @@ namespace TrebleSketch_AIE_Platformer
         {
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            CheckIfTwoOrMoreKeys();
+
             if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
             {
                 if (IsGrounded)
@@ -182,29 +184,29 @@ namespace TrebleSketch_AIE_Platformer
                 }
             }
 
-            if (InputHandler.IsKeyDownOnce(Keys.A)) // Move Left
+            if (InputHandler.IsKeyDownOnce(Keys.A) && !BothSidesPressed) // Move Left
             {
-               
-               
                 {
-                    Velocity.X = -4.2f;
+                    Velocity.X = -250f;
                 }
                 PlayerFacingRight = false;
             }
 
             if (InputHandler.IsKeyDownOnce(Keys.A) && InputHandler.IsKeyDownOnce(Keys.LeftShift))
             {
-                Velocity.X = -10f;
+                Velocity.X = -450f;
+                BothSidesPressed = true;
             }
+
             if (InputHandler.IsKeyDownOnce(Keys.D)) // Move Right
             {
                 if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
                 {
-                    Velocity.X = 10f;
+                    Velocity.X = 450f;
                 }
                 else
                 {
-                    Velocity.X = 4.2f;
+                    Velocity.X = 250f;
                 }
                 PlayerFacingRight = true;
             }
@@ -228,8 +230,25 @@ namespace TrebleSketch_AIE_Platformer
             if (!IsGrounded) Velocity.Y += Gravity * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
-            Position.X += Velocity.X;
+            Position.X += Velocity.X * time;
             UpdateBounds();
+        }
+
+        public void CheckIfTwoOrMoreKeys()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                BothSidesPressed = true;
+            } else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                BothSidesPressed = false;
+            } else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                BothSidesPressed = false;
+            } else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                BothSidesPressed = false;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)

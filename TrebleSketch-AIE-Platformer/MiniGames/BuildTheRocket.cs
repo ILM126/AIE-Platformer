@@ -65,9 +65,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void ResetRocketBuild()
         {
             parts.Clear();
-            PlannedRocketHeight = 0f;
-            PlannedRocketFuel = 0f;
-            ScrapMetalNeeded = 0f;
+            ScrapMetalCollected = 0;
+            RocketFuelCollected = 0;
             fuelTotal = 0f;
             ReadyForLiftOff = false;
             rocketFuelFull = false;
@@ -216,7 +215,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             if (ScrapMetalCollected >= ScrapMetalNeeded && Reset)
             {
-                ScrapMetalCollected = 0;
                 RocketsBuilt++;
                 Debug.WriteToFile(RocketsBuilt + " rockets now built + launched", false, false);
                 Debug.WriteToFile("Rocket " + RocketsBuilt + " just lifted off!", true, false);
@@ -228,14 +226,15 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel && LiftOff)
             {
-                //Rocket.Velocity.Y -= 75f;
+                Rocket.Velocity.Y -= 75f;
+                Debug.WriteToFile("I should be moving -Rocket", true, false);
             }
-            if (LiftOff && Rocket.Position.Y >= -1000f)
+            if (LiftOff && Rocket.Position.Y < -1000f)
             {
                 ResetRocketBuild();
                 Reset = true;
             }
-            if (InputHandler.IsKeyDownOnce(Keys.R) && RocketFuelCollected < PlannedRocketFuel || ScrapMetalCollected < ScrapMetalNeeded)
+            if (InputHandler.IsKeyDownOnce(Keys.R) && 0 < RocketFuelCollected || InputHandler.IsKeyDownOnce(Keys.R) && 0 < ScrapMetalCollected)
             {
                 ResetRocketBuild();
             }

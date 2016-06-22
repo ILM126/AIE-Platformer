@@ -53,10 +53,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             {
                 m_velocity.Y += Gravity * time;
             }
-            else
-            {
-                m_velocity.Y = 0;
-            }
             m_position.Y += m_velocity.Y * time;
             m_position.X += m_velocity.X;
 

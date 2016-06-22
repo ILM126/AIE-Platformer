@@ -370,7 +370,6 @@ namespace TrebleSketch_AIE_Platformer
             if (state.LeftButton == ButtonState.Pressed && UserInput.MouseInRectangle(Button) && MiniGame_BuildTheRocket.ReadyForLiftOff)
             {
                 MiniGame_BuildTheRocket.LiftOff = true;
-                MiniGame_BuildTheRocket.RocketsLiftedOff++;
             }
 
             PlayerInScene = true;

@@ -65,6 +65,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public void ResetRocketBuild()
         {
             parts.Clear();
+            RocketsLiftedOff++;
             ScrapMetalCollected = 0;
             RocketFuelCollected = 0;
             fuelTotal = 0f;
@@ -72,6 +73,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             rocketFuelFull = false;
             LiftOff = false;
             Reset = false;
+            Rocket.Position = SceneLoad.CentreScreen;
         }   
 
         public void SetRocketHeight(RocketClass.LaunchVehicles rocket)
@@ -135,6 +137,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             switch (parts.Count)
             {
                 case 0:
+                    Rocket.SetSize(new Vector2(0, 0));
                     break;
                 case 1:
                     Rocket.SetSize(new Vector2(Rocket.rocketParts[0].Width, Rocket.rocketParts[0].Height));
@@ -163,6 +166,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                     //Debug.WriteToFile("Fuel Total: " + fuelTotal, false, false);
                 }
             }
+
+            Cheats();
 
             #region Actual Rocket Build
             if (ScrapMetalCollected == 3 && parts.Count == 0) // 3
@@ -213,7 +218,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
             RocketLaunch();
 
-            if (ScrapMetalCollected >= ScrapMetalNeeded && Reset)
+            if (Reset)
             {
                 RocketsBuilt++;
                 Debug.WriteToFile(RocketsBuilt + " rockets now built + launched", false, false);
@@ -226,8 +231,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         {
             if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel && LiftOff)
             {
-                Rocket.Velocity.Y -= 75f;
-                Debug.WriteToFile("I should be moving -Rocket", true, false);
+                Rocket.Velocity.Y -= 45f;
             }
             if (LiftOff && Rocket.Position.Y < -1000f)
             {
@@ -237,6 +241,18 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             if (InputHandler.IsKeyDownOnce(Keys.R) && 0 < RocketFuelCollected || InputHandler.IsKeyDownOnce(Keys.R) && 0 < ScrapMetalCollected)
             {
                 ResetRocketBuild();
+            }
+        }
+
+        public void Cheats()
+        {
+            if (InputHandler.IsKeyDownOnce(Keys.Y))
+            {
+                ScrapMetalCollected++;
+            }
+            if (InputHandler.IsKeyDownOnce(Keys.U))
+            {
+                RocketFuelCollected += 400;
             }
         }
     }

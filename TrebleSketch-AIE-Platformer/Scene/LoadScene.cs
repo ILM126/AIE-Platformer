@@ -36,7 +36,7 @@ namespace TrebleSketch_AIE_Platformer
 
         float Scene_Width;
         float Scene_Height;
-        float Scale;
+        public float Scale;
         float Tile_Size;
 
         public Vector2 CentreScreen;
@@ -74,17 +74,8 @@ namespace TrebleSketch_AIE_Platformer
             Scale = 1f;
             Tile_Size = 50f;
             SceneID = 1; // Controls what is being shown on screen
-            button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
-            Button = new Rectangle(
-                    (int)button_Position.X - 50,
-                    (int)button_Position.Y - 20,
-                    100,
-                    40);
             RunOnceTest = true;
-            MessageNotLoaded = true;
-
-            ListMessages.MessagePosition = new Vector2(CentreScreen.X * 2 - 140, CentreScreen.Y * 2 - 30);
-
+            MessageNotLoaded = true;            
             //RunOnceTest = false;
             // Debug.WriteToFile(ScrapMetals[0].m_position.ToString(), false);
         }
@@ -94,9 +85,28 @@ namespace TrebleSketch_AIE_Platformer
             // parts.Add(part);
         }
 
+        public void ButtonMessageUpdate()
+        {
+            if (SceneID == 1)
+            {
+                button_Position = new Vector2(CentreScreen.X, CentreScreen.Y);
+            } else if (SceneID == 5)
+            {
+                button_Position = new Vector2(CentreScreen.X, 40);
+            }
+            Button = new Rectangle(
+                    (int)button_Position.X - 50,
+                    (int)button_Position.Y - 20,
+                    100,
+                    40);
+            ListMessages.MessagePosition = new Vector2(CentreScreen.X * 2 - 140, CentreScreen.Y * 2 - 30);
+        }
+
         public void SceneLoader(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            switch(SceneID)
+            ButtonMessageUpdate();
+
+            switch (SceneID)
             {
                 case 0:
                     #region Test Map
@@ -129,12 +139,6 @@ namespace TrebleSketch_AIE_Platformer
                     {
                         SceneID = 5;
                         MessageNotLoaded = true;
-                        button_Position = new Vector2(CentreScreen.X, 40);
-                        Button = new Rectangle(
-                            (int)button_Position.X - 50,
-                            (int)button_Position.Y - 20,
-                            100,
-                            40);
                         MiniGame_BuildTheRocket.LoadBTR();
                     }
                     PlayerInScene = false;

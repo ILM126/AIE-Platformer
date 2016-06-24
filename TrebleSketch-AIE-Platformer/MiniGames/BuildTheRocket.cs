@@ -122,6 +122,42 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
         }
 
+        void CheckFuelUnitPosition()
+        {
+            foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+            {
+                if (fuelUnit.CollisionCheck(this))
+                {
+                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
+                    ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
+                }
+            }
+            if (ToRemove != -1)
+            {
+                SceneLoad.FuelUnits.RemoveAt(ToRemove);
+                MiniGame_BuildTheRocket.RocketFuelCollected += 400;
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
+            }
+        }
+
+        void CheckScrapMetalPosition()
+        {
+            foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+            {
+                if (fuelUnit.CollisionCheck(this))
+                {
+                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
+                    ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
+                }
+            }
+            if (ToRemove != -1)
+            {
+                SceneLoad.FuelUnits.RemoveAt(ToRemove);
+                MiniGame_BuildTheRocket.RocketFuelCollected += 400;
+                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
             parts = Rocket.parts;

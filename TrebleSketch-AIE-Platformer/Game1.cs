@@ -101,7 +101,8 @@ namespace TrebleSketch_AIE_Platformer
         int res_OriginalGameWidth;
         int res_ScreenHeight;
         int res_ScreenWidth;
-        float res_ScreenScaleDifference;
+        float res_ScreenScaleUpDifference;
+        float res_ScreenScaleDownDifference;
         #endregion
 
         public Game1()
@@ -124,8 +125,10 @@ namespace TrebleSketch_AIE_Platformer
             Debug.WriteToFile("Screen size: " + res_ScreenWidth + " x " + res_ScreenHeight, true, false);
             Debug.WriteToFile("Game screen size: " + res_OriginalGameWidth + " x " + res_OriginalGameHeight, true, false);
 
-            res_ScreenScaleDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
-            Debug.WriteToFile("Difference between ScreenHeight and OriginalGameHeight: " + res_ScreenScaleDifference, true, false);
+            res_ScreenScaleUpDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
+            res_ScreenScaleDownDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
+            Debug.WriteToFile("Scale up from OriginalGameHeight to ScreenHeight: " + res_ScreenScaleUpDifference, true, false);
+            Debug.WriteToFile("Scale down from ScreenHeight to OriginalGameHeight: " + res_ScreenScaleDownDifference, true, false);
         }
 
         /// <summary>
@@ -385,7 +388,7 @@ namespace TrebleSketch_AIE_Platformer
                 Debug.WriteToFile("Message being removed", false, false);
             }
 
-            CallFullScreen();
+            //CallFullScreen();
 
             InputHandler.Update();
 
@@ -414,12 +417,30 @@ namespace TrebleSketch_AIE_Platformer
                         , graphics.PreferredBackBufferHeight / 2);
                     graphics.ToggleFullScreen();
 
-                    Scale = res_ScreenScaleDifference;
-                    Player.Scale = Scale;
-                    Rocket.Scale = Scale;
+                    Scale = res_ScreenScaleUpDifference;
 
                     SceneLoad.CentreScreen = CentreScreen;
-                    SceneLoad.Scale = Scale;              
+                    SceneLoad.Scale = Scale;
+
+                    Player.Scale = Scale;
+                    res_ScreenScaleUpDifference *= Player.Position.X;
+                    res_ScreenScaleUpDifference *= Player.Position.Y;
+                    Rocket.Scale = Scale;
+                    res_ScreenScaleUpDifference *= Rocket.Position.X;
+                    res_ScreenScaleUpDifference *= Rocket.Position.Y;
+
+                    foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
+                    {
+                        res_ScreenScaleDownDifference *= scrapMetal.m_position.Y;
+                        res_ScreenScaleDownDifference *= scrapMetal.m_position.X;
+                    }
+
+                    foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+                    {
+                        res_ScreenScaleDownDifference *= fuelUnit.m_position.Y;
+                        res_ScreenScaleDownDifference *= fuelUnit.m_position.X;
+                    }
+
                     FullScreen = true;
                 }
                 else if (FullScreen)
@@ -432,11 +453,29 @@ namespace TrebleSketch_AIE_Platformer
                     graphics.ToggleFullScreen();
 
                     Scale = 1;
-                    Player.Scale = Scale;
-                    Rocket.Scale = Scale;
 
                     SceneLoad.CentreScreen = CentreScreen;
                     SceneLoad.Scale = Scale;
+
+                    Player.Scale = Scale;
+                    res_ScreenScaleDownDifference *= Player.Position.X;
+                    res_ScreenScaleDownDifference *= Player.Position.Y;
+                    Rocket.Scale = Scale;
+                    res_ScreenScaleDownDifference *= Rocket.Position.X;
+                    res_ScreenScaleDownDifference *= Rocket.Position.Y;
+
+                    foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
+                    {
+                        res_ScreenScaleDownDifference *= scrapMetal.m_position.Y;
+                        res_ScreenScaleDownDifference *= scrapMetal.m_position.X;
+                    }
+
+                    foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+                    {
+                        res_ScreenScaleDownDifference *= fuelUnit.m_position.Y;
+                        res_ScreenScaleDownDifference *= fuelUnit.m_position.X;
+                    }
+
                     FullScreen = false;
                 }
             }

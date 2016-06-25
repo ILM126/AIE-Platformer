@@ -227,7 +227,7 @@ namespace TrebleSketch_AIE_Platformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.B)) if (!IsGrounded) { Position = SpawnPosition; Velocity = new Vector2(0); JumpingDown = false; Debug.WriteToFile("[Player] Spawned at " + Position.ToString(), false, false); } // Get Your Pony Ass Back Here Treble!
 
-            if (!IsGrounded) Velocity.Y += Gravity * time;
+            if (!IsGrounded) Velocity.Y += Gravity * Scale * time;
             else Velocity.Y = 0;
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X * time;

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
+using AIEResources.ParticleEffects;
 using TrebleSketch_AIE_Platformer.MiniGames;
 using System.Collections.Generic;
 
@@ -25,7 +26,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.26.270 (Developmental Stages)
+    /// Version: 0.0.26.273 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -72,6 +73,9 @@ namespace TrebleSketch_AIE_Platformer
         SceneObjects SceneObject;
         AudioClass Audio;
 
+        ParticleSystem Particle;
+        Emitter ParticleEmitter;
+
         DevLogging Debug;
         Cursor MouseMovement;
         InputHandler UserInput;
@@ -104,7 +108,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.26.270 (22/06/16)";
+            GameVersionBuild = "v0.0.26.273 (25/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -243,6 +247,7 @@ namespace TrebleSketch_AIE_Platformer
                 Rocket.rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
                 Rocket.rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
                 Rocket.rocketParts[2] = Content.Load<Texture2D>("Rocket/capsule-PipingShrike-v1");
+                Rocket.particles_RocketExhaust = Content.Load<Texture2D>("Particles/rocketExhaust");
                 SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
@@ -259,6 +264,7 @@ namespace TrebleSketch_AIE_Platformer
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
+                
 
             Debug.WriteToFile("Finished Loading Game Textures", true, false);
 

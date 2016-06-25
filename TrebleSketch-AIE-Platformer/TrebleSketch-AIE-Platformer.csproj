@@ -54,6 +54,7 @@
     <Compile Include="MiniGames\ScrapMetal.cs" />
     <Compile Include="Player\PlayerClass.cs" />
     <Compile Include="Player\StoryMode.cs" />
+    <Compile Include="Rocket\ParticleSystem.cs" />
     <Compile Include="Rocket\RocketPart.cs" />
     <Compile Include="Scene\SceneObjects.cs" />
     <Compile Include="Game1.cs" />

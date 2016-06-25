@@ -312,32 +312,32 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                         Debug.WriteToFile("time: " + time, false, false);
                     }
 
-                    if (index == (int)RocketPart.PartTypes.Engine_Titus)
-                    {
-                        Vector2 enginePosition;
-                        enginePosition = Rocket.parts[index].m_position;
-                        ParticleEmitter = Emitter.CreateFireEmitter(Rocket.particles_RocketExhaust, enginePosition);
-                        ParticleEmitter.position = enginePosition;
+                    //if (index == (int)RocketPart.PartTypes.Engine_Titus)
+                    //{
+                    //    Vector2 enginePosition;
+                    //    enginePosition = Rocket.parts[index].m_position;
+                    //    ParticleEmitter = Emitter.CreateFireEmitter(Rocket.particles_RocketExhaust, enginePosition);
+                    //    ParticleEmitter.position = enginePosition;
 
-                        Debug.WriteToFile("partivle position: " + enginePosition.ToString(), false, false);
+                    //    Debug.WriteToFile("partivle position: " + enginePosition.ToString(), false, false);
 
-                        ParticleEmitter.Update(gameTime);
+                    //    ParticleEmitter.Update(gameTime);
 
-                        startEmitting = true;
+                    //    startEmitting = true;
 
-                        //RocketParticles(spriteBatch);
-                    } else if (index != (int)RocketPart.PartTypes.Engine_Titus) {
-                        foreach (RocketPart part in parts)
-                        {
-                            List<RocketPart.PartTypes> partsList = Enum.GetValues(typeof(RocketPart.PartTypes)).Cast<RocketPart.PartTypes>().ToList();
-                            index = partsList.IndexOf(part.m_type);
-                        }
-                    }
+                    //    //RocketParticles(spriteBatch);
+                    //} else if (index != (int)RocketPart.PartTypes.Engine_Titus) {
+                    //    foreach (RocketPart part in parts)
+                    //    {
+                    //        List<RocketPart.PartTypes> partsList = Enum.GetValues(typeof(RocketPart.PartTypes)).Cast<RocketPart.PartTypes>().ToList();
+                    //        index = partsList.IndexOf(part.m_type);
+                    //    }
+                    //}
                 }
 
                 if (actualLiftOff)
                 {
-                    Rocket.Velocity.Y -= 45f;
+                    Rocket.Velocity.Y -= 35f;
                 }
             }
             if (LiftOff && Rocket.Position.Y < -1000f)
@@ -365,11 +365,11 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Cheats()
         {
-            if (InputHandler.IsKeyDownOnce(Keys.Y))
+            if (InputHandler.IsKeyDownOnce(Keys.Y) && ScrapMetalCollected < ScrapMetalNeeded)
             {
                 ScrapMetalCollected++;
             }
-            if (InputHandler.IsKeyDownOnce(Keys.U))
+            if (InputHandler.IsKeyDownOnce(Keys.U) && RocketFuelCollected < PlannedRocketFuel)
             {
                 RocketFuelCollected += 400;
             }

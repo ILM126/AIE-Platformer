@@ -26,7 +26,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.26.273 (Developmental Stages)
+    /// Version: 0.0.26.281 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -111,7 +111,7 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.26.273 (25/06/16)";
+            GameVersionBuild = "v0.0.26.281 (25/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -592,15 +592,15 @@ namespace TrebleSketch_AIE_Platformer
             foreach (var message in ListMessages.messages)
                 spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
 
-            if (MiniGame_BuildTheRocket.LiftOff && startEmitting)
-            {
-                ParticleEmitter.Draw(spriteBatch);
-                spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.Black);
-            }
+            //if (MiniGame_BuildTheRocket.LiftOff && startEmitting)
+            //{
+            //    ParticleEmitter.Draw(spriteBatch);
+            //    spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.Black);
+            //}
 
-            ParticleEmitter = Emitter.CreateFireEmitter(Rocket.particles_RocketExhaust, new Vector2(CentreScreen.X, CentreScreen.Y + 50));
-            ParticleEmitter.Draw(spriteBatch);
-            spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.White);
+            //ParticleEmitter = Emitter.CreateBurstEmitter(Rocket.particles_RocketExhaust, new Vector2(CentreScreen.X, CentreScreen.Y + 50));
+            //ParticleEmitter.Draw(spriteBatch);
+            //spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.White);
 
             spriteBatch.End();
 

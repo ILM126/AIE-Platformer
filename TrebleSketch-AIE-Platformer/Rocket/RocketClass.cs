@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EclipsingGameUtils;
+using AIEResources.ParticleEffects;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -168,14 +169,6 @@ namespace TrebleSketch_AIE_Platformer
             foreach(RocketPart part in parts)
             {
                 part.Draw(spriteBatch);
-            }
-        }
-
-        public void RocketParticles()
-        {
-            if (PartTypes == RocketPart.PartTypes.Engine_Titus)
-            {
-
             }
         }
 

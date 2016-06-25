@@ -54,7 +54,7 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Mini Game - Build the Rocket) Loading screen before first part spawn!
     /// - (Mini Game - Build the Rocket) End game screen
     /// - (Mini Game - Build the Rocket) Score management (score stored)
-    /// - (Mini Game - Build the Rocket) The mysterious 1600 fuel unit update bug ||||GAME BREAKING|||||
+    /// - (Mini Game - Build the Rocket) The mysterious 12 scrap / 1600 fuel unit update bug ||||GAME BREAKING|||||
     /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game
@@ -103,6 +103,8 @@ namespace TrebleSketch_AIE_Platformer
         int res_ScreenWidth;
         float res_ScreenScaleUpDifference;
         float res_ScreenScaleDownDifference;
+
+        bool startEmitting;
         #endregion
 
         public Game1()
@@ -267,7 +269,8 @@ namespace TrebleSketch_AIE_Platformer
                 SceneObject.scene_TextureError = Content.Load<Texture2D>("scene-errorTexturev1");
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
-                
+
+                ParticleEmitter = Emitter.CreateBurstEmitter(Rocket.particles_RocketExhaust, CentreScreen);
 
             Debug.WriteToFile("Finished Loading Game Textures", true, false);
 
@@ -376,7 +379,8 @@ namespace TrebleSketch_AIE_Platformer
                     fuelUnit.Update(gameTime);
                 }
 
-                MiniGame_BuildTheRocket.Update(gameTime);
+                startEmitting = MiniGame_BuildTheRocket.startEmitting;
+                MiniGame_BuildTheRocket.Update(gameTime, spriteBatch);
             }
             #endregion
 
@@ -524,7 +528,7 @@ namespace TrebleSketch_AIE_Platformer
                 GraphicsDevice.Clear(Color.Black);
             } else
             {
-                GraphicsDevice.Clear(Color.SkyBlue);
+                GraphicsDevice.Clear(Color.Brown);
             }
             // GraphicsDevice.Clear(Color.Black);
 
@@ -587,6 +591,16 @@ namespace TrebleSketch_AIE_Platformer
 
             foreach (var message in ListMessages.messages)
                 spriteBatch.DrawString(Debug.scoreText, message.Text, message.Position, Color.Lime);
+
+            if (MiniGame_BuildTheRocket.LiftOff && startEmitting)
+            {
+                ParticleEmitter.Draw(spriteBatch);
+                spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.Black);
+            }
+
+            ParticleEmitter = Emitter.CreateFireEmitter(Rocket.particles_RocketExhaust, new Vector2(CentreScreen.X, CentreScreen.Y + 50));
+            ParticleEmitter.Draw(spriteBatch);
+            spriteBatch.DrawString(Debug.scoreText, "I am drawing over here", ParticleEmitter.position, Color.White);
 
             spriteBatch.End();
 

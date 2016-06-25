@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using EclipsingGameUtils;
+using AIEResources.ParticleEffects;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TrebleSketch_AIE_Platformer.MiniGames
 {
@@ -13,6 +16,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public LoadScene SceneLoad;
         public DevLogging Debug;
         public RocketClass Rocket;
+        Emitter ParticleEmitter;
 
         public RocketClass.LaunchVehicles LaunchVehicle;
         public RocketPart.PartTypes PartType;
@@ -31,9 +35,15 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         public bool LiftOff;
         public bool Reset;
         bool finishedRocket;
+        bool actualLiftOff;
+        bool poof;
+        int index;
 
         public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
-        public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 3, 0, 0);
+        public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 0);
+        public TimeSpan LiftOffTime = new TimeSpan(0, 0, 4);
+        float launchTime;
+        public bool startEmitting;
 
         int screenWidth;
         int screenHeight;
@@ -61,6 +71,8 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                     new Vector2(50, 30),
                     1f);
             SceneLoad.ScrapMetals.Add(scrapMetal);
+            launchTime = 0f;
+            poof = false;
         }
 
         public void ResetRocketBuild()
@@ -70,11 +82,13 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             ScrapMetalCollected = 0;
             RocketFuelCollected = 0;
             fuelTotal = 0f;
+            launchTime = 0f;
             ReadyForLiftOff = false;
             rocketFuelFull = false;
             LiftOff = false;
             Reset = false;
             Rocket.Position = SceneLoad.CentreScreen;
+            poof = false;
         }   
 
         public void SetRocketHeight(RocketClass.LaunchVehicles rocket)
@@ -158,13 +172,13 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, SpriteBatch spriteBatch)
         {
             parts = Rocket.parts;
 
             SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie_Crewed);
 
-            RocketBuild(gameTime);
+            RocketBuild(gameTime, spriteBatch);
 
             //(int)SceneLoad.CentreScreen.X - 200 = screenWidth;
             //screenHeight = (int)SceneLoad.CentreScreen.Y - 20;
@@ -189,7 +203,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             //Debug.WriteToFile("Rocket Engine Position after SetSize in BTR: " + parts[0].m_position.ToString(), true, false);
         }
 
-        public void RocketBuild(GameTime gameTime) // Increments of 25 for one scrapmetal
+        public void RocketBuild(GameTime gameTime, SpriteBatch spriteBatch) // Increments of 25 for one scrapmetal
         {
             ScrapMetalNeeded = PlannedRocketHeight / 25;
 
@@ -255,7 +269,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 //}
             }
 
-            RocketLaunch();
+            RocketLaunch(gameTime, spriteBatch);
 
             if (ScrapMetalCollected == ScrapMetalNeeded && finishedRocket)
             {
@@ -271,22 +285,82 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
         }
 
-        public void RocketLaunch()
+        public void RocketLaunch(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel && LiftOff)
+
+            if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel)
             {
-                Rocket.Velocity.Y -= 45f;
+                if (LiftOff)
+                {
+                    float time = (float)gameTime.TotalGameTime.Seconds;
+
+                    if (!poof)
+                    {
+                        launchTime = time + 3;
+                        Debug.WriteToFile("poofed!", false, false);
+                        Debug.WriteToFile("launchTime: " + launchTime, false, false);
+                        Debug.WriteToFile("time: " + time, false, false);
+                        poof = true;
+                    }
+
+                    if (launchTime == time)
+                    {
+                        launchTime = 0;
+                        actualLiftOff = true;
+                        Debug.WriteToFile("If time equal launchTime", false, false);
+                        Debug.WriteToFile("launchTime: " + launchTime, false, false);
+                        Debug.WriteToFile("time: " + time, false, false);
+                    }
+
+                    if (index == (int)RocketPart.PartTypes.Engine_Titus)
+                    {
+                        Vector2 enginePosition;
+                        enginePosition = Rocket.parts[index].m_position;
+                        ParticleEmitter = Emitter.CreateFireEmitter(Rocket.particles_RocketExhaust, enginePosition);
+                        ParticleEmitter.position = enginePosition;
+
+                        Debug.WriteToFile("partivle position: " + enginePosition.ToString(), false, false);
+
+                        ParticleEmitter.Update(gameTime);
+
+                        startEmitting = true;
+
+                        //RocketParticles(spriteBatch);
+                    } else if (index != (int)RocketPart.PartTypes.Engine_Titus) {
+                        foreach (RocketPart part in parts)
+                        {
+                            List<RocketPart.PartTypes> partsList = Enum.GetValues(typeof(RocketPart.PartTypes)).Cast<RocketPart.PartTypes>().ToList();
+                            index = partsList.IndexOf(part.m_type);
+                        }
+                    }
+                }
+
+                if (actualLiftOff)
+                {
+                    Rocket.Velocity.Y -= 45f;
+                }
             }
             if (LiftOff && Rocket.Position.Y < -1000f)
             {
                 ResetRocketBuild();
                 Rocket.Velocity.Y = 0;
+                actualLiftOff = false;
+                LiftOff = false;
                 Reset = true;
+                startEmitting = false;
+                index = -1;
             }
             if (InputHandler.IsKeyDownOnce(Keys.R) && 0 < RocketFuelCollected || InputHandler.IsKeyDownOnce(Keys.R) && 0 < ScrapMetalCollected)
             {
                 ResetRocketBuild();
             }
+        }
+
+        public void RocketParticles(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+            //ParticleEmitter.Draw(spriteBatch);
+            spriteBatch.End();
         }
 
         public void Cheats()

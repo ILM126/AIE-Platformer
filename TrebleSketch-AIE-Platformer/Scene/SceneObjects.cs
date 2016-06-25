@@ -43,16 +43,16 @@ namespace TrebleSketch_AIE_Platformer
                                 (int)(scene_Size.X),
                                 (int)(scene_Size.Y));
 
-            //spriteBatch.Draw(
-            //    texture,
-            //    scene_Position,
-            //    srcRect,
-            //    Color.White,
-            //    0,
-            //    scene_Origin,
-            //    scene_Scale,
-            //    0,
-            //    0);
+            spriteBatch.Draw(
+                texture,
+                scene_Position,
+                srcRect,
+                Color.White,
+                0,
+                scene_Origin,
+                scene_Scale,
+                0,
+                0);
         }
 
         protected virtual void UpdateBounds()

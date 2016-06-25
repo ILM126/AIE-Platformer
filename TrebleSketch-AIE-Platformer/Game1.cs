@@ -26,7 +26,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.26.281 (Developmental Stages)
+    /// Version: 0.0.26.282 (Developmental Stages)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -73,7 +73,6 @@ namespace TrebleSketch_AIE_Platformer
         SceneObjects SceneObject;
         AudioClass Audio;
 
-        ParticleSystem Particle;
         Emitter ParticleEmitter;
 
         DevLogging Debug;
@@ -111,8 +110,9 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.26.281 (25/06/16)";
+            GameVersionBuild = "v0.0.26.282 (25/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
+            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 720;
@@ -540,13 +540,6 @@ namespace TrebleSketch_AIE_Platformer
             SceneLoad.Draw(gameTime, spriteBatch);
 
             // Debug.WriteToFile("Drawing Rocket Textures");
-            if (SceneLoad.RocketInScene)
-            {
-                Rocket.Draw(spriteBatch);
-
-                Rectangle tempRect = new Rectangle((int)Rocket.Position.X - 5, (int)Rocket.Position.Y - 5, 10, 10);
-                //DrawRectangle(tempRect, Color.White);
-            }
             //else if (!RocketInScene)
             //{
             //    Debug.WriteToFile("Rocket is not being drawn on screen");
@@ -581,6 +574,14 @@ namespace TrebleSketch_AIE_Platformer
             //} else {
             //    Audio.CurrentSong(spriteBatch, Color.Black);
             //}
+
+            if (SceneLoad.RocketInScene)
+            {
+                Rocket.Draw(spriteBatch);
+
+                Rectangle tempRect = new Rectangle((int)Rocket.Position.X - 5, (int)Rocket.Position.Y - 5, 10, 10);
+                //DrawRectangle(tempRect, Color.White);
+            }
 
             if (SceneLoad.SceneID == 5)
             {

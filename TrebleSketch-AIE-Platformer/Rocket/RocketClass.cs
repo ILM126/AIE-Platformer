@@ -13,6 +13,7 @@ namespace TrebleSketch_AIE_Platformer
         public List<RocketPart> parts = new List<RocketPart>();
 
         public Texture2D[] rocketParts = new Texture2D[4];
+        public Texture2D particles_RocketExhaust;
 
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
@@ -170,6 +171,15 @@ namespace TrebleSketch_AIE_Platformer
             }
         }
 
+        public void RocketParticles()
+        {
+            if (PartTypes == RocketPart.PartTypes.Engine_Titus)
+            {
+
+            }
+        }
+
+        #region Collisions
         protected virtual void UpdateBounds()
         {
             /// Note: this should be called whenever the object position,
@@ -216,5 +226,6 @@ namespace TrebleSketch_AIE_Platformer
             }
             return false;
         }
+        #endregion
     }
 }

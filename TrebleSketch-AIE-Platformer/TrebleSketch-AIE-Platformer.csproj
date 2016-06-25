@@ -122,9 +122,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MiniGame\miniGame_FuelUnits-v1.png" />
-    <Content Include="Content\Particles\spark.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\Particles\rocketExhaust.png" />
     <Content Include="Content\Player\treble-sketch_stand_left-v2.png" />
     <Content Include="Content\Player\treble-sketch_stand_right-v2.png" />
     <Content Include="Content\Rocket\capsule-PipingShrike-v1.png">

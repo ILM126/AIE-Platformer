@@ -97,11 +97,12 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 ScrapMetal scrapMetal = new ScrapMetal(
                         BTR_ScrapMetal.tex_ScrapMetal,
                         pos,
-                        new Vector2(50, 30),
+                        new Vector2 (BTR_ScrapMetal.tex_ScrapMetal.Width, BTR_ScrapMetal.tex_ScrapMetal.Height),
                         1f);
                 SceneLoad.ScrapMetals.Add(scrapMetal);
                 scrapMetalFrameCounter = 0;
             }
+            CheckScrapMetalPosition();
         }
 
         public void SpawnFuelUnits()
@@ -115,46 +116,45 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                 FuelUnit fuelUnit = new FuelUnit(
                         BTR_FuelUnit.tex_FuelUnit,
                         pos,
-                        new Vector2(50, 30),
+                        new Vector2(BTR_FuelUnit.tex_FuelUnit.Width, BTR_FuelUnit.tex_FuelUnit.Height),
                         1f);
                 SceneLoad.FuelUnits.Add(fuelUnit);
                 fuelUnitFrameCounter = 0;
             }
+            CheckFuelUnitPosition();
         }
 
         void CheckFuelUnitPosition()
         {
+            int ToRemove = -1;
             foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
             {
-                if (fuelUnit.CollisionCheck(this))
-                {
-                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
-                    ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
-                }
+                ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
             }
             if (ToRemove != -1)
             {
-                SceneLoad.FuelUnits.RemoveAt(ToRemove);
-                MiniGame_BuildTheRocket.RocketFuelCollected += 400;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
+                if (SceneLoad.FuelUnits[ToRemove].m_position.Y > SceneLoad.CentreScreen.Y * 2)
+                {
+                    SceneLoad.FuelUnits.RemoveAt(ToRemove);
+                    Debug.WriteToFile("Fuel Unit no. " + ToRemove + " is now deleted due to it being outside the screen", false, false);
+                }
             }
         }
 
         void CheckScrapMetalPosition()
         {
-            foreach (FuelUnit fuelUnit in SceneLoad.FuelUnits)
+            int ToRemove = -1;
+            foreach (ScrapMetal scrapMetal in SceneLoad.ScrapMetals)
             {
-                if (fuelUnit.CollisionCheck(this))
-                {
-                    //Debug.WriteToFile("PLAYER IS TOUCHING SCRAP METAL", false);
-                    ToRemove = SceneLoad.FuelUnits.IndexOf(fuelUnit);
-                }
+                ToRemove = SceneLoad.ScrapMetals.IndexOf(scrapMetal);
             }
             if (ToRemove != -1)
             {
-                SceneLoad.FuelUnits.RemoveAt(ToRemove);
-                MiniGame_BuildTheRocket.RocketFuelCollected += 400;
-                Debug.WriteToFile("Player has retrieved " + MiniGame_BuildTheRocket.RocketFuelCollected + " fuel units", false, false);
+                if (SceneLoad.ScrapMetals[ToRemove].m_position.Y > SceneLoad.CentreScreen.Y * 2)
+                {
+                    SceneLoad.ScrapMetals.RemoveAt(ToRemove);
+                    Debug.WriteToFile("Scrap Metal no. " + ToRemove + " is now deleted due to it being outside the screen", false, false);
+                }
             }
         }
 

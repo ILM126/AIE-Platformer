@@ -112,7 +112,6 @@ namespace TrebleSketch_AIE_Platformer
             File.Delete(Debug.GetCurrentDirectory());
             GameVersionBuild = "v0.0.26.282 (25/06/16)";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
-            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, true);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 720;
@@ -229,11 +228,10 @@ namespace TrebleSketch_AIE_Platformer
             Audio.Debug = Debug;
 
             //Debug.WriteToFile(SceneLoad.SceneID + "", true);
-
-            Debug.WriteToFile("Finished Initializing Game", true, false);
             #endregion
 
             base.Initialize();
+            Debug.WriteToFile("Finished Initializing Game", true, false);
         }
 
         /// <summary>

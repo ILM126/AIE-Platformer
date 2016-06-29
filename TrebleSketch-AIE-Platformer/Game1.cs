@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,7 +9,6 @@ using MonoGame.Extended.BitmapFonts;
 using EclipsingGameUtils;
 using AIEResources.ParticleEffects;
 using TrebleSketch_AIE_Platformer.MiniGames;
-using System.Collections.Generic;
 
 namespace TrebleSketch_AIE_Platformer
 {
@@ -26,7 +27,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.27.284 (Pre-Alpha Release)
+    /// Version: 0.0.27.285 (Pre-Alpha Release)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -110,8 +111,9 @@ namespace TrebleSketch_AIE_Platformer
         {
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
-            GameVersionBuild = "v0.0.27.284 (29/06/16)";
-            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild, true, false);
+            DateTime thisDay = DateTime.Now;
+            GameVersionBuild = "v0.0.27.285 ";
+            Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild + thisDay.ToString("dd-MM-yyyy HH:mm:ss zzz"), true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 720;
@@ -127,7 +129,7 @@ namespace TrebleSketch_AIE_Platformer
             Debug.WriteToFile("Game screen size: " + res_OriginalGameWidth + " x " + res_OriginalGameHeight, true, false);
 
             res_ScreenScaleUpDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
-            res_ScreenScaleDownDifference = (float)res_ScreenHeight / (float)res_OriginalGameHeight;
+            res_ScreenScaleDownDifference = (float)res_OriginalGameHeight / (float)res_ScreenHeight;
             Debug.WriteToFile("Scale up from OriginalGameHeight to ScreenHeight: " + res_ScreenScaleUpDifference, true, false);
             Debug.WriteToFile("Scale down from ScreenHeight to OriginalGameHeight: " + res_ScreenScaleDownDifference, true, false);
         }

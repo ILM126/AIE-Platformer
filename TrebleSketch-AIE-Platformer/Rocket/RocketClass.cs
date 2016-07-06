@@ -13,6 +13,7 @@ namespace TrebleSketch_AIE_Platformer
         //      Add list of parts that have the textures and stack dynamically
         public List<RocketPart> parts = new List<RocketPart>();
 
+        public Emitter ParticleEmitter;
         public Texture2D[] rocketParts = new Texture2D[4];
         public Texture2D particles_RocketExhaust;
 
@@ -96,6 +97,10 @@ namespace TrebleSketch_AIE_Platformer
             Position.Y += Velocity.Y * time;
             Position.X += Velocity.X;
 
+            // if engine is built and actualLiftOff is true, then emitter update will run!
+
+            ParticleEmitter.position = Position; // check if the part if engine and then particle appear when actualLiftOff is true
+
             CalculatePositionAndCollisionBox();
             StackParts();
             UpdateBounds();
@@ -166,6 +171,8 @@ namespace TrebleSketch_AIE_Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            // emitter draw will be updated once engine is built and actualiftOff is true
+
             foreach(RocketPart part in parts)
             {
                 part.Draw(spriteBatch);

@@ -27,7 +27,7 @@ namespace TrebleSketch_AIE_Platformer
     /// Genre: 2D Platformer
     /// Description: You must play as Treble Sketch or Adelaide as either of them must handle the everyday stress of being the head of
     /// a starting national space agency.
-    /// Version: 0.0.27.286 (Pre-Alpha Release)
+    /// Version: 0.0.28.287 (Pre-Alpha Release)
     /// Developer: Titus Huang (Treble Sketch/ILM126)
     /// Game Engine: MonoGame/XNA
     /// Language: C#
@@ -56,6 +56,7 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Mini Game - Build the Rocket) End game screen
     /// - (Mini Game - Build the Rocket) Score management (score stored)
     /// - (Mini Game - Build the Rocket) The mysterious 12 scrap / 1600 fuel unit update bug ||||GAME BREAKING|||||
+    /// - (Mini Game - Build the Rocket) The mysterious 8 built rocket not launching bug ||||GAME BREAKING|||||
     /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game
@@ -114,7 +115,7 @@ namespace TrebleSketch_AIE_Platformer
             Debug = new DevLogging();
             File.Delete(Debug.GetCurrentDirectory());
             DateTime thisDay = DateTime.Now;
-            GameVersionBuild = "v0.0.27.286 ";
+            GameVersionBuild = "v0.0.28.287 ";
             Debug.WriteToFile("Starting Space Program Simulator 2016 " + GameVersionBuild + thisDay.ToString("dd-MM-yyyy HH:mm:ss zzz"), true, false);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -219,6 +220,7 @@ namespace TrebleSketch_AIE_Platformer
             Rocket.GroundHeight = GroundHeight;
             //Rocket.rocketParts.m_scale = Scale;
             Rocket.ParticleEmitter = ParticleEmitter;
+            Rocket.Game = this;
             Rocket.InitialiseRocket();
 
             MiniGame_BuildTheRocket.parts = Rocket.parts;
@@ -273,8 +275,6 @@ namespace TrebleSketch_AIE_Platformer
                 MouseMovement.MouseTexture = Content.Load<Texture2D>("Cursor-v1");
                 MouseMovement.MouseTexturePressed = Content.Load<Texture2D>("Cursor-v1-clicked");
 
-                ParticleEmitter = Emitter.CreateBurstEmitter(Rocket.particles_RocketExhaust, CentreScreen);
-
             Debug.WriteToFile("Finished Loading Game Textures", true, false);
 
             Rocket.InitialiseRocket();
@@ -323,6 +323,7 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.RocketInScene && Rocket.parts.Count > 0)
             {
                 Rocket.SpawnPosition = CentreScreen;
+                Rocket.LiftOff = MiniGame_BuildTheRocket.LiftOff;
                 Rocket.Update(gameTime);
                 Rocket.IsGrounded = false;
                 //Debug.WriteToFile("Rocket Engine Position after Rocker Update: " + Rocket.parts[0].m_position.ToString(), true, false);

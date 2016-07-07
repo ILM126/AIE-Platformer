@@ -53,7 +53,7 @@ namespace AIEResources.ParticleEffects
             maxVelocity.Y = 50.0f;
             minVelocity.X = -50.0f;
             maxVelocity.X = 50.0f;
-            gravity = 0.0f;
+            gravity = 0f;
             wind = 0.0f;
             transparency = 0.25f;
             //-----------------------------------------------------------------
@@ -115,7 +115,7 @@ namespace AIEResources.ParticleEffects
 
             p.life = fRand(minLife, maxLife);
             p.rotation = 0.0f;
-            p.color = Color.White;
+            p.color = Color.OrangeRed;
             p.acceleration = new Vector2(wind, -gravity);
             p.velocity = new Vector2(fRand(minVelocity.X, maxVelocity.X), fRand(minVelocity.Y, maxVelocity.Y));
             p.position = new Vector2(fRand(-emissionSize.X, emissionSize.X) + position.X,
@@ -168,12 +168,27 @@ namespace AIEResources.ParticleEffects
             e.emissionRate = 100.0f;
             e.minLife = 2.0f;
             e.maxLife = 7.0f;
+
             e.transparency = 0.20f;
-            e.minVelocity.X = 0.0f;
-            e.maxVelocity.X = 0.0f;
-            e.minVelocity.Y = 75.0f;
-            e.maxVelocity.Y = 100.0f;
             e.transparency = 0.5f;
+            return e;
+        }
+
+        public static Emitter CreateRocketFireEmitter(Texture2D particleTexture, Vector2 pos)
+        {
+            Emitter e = new Emitter(particleTexture, pos);
+            e.emissionSize = new Vector2(12f, 250.0f);
+            e.emissionRate = 3000.0f;
+
+            e.minVelocity = new Vector2(2.0f, 80.0f);
+            e.maxVelocity = new Vector2(7.0f, 250.0f);
+
+            e.gravity = 50f;
+            e.wind = 100f;
+            e.minLife = 7f;
+            e.maxLife = 10.0f;
+            e.transparency = 1f;
+
             return e;
         }
     }

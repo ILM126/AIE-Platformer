@@ -16,7 +16,9 @@ namespace TrebleSketch_AIE_Platformer
         public Emitter ParticleEmitter;
         public Texture2D[] rocketParts = new Texture2D[4];
         public Texture2D particles_RocketExhaust;
+        public Vector2 particlesPosition;
 
+        public Game1 Game;
         public InputHandler UserInput;
         public SquareCollision BoxCollision;
         public DevLogging Debug;
@@ -39,6 +41,8 @@ namespace TrebleSketch_AIE_Platformer
         public float Gravity;
         public float GroundHeight;
 
+        public bool LiftOff;
+
         float height;
         int lowerPart;
         int higherPart;
@@ -57,6 +61,7 @@ namespace TrebleSketch_AIE_Platformer
         public void InitialiseRocket()
         {
             BoxCollision = new SquareCollision(Position, Size);
+            ParticleEmitter = Emitter.CreateBurstEmitter(particles_RocketExhaust, Game.CentreScreen);
 
             IsGrounded = false;
 
@@ -99,7 +104,25 @@ namespace TrebleSketch_AIE_Platformer
 
             // if engine is built and actualLiftOff is true, then emitter update will run!
 
-            ParticleEmitter.position = Position; // check if the part if engine and then particle appear when actualLiftOff is true
+            if (LiftOff)
+            {
+                foreach (RocketPart part in parts)
+                {
+                    switch (PartTypes = part.m_type)
+                    {
+                        case RocketPart.PartTypes.Engine_Titus:
+                            particlesPosition = new Vector2(part.m_position.X, part.m_position.Y + 290);
+                            ParticleEmitter.position = particlesPosition; // check if the part if engine and then particle appear when actualLiftOff is true;
+                            ParticleEmitter = Emitter.CreateRocketFireEmitter(particles_RocketExhaust, particlesPosition);
+                            ParticleEmitter.Update(gameTime);
+                            //Debug.WriteToFile("Updating particle position", false, false);
+                            //Debug.WriteToFile("Particle Position: " + ParticleEmitter.position.ToString(), false, false);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
             CalculatePositionAndCollisionBox();
             StackParts();
@@ -173,7 +196,23 @@ namespace TrebleSketch_AIE_Platformer
         {
             // emitter draw will be updated once engine is built and actualiftOff is true
 
-            foreach(RocketPart part in parts)
+            if (LiftOff)
+            {
+                foreach (RocketPart part in parts)
+                {
+                    switch (PartTypes = part.m_type)
+                    {
+                        case RocketPart.PartTypes.Engine_Titus:
+                            ParticleEmitter.Draw(spriteBatch);
+                            //Debug.WriteToFile("Drawing particle", false, false);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            foreach (RocketPart part in parts)
             {
                 part.Draw(spriteBatch);
             }

@@ -176,45 +176,34 @@ namespace TrebleSketch_AIE_Platformer
 
             CheckIfTwoOrMoreKeys();
 
-            if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
+            if (BothSidesPressed)
             {
-                if (IsGrounded)
-                {
-                    Velocity = new Vector2(0);
-                }
-            }
-
-            if (InputHandler.IsKeyDownOnce(Keys.A) && !BothSidesPressed) // Move Left
+                Velocity = new Vector2(0);
+            } else
             {
+                if (InputHandler.IsKeyDownOnce(Keys.A) && !BothSidesPressed) // Move Left
                 {
                     Velocity.X = -250f;
+                    PlayerFacingRight = false;
                 }
-                PlayerFacingRight = false;
-            }
 
-            if (InputHandler.IsKeyDownOnce(Keys.A) && InputHandler.IsKeyDownOnce(Keys.LeftShift))
-            {
-                Velocity.X = -450f;
-                BothSidesPressed = true;
-            }
-
-            if (InputHandler.IsKeyDownOnce(Keys.D)) // Move Right
-            {
-                if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
+                if (InputHandler.IsKeyDownOnce(Keys.A) && InputHandler.IsKeyDownOnce(Keys.LeftShift))
                 {
-                    Velocity.X = 450f;
+                    Velocity.X = -450f;
+                    BothSidesPressed = true;
                 }
-                else
+
+                if (InputHandler.IsKeyDownOnce(Keys.D) && !BothSidesPressed) // Move Right
                 {
                     Velocity.X = 250f;
+                    PlayerFacingRight = true;
                 }
-                PlayerFacingRight = true;
-            }
 
-            //if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
-            //{
-            //    Debug.WriteToFile("LEFT SHIFT KEY IS BEING PRESSED", true);
-            //}
+                //if (InputHandler.IsKeyDownOnce(Keys.LeftShift))
+                //{
+                //    Debug.WriteToFile("LEFT SHIFT KEY IS BEING PRESSED", true);
+                //}
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W) && IsGrounded) Jump(); // Jump!
 
@@ -236,18 +225,37 @@ namespace TrebleSketch_AIE_Platformer
 
         public void CheckIfTwoOrMoreKeys()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                BothSidesPressed = true;
-            } else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                BothSidesPressed = false;
-            } else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 BothSidesPressed = false;
             } else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
                 BothSidesPressed = false;
+            } else
+            {
+                BothSidesPressed = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                BothSidesPressed = false;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                BothSidesPressed = false;
+            }
+            else
+            {
+                BothSidesPressed = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                BothSidesPressed = true;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                BothSidesPressed = true;
             }
         }
 

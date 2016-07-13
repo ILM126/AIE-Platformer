@@ -39,9 +39,12 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
         bool poof;
         int index;
 
-        public TimeSpan FiveMinGameTimer = new TimeSpan(0, 0, 5, 0, 0);
+        public float FiveMinGameTimer = 60 * 5;
+        public float FiveMinGameTime;
+        float time5SecSpace;
+
         public TimeSpan LiftOffTimer = new TimeSpan(0, 0, 0);
-        public TimeSpan LiftOffTime = new TimeSpan(0, 0, 4);
+        public TimeSpan LiftOffTime = new TimeSpan(0, 0, 3);
         float launchTime;
         public bool startEmitting;
 
@@ -58,7 +61,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             randNum = new Random();
         }
 
-        public void LoadBTR()
+        public void LoadBTR(GameTime gameTime)
         {
             ReadyForLiftOff = false;
             rocketFuelFull = false;
@@ -72,6 +75,7 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
                     1f);
             SceneLoad.ScrapMetals.Add(scrapMetal);
             launchTime = 0f;
+            FiveMinGameTime = (float)FiveMinGameTimer + (float)gameTime.ElapsedGameTime.TotalSeconds;
             poof = false;
         }
 
@@ -174,6 +178,18 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
         public void Update(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (FiveMinGameTime <= time)
+            {
+                spriteBatch.DrawString(Debug.scoreText, "AYYYYYYYYYYYYYYY", new Vector2(100, 100), Color.Green);
+            }
+            if (time5SecSpace >= time)
+            {
+                Debug.WriteToFile("Time left: " + FiveMinGameTime + " seconds", true, false);
+                time5SecSpace = 5f + time;
+            }
+
             parts = Rocket.parts;
 
             SetRocketHeight(RocketClass.LaunchVehicles.LightLauncher_Magpie_Crewed);
@@ -247,28 +263,6 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             }
             #endregion
 
-            if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel) // Rocket Animation
-            {
-                ReadyForLiftOff = true;
-
-                //float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                //Debug.WriteToFile("Rocket Flight Animation complete", true, false);
-                //Rocket.parts.Clear();
-                //Rocket.InitialiseRocket();
-
-                //if (Rocket.Position.Y < 0)
-                //{
-                //    //Rocket.Velocity.Y += 1 * time;
-                //}
-                //else /*if (Rocket.Position.Y == 0)*/
-                //{
-                //    Debug.WriteToFile("Rocket Flight Animation complete", true, false);
-                //    Rocket.parts.Clear();
-                //    Rocket.InitialiseRocket();
-                //}
-            }
-
             RocketLaunch(gameTime, spriteBatch);
 
             if (ScrapMetalCollected == ScrapMetalNeeded && finishedRocket)
@@ -281,18 +275,25 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
             {
                 Debug.WriteToFile(RocketsBuilt + " rockets now built + launched", false, false);
                 Debug.WriteToFile("Rocket " + RocketsBuilt + " just lifted off!", true, false);
+                Debug.WriteToFile("Checking LiftOff variable: " + LiftOff.ToString(), false, false);
                 Reset = false;
             }
         }
 
         public void RocketLaunch(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
             if (parts.Count == 3 && RocketFuelCollected == PlannedRocketFuel)
             {
+                ReadyForLiftOff = true;
+
+                Debug.WriteToFile("Checking LiftOff variable: " + LiftOff.ToString(), false, false);
                 if (LiftOff)
                 {
                     float time = (float)gameTime.TotalGameTime.Seconds;
+                    if (!poof)
+                    {
+                        Debug.WriteToFile("LifeOff was passed", false, false);
+                    }
 
                     if (!poof)
                     {
@@ -305,9 +306,13 @@ namespace TrebleSketch_AIE_Platformer.MiniGames
 
                     if (launchTime == time)
                     {
-                        launchTime = 0;
                         actualLiftOff = true;
                         Debug.WriteToFile("If time equal launchTime", false, false);
+                        Debug.WriteToFile("launchTime: " + launchTime, false, false);
+                        Debug.WriteToFile("time: " + time, false, false);
+                        launchTime = 0;
+                    } else
+                    {
                         Debug.WriteToFile("launchTime: " + launchTime, false, false);
                         Debug.WriteToFile("time: " + time, false, false);
                     }

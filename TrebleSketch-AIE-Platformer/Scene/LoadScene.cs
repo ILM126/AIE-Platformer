@@ -139,7 +139,7 @@ namespace TrebleSketch_AIE_Platformer
                     {
                         SceneID = 5;
                         MessageNotLoaded = true;
-                        MiniGame_BuildTheRocket.LoadBTR();
+                        MiniGame_BuildTheRocket.LoadBTR(gameTime);
                     }
                     PlayerInScene = false;
                     RocketInScene = false;
@@ -374,6 +374,7 @@ namespace TrebleSketch_AIE_Platformer
             if (state.LeftButton == ButtonState.Pressed && UserInput.MouseInRectangle(Button) && MiniGame_BuildTheRocket.ReadyForLiftOff)
             {
                 MiniGame_BuildTheRocket.LiftOff = true;
+                Debug.WriteToFile("Launch Button clicked", false, false);
             }
 
             PlayerInScene = true;

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TrebleSketch_AIE_Platformer
 {
-    class DevLogging // Version 6
+    class DevLogging // Version 6.2
     {
         public BitmapFont DebugFont;
         public BitmapFont InformationFont;

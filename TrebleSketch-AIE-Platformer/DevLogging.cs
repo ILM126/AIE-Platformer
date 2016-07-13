@@ -37,13 +37,17 @@ namespace TrebleSketch_AIE_Platformer
         /// <param name="text"></param>
         public void WriteToFile(string text, bool toConsole, bool warning)
         {
-            if (toConsole || !toConsole && !warning)
+            if (toConsole && !warning)
             {
-                Console.WriteLine("[INFO] " + text);
+                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss ") + "[INFO] " + text);
+            }
+            else if (!toConsole && !warning)
+            {
+                // Shouldn't do anything, but I just do this just in case
             }
             else if (toConsole || !toConsole && warning)
             {
-                Console.WriteLine("[WARNING] " + text);
+                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss ") + "[WARNING] " + text);
             }
             else
             {

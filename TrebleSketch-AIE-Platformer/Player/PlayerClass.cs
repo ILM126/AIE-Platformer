@@ -176,11 +176,27 @@ namespace TrebleSketch_AIE_Platformer
 
             CheckIfTwoOrMoreKeys();
 
-            if (BothSidesPressed)
+            if (BothSidesPressed && IsGrounded)
             {
                 Velocity = new Vector2(0);
             } else
             {
+                //if (InputHandler.IsKeyUpOnce(Keys.A) || InputHandler.IsKeyUpOnce(Keys.D))
+                //{
+                //    if (IsGrounded)
+                //    {
+                //        Velocity = new Vector2(0);
+                //    }
+                //}
+
+                if (Keyboard.GetState().IsKeyUp(Keys.D) && Keyboard.GetState().IsKeyUp(Keys.A))
+                {
+                    if (IsGrounded)
+                    {
+                        Velocity = new Vector2(0);
+                    }
+                }
+
                 if (InputHandler.IsKeyDownOnce(Keys.A) && !BothSidesPressed) // Move Left
                 {
                     Velocity.X = -250f;
@@ -203,6 +219,7 @@ namespace TrebleSketch_AIE_Platformer
                 //{
                 //    Debug.WriteToFile("LEFT SHIFT KEY IS BEING PRESSED", true);
                 //}
+
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W) && IsGrounded) Jump(); // Jump!

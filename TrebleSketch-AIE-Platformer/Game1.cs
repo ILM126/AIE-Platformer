@@ -56,7 +56,6 @@ namespace TrebleSketch_AIE_Platformer
     /// - (Mini Game - Build the Rocket) End game screen
     /// - (Mini Game - Build the Rocket) Score management (score stored)
     /// - (Mini Game - Build the Rocket) The mysterious 12 scrap / 1600 fuel unit update bug ||||GAME BREAKING|||||
-    /// - (Mini Game - Build the Rocket) The mysterious 8 built rocket not launching bug ||||GAME BREAKING|||||
     /// - (UI) Able to take user's name and use it in the game
     /// </summary>
     public class Game1 : Game
@@ -251,14 +250,14 @@ namespace TrebleSketch_AIE_Platformer
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
                 Player.FaceLeft = Content.Load<Texture2D>("Player/treble-sketch_stand_left-v2");
                 Player.FaceRight = Content.Load<Texture2D>("Player/treble-sketch_stand_right-v2");
                 Rocket.rocketParts[0] = Content.Load<Texture2D>("Rocket/engine-Titus-v2");
                 Rocket.rocketParts[1] = Content.Load<Texture2D>("Rocket/fuelTank-Medium-v2");
                 Rocket.rocketParts[2] = Content.Load<Texture2D>("Rocket/capsule-PipingShrike-v1");
                 Rocket.particles_RocketExhaust = Content.Load<Texture2D>("Particles/rocketExhaust");
-                SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");    
+                SceneLoad.OutsideGrass = Content.Load<Texture2D>("Surface/surface-dirt1-v1");
                 SceneLoad.MainMenu_StartButton = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1");
                 SceneLoad.MainMenu_StartButton_Hover = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-hover");
                 SceneLoad.MainMenu_StartButton_Clicked = Content.Load<Texture2D>("Menu/menu-StartGameButton-v1-clicked");
@@ -310,13 +309,9 @@ namespace TrebleSketch_AIE_Platformer
 
             SceneLoad.SceneLoader(spriteBatch, gameTime);
 
-            if (SceneLoad.ScrapMetals.Count > 0)
+            if (SceneLoad.SceneID == 5)
             {
                 SceneLoad.MiniGame = true;
-            }
-            else
-            {
-                SceneLoad.MiniGame = false;
             }
 
             #region Rocket/Player/MiniGames
@@ -345,7 +340,7 @@ namespace TrebleSketch_AIE_Platformer
                 Player.Update(gameTime);
                 Player.IsGrounded = false;
                 Player.PewPew = false;
-                
+
                 // Debug.WriteToFile("Playing...");
             }
             //else if (!SceneLoad.PlayerInScene)
@@ -363,7 +358,8 @@ namespace TrebleSketch_AIE_Platformer
                 if (MiniGame_BuildTheRocket.RocketFuelCollected < MiniGame_BuildTheRocket.PlannedRocketFuel)
                 {
                     Player.CheckCollisions(BTR_FuelUnit);
-                } else if (MiniGame_BuildTheRocket.RocketFuelCollected == MiniGame_BuildTheRocket.PlannedRocketFuel)
+                }
+                else if (MiniGame_BuildTheRocket.RocketFuelCollected == MiniGame_BuildTheRocket.PlannedRocketFuel)
                 {
                     MiniGame_BuildTheRocket.rocketFuelFull = true;
                 }
@@ -490,7 +486,7 @@ namespace TrebleSketch_AIE_Platformer
         }
 
         #region Draw UI
-        
+
         public void BTR_UI()
         {
             spriteBatch.DrawString // Scrap Metal collected
@@ -530,7 +526,8 @@ namespace TrebleSketch_AIE_Platformer
             if (SceneLoad.SceneID == 1)
             {
                 GraphicsDevice.Clear(Color.Black);
-            } else
+            }
+            else
             {
                 GraphicsDevice.Clear(Color.LightSkyBlue);
             }
